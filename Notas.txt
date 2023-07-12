@@ -1,0 +1,8 @@
+% flutter build apk --split-per-abi
+
+% flutter gen-l10n
+
+% open ios/Runner.xcworkspace
+
+% flutter build ipa --obfuscate --release --export-method=ad-hoc --split-debug-info=/Users/claudiograsso/Desktop
+
