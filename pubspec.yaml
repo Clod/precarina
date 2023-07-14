@@ -45,6 +45,7 @@ dependencies:
   intl: any
   url_launcher: ^6.1.12
   flutter_html: ^3.0.0-beta.2
+  provider: ^6.0.5
 
 flutter_launcher_icons:
   android: true

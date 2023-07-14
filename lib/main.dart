@@ -1,18 +1,19 @@
 // main.dart
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:precarina/main_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'aux_functions/show_terms_and_conds.dart';
 import 'help_drawer.dart';
+import 'package:precarina/model/precarina_model.dart';
 
 SharedPreferences? prefs;
 bool? flagShowTandC = true;
 
-double _promedio = 0;
+//double _promedio = 0;
 List<int> dummy = [];
 
 Future<void> main() async {
@@ -30,7 +31,13 @@ Future<void> main() async {
   debugPrint("Show T&C: $flagShowTandC");
   // If I could not read it I assume T&C have not veen already accepted
   flagShowTandC ??= true;
-  runApp(const MyApp());
+
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => PrecarinaModel(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -38,26 +45,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CupertinoApp(
-      theme: CupertinoThemeData(
-        textTheme: CupertinoTextThemeData(
-          textStyle: TextStyle(fontSize: 18.0),
+    return  MaterialApp(
+      theme: ThemeData(
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(fontSize: 18.0),
         ),
       ),
       // Remove the debug banner
       debugShowCheckedModeBanner: false,
       title: 'Score',
-      localizationsDelegates: [
+      localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [
+      supportedLocales: const [
         Locale('en', ''), // English
         Locale('es', ''), // Spanish
       ],
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
@@ -70,7 +77,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class MyHomePageState extends State<MyHomePage> {
-
   late BuildContext bc;
   bool tcAccepted = false;
 
@@ -118,12 +124,12 @@ class MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
 
-    final gridColumnWidth = (screenWidth - 16.0) / 4.0;
+   // final gridColumnWidth = (screenWidth - 16.0) / 4.0;
 
     debugPrint('Ancho de pantalla: ${screenWidth.toString()}');
 
     // Acomodo el tamaño del font de acuerdo con el ancho de la pantalla
-    final fontSize = screenWidth / 75.0;
+    //final fontSize = screenWidth / 75.0;
 
     bc = context;
 

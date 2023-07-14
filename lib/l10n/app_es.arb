@@ -9,6 +9,13 @@
    "txtButtonAcceptTandC" : "Aceptar",
    "txtButtonRejectTandC" : "Salir",
    "txtButtonWarnings" : "Aceptar",
+   "txtButtonAccept" : "Aceptar",
+   "txtButtonCancel" : "Cancelar",
+   "txtCancelModalTitle": "Se perderán los cambios",
+   "txtCancelModalText" : "¿Desea descartarlos?",
+   "txtCancelModalDiscard" : "Descartar",
+   "txtCancelModalVolver" : "Volver",
+
 
   "txtDietButton": "Dieta",
   "txtDietDialog" : "Cuantiles de adherencia al estilo de dieta DASH (MEPA). Edades 2-19 a.",

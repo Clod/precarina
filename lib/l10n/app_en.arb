@@ -9,6 +9,12 @@
    "txtButtonAcceptTandC" : "Accept",
    "txtButtonRejectTandC" : "Cancel",
    "txtButtonWarnings" : "Accept",
+  "txtButtonAccept" : "Accept",
+  "txtButtonCancel" : "Cancel",
+  "txtCancelModalTitle": "Are you sure?",
+  "txtCancelModalText" : "Do you want to discard your changes?",
+  "txtCancelModalDiscard" : "Discard",
+  "txtCancelModalVolver" : "Return",
 
   "txtDietButton": "Diet",
   "@txtDietButton": {"description": ""},

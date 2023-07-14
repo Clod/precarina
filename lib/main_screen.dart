@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
-// main.dart
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
+import 'package:precarina/model/precarina_model.dart';
 import 'package:precarina/pretty_gauge.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'aux_functions/show_terms_and_conds.dart';
-import 'help_drawer.dart';
-import 'linear_gauge.dart';
 import 'linear_gauge_flexible.dart';
+import 'package:precarina/behaviors_and_factors_screens/diet_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -21,12 +16,23 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   double _promedio = 0;
-  int? dummy = null;
-
-  int? valorDieta = null;
+  int? dummy;
+  int? valorDieta;
 
   @override
   Widget build(BuildContext context) {
+
+    var counter = Provider.of<PrecarinaModel>(context);
+
+/*
+    Consumer<PrecarinaModel>(
+      builder: (context, precaModel, child) {
+        debugPrint('Total value: ${precaModel.dietValue}');
+        return Text('Total value: ${precaModel.dietValue}');
+      },
+    );
+*/
+
     return SafeArea(
       child: Container(
         // color: Colors.black12,
@@ -34,13 +40,13 @@ class _MainScreenState extends State<MainScreen> {
         child: Column(
           children: <Widget>[
             buildOneRow(context, AppLocalizations.of(context)!.txtDietButton, Colors.red, AppLocalizations.of(context)!.txtDietDialog,
-                AppLocalizations.of(context)!.txtDietDialogOptions, valorDieta, null),
+                AppLocalizations.of(context)!.txtDietDialogOptions, counter.dietValue, null),
             const Expanded(child: SizedBox(height: 5)),
             buildOneRow(context, AppLocalizations.of(context)!.txtPhysicalActivityButton, Colors.red,
                 AppLocalizations.of(context)!.txtPhysicalActivityDialog, AppLocalizations.of(context)!.txtPhysicalActivityDialogOptions, 7, null),
             const Expanded(child: SizedBox(height: 5)),
-            buildOneRow(context, AppLocalizations.of(context)!.txtSmokeExposureButton, Colors.red, AppLocalizations.of(context)!.txtSmokeExposureDialog,
-                AppLocalizations.of(context)!.txtSmokeExposureDialogOptions, 1, null),
+            buildOneRow(context, AppLocalizations.of(context)!.txtSmokeExposureButton, Colors.red,
+                AppLocalizations.of(context)!.txtSmokeExposureDialog, AppLocalizations.of(context)!.txtSmokeExposureDialogOptions, 1, null),
             const Expanded(child: SizedBox(height: 5)),
             buildOneRow(context, AppLocalizations.of(context)!.txtSleepButton, Colors.red, AppLocalizations.of(context)!.txtSleepDialog,
                 AppLocalizations.of(context)!.txtSleepDialogOptions, 2, null),
@@ -69,7 +75,7 @@ class _MainScreenState extends State<MainScreen> {
               onLongPress: () => setState(() {
                 // resetValues();
               }),
-              child: buildPrettyGauge(),
+              child: buildPrettyGauge(counter.average),
             ),
             GestureDetector(
               onTap: () async {
@@ -90,15 +96,15 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Row buildOneRow(
-      BuildContext context,
-      String textoBoton,
-      Color? buttonColor,
-      String tituloDialogo,
-      String listaOpciones,
-      int? resultValue,
-      setter, {
-        String? preText,
-      }) {
+    BuildContext context,
+    String textoBoton,
+    Color? buttonColor,
+    String tituloDialogo,
+    String listaOpciones,
+    int? resultValue,
+    setter, {
+    String? preText,
+  }) {
     return Row(
       children: <Widget>[
         SizedBox(
@@ -107,9 +113,14 @@ class _MainScreenState extends State<MainScreen> {
           child: ElevatedButton(
             style: ButtonStyle(backgroundColor: MaterialStateProperty.all(buttonColor)),
             onPressed: () {
-              setState(() {
-                (valorDieta == null) ? (valorDieta = 0) : (valorDieta = valorDieta! + 1);
-              });
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const DietScreen(),
+                ),
+              );
+              // setState(() {
+              //   (valorDieta == null) ? (valorDieta = 0) : (valorDieta = valorDieta! + 1);
+              // });
               // As this is a new list with new objets, the picked value is not included
               // I need to search for the equivalent object (I search for the same value
               // because the laguage might have changes in the middle.
@@ -136,7 +147,9 @@ class _MainScreenState extends State<MainScreen> {
                 child: SizedBox(
                   height: 30.0,
                   width: 170,
-                  child: LinearGaugeFlexible(valueToSignal: resultValue,),
+                  child: LinearGaugeFlexible(
+                    valueToSignal: resultValue,
+                  ),
                 ),
               ),
             ),
@@ -146,24 +159,25 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  PrettyGauge buildPrettyGauge() {
+  PrettyGauge buildPrettyGauge(value) {
+    debugPrint("Dibujando PrettyGauge con valor $value");
     return PrettyGauge(
-              gaugeSize: 190,
-              // https://meyerweb.com/eric/tools/color-blend/#FFEB3B:4CAF50:3:rgbd
-              segments: [
-                GaugeSegment('Low', 10, Colors.red),
-                GaugeSegment('', 10, const Color.fromRGBO(246, 101, 55, 100)),
-                GaugeSegment('', 10, const Color.fromRGBO(248, 134, 56, 100)),
-                GaugeSegment('', 10, const Color.fromRGBO(251, 168, 57, 100)),
-                GaugeSegment('', 10, const Color.fromRGBO(253, 201, 58, 100)),
-                GaugeSegment('Medium High', 10, Colors.yellow),
-                GaugeSegment('', 10, const Color.fromRGBO(210, 220, 64, 100)),
-                GaugeSegment('', 10, const Color.fromRGBO(166, 205, 70, 100)),
-                GaugeSegment('', 10, const Color.fromRGBO(121, 190, 75, 100)),
-                GaugeSegment('High', 10, Colors.green),
-              ],
-              currentValue: _promedio,
-              displayWidget: const Text('Score', style: TextStyle(fontSize: 16)),
-            );
+      gaugeSize: 190,
+      // https://meyerweb.com/eric/tools/color-blend/#FFEB3B:4CAF50:3:rgbd
+      segments: [
+        GaugeSegment('Low', 10, Colors.red),
+        GaugeSegment('', 10, const Color.fromRGBO(246, 101, 55, 100)),
+        GaugeSegment('', 10, const Color.fromRGBO(248, 134, 56, 100)),
+        GaugeSegment('', 10, const Color.fromRGBO(251, 168, 57, 100)),
+        GaugeSegment('', 10, const Color.fromRGBO(253, 201, 58, 100)),
+        GaugeSegment('Medium High', 10, Colors.yellow),
+        GaugeSegment('', 10, const Color.fromRGBO(210, 220, 64, 100)),
+        GaugeSegment('', 10, const Color.fromRGBO(166, 205, 70, 100)),
+        GaugeSegment('', 10, const Color.fromRGBO(121, 190, 75, 100)),
+        GaugeSegment('High', 10, Colors.green),
+      ],
+      currentValue: value,
+      displayWidget: const Text('Score', style: TextStyle(fontSize: 16)),
+    );
   }
 }

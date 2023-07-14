@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class ItemHelp extends StatelessWidget {
   const ItemHelp({
     Key? key,
-    required String this.title,
-    required String this.content,
+    required this.title,
+    required this.content,
   }) : super(key: key);
 
   final String title;
