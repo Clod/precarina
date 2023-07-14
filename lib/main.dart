@@ -2,17 +2,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:form_builder_validators/form_builder_validators.dart';
-// import 'package:intl/intl.dart';
+import 'package:precarina/main_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-// https://phrase.com/blog/posts/flutter-localization/
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'aux_functions/show_terms_and_conds.dart';
 import 'help_drawer.dart';
 
 SharedPreferences? prefs;
 bool? flagShowTandC = true;
+
+double _promedio = 0;
+List<int> dummy = [];
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -69,51 +70,38 @@ class MyHomePage extends StatefulWidget {
 }
 
 class MyHomePageState extends State<MyHomePage> {
-  String? _selectedValueFuma;
-  String? _selectedValueBMI;
-  String? _selectedValueActiFis;
-  String? _selectedValueDieta;
-  String? _selectedValueColesterol;
-  String? _selectedValuePresion;
-  String? _selectedValueGlucemia;
-
-  double _puntaje = 0.0;
 
   late BuildContext bc;
   bool tcAccepted = false;
 
-
-  showHint(BuildContext context, String title, String body) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(
-            title,
-            style: const TextStyle(fontSize: 16.0),
-          ),
-          content: SizedBox(
-              width: 400,
-              height: 400,
-              child: SingleChildScrollView(
-                child: Text(
-                  body,
-                  style: const TextStyle(fontSize: 14.0),
-                ),
-              )),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-
-  ////////////////////////////////////////////////////////////////
+  // showHint(BuildContext context, String title, String body) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         title: Text(
+  //           title,
+  //           style: const TextStyle(fontSize: 16.0),
+  //         ),
+  //         content: SizedBox(
+  //             width: 400,
+  //             height: 400,
+  //             child: SingleChildScrollView(
+  //               child: Text(
+  //                 body,
+  //                 style: const TextStyle(fontSize: 14.0),
+  //               ),
+  //             ),),
+  //         actions: [
+  //           TextButton(
+  //             onPressed: () => Navigator.of(context).pop(),
+  //             child: const Text('OK'),
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 
   @override
   void initState() {
@@ -126,12 +114,9 @@ class MyHomePageState extends State<MyHomePage> {
     }
   }
 
-////////////////////////////////////////////////////////////////
-
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
-    // final double screenHeight = MediaQuery.of(context).size.height;
 
     final gridColumnWidth = (screenWidth - 16.0) / 4.0;
 
@@ -153,8 +138,8 @@ class MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-      drawer: HelpDrawer(),
-      body: const Text("ÄBRACADABRA"),
+      drawer: const HelpDrawer(),
+      body: const MainScreen(),
     );
   }
 }
