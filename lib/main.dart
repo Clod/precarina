@@ -1,6 +1,7 @@
 // main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:precarina/initial_page_view.dart';
 import 'package:precarina/main_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -145,7 +146,8 @@ class MyHomePageState extends State<MyHomePage> {
         ),
       ),
       drawer: const HelpDrawer(),
-      body: const MainScreen(),
+      body: const InitialPageView(),
+      // body: const MainScreen(),
     );
   }
 }
