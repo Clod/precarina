@@ -13,6 +13,14 @@ class PrecarinaModel extends ChangeNotifier {
 
   double average = 0.0;
 
+  String? sex;
+  int? height;
+  int? weightKilos;
+  int? weightGrams;
+  DateTime? dateOfBirth;
+  int? ageYears;
+  int? ageMonths;
+
   calculateAverage () {
     average = (dietValue != null) ? dietValue! * 10 : 0.0;
     notifyListeners();

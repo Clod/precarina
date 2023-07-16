@@ -3,6 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:precarina/model/precarina_model.dart';
 import 'package:provider/provider.dart';
 
+import '../help_drawer.dart';
+
 class DietScreen extends StatefulWidget {
   const DietScreen({super.key});
 
@@ -52,11 +54,14 @@ class _DietScreenState extends State<DietScreen> {
         appBar: AppBar(
           title: Text(AppLocalizations.of(context)!.txtDietButton),
         ),
+        drawer: const HelpDrawer(),
         body: Column(
           children: [
             TextField(
               controller: _controller,
             ),
+            Text("Sexo: ${precaModel.sex}"),
+            Text("Edad: ${precaModel.ageYears} años ${precaModel.ageMonths} meses"),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

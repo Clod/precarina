@@ -4,6 +4,7 @@ import 'package:precarina/pretty_gauge.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'help_drawer.dart';
 import 'linear_gauge_flexible.dart';
 import 'package:precarina/behaviors_and_factors_screens/diet_screen.dart';
 
@@ -15,81 +16,87 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  double _promedio = 0;
   int? dummy;
   int? valorDieta;
 
   @override
   Widget build(BuildContext context) {
-
     var counter = Provider.of<PrecarinaModel>(context);
 
-/*
-    Consumer<PrecarinaModel>(
-      builder: (context, precaModel, child) {
-        debugPrint('Total value: ${precaModel.dietValue}');
-        return Text('Total value: ${precaModel.dietValue}');
-      },
-    );
-*/
-
-    return SafeArea(
-      child: Container(
-        // color: Colors.black12,
-        margin: const EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget>[
-            buildOneRow(context, AppLocalizations.of(context)!.txtDietButton, Colors.red, AppLocalizations.of(context)!.txtDietDialog,
-                AppLocalizations.of(context)!.txtDietDialogOptions, counter.dietValue, null),
-            const Expanded(child: SizedBox(height: 5)),
-            buildOneRow(context, AppLocalizations.of(context)!.txtPhysicalActivityButton, Colors.red,
-                AppLocalizations.of(context)!.txtPhysicalActivityDialog, AppLocalizations.of(context)!.txtPhysicalActivityDialogOptions, 7, null),
-            const Expanded(child: SizedBox(height: 5)),
-            buildOneRow(context, AppLocalizations.of(context)!.txtSmokeExposureButton, Colors.red,
-                AppLocalizations.of(context)!.txtSmokeExposureDialog, AppLocalizations.of(context)!.txtSmokeExposureDialogOptions, 1, null),
-            const Expanded(child: SizedBox(height: 5)),
-            buildOneRow(context, AppLocalizations.of(context)!.txtSleepButton, Colors.red, AppLocalizations.of(context)!.txtSleepDialog,
-                AppLocalizations.of(context)!.txtSleepDialogOptions, 2, null),
-            const Expanded(child: SizedBox(height: 5)),
-            buildOneRow(context, AppLocalizations.of(context)!.txtBodyMassIndexButton, Colors.blue,
-                AppLocalizations.of(context)!.txtBodyMassIndexDialog, AppLocalizations.of(context)!.txtBodyMassIndexDialogOptions, 10, null),
-            const Expanded(child: SizedBox(height: 5)),
-            buildOneRow(context, AppLocalizations.of(context)!.txtCholesterolButton, Colors.blue, AppLocalizations.of(context)!.txtCholesterolDialog,
-                AppLocalizations.of(context)!.txtCholesterolDialogOptions, 3, null),
-            const Expanded(child: SizedBox(height: 5)),
-            buildOneRow(context, AppLocalizations.of(context)!.txtDiabetesButton, Colors.blue, AppLocalizations.of(context)!.txtDiabetesDialog,
-                AppLocalizations.of(context)!.txtDiabetesDialogOptions, 4, null),
-            const Expanded(child: SizedBox(height: 5)),
-            buildOneRow(
-              context,
-              AppLocalizations.of(context)!.txtBloodPressureButton,
-              Colors.blue,
-              AppLocalizations.of(context)!.txtBloodPressureDialog,
-              AppLocalizations.of(context)!.txtBloodPressureDialogOptions,
-              5,
-              null,
-              preText: AppLocalizations.of(context)!.txtBloodPressureWarning,
-            ),
-            const Expanded(child: SizedBox(height: 5)),
-            GestureDetector(
-              onLongPress: () => setState(() {
-                // resetValues();
-              }),
-              child: buildPrettyGauge(counter.average),
-            ),
-            GestureDetector(
-              onTap: () async {
-                await launchUrl(Uri.parse('https://www.ahajournals.org/doi/10.1161/CIR.0000000000001078'));
-              },
-              child: Text(
-                AppLocalizations.of(context)!.txtFundamentalsLocationMainWindow,
-                style: const TextStyle(
-                  decoration: TextDecoration.underline,
-                  color: Colors.blue,
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: const Text(
+          'PRECARINA',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      drawer: const HelpDrawer(),
+      body: SafeArea(
+        child: Container(
+          // color: Colors.black12,
+          margin: const EdgeInsets.all(8.0),
+          child: Column(
+            children: <Widget>[
+              buildOneRow(context, AppLocalizations.of(context)!.txtDietButton, Colors.red, AppLocalizations.of(context)!.txtDietDialog,
+                  AppLocalizations.of(context)!.txtDietDialogOptions, counter.dietValue, null),
+              const Expanded(child: SizedBox(height: 5)),
+              buildOneRow(context, AppLocalizations.of(context)!.txtPhysicalActivityButton, Colors.red,
+                  AppLocalizations.of(context)!.txtPhysicalActivityDialog, AppLocalizations.of(context)!.txtPhysicalActivityDialogOptions, 7, null),
+              const Expanded(child: SizedBox(height: 5)),
+              buildOneRow(context, AppLocalizations.of(context)!.txtSmokeExposureButton, Colors.red,
+                  AppLocalizations.of(context)!.txtSmokeExposureDialog, AppLocalizations.of(context)!.txtSmokeExposureDialogOptions, 1, null),
+              const Expanded(child: SizedBox(height: 5)),
+              buildOneRow(context, AppLocalizations.of(context)!.txtSleepButton, Colors.red, AppLocalizations.of(context)!.txtSleepDialog,
+                  AppLocalizations.of(context)!.txtSleepDialogOptions, 2, null),
+              const Expanded(child: SizedBox(height: 5)),
+              buildOneRow(context, AppLocalizations.of(context)!.txtBodyMassIndexButton, Colors.blue,
+                  AppLocalizations.of(context)!.txtBodyMassIndexDialog, AppLocalizations.of(context)!.txtBodyMassIndexDialogOptions, 10, null),
+              const Expanded(child: SizedBox(height: 5)),
+              buildOneRow(context, AppLocalizations.of(context)!.txtCholesterolButton, Colors.blue,
+                  AppLocalizations.of(context)!.txtCholesterolDialog, AppLocalizations.of(context)!.txtCholesterolDialogOptions, 3, null),
+              const Expanded(child: SizedBox(height: 5)),
+              buildOneRow(context, AppLocalizations.of(context)!.txtDiabetesButton, Colors.blue, AppLocalizations.of(context)!.txtDiabetesDialog,
+                  AppLocalizations.of(context)!.txtDiabetesDialogOptions, 4, null),
+              const Expanded(child: SizedBox(height: 5)),
+              buildOneRow(
+                context,
+                AppLocalizations.of(context)!.txtBloodPressureButton,
+                Colors.blue,
+                AppLocalizations.of(context)!.txtBloodPressureDialog,
+                AppLocalizations.of(context)!.txtBloodPressureDialogOptions,
+                5,
+                null,
+                preText: AppLocalizations.of(context)!.txtBloodPressureWarning,
+              ),
+              const Expanded(child: SizedBox(height: 5)),
+              GestureDetector(
+                onLongPress: () => setState(() {
+                  // resetValues();
+                }),
+                child: buildPrettyGauge(counter.average),
+              ),
+              GestureDetector(
+                onTap: () async {
+                  await launchUrl(Uri.parse('https://www.ahajournals.org/doi/10.1161/CIR.0000000000001078'));
+                },
+                child: Text(
+                  AppLocalizations.of(context)!.txtFundamentalsLocationMainWindow,
+                  style: const TextStyle(
+                    decoration: TextDecoration.underline,
+                    color: Colors.blue,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
