@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:precarina/behaviors_and_factors_screens/blood_pressure_screen.dart';
 import 'package:precarina/model/precarina_model.dart';
 import 'package:precarina/pretty_gauge.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -18,15 +19,17 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int? dummy;
   int? valorDieta;
+  late PrecarinaModel precaModel;
 
   @override
   Widget build(BuildContext context) {
-    var counter = Provider.of<PrecarinaModel>(context);
+
+    precaModel = Provider.of<PrecarinaModel>(context);
 
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: const Text(
@@ -45,43 +48,27 @@ class _MainScreenState extends State<MainScreen> {
           margin: const EdgeInsets.all(8.0),
           child: Column(
             children: <Widget>[
-              buildOneRow(context, AppLocalizations.of(context)!.txtDietButton, Colors.red, AppLocalizations.of(context)!.txtDietDialog,
-                  AppLocalizations.of(context)!.txtDietDialogOptions, counter.dietValue, null),
+              buildOneRow(context, AppLocalizations.of(context)!.txtDietButton, Colors.red, const DietScreen()),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(context, AppLocalizations.of(context)!.txtPhysicalActivityButton, Colors.red,
-                  AppLocalizations.of(context)!.txtPhysicalActivityDialog, AppLocalizations.of(context)!.txtPhysicalActivityDialogOptions, 7, null),
+              buildOneRow(context, AppLocalizations.of(context)!.txtPhysicalActivityButton, Colors.red, const DietScreen()),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(context, AppLocalizations.of(context)!.txtSmokeExposureButton, Colors.red,
-                  AppLocalizations.of(context)!.txtSmokeExposureDialog, AppLocalizations.of(context)!.txtSmokeExposureDialogOptions, 1, null),
+              buildOneRow(context, AppLocalizations.of(context)!.txtSmokeExposureButton, Colors.red, const DietScreen()),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(context, AppLocalizations.of(context)!.txtSleepButton, Colors.red, AppLocalizations.of(context)!.txtSleepDialog,
-                  AppLocalizations.of(context)!.txtSleepDialogOptions, 2, null),
+              buildOneRow(context, AppLocalizations.of(context)!.txtSleepButton, Colors.red, const DietScreen()),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(context, AppLocalizations.of(context)!.txtBodyMassIndexButton, Colors.blue,
-                  AppLocalizations.of(context)!.txtBodyMassIndexDialog, AppLocalizations.of(context)!.txtBodyMassIndexDialogOptions, 10, null),
+              buildOneRow(context, AppLocalizations.of(context)!.txtBodyMassIndexButton, Colors.blue, const DietScreen()),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(context, AppLocalizations.of(context)!.txtCholesterolButton, Colors.blue,
-                  AppLocalizations.of(context)!.txtCholesterolDialog, AppLocalizations.of(context)!.txtCholesterolDialogOptions, 3, null),
+              buildOneRow(context, AppLocalizations.of(context)!.txtCholesterolButton, Colors.blue, const DietScreen()),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(context, AppLocalizations.of(context)!.txtDiabetesButton, Colors.blue, AppLocalizations.of(context)!.txtDiabetesDialog,
-                  AppLocalizations.of(context)!.txtDiabetesDialogOptions, 4, null),
+              buildOneRow(context, AppLocalizations.of(context)!.txtDiabetesButton, Colors.blue, const DietScreen()),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(
-                context,
-                AppLocalizations.of(context)!.txtBloodPressureButton,
-                Colors.blue,
-                AppLocalizations.of(context)!.txtBloodPressureDialog,
-                AppLocalizations.of(context)!.txtBloodPressureDialogOptions,
-                5,
-                null,
-                preText: AppLocalizations.of(context)!.txtBloodPressureWarning,
-              ),
+              buildOneRow(context, AppLocalizations.of(context)!.txtBloodPressureButton, Colors.blue, const BloodPressureScreen()),
               const Expanded(child: SizedBox(height: 5)),
               GestureDetector(
                 onLongPress: () => setState(() {
                   // resetValues();
                 }),
-                child: buildPrettyGauge(counter.average),
+                child: buildPrettyGauge(precaModel.average),
               ),
               GestureDetector(
                 onTap: () async {
@@ -106,12 +93,8 @@ class _MainScreenState extends State<MainScreen> {
     BuildContext context,
     String textoBoton,
     Color? buttonColor,
-    String tituloDialogo,
-    String listaOpciones,
-    int? resultValue,
-    setter, {
-    String? preText,
-  }) {
+    Widget screenToGo,
+  ) {
     return Row(
       children: <Widget>[
         SizedBox(
@@ -122,7 +105,8 @@ class _MainScreenState extends State<MainScreen> {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const DietScreen(),
+//                  builder: (context) => const DietScreen(),
+                  builder: (context) => screenToGo,
                 ),
               );
               // setState(() {
@@ -155,7 +139,8 @@ class _MainScreenState extends State<MainScreen> {
                   height: 30.0,
                   width: 170,
                   child: LinearGaugeFlexible(
-                    valueToSignal: resultValue,
+                    //valueToSignal: precaModel.calculateAverage(),
+                     valueToSignal: precaModel.average.round(),
                   ),
                 ),
               ),

@@ -411,8 +411,13 @@ class _InputDataPageState extends State<InputDataPage> {
                 ),
                 const SizedBox(width: 20.0,),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     FocusScope.of(context).unfocus();
+                    // Let's give some time for the keyboard to fade away, otherwise
+                    // a layout error is shown in Andorid because in the following screen
+                    // there is not enough room for all the widgets and the keybard
+                    await Future.delayed(Duration(seconds: 1));
+
                     if (_formKey.currentState?.validate() == true) {
 
                       precaModel.height = int.parse(_textContAltura.text);
