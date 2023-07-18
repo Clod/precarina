@@ -23,8 +23,9 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     precaModel = Provider.of<PrecarinaModel>(context);
+
+    debugPrint("Dieta: ${precaModel.dietValue}");
 
     return Scaffold(
       appBar: AppBar(
@@ -48,21 +49,23 @@ class _MainScreenState extends State<MainScreen> {
           margin: const EdgeInsets.all(8.0),
           child: Column(
             children: <Widget>[
-              buildOneRow(context, AppLocalizations.of(context)!.txtDietButton, Colors.red, const DietScreen()),
+              buildOneRow(context, AppLocalizations.of(context)!.txtDietButton, Colors.red, const DietScreen(), precaModel.dietValue),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(context, AppLocalizations.of(context)!.txtPhysicalActivityButton, Colors.red, const DietScreen()),
+              buildOneRow(
+                  context, AppLocalizations.of(context)!.txtPhysicalActivityButton, Colors.red, const DietScreen(), precaModel.physicalActivityValue),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(context, AppLocalizations.of(context)!.txtSmokeExposureButton, Colors.red, const DietScreen()),
+              buildOneRow(context, AppLocalizations.of(context)!.txtSmokeExposureButton, Colors.red, const DietScreen(), precaModel.smokeValue),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(context, AppLocalizations.of(context)!.txtSleepButton, Colors.red, const DietScreen()),
+              buildOneRow(context, AppLocalizations.of(context)!.txtSleepButton, Colors.red, const DietScreen(), precaModel.sleepValue),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(context, AppLocalizations.of(context)!.txtBodyMassIndexButton, Colors.blue, const DietScreen()),
+              buildOneRow(context, AppLocalizations.of(context)!.txtBodyMassIndexButton, Colors.blue, const DietScreen(), precaModel.bmiValue),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(context, AppLocalizations.of(context)!.txtCholesterolButton, Colors.blue, const DietScreen()),
+              buildOneRow(context, AppLocalizations.of(context)!.txtCholesterolButton, Colors.blue, const DietScreen(), precaModel.cholesterolValue),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(context, AppLocalizations.of(context)!.txtDiabetesButton, Colors.blue, const DietScreen()),
+              buildOneRow(context, AppLocalizations.of(context)!.txtDiabetesButton, Colors.blue, const DietScreen(), precaModel.diabetesValue),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(context, AppLocalizations.of(context)!.txtBloodPressureButton, Colors.blue, const BloodPressureScreen()),
+              buildOneRow(context, AppLocalizations.of(context)!.txtBloodPressureButton, Colors.blue, const BloodPressureScreen(),
+                  precaModel.bloodPressureValue),
               const Expanded(child: SizedBox(height: 5)),
               GestureDetector(
                 onLongPress: () => setState(() {
@@ -94,6 +97,7 @@ class _MainScreenState extends State<MainScreen> {
     String textoBoton,
     Color? buttonColor,
     Widget screenToGo,
+    int? valueToDisplay,
   ) {
     return Row(
       children: <Widget>[
@@ -140,7 +144,7 @@ class _MainScreenState extends State<MainScreen> {
                   width: 170,
                   child: LinearGaugeFlexible(
                     //valueToSignal: precaModel.calculateAverage(),
-                     valueToSignal: precaModel.average.round(),
+                    valueToSignal: valueToDisplay,
                   ),
                 ),
               ),
@@ -154,7 +158,7 @@ class _MainScreenState extends State<MainScreen> {
   PrettyGauge buildPrettyGauge(value) {
     debugPrint("Dibujando PrettyGauge con valor $value");
     return PrettyGauge(
-      gaugeSize: 190,
+      gaugeSize: 190, // Size of a sqare that contains the Gauge
       // https://meyerweb.com/eric/tools/color-blend/#FFEB3B:4CAF50:3:rgbd
       segments: [
         GaugeSegment('Low', 10, Colors.red),
@@ -163,9 +167,14 @@ class _MainScreenState extends State<MainScreen> {
         GaugeSegment('', 10, const Color.fromRGBO(251, 168, 57, 100)),
         GaugeSegment('', 10, const Color.fromRGBO(253, 201, 58, 100)),
         GaugeSegment('Medium High', 10, Colors.yellow),
-        GaugeSegment('', 10, const Color.fromRGBO(210, 220, 64, 100)),
-        GaugeSegment('', 10, const Color.fromRGBO(166, 205, 70, 100)),
-        GaugeSegment('', 10, const Color.fromRGBO(121, 190, 75, 100)),
+        // GaugeSegment('', 10, const Color.fromRGBO(210, 220, 64, 100)),
+        // GaugeSegment('', 10, const Color.fromRGBO(166, 205, 70, 100)),
+        // GaugeSegment('', 10, const Color.fromRGBO(121, 190, 75, 100)),
+        // GaugeSegment('High', 10, Colors.green),
+        GaugeSegment('', 10, const Color.fromRGBO(210, 220, 64, 1.0)),
+        GaugeSegment('', 10, const Color.fromRGBO(182, 215, 64, 1.0)),
+        GaugeSegment('', 10, const Color.fromRGBO(155, 210, 65, 1.0)),
+        GaugeSegment('', 10, const Color.fromRGBO(121, 190, 75, 1.0)), // New shade of green
         GaugeSegment('High', 10, Colors.green),
       ],
       currentValue: value,
@@ -173,3 +182,4 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 }
+

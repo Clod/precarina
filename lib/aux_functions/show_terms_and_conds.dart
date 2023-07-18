@@ -35,7 +35,7 @@ showTandC(BuildContext context, Function setAccepted) {
                   Text(
                     AppLocalizations.of(context)!.txtAppPurpose,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 10.0,

@@ -29,7 +29,7 @@ class _InputDataPageState extends State<InputDataPage> {
 
   late DateTime _dateTime;
   late DateTime _currentDate;
-  String? _selectedOption;
+  PatientSex? _selectedOption;
   bool _showSexError = false;
   final TextEditingController _textContAltura = TextEditingController();
   final TextEditingController _textContKilos = TextEditingController();
@@ -105,7 +105,7 @@ class _InputDataPageState extends State<InputDataPage> {
                   width: 150.0,
                   child: RadioListTile(
                     title: const Text('Mujer'),
-                    value: 'mujer',
+                    value: PatientSex.female,
                     groupValue: _selectedOption,
                     onChanged: (value) {
                       setState(() {
@@ -119,7 +119,7 @@ class _InputDataPageState extends State<InputDataPage> {
                   width: 150.0,
                   child: RadioListTile(
                     title: const Text('Varón'),
-                    value: 'varon',
+                    value: PatientSex.male,
                     groupValue: _selectedOption,
                     onChanged: (value) {
                       setState(() {
@@ -411,12 +411,12 @@ class _InputDataPageState extends State<InputDataPage> {
                 ),
                 const SizedBox(width: 20.0,),
                 ElevatedButton(
-                  onPressed: () async {
+                  onPressed: () {
                     FocusScope.of(context).unfocus();
                     // Let's give some time for the keyboard to fade away, otherwise
                     // a layout error is shown in Andorid because in the following screen
                     // there is not enough room for all the widgets and the keybard
-                    await Future.delayed(Duration(seconds: 1));
+                    // await Future.delayed(const Duration(seconds: 1));
 
                     if (_formKey.currentState?.validate() == true) {
 
@@ -426,7 +426,7 @@ class _InputDataPageState extends State<InputDataPage> {
                       precaModel.ageYears = int.parse(_textContAnios.text);
                       precaModel.ageMonths = int.parse(_textContMeses.text);
                       precaModel.dateOfBirth = _dateTime ;
-                      precaModel.sex = _selectedOption;
+                      precaModel.patientSex = _selectedOption;
 
                       Navigator.of(context).push(
                         MaterialPageRoute(

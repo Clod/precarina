@@ -26,12 +26,12 @@ class HelpDrawer extends StatelessWidget {
             child: Center(
               child: Text(
                 AppLocalizations.of(context)!.txtGlossary,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
           ),
           ListTile(
-            leading: Icon(Icons.restaurant),
+            leading: const Icon(Icons.restaurant),
             title: Text(AppLocalizations.of(context)!.txtDietButton),
             onTap: () {
               Navigator.push(
@@ -44,7 +44,7 @@ class HelpDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.monitor_weight),
+            leading: const Icon(Icons.monitor_weight),
             title: Text(AppLocalizations.of(context)!.txtBodyMassIndexButton),
             onTap: () {
               Navigator.push(
@@ -57,7 +57,7 @@ class HelpDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.smoking_rooms),
+            leading: const Icon(Icons.smoking_rooms),
             title: Text(AppLocalizations.of(context)!.txtSmokeExposureButton),
             onTap: () {
               Navigator.push(
@@ -70,7 +70,7 @@ class HelpDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.icecream),
+            leading: const Icon(Icons.icecream),
             title: Text(AppLocalizations.of(context)!.txtDiabetesButton),
             onTap: () {
               Navigator.push(
@@ -83,7 +83,7 @@ class HelpDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.favorite),
+            leading: const Icon(Icons.favorite),
             title: Text(AppLocalizations.of(context)!.txtBloodPressureButton),
             onTap: () {
               Navigator.push(
@@ -96,18 +96,17 @@ class HelpDrawer extends StatelessWidget {
             },
           ),
           AboutListTile(
-            icon: Icon(
+            icon: const Icon(
               Icons.info,
             ),
-            child: Text('About this app'),
-            applicationIcon: Icon(
+            applicationIcon: const Icon(
               Icons.local_play,
             ),
             applicationName: 'SACARINA',
             applicationVersion: '2.0.0',
             applicationLegalese: 'This app is Freeware and Open Source',
             aboutBoxChildren: [
-              SizedBox(height: 5.0,),
+              const SizedBox(height: 5.0,),
               SizedBox(
                   height: 300.0,
                   width: 150.0,
@@ -117,6 +116,7 @@ class HelpDrawer extends StatelessWidget {
                         AppLocalizations.of(context)!.txtAbout),
                   ))
             ],
+            child: const Text('About this app'),
           ),
         ],
       ),

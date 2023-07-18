@@ -2,8 +2,6 @@ library pretty_gauge;
 
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 
 ///Class that holds the details of each segment on a CustomGauge
 class GaugeSegment {
@@ -40,8 +38,7 @@ class GaugeNeedleClipper extends CustomClipper<Path> {
 }
 
 class ArcPainter extends CustomPainter {
-  ArcPainter(
-      {this.startAngle = 0, this.sweepAngle = 0, this.color = Colors.grey});
+  ArcPainter({this.startAngle = 0, this.sweepAngle = 0, this.color = Colors.grey});
 
   final double startAngle;
 
@@ -51,8 +48,7 @@ class ArcPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final rect = Rect.fromLTRB(size.width * 0.1, size.height * 0.1,
-        size.width * 0.9, size.height * 0.9);
+    final rect = Rect.fromLTRB(size.width * 0.1, size.height * 0.1, size.width * 0.9, size.height * 0.9);
 
     const useCenter = false;
 
@@ -65,7 +61,7 @@ class ArcPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CustomPainter old) {
+  bool shouldRepaint(CustomPainter oldDelegate) {
     return false;
   }
 }
@@ -95,7 +91,7 @@ class GaugeMarkerPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CustomPainter old) {
+  bool shouldRepaint(CustomPainter oldDelegate) {
     return false;
   }
 }
@@ -148,93 +144,87 @@ class PrettyGauge extends StatefulWidget {
   final TextStyle endMarkerStyle;
 
   @override
-  _PrettyGaugeState createState() => _PrettyGaugeState();
+  PrettyGaugeState createState() => PrettyGaugeState();
 
   const PrettyGauge(
       {Key? key,
-        this.gaugeSize = 200,
-        this.segments,
-        this.minValue = 0,
-        this.maxValue = 100.0,
-        this.currentValue,
-        this.currentValueDecimalPlaces = 1,
-        this.needleColor = Colors.black,
-        this.defaultSegmentColor = Colors.grey,
-        this.valueWidget,
-        this.displayWidget,
-        this.showMarkers = true,
-        this.startMarkerStyle =
-        const TextStyle(fontSize: 10, color: Colors.black),
-        this.endMarkerStyle = const TextStyle(fontSize: 10, color: Colors.black)})
+      this.gaugeSize = 200,
+      this.segments,
+      this.minValue = 0,
+      this.maxValue = 100.0,
+      this.currentValue,
+      this.currentValueDecimalPlaces = 1,
+      this.needleColor = Colors.black,
+      this.defaultSegmentColor = Colors.grey,
+      this.valueWidget,
+      this.displayWidget,
+      this.showMarkers = true,
+      this.startMarkerStyle = const TextStyle(fontSize: 10, color: Colors.black),
+      this.endMarkerStyle = const TextStyle(fontSize: 10, color: Colors.black)})
       : super(key: key);
 }
 
-class _PrettyGaugeState extends State<PrettyGauge> {
+class PrettyGaugeState extends State<PrettyGauge> {
   //This method builds out multiple arcs that make up the Gauge
   //using data supplied in the segments property
   List<Widget> buildGauge(List<GaugeSegment> segments) {
     List<CustomPaint> arcs = [];
     double cumulativeSegmentSize = 0.0;
-    double gaugeSpread = widget.maxValue - widget.minValue;
+    double gaugeSpread = widget.maxValue + 10 - widget.minValue;
 
     //Iterate through the segments collection in reverse order
     //First paint the arc with the last segment color, then paint multiple arcs in sequence until we reach the first segment
 
     //Because all these arcs will be painted inside of a Stack, it will overlay to represent the eventual gauge with
     //multiple segments
-    segments.reversed.forEach((segment) {
+    for (var segment in segments.reversed) {
       arcs.add(
         CustomPaint(
           size: Size(widget.gaugeSize, widget.gaugeSize),
           painter: ArcPainter(
               startAngle: 0.75 * math.pi,
-              sweepAngle: 1.5 *
-                  ((gaugeSpread - cumulativeSegmentSize) / gaugeSpread) *
-                  math.pi,
+              sweepAngle: 1.5 * ((gaugeSpread - cumulativeSegmentSize) / gaugeSpread) * math.pi,
               color: segment.segmentColor),
         ),
       );
       cumulativeSegmentSize = cumulativeSegmentSize + segment.segmentSize;
-    });
+    }
 
     return arcs;
   }
 
   @override
   Widget build(BuildContext context) {
-    List<GaugeSegment>? _segments = widget.segments;
-    double? _currentValue = widget.currentValue;
-    int _currentValueDecimalPlaces = widget.currentValueDecimalPlaces;
+    List<GaugeSegment>? segments = widget.segments;
+    double? currentValue = widget.currentValue;
+    int currentValueDecimalPlaces = widget.currentValueDecimalPlaces;
 
     if (widget.currentValue! < widget.minValue) {
-      _currentValue = widget.minValue;
+      currentValue = widget.minValue;
     }
     if (widget.currentValue! > widget.maxValue) {
-      _currentValue = widget.maxValue;
+      currentValue = widget.maxValue;
     }
     // Make sure the decimal place if supplied meets Darts bounds (0-20)
-    if (_currentValueDecimalPlaces < 0) {
-      _currentValueDecimalPlaces = 0;
+    if (currentValueDecimalPlaces < 0) {
+      currentValueDecimalPlaces = 0;
     }
-    if (_currentValueDecimalPlaces > 20) {
-      _currentValueDecimalPlaces = 20;
+    if (currentValueDecimalPlaces > 20) {
+      currentValueDecimalPlaces = 20;
     }
 
     //If segments is supplied, validate that the sum of all segment sizes = (maxValue - minValue)
-    if (_segments != null) {
+    if (segments != null) {
       double totalSegmentSize = 0;
-      _segments.forEach((segment) {
+      for (var segment in segments) {
         totalSegmentSize = totalSegmentSize + segment.segmentSize;
-      });
-      if (totalSegmentSize != (widget.maxValue - widget.minValue)) {
+      }
+      if (totalSegmentSize != (widget.maxValue + 10 - widget.minValue)) {
         throw Exception('Total segment size must equal (Max Size - Min Size)');
       }
     } else {
       //If no segments are supplied, default to one segment with default color
-      _segments = [
-        GaugeSegment(
-            '', (widget.maxValue - widget.minValue), widget.defaultSegmentColor)
-      ];
+      segments = [GaugeSegment('', (widget.maxValue + 10 - widget.minValue), widget.defaultSegmentColor)];
     }
 
     return SizedBox(
@@ -242,33 +232,26 @@ class _PrettyGaugeState extends State<PrettyGauge> {
       width: widget.gaugeSize,
       child: Stack(
         children: <Widget>[
-          ...buildGauge(_segments),
+          ...buildGauge(segments),
           widget.showMarkers
               ? CustomPaint(
-              size: Size(widget.gaugeSize, widget.gaugeSize),
-              painter: GaugeMarkerPainter(
-                  widget.minValue.toString(),
-                  Offset(widget.gaugeSize * 0.1, widget.gaugeSize * 0.85),
-                  widget.startMarkerStyle))
+                  size: Size(widget.gaugeSize, widget.gaugeSize),
+                  painter: GaugeMarkerPainter(
+                      widget.minValue.toString(), Offset(widget.gaugeSize * 0.1, widget.gaugeSize * 0.85), widget.startMarkerStyle))
               : Container(),
           widget.showMarkers
               ? CustomPaint(
-              size: Size(widget.gaugeSize, widget.gaugeSize),
-              painter: GaugeMarkerPainter(
-                  widget.maxValue.toString(),
-                  Offset(widget.gaugeSize * 0.8, widget.gaugeSize * 0.85),
-                  widget.endMarkerStyle))
+                  size: Size(widget.gaugeSize, widget.gaugeSize),
+                  painter:
+                      GaugeMarkerPainter(widget.maxValue.toString(), Offset(widget.gaugeSize * 0.8, widget.gaugeSize * 0.85), widget.endMarkerStyle),
+                )
               : Container(),
           Container(
             height: widget.gaugeSize,
             width: widget.gaugeSize,
             alignment: Alignment.center,
             child: Transform.rotate(
-              angle: (math.pi / 4) +
-                  ((_currentValue! - widget.minValue) /
-                      (widget.maxValue - widget.minValue) *
-                      1.5 *
-                      math.pi),
+              angle: (math.pi / 4) + ((currentValue! - widget.minValue) / (widget.maxValue - widget.minValue) * 1.5 * math.pi),
               child: ClipPath(
                 clipper: GaugeNeedleClipper(),
                 child: Container(
@@ -288,9 +271,7 @@ class _PrettyGaugeState extends State<PrettyGauge> {
               children: <Widget>[
                 widget.displayWidget ?? Container(),
                 widget.valueWidget ??
-                    Text(
-                        '${_currentValue.toStringAsFixed(_currentValueDecimalPlaces)}',
-                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    Text(currentValue.toStringAsFixed(currentValueDecimalPlaces), style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               ],
             ),
           ),

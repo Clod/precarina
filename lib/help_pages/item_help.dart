@@ -23,7 +23,7 @@ class ItemHelp extends StatelessWidget {
           ),
         ),
       ),
-      body: SafeArea(
+      body: const SafeArea(
         child: Text("Abracadabra")
       ),
     );

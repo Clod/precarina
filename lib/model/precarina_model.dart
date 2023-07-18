@@ -3,6 +3,15 @@ import 'package:flutter/material.dart';
 class PrecarinaModel extends ChangeNotifier {
 
   int? dietValue;
+  // int? _dietScoreValue;
+
+  // int? get dietScoreValue => _dietScoreValue;
+
+  // set dietScoreValue(int? value) {
+  //   _dietScoreValue = value;
+  //   notifyListeners();
+  // }
+
   int? physicalActivityValue;
   int? smokeValue;
   int? sleepValue;
@@ -13,7 +22,8 @@ class PrecarinaModel extends ChangeNotifier {
 
   double average = 0.0;
 
-  String? sex;
+//  String? sex;
+  PatientSex? patientSex;
   int? height;
   int? weightKilos;
   int? weightGrams;
@@ -22,8 +32,8 @@ class PrecarinaModel extends ChangeNotifier {
   int? ageMonths;
 
   calculateAverage () {
-    average = (dietValue != null) ? dietValue! * 10 : 0.0;
-    notifyListeners();
+    average = (dietValue != null) ? dietValue!.toDouble() : 0.0;
+    notifyListeners(); // TODO: hace falta????
   }
 
   /// Internal, private state of the cart.
@@ -33,3 +43,5 @@ class PrecarinaModel extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+enum PatientSex { male, female}

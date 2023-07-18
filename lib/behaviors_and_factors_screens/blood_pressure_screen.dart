@@ -55,11 +55,13 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Acá no me gusta pero initState explota. Ver si hay un lugar mejor
     precaModel = Provider.of<PrecarinaModel>(context);
+
     _controller.text = precaModel.dietValue.toString();
     bc = context;
-    final Orientation orientation = MediaQuery.of(context).orientation;
-    final Size dialogSize = (orientation == Orientation.portrait) ? Size(400, 600) : Size(600, 400);
+    // final Orientation orientation = MediaQuery.of(context).orientation;
+    // final Size dialogSize = (orientation == Orientation.portrait) ? Size(400, 600) : Size(600, 400);
 
     return WillPopScope(
       onWillPop: () async {
@@ -98,7 +100,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
             TextField(
               controller: _controller,
             ),
-            Text("Sexo: ${precaModel.sex}"),
+            Text("Sexo: ${precaModel.patientSex}"),
             Text("Edad: ${precaModel.ageYears} años ${precaModel.ageMonths} meses"),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

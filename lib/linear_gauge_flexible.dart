@@ -17,7 +17,9 @@ class LinearGaugeFlexible extends StatefulWidget {
 class _LinearGaugeFlexibleState extends State<LinearGaugeFlexible> {
   @override
   Widget build(BuildContext context) {
-    var valor = widget.valueToSignal;
+    var valor = (widget.valueToSignal != null) ? (widget.valueToSignal! / 10).round() : null;
+
+    debugPrint("Valor: $valor");
 
     return Stack(
       children: [
@@ -57,6 +59,11 @@ class _LinearGaugeFlexibleState extends State<LinearGaugeFlexible> {
             Expanded(
               child: Container(
                 color: const Color.fromRGBO(210, 220, 64, 1.0),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                color: const Color.fromRGBO(182, 215, 64, 1.0),
               ),
             ),
             Expanded(
@@ -127,6 +134,11 @@ class _LinearGaugeFlexibleState extends State<LinearGaugeFlexible> {
             Expanded(
               child: Container(
                 decoration: showBoxDecoration(9, valor),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                decoration: showBoxDecoration(10, valor),
               ),
             ),
           ],

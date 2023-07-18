@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class LinearGauge extends StatefulWidget {
-  double height;
-  double width;
-  int valueToSignal;
+  final double height;
+  final double width;
+  final int valueToSignal;
 
-  LinearGauge({
+  const LinearGauge({
     super.key,
     required this.height,
     required this.width,
@@ -23,7 +23,6 @@ class _LinearGaugeState extends State<LinearGauge> {
     // debugPrint(valor.toString());
     List<bool> mostrar = List<bool>.filled(11, false);
 
-    if (widget.valueToSignal != null) {
       if (valor == 0) {
         mostrar[0] = true;
       } else if (valor <= 10) {
@@ -47,7 +46,6 @@ class _LinearGaugeState extends State<LinearGauge> {
       } else if (valor == 100) {
         mostrar[10] = true;
       }
-    }
 
     return Column(
       children: [
@@ -99,7 +97,7 @@ class _LinearGaugeState extends State<LinearGauge> {
               ),
               Expanded(
                 child: Container(
-                  color: Color.fromRGBO(155, 210, 65, 1.0),
+                  color: const Color.fromRGBO(155, 210, 65, 1.0),
                 ),
               ),
               Expanded(
