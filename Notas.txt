@@ -6,3 +6,21 @@
 
 % flutter build ipa --obfuscate --release --export-method=ad-hoc --split-debug-info=/Users/claudiograsso/Desktop
 
+Matar Xcode desde la línea de comandos:
+
+kill $(ps aux | grep 'Xcode' | awk '{print $2}')
+
+flutter run --release  (para correrlo en un iPhone y poder desconectarlo)
+
+flutter build apk --split-per-abi (y cmpartir el ARM64)
+
+flutter build ipa --obfuscate --release --export-method=ad-hoc --split-debug-info=/Users/claudiograsso/Desktop
+
+In Xcode, go to Target Runner > Build Settings > Strip Style
+Change from All Symbols to Non-Global Symbols (Está en el apartado Deployment)
+Se ve desde los dos Runners (el de arriba y el del iconito)
+
+
+Primero hay que crear el proyecto en Firebase y bajar el archivo a:
+
+/Users/claudiograsso/StudioProjects/tflite_bmi_duo/ios/Runner/GoogleService-Info.plist

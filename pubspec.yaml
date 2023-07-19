@@ -31,7 +31,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -46,6 +45,14 @@ dependencies:
   url_launcher: ^6.1.12
   flutter_html: ^3.0.0-beta.2
   provider: ^6.0.5
+  # Remember to:
+  # enable assets in this file (where you put the model)
+  # Min Android SDK is 21 (the app DOES RUN in Android emulator)
+  # Esto no necesité hacerlo pero, por las dudas...
+  # In Xcode, go to Target Runner > Build Settings > Strip Style
+  # Change from All Symbols to Non-Global Symbols (Está en el apartado Deployment)
+  # Se ve desde los dos Runners (el de arriba y el del iconito)
+  tflite_flutter: ^0.10.1
 
 flutter_launcher_icons:
   android: true
@@ -78,7 +85,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+    - assets/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
