@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import '../aux_widgets/diet_item_widget.dart';
 import '../aux_widgets/vertical_space.dart';
 import '../help_drawer.dart';
-import '../model/datos.dart';
+import '../model/datos_alimentacion.dart';
 
 class DietScreen extends StatefulWidget {
   const DietScreen({super.key});
@@ -65,12 +65,11 @@ class _DietScreenState extends State<DietScreen> {
     // Recorro la lista. Si están todos los datos devuelvo el score y, si no, Ingresar datos
     for (int i = 0; i < Items.values.length; i++) {
       if (selections[i][0] != null) {
-
         // Esta porquería es porque muestro el item que vale 2 a la izquierda
         // y el que vale 0 a la derecha.
         // TODO: corregirlo en la vesión bilingüe
         int valorASumar = selections[i][0]!;
-        if (valorASumar == 0 ) {
+        if (valorASumar == 0) {
           valorASumar = 2;
         } else if (valorASumar == 0) {
           valorASumar = 0;
@@ -101,14 +100,19 @@ class _DietScreenState extends State<DietScreen> {
     // TODO: en init no puedo llamarlo porque explota pero acá no me gusta.
     precaModel = precaModel = Provider.of<PrecarinaModel>(context);
 
-    precaModel.patientSex == PatientSex.male ? _indexSex = 0 : _indexSex = 1;
+    if (precaModel.patientSex != null) {
+      precaModel.patientSex == PatientSex.male ? _indexSex = 0 : _indexSex = 1;
+    }
 
-    if (precaModel.ageYears! <= 8) {
-      _indexAgeRange = 0;
-    } else if (precaModel.ageYears! < 14) {
-      _indexAgeRange = 1;
-    } else {
-      _indexAgeRange = 2;
+    // precaModel.ageYears is null only when inpud data screen does not make validations (intrnal tests)
+    if (precaModel.ageYears != null) {
+      if (precaModel.ageYears! <= 8) {
+        _indexAgeRange = 0;
+      } else if (precaModel.ageYears! < 14) {
+        _indexAgeRange = 1;
+      } else {
+        _indexAgeRange = 2;
+      }
     }
 
     return WillPopScope(
@@ -199,13 +203,15 @@ class _DietScreenState extends State<DietScreen> {
                           // SizedBox(width: 60.0),
                           Expanded(
                             child: Center(
-                              child: calcularScore(foodIndex) != null ?  Text(
-                                "Score: ${calcularScore(foodIndex)}",
-                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                              ) : const Text(
-                                "Score: Ingrese todos los datos",
-                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                              ),
+                              child: calcularScore(foodIndex) != null
+                                  ? Text(
+                                      "Score: ${calcularScore(foodIndex)}",
+                                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                                    )
+                                  : const Text(
+                                      "Score: Ingrese todos los datos",
+                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                                    ),
                             ),
                           ),
                           CupertinoButton(

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:precarina/main_screen.dart';
-import 'package:provider/provider.dart';
+// TTT import 'package:provider/provider.dart';
 
 import 'model/precarina_model.dart';
 
@@ -68,7 +68,7 @@ class _InputDataPageState extends State<InputDataPage> {
 
   @override
   Widget build(BuildContext context) {
-    var precaModel = Provider.of<PrecarinaModel>(context);
+    // TTT var precaModel = Provider.of<PrecarinaModel>(context);  COMMENTED JUST FOR INTERNAL TEST
 
     return SingleChildScrollView(
       // resizeToAvoidBottomInset: true,
@@ -409,8 +409,12 @@ class _InputDataPageState extends State<InputDataPage> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                const SizedBox(width: 20.0,),
-                ElevatedButton(
+                const SizedBox(
+                  width: 20.0,
+                ),
+
+                // TTT Descomentar para la versión de producción
+                /* ElevatedButton(
                   onPressed: () {
                     FocusScope.of(context).unfocus();
                     // Let's give some time for the keyboard to fade away, otherwise
@@ -442,6 +446,20 @@ class _InputDataPageState extends State<InputDataPage> {
                         }
                       });
                     }
+                  },
+                  child: const Text(
+                    'Continuar',
+                    textAlign: TextAlign.center,
+                  ),
+                ),*/
+                ElevatedButton(
+                  onPressed: () {
+                    FocusScope.of(context).unfocus();
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const MainScreen(),
+                      ),
+                    );
                   },
                   child: const Text(
                     'Continuar',
