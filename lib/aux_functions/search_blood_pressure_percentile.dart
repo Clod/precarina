@@ -3,7 +3,7 @@ import 'package:precarina/model/precarina_model.dart';
 
 import '../model/pressure_data.dart';
 
-void searchBloodPresurePercentiles({
+String searchBloodPresurePercentiles({
   required PatientSex sex,
   required double height,
   required int age,
@@ -15,6 +15,7 @@ void searchBloodPresurePercentiles({
   String sistBpPerc;
   int valorTablaSist;
   int valorTablaDiast;
+  double alturaTabla;
 
   if (sex == PatientSex.female) sexIndex = "females";
 
@@ -40,6 +41,7 @@ void searchBloodPresurePercentiles({
 
   // Diastolic Pressure
   if (height <= heights[col1]) {
+    alturaTabla = heights[col1];
     if (diastBP <= diastMatrix[row1][col1]) {
       valorTablaDiast = diastMatrix[row1][col1];
       diastBpPerc = "50";
@@ -54,6 +56,7 @@ void searchBloodPresurePercentiles({
       diastBpPerc = "95 + 12 mmHg";
     }
   } else if (height <= heights[col2]) {
+    alturaTabla = heights[col2];
     if (diastBP <= diastMatrix[row1][col2]) {
       valorTablaDiast = diastMatrix[row1][col2];
       diastBpPerc = "50";
@@ -68,6 +71,7 @@ void searchBloodPresurePercentiles({
       diastBpPerc = "95 + 12 mmHg";
     }
   } else if (height <= heights[col3]) {
+    alturaTabla = heights[col3];
     if (diastBP <= diastMatrix[row1][col3]) {
       valorTablaDiast = diastMatrix[row1][col3];
       diastBpPerc = "50";
@@ -82,6 +86,7 @@ void searchBloodPresurePercentiles({
       diastBpPerc = "95 + 12 mmHg";
     }
   } else if (height <= heights[col4]) {
+    alturaTabla = heights[col4];
     if (diastBP <= diastMatrix[row1][col4]) {
       valorTablaDiast = diastMatrix[row1][col4];
       diastBpPerc = "50";
@@ -96,6 +101,7 @@ void searchBloodPresurePercentiles({
       diastBpPerc = "95 + 12 mmHg";
     }
   } else if (height <= heights[col5]) {
+    alturaTabla = heights[col5];
     if (diastBP <= diastMatrix[row1][col5]) {
       valorTablaDiast = diastMatrix[row1][col5];
       diastBpPerc = "50";
@@ -110,6 +116,7 @@ void searchBloodPresurePercentiles({
       diastBpPerc = "95 + 12 mmHg";
     }
   } else if (height <= heights[col6]) {
+    alturaTabla = heights[col6];
     if (diastBP <= diastMatrix[row1][col6]) {
       valorTablaDiast = diastMatrix[row1][col6];
       diastBpPerc = "50";
@@ -124,6 +131,7 @@ void searchBloodPresurePercentiles({
       diastBpPerc = "95 + 12 mmHg";
     }
   } else {
+    alturaTabla = heights[col7];
     if (diastBP <= diastMatrix[row1][col7]) {
       valorTablaDiast = diastMatrix[row1][col7];
       diastBpPerc = "50";
@@ -240,7 +248,12 @@ void searchBloodPresurePercentiles({
     }
   }
 
+  debugPrint("Altura tabla utilizada: $alturaTabla");
   debugPrint("PAS: $sistBP Perc Sistólica: $sistBpPerc basado en tabla: $valorTablaSist");
   debugPrint("PAD: $diastBP Perc Diastólica: $diastBpPerc basado en tabla: $valorTablaDiast");
 
+  String sexo = (sex == PatientSex.female) ? "Para una nena de $height cm de altura se utilizó la altura de la tabla $alturaTabla\n" : "Para un varón de $height cm de altura se utilizó la altura de la tabla $alturaTabla\n";
+  String pas = "PAS: $sistBP Perc Sistólica: $sistBpPerc basado en tabla: $valorTablaSist\n";
+  String pad = "PAD: $diastBP Perc Diastólica: $diastBpPerc basado en tabla: $valorTablaDiast";
+  return ("${sexo}de $age años se determinaron los siguientes percentilos: \n$pas$pad" );
 }

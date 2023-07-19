@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:precarina/behaviors_and_factors_screens/blood_pressure_screen.dart';
+import 'package:precarina/behaviors_and_factors_screens/body_mass_index_screen.dart';
+import 'package:precarina/behaviors_and_factors_screens/cholesterol_screen.dart';
+import 'package:precarina/behaviors_and_factors_screens/physical_activity_screen.dart';
+import 'package:precarina/behaviors_and_factors_screens/smoke_exposure_screen.dart';
 import 'package:precarina/model/precarina_model.dart';
 import 'package:precarina/pretty_gauge.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'behaviors_and_factors_screens/diabetes_screen.dart';
+import 'behaviors_and_factors_screens/sleep_screen.dart';
 import 'help_drawer.dart';
 import 'linear_gauge_flexible.dart';
 import 'package:precarina/behaviors_and_factors_screens/diet_screen.dart';
@@ -52,17 +58,17 @@ class _MainScreenState extends State<MainScreen> {
               buildOneRow(context, AppLocalizations.of(context)!.txtDietButton, Colors.red, const DietScreen(), precaModel.dietValue),
               const Expanded(child: SizedBox(height: 5)),
               buildOneRow(
-                  context, AppLocalizations.of(context)!.txtPhysicalActivityButton, Colors.red, const DietScreen(), precaModel.physicalActivityValue),
+                  context, AppLocalizations.of(context)!.txtPhysicalActivityButton, Colors.red, const PhysicalActivityScreen(), precaModel.physicalActivityValue),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(context, AppLocalizations.of(context)!.txtSmokeExposureButton, Colors.red, const DietScreen(), precaModel.smokeValue),
+              buildOneRow(context, AppLocalizations.of(context)!.txtSmokeExposureButton, Colors.red, const SmokeExposureScreen(), precaModel.smokeValue),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(context, AppLocalizations.of(context)!.txtSleepButton, Colors.red, const DietScreen(), precaModel.sleepValue),
+              buildOneRow(context, AppLocalizations.of(context)!.txtSleepButton, Colors.red, const SleepScreen(), precaModel.sleepValue),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(context, AppLocalizations.of(context)!.txtBodyMassIndexButton, Colors.blue, const DietScreen(), precaModel.bmiValue),
+              buildOneRow(context, AppLocalizations.of(context)!.txtBodyMassIndexButton, Colors.blue, const BodyMassIndexScreen(), precaModel.bmiValue),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(context, AppLocalizations.of(context)!.txtCholesterolButton, Colors.blue, const DietScreen(), precaModel.cholesterolValue),
+              buildOneRow(context, AppLocalizations.of(context)!.txtCholesterolButton, Colors.blue, const CholesterolScreen(), precaModel.cholesterolValue),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(context, AppLocalizations.of(context)!.txtDiabetesButton, Colors.blue, const DietScreen(), precaModel.diabetesValue),
+              buildOneRow(context, AppLocalizations.of(context)!.txtDiabetesButton, Colors.blue, const DiabetesScreen(), precaModel.diabetesValue),
               const Expanded(child: SizedBox(height: 5)),
               buildOneRow(context, AppLocalizations.of(context)!.txtBloodPressureButton, Colors.blue, const BloodPressureScreen(),
                   precaModel.bloodPressureValue),
@@ -167,10 +173,6 @@ class _MainScreenState extends State<MainScreen> {
         GaugeSegment('', 10, const Color.fromRGBO(251, 168, 57, 100)),
         GaugeSegment('', 10, const Color.fromRGBO(253, 201, 58, 100)),
         GaugeSegment('Medium High', 10, Colors.yellow),
-        // GaugeSegment('', 10, const Color.fromRGBO(210, 220, 64, 100)),
-        // GaugeSegment('', 10, const Color.fromRGBO(166, 205, 70, 100)),
-        // GaugeSegment('', 10, const Color.fromRGBO(121, 190, 75, 100)),
-        // GaugeSegment('High', 10, Colors.green),
         GaugeSegment('', 10, const Color.fromRGBO(210, 220, 64, 1.0)),
         GaugeSegment('', 10, const Color.fromRGBO(182, 215, 64, 1.0)),
         GaugeSegment('', 10, const Color.fromRGBO(155, 210, 65, 1.0)),

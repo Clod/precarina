@@ -164,13 +164,26 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                         ElevatedButton(
                           child: const Text("Calcular"),
                           onPressed: () {
-                            PatientSex ps = (_controllerSex.text == "V" || _controllerSex.text == "v" ) ? PatientSex.male : PatientSex.female;
-                            searchBloodPresurePercentiles(
+                            String resultado;
+                            PatientSex ps = (_controllerSex.text == "V" || _controllerSex.text == "v") ? PatientSex.male : PatientSex.female;
+                            resultado = searchBloodPresurePercentiles(
                               sex: ps,
                               height: double.parse(_controllerHeight.text.replaceAll(",", ".")),
                               age: int.parse(_controllerAge.text),
                               sistBP: int.parse(_controllerSistAP.text),
                               diastBP: int.parse(_controllerDiastPA.text),
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(resultado),
+                                duration: const Duration(days: 1),
+                                action: SnackBarAction(
+                                  label: 'Listo',
+                                  onPressed: () {
+                                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                                  },
+                                ),
+                              ),
                             );
                           },
                         ),
