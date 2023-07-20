@@ -3,6 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:precarina/help_pages/item_help.dart';
 
+import 'help_pages/sleep_help.dart';
+
 // https://blog.logrocket.com/how-to-add-navigation-drawer-flutter/
 class HelpDrawer extends StatelessWidget {
   const HelpDrawer({
@@ -65,6 +67,19 @@ class HelpDrawer extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => ItemHelp(
                       title: AppLocalizations.of(context)!.txtSmokeExposureButton, content: AppLocalizations.of(context)!.txtSmokeExposureHelp),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.bedtime),
+            title: Text(AppLocalizations.of(context)!.txtSleepButton),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SleepHelp(
+                      title: AppLocalizations.of(context)!.txtSleepButton, content: AppLocalizations.of(context)!.txtSleepButton),
                 ),
               );
             },

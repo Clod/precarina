@@ -11,8 +11,6 @@ import '../aux_widgets/vertical_space.dart';
 import '../help_drawer.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
-import '../input_data_page.dart';
-
 late final Interpreter _interpreter;
 
 bool _interpreterUpAndRunning = false;
