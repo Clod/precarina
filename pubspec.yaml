@@ -53,6 +53,7 @@ dependencies:
   # Change from All Symbols to Non-Global Symbols (Está en el apartado Deployment)
   # Se ve desde los dos Runners (el de arriba y el del iconito)
   tflite_flutter: ^0.10.1
+  flutter_markdown: ^0.6.17
 
 flutter_launcher_icons:
   android: true
