@@ -19,8 +19,18 @@ flutter build ipa --obfuscate --release --export-method=ad-hoc --split-debug-inf
 In Xcode, go to Target Runner > Build Settings > Strip Style
 Change from All Symbols to Non-Global Symbols (Está en el apartado Deployment)
 Se ve desde los dos Runners (el de arriba y el del iconito)
+Si no hago eso, NO ME ANDA LA VERSIÓN AD-HOC
 
 
 Primero hay que crear el proyecto en Firebase y bajar el archivo a:
 
 /Users/claudiograsso/StudioProjects/tflite_bmi_duo/ios/Runner/GoogleService-Info.plist
+
+iPhones:
+Barbara Wagmaister: barbarawag@gmail.com
+Mariana Cazalas: marianacazalas@gmail.com
+Marina Vaccari: marinvaccari@gmail.com
+Carolina Gvirtzman: polisomnoguti@gmail.com
+
+OJO: después de agregarlos al proyecto en Firebase hay que agregarlos al release!!!
+Si no, las invitaciones no salen.

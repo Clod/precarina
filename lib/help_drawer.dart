@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:precarina/help_pages/blood_pressure_help.dart';
 import 'package:precarina/help_pages/item_help.dart';
 
 import 'help_pages/sleep_help.dart';
@@ -79,7 +80,9 @@ class HelpDrawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => SleepHelp(
-                      title: AppLocalizations.of(context)!.txtSleepButton, content: AppLocalizations.of(context)!.txtSleepButton),
+                    title: AppLocalizations.of(context)!.txtSleepButton,
+                    content: AppLocalizations.of(context)!.txtSleepButton,
+                  ),
                 ),
               );
             },
@@ -104,8 +107,10 @@ class HelpDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ItemHelp(
-                      title: AppLocalizations.of(context)!.txtBloodPressureButton, content: AppLocalizations.of(context)!.txtBloodPressureHelp),
+                  builder: (context) => BloodPressureHelp(
+                    title: AppLocalizations.of(context)!.txtBloodPressureButton,
+                    content: AppLocalizations.of(context)!.txtBloodPressureHelp,
+                  ),
                 ),
               );
             },
@@ -121,14 +126,14 @@ class HelpDrawer extends StatelessWidget {
             applicationVersion: '2.0.0',
             applicationLegalese: 'This app is Freeware and Open Source',
             aboutBoxChildren: [
-              const SizedBox(height: 5.0,),
+              const SizedBox(
+                height: 5.0,
+              ),
               SizedBox(
                   height: 300.0,
                   width: 150.0,
                   child: SingleChildScrollView(
-                    child: Html(
-                        data:
-                        AppLocalizations.of(context)!.txtAbout),
+                    child: Html(data: AppLocalizations.of(context)!.txtAbout),
                   ))
             ],
             child: const Text('About this app'),
