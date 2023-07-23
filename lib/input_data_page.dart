@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:precarina/main_screen.dart';
 // TTT import 'package:provider/provider.dart';
+import 'package:time_machine/time_machine.dart';
 
 import 'model/precarina_model.dart';
 
@@ -58,12 +59,19 @@ class _InputDataPageState extends State<InputDataPage> {
     if (pickedDate != null && pickedDate != _currentDate) {
       setState(() {
         _dateTime = pickedDate;
-        Duration parse = pickedDate.difference(DateTime.now()).abs();
-        debugPrint("${parse.inDays ~/ 360} Years ${((parse.inDays % 360) ~/ 30)} Month ${(parse.inDays % 360) % 30} Days");
-        _textContAnios.text = (parse.inDays ~/ 360).toString();
-        _textContMeses.text = ((parse.inDays % 360) ~/ 30).toString();
+        LocalDateTime a = LocalDateTime.now();
+        LocalDateTime b = LocalDateTime.dateTime(pickedDate);
+        Period diff = a.periodSince(b);
+
+        // debugPrint("years: ${diff.years}; months: ${diff.months}; days: ${diff.days}; hours: ${diff.hours}; minutes: ${diff.minutes}; seconds: ${diff.seconds}");
+        _textContAnios.text = diff.years.toString();
+        _textContMeses.text = diff.months.toString();
+
       });
     }
+
+
+
   }
 
   @override

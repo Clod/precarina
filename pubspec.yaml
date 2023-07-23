@@ -41,7 +41,7 @@ dependencies:
   flutter_exit_app: ^1.1.2
   flutter_localizations:
     sdk: flutter
-  intl: any
+  intl: ^0.18.0
   url_launcher: ^6.1.12
   flutter_html: ^3.0.0-beta.2
   provider: ^6.0.5
@@ -55,6 +55,7 @@ dependencies:
   tflite_flutter: ^0.10.1
   # https://dart-lang.github.io/markdown/
   flutter_markdown: ^0.6.17
+  time_machine: ^0.9.17
 
 flutter_launcher_icons:
   android: true
