@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1066739995215-hiu8p830poq416j1f04b94pdjiitt052.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1066739995215-hiu8p830poq416j1f04b94pdjiitt052</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDvThaIF1qDduxYhgnJCOWmXeO5tl5HUW8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1066739995215</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>ar.net.grasso.precarina</string>
+	<key>PROJECT_ID</key>
+	<string>precarina-10323</string>
+	<key>STORAGE_BUCKET</key>
+	<string>precarina-10323.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1066739995215:ios:302afe7af73126f7c0503a</string>
+</dict>
+</plist>
