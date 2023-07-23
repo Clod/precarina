@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
+import 'package:localization/localization.dart';
 import 'package:precarina/model/precarina_model.dart';
 import 'package:provider/provider.dart';
 
@@ -50,7 +52,8 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
       child: Scaffold(
         // resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.txtBloodPressureButton),
+ //         title: Text(AppLocalizations.of(context)!.txtBloodPressureButton),
+          title: Text("txtBloodPressureButton".i18n()),
         ),
         drawer: const HelpDrawer(),
         body: SafeArea(

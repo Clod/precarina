@@ -1,6 +1,7 @@
 // main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:localization/localization.dart';
 import 'package:precarina/input_data_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -45,6 +46,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    LocalJsonLocalization.delegate.directories = ['lib/i18n'];
+
     return  MaterialApp(
       theme: ThemeData(
         textTheme: const TextTheme(
@@ -54,15 +58,16 @@ class MyApp extends StatelessWidget {
       // Remove the debug banner
       debugShowCheckedModeBanner: false,
       title: 'Score',
-      localizationsDelegates: const [
+      localizationsDelegates: [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
+        LocalJsonLocalization.delegate,
       ],
       supportedLocales: const [
-        Locale('en', ''), // English
-        Locale('es', ''), // Spanish
+        Locale('en', 'US'), // English
+        Locale('es', 'ES'), // Spanish
       ],
       home: const MyHomePage(),
     );
