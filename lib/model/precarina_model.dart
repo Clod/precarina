@@ -24,7 +24,7 @@ class PrecarinaModel extends ChangeNotifier {
 
 //  String? sex;
   PatientSex? patientSex;
-  int? height;
+  double? height;
   int? weightKilos;
   int? weightGrams;
   DateTime? dateOfBirth;
