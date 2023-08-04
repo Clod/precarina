@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:precarina/main_screen.dart';
-// TTT import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
 import 'package:time_machine/time_machine.dart';
 
 import 'model/precarina_model.dart';
@@ -66,17 +66,13 @@ class _InputDataPageState extends State<InputDataPage> {
         // debugPrint("years: ${diff.years}; months: ${diff.months}; days: ${diff.days}; hours: ${diff.hours}; minutes: ${diff.minutes}; seconds: ${diff.seconds}");
         _textContAnios.text = diff.years.toString();
         _textContMeses.text = diff.months.toString();
-
       });
     }
-
-
-
   }
 
   @override
   Widget build(BuildContext context) {
-    // TTT var precaModel = Provider.of<PrecarinaModel>(context);  COMMENTED JUST FOR INTERNAL TEST
+    var precaModel = Provider.of<PrecarinaModel>(context);
 
     return SingleChildScrollView(
       // resizeToAvoidBottomInset: true,
@@ -420,9 +416,7 @@ class _InputDataPageState extends State<InputDataPage> {
                 const SizedBox(
                   width: 20.0,
                 ),
-
-                // TTT Descomentar para la versión de producción
-                /* ElevatedButton(
+                ElevatedButton(
                   onPressed: () {
                     FocusScope.of(context).unfocus();
                     // Let's give some time for the keyboard to fade away, otherwise
@@ -431,13 +425,12 @@ class _InputDataPageState extends State<InputDataPage> {
                     // await Future.delayed(const Duration(seconds: 1));
 
                     if (_formKey.currentState?.validate() == true) {
-
                       precaModel.height = int.parse(_textContAltura.text);
                       precaModel.weightKilos = int.parse(_textContKilos.text);
                       precaModel.weightGrams = int.parse(_textContGramos.text);
                       precaModel.ageYears = int.parse(_textContAnios.text);
                       precaModel.ageMonths = int.parse(_textContMeses.text);
-                      precaModel.dateOfBirth = _dateTime ;
+                      precaModel.dateOfBirth = _dateTime;
                       precaModel.patientSex = _selectedOption;
 
                       Navigator.of(context).push(
@@ -454,20 +447,6 @@ class _InputDataPageState extends State<InputDataPage> {
                         }
                       });
                     }
-                  },
-                  child: const Text(
-                    'Continuar',
-                    textAlign: TextAlign.center,
-                  ),
-                ),*/
-                ElevatedButton(
-                  onPressed: () {
-                    FocusScope.of(context).unfocus();
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const MainScreen(),
-                      ),
-                    );
                   },
                   child: const Text(
                     'Continuar',

@@ -115,7 +115,6 @@ class _MainScreenState extends State<MainScreen> {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-//                  builder: (context) => const DietScreen(),
                   builder: (context) => screenToGo,
                 ),
               );
@@ -168,10 +167,10 @@ class _MainScreenState extends State<MainScreen> {
       // https://meyerweb.com/eric/tools/color-blend/#FFEB3B:4CAF50:3:rgbd
       segments: [
         GaugeSegment('Low', 10, Colors.red),
-        GaugeSegment('', 10, const Color.fromRGBO(246, 101, 55, 100)),
-        GaugeSegment('', 10, const Color.fromRGBO(248, 134, 56, 100)),
-        GaugeSegment('', 10, const Color.fromRGBO(251, 168, 57, 100)),
-        GaugeSegment('', 10, const Color.fromRGBO(253, 201, 58, 100)),
+        GaugeSegment('', 10, const Color.fromRGBO(246, 101, 55, 1.0)),
+        GaugeSegment('', 10, const Color.fromRGBO(248, 134, 56, 1.0)),
+        GaugeSegment('', 10, const Color.fromRGBO(251, 168, 57, 1.0)),
+        GaugeSegment('', 10, const Color.fromRGBO(253, 201, 58, 1.0)),
         GaugeSegment('Medium High', 10, Colors.yellow),
         GaugeSegment('', 10, const Color.fromRGBO(210, 220, 64, 1.0)),
         GaugeSegment('', 10, const Color.fromRGBO(182, 215, 64, 1.0)),

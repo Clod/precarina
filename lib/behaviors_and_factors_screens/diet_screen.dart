@@ -98,7 +98,6 @@ class _DietScreenState extends State<DietScreen> {
     debugPrint(foodIndex.toString());
     dietItemsList.clear();
 
-    // TODO: en init no puedo llamarlo porque explota pero acá no me gusta.
     precaModel = precaModel = Provider.of<PrecarinaModel>(context);
 
     if (precaModel.patientSex != null) {
