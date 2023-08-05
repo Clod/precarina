@@ -26,8 +26,8 @@ class PagesHeader extends StatelessWidget {
                   children: [
                     const SizedBox(height: 5.0),
                     Text("Sexo: ${precaModel.patientSex == PatientSex.female ? "Mujer" : "Varón"}"),
-                    Text("Edad: ${precaModel.ageYears} año(s) ${precaModel.ageMonths} mes(es)."),
-                    Text("Peso: ${precaModel.weightKilos} Kg ${precaModel.weightGrams} g."),
+                    Text("Edad: ${precaModel.ageYears} ${(precaModel.ageYears == 0 || precaModel.ageYears == 1 ? "año" : "años")} ${precaModel.ageMonths} ${(precaModel.ageMonths == 1 ? "mes" : "meses")}"),
+                    Text("Peso: ${precaModel.weightKilos} Kg ${precaModel.weightGrams} g"),
                     Text("Estatura: ${precaModel.height} cm"),
                     const SizedBox(height: 5.0),
                   ],

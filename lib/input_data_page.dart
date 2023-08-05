@@ -474,11 +474,11 @@ class _InputDataPageState extends State<InputDataPage> {
                       validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
                       items: monthsRange
                           .map(
-                            (month) => DropdownMenuItem(
-                              value: month,
+                            (months) => DropdownMenuItem(
+                              value: months,
                               alignment: AlignmentDirectional.center,
                               child: Text(
-                                month.toString() + (month == 0 || month == 1 ? " mes" : " meses"),
+                                months.toString() + (months == 0 || months == 1 ? " mes" : " meses"),
                               ),
                             ),
                           )
