@@ -31,8 +31,6 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     precaModel = Provider.of<PrecarinaModel>(context);
 
-    debugPrint("Dieta: ${precaModel.dietValue}");
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(

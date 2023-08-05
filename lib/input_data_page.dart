@@ -28,8 +28,6 @@ class _InputDataPageState extends State<InputDataPage> {
   final _heightKey = GlobalKey<FormFieldState<String>>();
   final _weightKilosKey = GlobalKey<FormFieldState<String>>();
   final _weightGramsKey = GlobalKey<FormFieldState<String>>();
-  // final _ageYearsKey = GlobalKey<FormFieldState<String>>();
-  // final _ageMonthsKey = GlobalKey<FormFieldState<String>>();
 
   List<int> yearsRange = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
   List<int> monthsRange = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
@@ -43,6 +41,8 @@ class _InputDataPageState extends State<InputDataPage> {
   final TextEditingController _textContGramos = TextEditingController();
   final TextEditingController _textContAnios = TextEditingController();
   final TextEditingController _textContMeses = TextEditingController();
+
+  final TextEditingController _textContUsername = TextEditingController();
 
   var heightMaskFormatter = MaskTextInputFormatter(mask: '###,#', filter: {"#": RegExp(r'[0-9]')}, type: MaskAutoCompletionType.eager);
 
@@ -179,36 +179,49 @@ class _InputDataPageState extends State<InputDataPage> {
                 const SizedBox(
                   width: 10.0,
                 ),
-                Container(
-                  width: 100.0,
-                  height: 30.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.grey[300],
-                  ),
-                  child: TextFormField(
-                    key: _heightKey,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly, heightMaskFormatter],
-                    textAlign: TextAlign.center,
-                    controller: _textContAltura,
-                    focusNode: _heightFocusNode,
-                    decoration: const InputDecoration(
-                      hintText: 'Ej: 123,5',
+                Stack(
+                  children: [
+                    Container(
+                      width: 100.0,
+                      height: 48.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.grey[300],
+                      ),
                     ),
-                    onTap: () {
-                      _heightKey.currentState?.reset();
-                    },
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Requerido';
-                      }
-                      return null;
-                    },
-                  ),
+                    SizedBox(
+                      width: 100.0,
+                      child: FormBuilderTextField(
+                        validator: (val) => val!.isEmpty ? 'Requerido' : null,
+                        name: "HeightKey",
+                        key: _heightKey,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [FilteringTextInputFormatter.digitsOnly, heightMaskFormatter],
+                        textAlign: TextAlign.center,
+                        controller: _textContAltura,
+                        focusNode: _heightFocusNode,
+                        decoration: const InputDecoration(
+                          hintText: 'Ej: 123,5',
+                          border: InputBorder.none,
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15.0),
+                              ),
+                              borderSide: BorderSide(color: Colors.blue)),
+                          contentPadding: EdgeInsets.symmetric(
+                            vertical: 5,
+                            horizontal: 10,
+                          ),
+                        ),
+                        onTap: () {
+                          _heightKey.currentState?.reset();
+                        },
+                      ),
+                    ),
+                  ],
                 ),
                 const Text(
-                  "cm",
+                  "  cm",
                   style: TextStyle(
                     fontSize: 15.0,
                     fontWeight: FontWeight.bold,
@@ -233,35 +246,48 @@ class _InputDataPageState extends State<InputDataPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  width: 100.0,
-                  height: 30.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.grey[300],
-                  ),
-                  child: TextFormField(
-                    key: _weightKilosKey,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly, kilosWeightMaskFormatter],
-                    textAlign: TextAlign.center,
-                    controller: _textContKilos,
-                    decoration: const InputDecoration(
-                      hintText: 'Ej: 42',
+                Stack(
+                  children: [
+                    Container(
+                      width: 100.0,
+                      height: 48.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.grey[300],
+                      ),
                     ),
-                    onTap: () {
-                      _weightKilosKey.currentState?.reset();
-                    },
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Requerido';
-                      }
-                      return null;
-                    },
-                  ),
+                    SizedBox(
+                      width: 100.0,
+                      child: FormBuilderTextField(
+                        validator: (val) => val!.isEmpty ? 'Requerido' : null,
+                        key: _weightKilosKey,
+                        name: "WeightKilos",
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [FilteringTextInputFormatter.digitsOnly, kilosWeightMaskFormatter],
+                        textAlign: TextAlign.center,
+                        controller: _textContKilos,
+                        decoration: const InputDecoration(
+                          hintText: 'Ej: 42',
+                          border: InputBorder.none,
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15.0),
+                              ),
+                              borderSide: BorderSide(color: Colors.blue)),
+                          contentPadding: EdgeInsets.symmetric(
+                            vertical: 5,
+                            horizontal: 10,
+                          ),
+                        ),
+                        onTap: () {
+                          _weightKilosKey.currentState?.reset();
+                        },
+                      ),
+                    ),
+                  ],
                 ),
                 const Text(
-                  "Kg",
+                  "  Kg",
                   style: TextStyle(
                     fontSize: 15.0,
                     fontWeight: FontWeight.bold,
@@ -270,36 +296,47 @@ class _InputDataPageState extends State<InputDataPage> {
                 const SizedBox(
                   width: 10.0,
                 ),
-                Container(
-                  width: 100.0,
-                  height: 30.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.grey[300],
-                  ),
-                  // TODO: Limit to 999
-                  child: TextFormField(
-                    key: _weightGramsKey,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly, gramsWeightMaskFormatter],
-                    textAlign: TextAlign.center,
-                    controller: _textContGramos,
-                    decoration: const InputDecoration(
-                      hintText: 'Ej: 300',
+                Stack(children: [
+                  Container(
+                    width: 100.0,
+                    height: 48.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.grey[300],
                     ),
-                    onTap: () {
-                      _weightGramsKey.currentState?.reset();
-                    },
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Requerido';
-                      }
-                      return null;
-                    },
                   ),
-                ),
+                  SizedBox(
+                    width: 100.0,
+                    child: FormBuilderTextField(
+                      validator: (val) => val!.isEmpty ? 'Requerido' : null,
+                      key: _weightGramsKey,
+                      name: "WeightGrams",
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly, gramsWeightMaskFormatter],
+                      textAlign: TextAlign.center,
+                      controller: _textContGramos,
+                      decoration: const InputDecoration(
+                        hintText: 'Ej: 300',
+                        border: InputBorder.none,
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(15.0),
+                          ),
+                          borderSide: BorderSide(color: Colors.blue),
+                        ),
+                        contentPadding: EdgeInsets.symmetric(
+                          vertical: 5,
+                          horizontal: 10,
+                        ),
+                      ),
+                      onTap: () {
+                        _weightGramsKey.currentState?.reset();
+                      },
+                    ),
+                  ),
+                ]),
                 const Text(
-                  "g",
+                  "  g",
                   style: TextStyle(
                     fontSize: 15.0,
                     fontWeight: FontWeight.bold,
@@ -321,100 +358,6 @@ class _InputDataPageState extends State<InputDataPage> {
                 ),
               ),
             ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //   children: [
-            //     Column(
-            //       children: [
-            //         ElevatedButton(
-            //           onPressed: () => _selectDate(context),
-            //           child: const Text(
-            //             'Fecha de\n nacimiento',
-            //             textAlign: TextAlign.center,
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //     // Row(
-            //     //   mainAxisAlignment: MainAxisAlignment.center,
-            //     //   children: [
-            //     //     Container(
-            //     //       width: 50.0,
-            //     //       height: 30.0,
-            //     //       decoration: BoxDecoration(
-            //     //         borderRadius: BorderRadius.circular(20),
-            //     //         color: Colors.grey[300],
-            //     //       ),
-            //     //       // TODO: Limit to 19
-            //     //       child: TextFormField(
-            //     //         key: _ageYearsKey,
-            //     //         keyboardType: TextInputType.number,
-            //     //         inputFormatters: [FilteringTextInputFormatter.digitsOnly, ageYearsMaskFormatter],
-            //     //         textAlign: TextAlign.center,
-            //     //         controller: _textContAnios,
-            //     //         decoration: const InputDecoration(
-            //     //           hintText: 'Ej: 1',
-            //     //         ),
-            //     //         onTap: () {
-            //     //           _ageYearsKey.currentState?.reset();
-            //     //         },
-            //     //         validator: (value) {
-            //     //           if (value == null || value.isEmpty) {
-            //     //             return 'Requerido';
-            //     //           }
-            //     //           return null;
-            //     //         },
-            //     //       ),
-            //     //     ),
-            //     //     const Text(
-            //     //       "a",
-            //     //       style: TextStyle(
-            //     //         fontSize: 15.0,
-            //     //         fontWeight: FontWeight.bold,
-            //     //       ),
-            //     //     ),
-            //     //     const SizedBox(
-            //     //       width: 10.0,
-            //     //     ),
-            //     //     Container(
-            //     //       width: 60.0,
-            //     //       height: 30.0,
-            //     //       decoration: BoxDecoration(
-            //     //         borderRadius: BorderRadius.circular(20),
-            //     //         color: Colors.grey[300],
-            //     //       ),
-            //     //       // Limit to 11 or set to 0 if Years is 19
-            //     //       child: TextFormField(
-            //     //         key: _ageMonthsKey,
-            //     //         keyboardType: TextInputType.number,
-            //     //         inputFormatters: [FilteringTextInputFormatter.digitsOnly, ageMonthsMaskFormatter],
-            //     //         textAlign: TextAlign.center,
-            //     //         controller: _textContMeses,
-            //     //         decoration: const InputDecoration(
-            //     //           hintText: 'Ej: 10',
-            //     //         ),
-            //     //         onTap: () {
-            //     //           _ageMonthsKey.currentState?.reset();
-            //     //         },
-            //     //         validator: (value) {
-            //     //           if (value == null || value.isEmpty) {
-            //     //             return 'Requerido';
-            //     //           }
-            //     //           return null;
-            //     //         },
-            //     //       ),
-            //     //     ),
-            //     //     const Text(
-            //     //       "m",
-            //     //       style: TextStyle(
-            //     //         fontSize: 15.0,
-            //     //         fontWeight: FontWeight.bold,
-            //     //       ),
-            //     //     ),
-            //     //   ],
-            //     // ),
-            //   ],
-            // ),
             const SizedBox(
               height: 20.0,
             ),
@@ -445,7 +388,13 @@ class _InputDataPageState extends State<InputDataPage> {
                         labelText: 'Años',
                       ),
                       name: "Age Years",
-                      validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
+                      validator: FormBuilderValidators.compose(
+                        [
+                          FormBuilderValidators.required(errorText: "Requerido"),
+                        ],
+                      ),
+                      // Remove error message when user selects an option
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       items: yearsRange
                           .map(
                             (age) => DropdownMenuItem(
@@ -471,7 +420,13 @@ class _InputDataPageState extends State<InputDataPage> {
                         labelText: 'Meses',
                       ),
                       name: "Age Months",
-                      validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
+                      validator: FormBuilderValidators.compose(
+                        [
+                          FormBuilderValidators.required(errorText: "Requerido"),
+                        ],
+                      ),
+                      // Remove error message when user selects an option
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       items: monthsRange
                           .map(
                             (months) => DropdownMenuItem(
@@ -526,8 +481,6 @@ class _InputDataPageState extends State<InputDataPage> {
                       precaModel.weightGrams = int.parse(_textContGramos.text);
                       precaModel.ageYears = _formKey.currentState?.fields['Age Years']?.value;
                       precaModel.ageMonths = _formKey.currentState?.fields['Age Months']?.value;
-                      // precaModel.ageYears = int.parse(_textContAnios.text);
-                      // precaModel.ageMonths = int.parse(_textContMeses.text);
 
                       precaModel.dateOfBirth = _dateTime;
                       precaModel.patientSex = _selectedOption;

@@ -131,7 +131,7 @@ class MyHomePageState extends State<MyHomePage> {
 
    // final gridColumnWidth = (screenWidth - 16.0) / 4.0;
 
-    debugPrint('Ancho de pantalla: ${screenWidth.toString()}');
+   // debugPrint('Ancho de pantalla: ${screenWidth.toString()}');
 
     // Acomodo el tamaño del font de acuerdo con el ancho de la pantalla
     //final fontSize = screenWidth / 75.0;

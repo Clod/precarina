@@ -24,9 +24,7 @@ class BloodPressureScreen extends StatefulWidget {
 
 class _BloodPressureScreenState extends State<BloodPressureScreen> {
   final _formKey = GlobalKey<FormBuilderState>();
-  final _controllerHeight = TextEditingController();
   final _controllerSex = TextEditingController();
-  final _controllerAge = TextEditingController();
   final _controllerSistAP = TextEditingController();
   final _controllerDiastPA = TextEditingController();
   var bpFormatter = MaskTextInputFormatter(
@@ -37,22 +35,25 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
 
   var precaModel = PrecarinaModel();
 
-  late BuildContext bc;
+  String pasHint = "Ej.: 120";
+  String padHint = "Ej.: 80";
 
   List<String> results = ["", ""];
   String diagnose = "";
+  String score = "";
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => showWarning(bc));
+    // This callback will get called AFTER the Widget is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showWarning(context);
+      precaModel = Provider.of<PrecarinaModel>(context, listen: false);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    precaModel = Provider.of<PrecarinaModel>(context);
-
-    bc = context;
     // final Orientation orientation = MediaQuery.of(context).orientation;
     // final Size dialogSize = (orientation == Orientation.portrait) ? Size(400, 600) : Size(600, 400);
 
@@ -78,155 +79,212 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                   flex: 3,
                   child: SingleChildScrollView(
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        Center(
-                          child: SizedBox(
-                            width: 300,
-                            height: 300,
-                            child: Column(
+                        const VerticalSpace(altura: 15.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("PA Sistólica:   "),
+                            Stack(
                               children: [
-                                const VerticalSpace(altura: 15.0),
-                                Row(
-                                  children: [
-                                    const Text("PA Sistólica:   "),
-                                    Container(
-                                      width: 100.0,
-                                      height: 30.0,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: Colors.grey[300],
-                                      ),
-                                      child: FormBuilderTextField(
-                                        name: "PAS",
-                                        keyboardType: TextInputType.number,
-                                        style: const TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        inputFormatters: [FilteringTextInputFormatter.digitsOnly, bpFormatter],
-                                        controller: _controllerSistAP,
-                                        textAlign: TextAlign.center,
-                                        decoration: const InputDecoration(
-                                          hintText: 'Ej: 120',
-                                          border: InputBorder.none,
-                                          contentPadding: EdgeInsets.only(bottom: 10.0),
-                                        ),
-                                        validator: FormBuilderValidators.compose(
-                                          [
-                                            FormBuilderValidators.required(),
-                                            FormBuilderValidators.numeric(),
-                                            // FormBuilderValidators.max(70),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    const Text(" mmHg"),
-                                  ],
+                                Container(
+                                  width: 100.0,
+                                  height: 48.0,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.grey[300],
+                                  ),
                                 ),
-                                const VerticalSpace(altura: 15.0),
-                                Row(
-                                  children: [
-                                    const Text("PA Distólica:   "),
-                                    Container(
-                                      width: 100.0,
-                                      height: 30.0,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: Colors.grey[300],
+                                SizedBox(
+                                  width: 100.0,
+                                  child: FormBuilderTextField(
+                                    name: "PAS",
+                                    keyboardType: TextInputType.number,
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    inputFormatters: [FilteringTextInputFormatter.digitsOnly, bpFormatter],
+                                    controller: _controllerSistAP,
+                                    textAlign: TextAlign.center,
+                                    decoration: InputDecoration(
+                                      hintText: pasHint,
+                                      border: InputBorder.none,
+                                      focusedBorder: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(15.0),
+                                        ),
+                                        borderSide: BorderSide(color: Colors.blue),
                                       ),
-                                      child: TextFormField(
-                                        keyboardType: TextInputType.number,
-                                        style: const TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        inputFormatters: [FilteringTextInputFormatter.digitsOnly, bpFormatter],
-                                        controller: _controllerDiastPA,
-                                        textAlign: TextAlign.center,
-                                        decoration: const InputDecoration(
-                                          hintText: 'Ej: 80',
-                                          border: InputBorder.none,
-                                          contentPadding: EdgeInsets.only(bottom: 10.0),
-                                        ),
-                                        validator: FormBuilderValidators.compose(
-                                          [
-                                            FormBuilderValidators.required(),
-                                            FormBuilderValidators.numeric(),
-                                            // FormBuilderValidators.max(70),
-                                          ],
-                                        ),
+                                      contentPadding: const EdgeInsets.symmetric(
+                                        vertical: 5,
+                                        horizontal: 10,
                                       ),
                                     ),
-                                    const Text(" mmHg"),
-                                  ],
+                                    onTap: () {
+                                      _formKey.currentState?.fields['PAS']?.reset();
+                                    },
+                                    validator: FormBuilderValidators.compose(
+                                      [
+                                        (val) {
+                                          debugPrint("Validando");
+                                          return val!.isEmpty ? 'Requerido' : null;
+                                        },
+                                        FormBuilderValidators.required(errorText: "     Requerido"),
+                                        FormBuilderValidators.numeric(),
+                                        // FormBuilderValidators.max(70),
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                                const VerticalSpace(altura: 20.0),
-                                Flexible(
-                                  flex: 1,
-                                  child: FormBuilderChoiceChip<String>(
-                                    name: 'Medicado',
-                                    labelStyle: const TextStyle(fontSize: 25.0),
-                                    // initialValue: "N/I",
-                                    decoration: const InputDecoration(
-                                      isDense: true,
-                                      label: Text(
-                                        "Recibe medicación",
-                                        style: TextStyle(fontSize: 20.0),
-                                      ),
-                                      contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
-                                      border: OutlineInputBorder(),
+                              ],
+                            ),
+                            const Text(" mmHg"),
+                          ],
+                        ),
+                        const VerticalSpace(altura: 15.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("PA Distólica:   "),
+                            Stack(
+                              children: [
+                                Container(
+                                  width: 100.0,
+                                  height: 48.0,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.grey[300],
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 100.0,
+                                  child: FormBuilderTextField(
+                                    name: 'PAD',
+                                    keyboardType: TextInputType.number,
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                    alignment: WrapAlignment.spaceAround,
-                                    options: const [
-                                      FormBuilderChipOption(value: "S"),
-                                      FormBuilderChipOption(value: "N"),
-                                    ],
-                                    selectedColor: Colors.blueAccent,
-                                    onChanged: (value) {
-                                      ;
+                                    inputFormatters: [FilteringTextInputFormatter.digitsOnly, bpFormatter],
+                                    controller: _controllerDiastPA,
+                                    textAlign: TextAlign.center,
+                                    decoration: InputDecoration(
+                                      hintText: padHint,
+                                      border: InputBorder.none,
+                                      focusedBorder: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(15.0),
+                                        ),
+                                        borderSide: BorderSide(color: Colors.blue),
+                                      ),
+                                      contentPadding: const EdgeInsets.symmetric(
+                                        vertical: 5,
+                                        horizontal: 10,
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      _formKey.currentState?.fields['PAD']?.reset();
+                                    },
+                                    validator: FormBuilderValidators.compose(
+                                      [
+                                        (val) {
+                                          debugPrint("Validando");
+                                          return val!.isEmpty ? 'Requerido' : null;
+                                        },
+                                        FormBuilderValidators.required(errorText: "     Requerido"),
+                                        FormBuilderValidators.numeric(),
+                                        // FormBuilderValidators.max(70),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Text(" mmHg"),
+                          ],
+                        ),
+                        const VerticalSpace(altura: 20.0),
+                        SizedBox(
+                          width: 200.0,
+                          child: FormBuilderChoiceChip<String>(
+                            name: 'Medicado',
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            labelStyle: const TextStyle(fontSize: 25.0),
+                            // initialValue: "N/I",
+                            decoration: const InputDecoration(
+                              isDense: true,
+                              label: Text(
+                                "Recibe medicación",
+                                style: TextStyle(fontSize: 20.0),
+                              ),
+                              contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
+                              border: OutlineInputBorder(),
+                            ),
+                            alignment: WrapAlignment.spaceAround,
+                            options: const [
+                              FormBuilderChipOption(value: "S"),
+                              FormBuilderChipOption(value: "N"),
+                            ],
+                            validator: FormBuilderValidators.compose(
+                              [
+                                FormBuilderValidators.required(errorText: "     Requerido"),
+                              ],
+                            ),
+                            selectedColor: Colors.blueAccent,
+                            onChanged: (value) {
+                              // _formKey.currentState!.fields['Medicado']?.reset();
+                              _formKey.currentState!.fields['Medicado']?.validate();
+                            },
+                          ),
+                        ),
+                        const VerticalSpace(altura: 15.0),
+                        ElevatedButton(
+                          child: const Text("Calcular"),
+                          onPressed: () {
+                            if (_formKey.currentState!.validate() == true) {
+                              FocusScope.of(context).unfocus();
+                              PatientSex ps = (_controllerSex.text == "V" || _controllerSex.text == "v") ? PatientSex.male : PatientSex.female;
+                              results = searchBloodPresurePercentiles(
+                                sex: precaModel.patientSex == PatientSex.female ? PatientSex.female : PatientSex.male,
+                                height: precaModel.height!,
+                                age: precaModel.ageYears!,
+                                sistBP: int.parse(_controllerSistAP.text),
+                                diastBP: int.parse(_controllerDiastPA.text),
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(results[1]),
+                                  duration: const Duration(days: 1),
+                                  action: SnackBarAction(
+                                    label: 'OK',
+                                    onPressed: () {
+                                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                                      setState(() {
+                                        diagnose = results[0];
+                                        score = calculateScore(diagnose, _formKey.currentState!.fields['Medicado']?.value);
+                                      });
                                     },
                                   ),
                                 ),
-                                const VerticalSpace(altura: 15.0),
-                                ElevatedButton(
-                                  child: const Text("Calcular"),
-                                  onPressed: () {
-                                    _formKey.currentState!.validate();
-                                    PatientSex ps = (_controllerSex.text == "V" || _controllerSex.text == "v") ? PatientSex.male : PatientSex.female;
-                                    results = searchBloodPresurePercentiles(
-                                      sex: precaModel.patientSex == PatientSex.female ? PatientSex.female : PatientSex.male,
-                                      height: precaModel.height!,
-                                      age: precaModel.ageYears!,
-                                      sistBP: int.parse(_controllerSistAP.text),
-                                      diastBP: int.parse(_controllerDiastPA.text),
-                                    );
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(results[1]),
-                                        duration: const Duration(days: 1),
-                                        action: SnackBarAction(
-                                          label: 'OK',
-                                          onPressed: () {
-                                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                                            setState(() {
-                                              diagnose = results[0];
-                                            });
-                                          },
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                                const VerticalSpace(altura: 15.0),
-                                Text(
-                                  diagnose,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 21.0,
-                                  ),
-                                )
-                              ],
-                            ),
+                              );
+                            }
+                          },
+                        ),
+                        const VerticalSpace(altura: 15.0),
+                        Text(
+                          diagnose,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 21.0,
+                          ),
+                        ),
+                        Text(
+                          score,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 21.0,
                           ),
                         ),
                         Row(
@@ -234,15 +292,18 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                           children: [
                             ElevatedButton(
                               child: Text(AppLocalizations.of(context)!.txtButtonCancel),
-                              onPressed: () => Navigator.maybePop(context),
+                              onPressed: () {
+                                FocusScope.of(context).unfocus();
+                                Navigator.maybePop(context);
+                              },
                             ),
                             const SizedBox(
                               width: 10.0,
                             ),
                             ElevatedButton(
                               onPressed: () {
-                                precaModel.dietValue = int.parse(_controllerHeight.value.text);
-                                debugPrint("Diet Value en Screen: ${precaModel.dietValue}");
+                                FocusScope.of(context).unfocus();
+                                debugPrint("BP value en Screen: ${precaModel.bloodPressureValue}");
                                 precaModel.calculateAverage();
                                 Navigator.of(context).pop();
                               },
@@ -260,5 +321,26 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
         ),
       ),
     );
+  }
+
+  String calculateScore(String diagnose, value) {
+    int score = 0;
+
+    switch (diagnose) {
+      case "Paciente normotenso":
+        score = 100;
+      case "Paciente prehipertenso":
+        score = 66;
+      case "Paciente hipertenso leve":
+        score = 33;
+      case "Paciente hipertenso severo":
+        score = 0;
+    }
+
+    if (score >= 20) score -= 20;
+
+    precaModel.bloodPressureValue = score;
+
+    return "Score: $score";
   }
 }

@@ -9,10 +9,10 @@ showWarning(BuildContext context) {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('IMPORTANTE ¡LEER ATENTAMENTE!'),
+            title: const Text('IMPORTANTE\n¡LEER ATENTAMENTE!', textAlign: TextAlign.center,),
             content: SizedBox(
-              width: 300,
-              height: 400,
+              width: 300.0,
+              height: 400.0,
               child: SingleChildScrollView(child: Html(data:AppLocalizations.of(context)!.txtBloodPressureWarning)),
             ),
             actions: [
