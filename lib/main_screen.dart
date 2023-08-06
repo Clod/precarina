@@ -5,14 +5,14 @@ import 'package:precarina/behaviors_and_factors_screens/cholesterol_screen.dart'
 import 'package:precarina/behaviors_and_factors_screens/physical_activity_screen.dart';
 import 'package:precarina/behaviors_and_factors_screens/smoke_exposure_screen.dart';
 import 'package:precarina/model/precarina_model.dart';
-import 'package:precarina/pretty_gauge.dart';
+import 'package:precarina/aux_widgets/pretty_gauge.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'behaviors_and_factors_screens/diabetes_screen.dart';
 import 'behaviors_and_factors_screens/sleep_screen.dart';
-import 'help_drawer.dart';
-import 'linear_gauge_flexible.dart';
+import 'help_pages/help_drawer.dart';
+import 'aux_widgets/linear_gauge_flexible.dart';
 import 'package:precarina/behaviors_and_factors_screens/diet_screen.dart';
 
 class MainScreen extends StatefulWidget {

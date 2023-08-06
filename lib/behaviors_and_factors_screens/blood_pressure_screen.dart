@@ -13,7 +13,7 @@ import '../aux_functions/lose_input_warning.dart';
 import '../aux_functions/search_blood_pressure_percentile.dart';
 import '../aux_functions/show_blood_pressure_warning.dart';
 import '../aux_widgets/vertical_space.dart';
-import '../help_drawer.dart';
+import '../help_pages/help_drawer.dart';
 
 class BloodPressureScreen extends StatefulWidget {
   const BloodPressureScreen({super.key});

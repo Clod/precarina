@@ -1,17 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PrecarinaModel extends ChangeNotifier {
-
   int? dietValue;
-  // int? _dietScoreValue;
-
-  // int? get dietScoreValue => _dietScoreValue;
-
-  // set dietScoreValue(int? value) {
-  //   _dietScoreValue = value;
-  //   notifyListeners();
-  // }
-
   int? physicalActivityValue;
   int? smokeValue;
   int? sleepValue;
@@ -31,7 +21,7 @@ class PrecarinaModel extends ChangeNotifier {
   int? ageYears;
   int? ageMonths;
 
-  calculateAverage () {
+  calculateAverage() {
     average = (dietValue != null) ? dietValue!.toDouble() : 0.0;
     notifyListeners(); // TODO: hace falta????
   }
@@ -42,6 +32,19 @@ class PrecarinaModel extends ChangeNotifier {
     // This call tells the widgets that are listening to this model to rebuild.
     notifyListeners();
   }
+
+  @override
+  String toString() {
+    String patientData = "\nSex: $patientSex"
+        "\nHeight: $height"
+        "\nWeight Kilos: $weightKilos"
+        "\nWeight Kilos: $weightGrams"
+        "\nDate of Birth: ${dateOfBirth.toString().substring(0,10)}"
+        "\nAge Years: $ageYears"
+        "\nAge Months: $ageMonths";
+
+    return patientData;
+  }
 }
 
-enum PatientSex { male, female}
+enum PatientSex { male, female }

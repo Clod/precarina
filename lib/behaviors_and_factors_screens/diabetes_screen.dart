@@ -5,7 +5,7 @@ import 'package:precarina/model/precarina_model.dart';
 import 'package:provider/provider.dart';
 import '../aux_functions/lose_input_warning.dart';
 import '../aux_widgets/vertical_space.dart';
-import '../help_drawer.dart';
+import '../help_pages/help_drawer.dart';
 
 class DiabetesScreen extends StatefulWidget {
   const DiabetesScreen({super.key});

@@ -8,7 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'aux_functions/show_terms_and_conds.dart';
-import 'help_drawer.dart';
+import 'help_pages/help_drawer.dart';
 import 'package:precarina/model/precarina_model.dart';
 
 SharedPreferences? prefs;

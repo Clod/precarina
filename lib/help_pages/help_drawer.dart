@@ -4,7 +4,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:precarina/help_pages/blood_pressure_help.dart';
 import 'package:precarina/help_pages/item_help.dart';
 
-import 'help_pages/sleep_help.dart';
+import 'sleep_help.dart';
 
 // https://blog.logrocket.com/how-to-add-navigation-drawer-flutter/
 class HelpDrawer extends StatelessWidget {
