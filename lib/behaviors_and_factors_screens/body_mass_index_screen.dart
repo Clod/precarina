@@ -1,19 +1,15 @@
 import 'dart:io';
-import 'dart:async';
-import 'package:flutter/cupertino.dart';
+import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:precarina/behaviors_and_factors_screens/pages_header.dart';
 import 'package:precarina/model/precarina_model.dart';
 import 'package:provider/provider.dart';
 import '../aux_functions/lose_input_warning.dart';
-import '../aux_widgets/vertical_space.dart';
 import '../help_pages/help_drawer.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
 late final Interpreter _interpreter;
-
-bool _interpreterUpAndRunning = false;
 
 class BodyMassIndexScreen extends StatefulWidget {
   const BodyMassIndexScreen({super.key});
@@ -49,7 +45,6 @@ void _loadModel() async {
     // Creating the interpreter using Interpreter.fromAsset
     _interpreter = await Interpreter.fromAsset(modelFile, options: options);
     debugPrint('Interpreter loaded successfully');
-    _interpreterUpAndRunning = true;
   } catch (e) {
     debugPrint('Interpreter NOT loaded successfully');
     debugPrint("Error: $e");
@@ -59,41 +54,14 @@ void _loadModel() async {
 class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
   var precaModel = PrecarinaModel();
 
-  late BuildContext bc;
+  BuildContext? bc;
 
-  int? _selectedBmiOption;
+  bool enableAcceptButton = true;
 
-  bool enableAcceptButton = false;
-
-  late DateTime dateTime;
-  late DateTime currentDate;
-  String? _selectedOption;
-  final TextEditingController _textContAltura = TextEditingController();
-  final TextEditingController _textContKilos = TextEditingController();
-  final TextEditingController _textContGramos = TextEditingController();
-  final TextEditingController _textContAnios = TextEditingController();
-  final TextEditingController _textContMeses = TextEditingController();
   String _imc = "";
   String _percentil = "";
 
-  calcularEdad(DateTime nacimiento) {
-    // Duration parse = nacimiento.difference(DateTime.now()).abs();
-    return "";
-  }
-
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? pickedDate =
-        await showDatePicker(context: context, initialDate: currentDate, firstDate: DateTime(2000), lastDate: DateTime.now());
-    if (pickedDate != null && pickedDate != currentDate) {
-      setState(() {
-        dateTime = pickedDate;
-        Duration parse = pickedDate.difference(DateTime.now()).abs();
-        debugPrint("${parse.inDays ~/ 360} Years ${((parse.inDays % 360) ~/ 30)} Month ${(parse.inDays % 360) % 30} Days");
-        _textContAnios.text = (parse.inDays ~/ 360).toString();
-        _textContMeses.text = ((parse.inDays % 360) ~/ 30).toString();
-      });
-    }
-  }
+  int _percentilValue = 0;
 
   _obtenerResultados(BuildContext context) {
     // Hide the keyboard
@@ -106,15 +74,16 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
       [0.00]
     ];
 
-    double imc = (double.parse(_textContKilos.text) + double.parse(_textContGramos.text) / 1000.0) /
-        ((double.parse(_textContAltura.text) / 100.0) * (double.parse(_textContAltura.text) / 100.0));
+    double? totalWeight = precaModel.weightKilos! + precaModel.weightGrams! / 1000.0;
 
-    double edad = double.parse(_textContAnios.text) + double.parse(_textContMeses.text) / 12.0;
+    double imc = totalWeight / pow((precaModel.height! / 100.0), 2);
+
+    double edad = precaModel.ageYears! + precaModel.ageMonths! / 12.0;
 
     input[0][1] = imc;
     input[0][0] = edad;
 
-    if (_selectedOption == "mujer") {
+    if (precaModel.patientSex == PatientSex.female) {
       input[0][2] = 1.0;
       input[0][3] = 0.0;
     } else {
@@ -132,27 +101,17 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
     setState(() {
       _imc = imc.toStringAsFixed(2);
 
-      if (output[0][0].truncate() >= 100.0) {
-        _percentil = '100 %';
-      } else if (output[0][0].truncate() <= 0.0) {
-        _percentil = '0 %';
-      } else {
-        _percentil = '${output[0][0].truncate()} %';
-      }
-    });
-  }
+      _percentilValue = output[0][0].truncate();
 
-  _resetearValores(BuildContext context) {
-    setState(() {
-      _textContAltura.text = '';
-      _textContKilos.text = '';
-      _textContGramos.text = '';
-      _textContAnios.text = '';
-      _textContMeses.text = '';
-      _imc = "";
-      _percentil = "";
-      dateTime = DateTime.now();
-      _selectedOption = null;
+      if (_percentilValue >= 100.0) {
+        _percentil = '100 %';
+        _percentilValue = 100;
+      } else if (_percentilValue <= 0.0) {
+        _percentil = '0 %';
+        _percentilValue = 0;
+      } else {
+        _percentil = '$_percentilValue %';
+      }
     });
   }
 
@@ -166,15 +125,13 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
       debugPrint("Error al cargar el Modelo: ${e.toString()}");
     }
 
-    dateTime = DateTime.now();
-    currentDate = DateTime(dateTime.year, dateTime.month, dateTime.day);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      precaModel = Provider.of<PrecarinaModel>(context, listen: false);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Acá no me gusta pero initState explota. Ver si hay un lugar mejor
-    precaModel = Provider.of<PrecarinaModel>(context);
-
     debugPrint("Building Wdiget");
 
     // final bmiValues = [100, 70, 30, 15, 0];
@@ -193,404 +150,62 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
         ),
         drawer: const HelpDrawer(),
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30.0),
-                      color: Colors.yellow[200],
-                    ),
-                    width: double.infinity,
-                    child: Column(
-                      children: [
-                        const VerticalSpace(altura: 15.0),
-                        const Text(
-                          "Sexo: ",
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                        ),
-                        const Text(
-                          "Edad: ",
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                        ),
-                        const Text(
-                          "Estatura: ",
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                        ),
-                        const Text(
-                          "Peso: ",
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                        ),
-                        Row(
-                          children: [
-                            CupertinoButton(
-                              child: const Icon(Icons.delete),
-                              onPressed: () {
-                                setState(() {});
-                              },
-                            ),
-                          ],
-                        ),
-                        const VerticalSpace(altura: 10.0),
-                      ],
-                    ),
-                  ),
-                ),
-                SingleChildScrollView(
+          child: Column(
+            children: [
+              const Expanded(
+                flex: 1,
+                child: PagesHeader(),
+              ),
+              Expanded(
+                flex: 3,
+                child: SingleChildScrollView(
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      const VerticalSpace(altura: 10.0),
-                      const Text(
-                        "Ingrese el sexo",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-                      ),
-                      Row(
-                        // mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        //crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          SizedBox(
-                            width: 150.0,
-                            child: RadioListTile(
-                              title: const Text('Mujer'),
-                              value: 'mujer',
-                              groupValue: _selectedOption,
-                              onChanged: (value) {
-                                setState(() {
-                                  _selectedOption = value;
-                                });
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            width: 150.0,
-                            child: RadioListTile(
-                              title: const Text('Varón'),
-                              value: 'varon',
-                              groupValue: _selectedOption,
-                              onChanged: (value) {
-                                setState(() {
-                                  _selectedOption = value;
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                      const Text(
-                        "Ingrese la altura",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-                      ),
-                      const VerticalSpace(altura: 10.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const SizedBox(
-                            width: 10.0,
-                          ),
-                          Container(
-                            width: 100.0,
-                            height: 30.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.grey[300],
-                            ),
-                            child: TextField(
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                              textAlign: TextAlign.center,
-                              controller: _textContAltura,
-                              decoration: const InputDecoration(
-                                hintText: 'Ej: 160',
-                              ),
-                            ),
-                          ),
-                          const Text(
-                            "cm",
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      const Text(
-                        "Ingrese el peso",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 100.0,
-                            height: 30.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.grey[300],
-                            ),
-                            child: TextField(
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                              textAlign: TextAlign.center,
-                              controller: _textContKilos,
-                              decoration: const InputDecoration(
-                                hintText: 'Ej: 50',
-                              ),
-                            ),
-                          ),
-                          const Text(
-                            "Kg",
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10.0,
-                          ),
-                          Container(
-                            width: 100.0,
-                            height: 30.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.grey[300],
-                            ),
-                            child: TextField(
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                              textAlign: TextAlign.center,
-                              controller: _textContGramos,
-                              decoration: const InputDecoration(
-                                hintText: 'Ej: 500',
-                              ),
-                            ),
-                          ),
-                          const Text(
-                            "g",
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      const Text(
-                        "Ingrese fecha de nacimiento \n o edad en años y meses",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Column(
-                            children: [
-                              ElevatedButton(
-                                onPressed: () => _selectDate(context),
-                                child: const Text(
-                                  'Fecha de\n nacimiento',
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              // Text(
-                              //   dateFormat.format(dateTime),
-                              // ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 50.0,
-                                height: 30.0,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.grey[300],
-                                ),
-                                child: TextField(
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                                  textAlign: TextAlign.center,
-                                  controller: _textContAnios,
-                                  decoration: const InputDecoration(
-                                    hintText: 'Ej: 14',
-                                  ),
-                                ),
-                              ),
-                              const Text(
-                                "a",
-                                style: TextStyle(
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 10.0,
-                              ),
-                              Container(
-                                width: 60.0,
-                                height: 30.0,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.grey[300],
-                                ),
-                                child: TextField(
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                                  textAlign: TextAlign.center,
-                                  controller: _textContMeses,
-                                  decoration: const InputDecoration(
-                                    hintText: 'Ej: 6',
-                                  ),
-                                ),
-                              ),
-                              const Text(
-                                "m",
-                                style: TextStyle(
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20.0,
+                    children: [
+                      Text("Índice de masa corporal: $_imc"),
+                      Text("Percentilo: $_percentil"),
+                      ElevatedButton(
+                        onPressed: () {
+                          _obtenerResultados(context);
+                        },
+                        child: const Text("Calcular"),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ElevatedButton(
-                            onPressed: () => _resetearValores(context),
-                            child: const Text(
-                              'Limpiar',
-                              textAlign: TextAlign.center,
-                            ),
+                            onPressed: () {
+                              precaModel.bmiValue = null;
+                              Navigator.pop(context);
+                            },
+                            child: const Text("Cancelar"),
                           ),
-                          const SizedBox(width: 15.0),
+                          const SizedBox(width: 10.0),
                           ElevatedButton(
-                            onPressed: () => _interpreterUpAndRunning ? _obtenerResultados(context) : showSnackbar(context),
-                            child: const Text(
-                              'Calcular',
-                              textAlign: TextAlign.center,
-                            ),
+                            //   final _BodyMassIndexValues = [100, 70, 30, 15, 0];
+                            // "5to - < percentil 85
+                            // 85 - < percentil 95
+                            // percentil 95 - < 120% del percentil 95
+                            // 120% del percentil 95 - < 140% del percentil 95
+                            // ≥ 140% del percentil 95",
+                            onPressed: () {
+                              if (_percentilValue <= 85) {
+                                precaModel.bmiValue = 100;
+                              } else if (_percentilValue <= 85) {
+                                precaModel.bmiValue = 70;
+                              } else {
+                                precaModel.bmiValue = 30;
+                              }
+                              Navigator.pop(context);
+                            },
+                            child: const Text("Aceptar"),
                           ),
                         ],
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "IMC: ",
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            _imc,
-                            style: const TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 20.0,
-                          ),
-                          const Text(
-                            "Percentil: ",
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            _percentil,
-                            style: const TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
+                      )
                     ],
                   ),
-                  // child: Column(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: [
-                  //     ...(() {
-                  //       List<Widget> sbList = [];
-                  //       for (int i = 0; i < optionsTexts.length; i++) {
-                  //         sbList.add(SizedBox(
-                  //           width: 300.0,
-                  //           child: RadioListTile(
-                  //             title: Text(optionsTexts[i]),
-                  //             value: bmiValues[i],
-                  //             groupValue: _selectedBmiOption,
-                  //             onChanged: (value) {
-                  //               setState(() {
-                  //                 enableAcceptButton = true;
-                  //                 _selectedBmiOption = value;
-                  //               });
-                  //             },
-                  //           ),
-                  //         ));
-                  //         sbList.add(const VerticalSpace(altura: 5.0));
-                  //       }
-                  //       return sbList;
-                  //     })(),
-                  //     const VerticalSpace(altura: 15.0),
-                  //   ],
-                  // ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      child: Text(AppLocalizations.of(context)!.txtButtonCancel),
-                      onPressed: () => Navigator.maybePop(context),
-                    ),
-                    const SizedBox(
-                      width: 10.0,
-                    ),
-                    ElevatedButton(
-                      onPressed: enableAcceptButton
-                          ? () {
-                              precaModel.bmiValue = _selectedBmiOption;
-                              debugPrint("BMI Value en Screen: ${precaModel.bmiValue}");
-                              precaModel.calculateAverage();
-                              Navigator.of(context).pop();
-                            }
-                          : null,
-                      child: Text(AppLocalizations.of(context)!.txtButtonAccept),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+              ),
+            ], // Children
           ),
         ),
       ),
@@ -600,7 +215,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
   showSnackbar(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: const Text("No se cargó el traductor \n Por fafor \n Avise al desarrollador"),
+        content: const Text("No se cargó el traductor \n Por favor \n Avise al soporte técnico"),
         duration: const Duration(days: 1),
         action: SnackBarAction(
           label: 'Listo',
