@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:localization/localization.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:precarina/aux_widgets/horizontal_space.dart';
 import 'package:precarina/behaviors_and_factors_screens/pages_header.dart';
 import 'package:precarina/model/precarina_model.dart';
 import 'package:provider/provider.dart';
@@ -81,7 +82,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const VerticalSpace(altura: 15.0),
+                        const VerticalSpace(height: 15.0),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -143,7 +144,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                             const Text(" mmHg"),
                           ],
                         ),
-                        const VerticalSpace(altura: 15.0),
+                        const VerticalSpace(height: 15.0),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -205,7 +206,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                             const Text(" mmHg"),
                           ],
                         ),
-                        const VerticalSpace(altura: 20.0),
+                        const VerticalSpace(height: 20.0),
                         SizedBox(
                           width: 200.0,
                           child: FormBuilderChoiceChip<String>(
@@ -239,7 +240,8 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                             },
                           ),
                         ),
-                        const VerticalSpace(altura: 15.0),
+                        const VerticalSpace(height: 15.0),
+                        // Trigger interpolation button
                         ElevatedButton(
                           child: const Text("Calcular"),
                           onPressed: () {
@@ -272,7 +274,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                             }
                           },
                         ),
-                        const VerticalSpace(altura: 15.0),
+                        const VerticalSpace(height: 15.0),
                         Text(
                           diagnose,
                           style: const TextStyle(
@@ -280,6 +282,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                             fontSize: 21.0,
                           ),
                         ),
+                        const VerticalSpace(height: 5.0),
                         Text(
                           score,
                           style: const TextStyle(
@@ -287,9 +290,11 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                             fontSize: 21.0,
                           ),
                         ),
+                        const VerticalSpace(height: 15.0),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            // Cancel Button
                             ElevatedButton(
                               child: Text(AppLocalizations.of(context)!.txtButtonCancel),
                               onPressed: () {
@@ -297,9 +302,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                                 Navigator.maybePop(context);
                               },
                             ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
+                            const HorizontalSpace(width: 15.0),
                             ElevatedButton(
                               onPressed: () {
                                 FocusScope.of(context).unfocus();

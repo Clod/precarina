@@ -127,14 +127,6 @@ class MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-
-   // final gridColumnWidth = (screenWidth - 16.0) / 4.0;
-
-   // debugPrint('Ancho de pantalla: ${screenWidth.toString()}');
-
-    // Acomodo el tamaño del font de acuerdo con el ancho de la pantalla
-    //final fontSize = screenWidth / 75.0;
 
     bc = context;
 

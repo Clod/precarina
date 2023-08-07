@@ -42,8 +42,6 @@ class _InputDataPageState extends State<InputDataPage> {
   final TextEditingController _textContAnios = TextEditingController();
   final TextEditingController _textContMeses = TextEditingController();
 
-  final TextEditingController _textContUsername = TextEditingController();
-
   var heightMaskFormatter = MaskTextInputFormatter(mask: '###,#', filter: {"#": RegExp(r'[0-9]')}, type: MaskAutoCompletionType.eager);
 
   var kilosWeightMaskFormatter = MaskTextInputFormatter(mask: '###', filter: {"#": RegExp(r'[0-9]')}, type: MaskAutoCompletionType.eager);

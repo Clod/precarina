@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:precarina/aux_widgets/horizontal_space.dart';
 import 'package:precarina/behaviors_and_factors_screens/pages_header.dart';
 import 'package:precarina/model/precarina_model.dart';
 import 'package:provider/provider.dart';
@@ -115,10 +116,12 @@ class _DietScreenState extends State<DietScreen> {
 
     _dietItemsList.clear();
 
+    // Select choices according to sex...
     if (_precaModel!.patientSex != null) {
       _precaModel!.patientSex == PatientSex.male ? _indexSex = 0 : _indexSex = 1;
     }
 
+    // ...and age range
     if (_precaModel!.ageYears! <= 8) {
       _indexAgeRange = 0;
     } else if (_precaModel!.ageYears! < 14) {
@@ -149,7 +152,7 @@ class _DietScreenState extends State<DietScreen> {
                     controller: _scrollController,
                     children: [
                       ..._dietItems(),
-                      const VerticalSpace(altura: 15.0),
+                      const VerticalSpace(height: 15.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -158,7 +161,7 @@ class _DietScreenState extends State<DietScreen> {
                             child: Text(AppLocalizations.of(context)!.txtButtonCancel),
                             onPressed: () => Navigator.maybePop(context),
                           ),
-                          const VerticalSpace(altura: 10.0),
+                          const HorizontalSpace(width: 15.0),
                           // Accept button
                           ElevatedButton(
                             onPressed: !_enableAcceptButton

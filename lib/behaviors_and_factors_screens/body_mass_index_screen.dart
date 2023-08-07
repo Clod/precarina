@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:precarina/aux_widgets/vertical_space.dart';
 import 'package:precarina/behaviors_and_factors_screens/pages_header.dart';
 import 'package:precarina/model/precarina_model.dart';
 import 'package:provider/provider.dart';
@@ -63,7 +64,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
 
   int _percentilValue = 0;
 
-  _obtenerResultados(BuildContext context) {
+  _getResults(BuildContext context) {
     // Hide the keyboard
     FocusScope.of(context).unfocus();
     // var input = [[7.011268, 12.637012, 0.0, 1.0]];
@@ -161,11 +162,30 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      Text("Índice de masa corporal: $_imc"),
-                      Text("Percentilo: $_percentil"),
+                      const VerticalSpace(height: 15.0),
+                      const Text(
+                        "Índice de masa corporal: ",
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                      ),
+                      const VerticalSpace(height: 5.0),
+                      Text(
+                        _imc,
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+                      ),
+                      const VerticalSpace(height: 10.0),
+                      const Text(
+                        "Percentilo: ",
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                      ),
+                      const VerticalSpace(height: 5.0),
+                      Text(
+                        _percentil,
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+                      ),
+                      const VerticalSpace(height: 15.0),
                       ElevatedButton(
                         onPressed: () {
-                          _obtenerResultados(context);
+                          _getResults(context);
                         },
                         child: const Text("Calcular"),
                       ),

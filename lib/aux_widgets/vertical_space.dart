@@ -1,14 +1,14 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class VerticalSpace extends StatelessWidget {
-  final double altura;
+  final double height;
 
-  const VerticalSpace({Key? key, required this.altura}) : super(key: key);
+  const VerticalSpace({Key? key, required this.height}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: altura,
+      height: height,
     );
   }
 }
