@@ -1,7 +1,7 @@
 {
    "txtImportantNotice": "AVISO IMPORTANTE",
    "txtReadCarefully": "Por favor, lea cuidadosamente antes de usar esta aplicación",
-   "txtAppPurpose": "Esta aplicación calcula el puntaje estimado de salud cardiovascular según lo definido por la",
+   "txtAppPurpose": "Esta aplicación calcula el puntaje estimado de salud cardiovascular basado en el definido por la",
    "txtFundamentalsLocation": "El sistema de puntuación y los criterios se explican detalladamente en:",
    "txtLifeEssentialEightObjective": "Life's Essential 8: Actualización y Mejora del Constructo de Salud Cardiovascular de la Asociación Americana del Corazón: Un Aviso Presidencial de la Asociación Americana del Corazón",
    "txtPaperAuthors": "Publicado por: Donald M. Lloyd-Jones, MD, ScM, FAHA, presidente; Norrina B. Allen, PhD, MPH, FAHA; Cheryl A.M. Anderson, PhD, MPH, MS, FAHA; Terrie Black, DNP, MBA, CRRN, FAHA; LaPrincess C. Brewer, MD, MPH; Randi E. Foraker, PhD, MA, FAHA; Michael A. Grandner, PhD, MTR, FAHA; Helen Lavretsky, MD, MS; Amanda Marma Perak, MD, MS, FAHA; Garima Sharma, MD; Wayne Rosamond, PhD, MS, FAHA; en representación de la Asociación Americana del Corazón",
@@ -62,7 +62,7 @@
    "txtCholesterolWarning" : "",
 
   "txtLongPressGauge" : "Mantén presionado el indicador para restablecer todos los valores",
-  "txtGlossary" : "Glosario",
+  "txtGlossary" : "Información importante",
 
   "txtAbout" : "<span style=\"color:red\"><p>Sugerimos que esta app sea considerada principalmente como una herramienta para evaluar y promover un estilo de vida saludable para la práctica clínica pediátrica y especialmente las edades más jóvenes. \n La puntuación formal es opcional y los médicos deben enfatizar los conceptos y el bienestar de por vida y no el puntaje específico, dada la escasez de datos para respaldar un marco de puntuación.<br></br>La salud cardiovascular debe valorarse desde la infancia. Numerosos estudios han demostrado que existen alteraciones en edades pediátricas y se asocia con ECV subclínica en la mediana edad.</p></span><br></br> <p>Los resultados de salud a corto y mediano plazo (incluido el seguimiento de las métricas en adolescencia y edad adulta) son lo suficientemente sólidos como para que la dieta, la actividad física (tiempo de pantalla y jugar), el sueño, la exposición al humo de segunda mano y el peso corporal\n sean objeto de atención y consejo  en visitas rutinarias de niño sano.</p>"
 

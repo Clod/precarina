@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_exit_app/flutter_exit_app.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:precarina/aux_widgets/vertical_space.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 showTandC(BuildContext context, Function setAccepted) {
@@ -12,69 +13,68 @@ showTandC(BuildContext context, Function setAccepted) {
         title: Text(
           AppLocalizations.of(context)!.txtImportantNotice,
           textAlign: TextAlign.center,
-          style: const TextStyle(
-              color: Colors.deepOrange,
-              fontSize: 14.0,
-              fontWeight: FontWeight.bold),
+          style: const TextStyle(color: Colors.deepOrange, fontSize: 16.0, fontWeight: FontWeight.bold),
         ),
         content: SizedBox(
-            width: 400,
-            height: 400,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.txtReadCarefully,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  Text(
-                    AppLocalizations.of(context)!.txtAppPurpose,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  GestureDetector(
-                    onTap: () async {
-                      await launchUrl(Uri.parse('https://www.heart.org'));
-                    },
-                    child: const Text(
-                      'American Heart Association',
-                      style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        color: Colors.blue,
-                      ),
+          width: 400,
+          height: 400,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  AppLocalizations.of(context)!.txtReadCarefully,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                const VerticalSpace(height: 10.0),
+                Text(
+                  AppLocalizations.of(context)!.txtAppPurpose,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                const VerticalSpace(height: 10.0),
+                GestureDetector(
+                  onTap: () async {
+                    await launchUrl(Uri.parse('https://www.heart.org/en/healthy-living/healthy-lifestyle/lifes-essential-8'));
+                  },
+                  child: const Text(
+                    'American Heart Association',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      color: Colors.blue,
                     ),
                   ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  Text(
-                    AppLocalizations.of(context)!.txtFundamentalsLocation,
+                ),
+                const VerticalSpace(height: 10.0),
+                Text(
+                  AppLocalizations.of(context)!.txtFundamentalsLocation,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                GestureDetector(
+                  onTap: () async {
+                    await launchUrl(Uri.parse('https://www.ahajournals.org/doi/10.1161/CIR.0000000000001078'));
+                  },
+                  child: Text(
+                    AppLocalizations.of(context)!.txtLifeEssentialEightObjective,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  GestureDetector(
-                    onTap: () async {
-                      await launchUrl(Uri.parse('https://playbook.heart.org/lifes-simple-7/'));
-                    },
-                    child: Text(
-                      AppLocalizations.of(context)!.txtImportantNotice,
-                      style: const TextStyle(
-                        decoration: TextDecoration.underline,
-                        color: Colors.blue,
-                      ),
+                    style: const TextStyle(
+                      decoration: TextDecoration.underline,
+                      color: Colors.blue,
                     ),
                   ),
-                ],
-              ),
-            )),
+                ),
+                Text(
+                  AppLocalizations.of(context)!.txtPaperAuthors,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
         actions: [
           TextButton(
             onPressed: () {
@@ -84,17 +84,15 @@ showTandC(BuildContext context, Function setAccepted) {
               // FlutterExitApp.exitApp(iosForceExit: true);
               FlutterExitApp.exitApp();
             },
-            child: const Text('Reject'),
+            child: Text(AppLocalizations.of(context)!.txtButtonRejectTandC),
           ),
           TextButton(
-            onPressed: () {
-              debugPrint("Aceptando...");
-              setAccepted();
-              // prefs!.setBool('showTandC', false);
-              Navigator.of(context).pop();
-            },
-            child: const Text('Accept'),
-          ),
+              onPressed: () {
+                debugPrint("Aceptando...");
+                setAccepted();
+                Navigator.of(context).pop();
+              },
+              child: Text(AppLocalizations.of(context)!.txtButtonAcceptTandC)),
         ],
       );
     },

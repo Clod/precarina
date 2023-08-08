@@ -3,7 +3,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:precarina/help_pages/blood_pressure_help.dart';
 import 'package:precarina/help_pages/item_help.dart';
+import 'package:precarina/help_pages/smoke_exposure_help.dart';
 
+import 'bmi_help.dart';
+import 'diet_help.dart';
 import 'sleep_help.dart';
 
 // https://blog.logrocket.com/how-to-add-navigation-drawer-flutter/
@@ -41,7 +44,7 @@ class HelpDrawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      ItemHelp(title: AppLocalizations.of(context)!.txtDietButton, content: AppLocalizations.of(context)!.txtDietHelp),
+                      DietHelp(title: AppLocalizations.of(context)!.txtDietButton, content: AppLocalizations.of(context)!.txtDietHelp),
                 ),
               );
             },
@@ -53,7 +56,7 @@ class HelpDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ItemHelp(
+                  builder: (context) => BmiHelp(
                       title: AppLocalizations.of(context)!.txtBodyMassIndexButton, content: AppLocalizations.of(context)!.txtBodyMassIndextHelp),
                 ),
               );
@@ -66,7 +69,7 @@ class HelpDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ItemHelp(
+                  builder: (context) => SmokeExposureHelp(
                       title: AppLocalizations.of(context)!.txtSmokeExposureButton, content: AppLocalizations.of(context)!.txtSmokeExposureHelp),
                 ),
               );
@@ -122,21 +125,23 @@ class HelpDrawer extends StatelessWidget {
             applicationIcon: const Icon(
               Icons.local_play,
             ),
-            applicationName: 'SACARINA',
-            applicationVersion: '2.0.0',
-            applicationLegalese: 'This app is Freeware and Open Source',
+            applicationName: 'PRECARINA',
+            applicationVersion: '1.0.0',
+            applicationLegalese:
+                'Esta app es y será gratuitua y de código abierto.\nSu única finalidad es promover la salud cardiovascular desde la infancia.',
             aboutBoxChildren: [
               const SizedBox(
                 height: 5.0,
               ),
               SizedBox(
-                  height: 300.0,
-                  width: 150.0,
-                  child: SingleChildScrollView(
-                    child: Html(data: AppLocalizations.of(context)!.txtAbout),
-                  ))
+                height: 300.0,
+                width: 150.0,
+                child: SingleChildScrollView(
+                  child: Html(data: AppLocalizations.of(context)!.txtAbout),
+                ),
+              )
             ],
-            child: const Text('About this app'),
+            child: const Text('Información sobre la app', style: TextStyle(fontWeight: FontWeight.bold)),
           ),
         ],
       ),

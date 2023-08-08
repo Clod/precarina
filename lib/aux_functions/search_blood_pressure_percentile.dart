@@ -3,7 +3,7 @@ import 'package:precarina/model/precarina_model.dart';
 
 import '../model/pressure_data.dart';
 
-List<String> searchBloodPresurePercentiles({
+List<String> searchBloodPressurePercentiles({
   required PatientSex sex,
   required double height,
   required int age,

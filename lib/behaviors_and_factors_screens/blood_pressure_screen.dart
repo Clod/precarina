@@ -248,7 +248,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                             if (_formKey.currentState!.validate() == true) {
                               FocusScope.of(context).unfocus();
                               PatientSex ps = (_controllerSex.text == "V" || _controllerSex.text == "v") ? PatientSex.male : PatientSex.female;
-                              results = searchBloodPresurePercentiles(
+                              results = searchBloodPressurePercentiles(
                                 sex: precaModel.patientSex == PatientSex.female ? PatientSex.female : PatientSex.male,
                                 height: precaModel.height!,
                                 age: precaModel.ageYears!,
