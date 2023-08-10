@@ -157,7 +157,7 @@ List<List<List<List<String>>>> opciones = [
         '< 2  unidades medianas por semana o 1/4 plato diario',
       ],
       [
-        '1  1/2 unidad grande por día o 2 unidades medianas por día',
+        '1 1/2 unidad grande por día o 2 unidades medianas por día',
         '1 unidad mediana por día',
         '< 1 unidad mediana por día',
       ],
@@ -174,7 +174,7 @@ List<List<List<List<String>>>> opciones = [
       [
         '1/4 plato al día de pasta integral  o 1 porción de masa',
         '1/2 plato al día o 2 porciones de masa',
-        '  > 1/2 plato al día  o > 2 porciones de masa al día',
+        '> 1/2 plato al día  ó > 2 porciones de masa al día',
       ],
       [
         '2 tazas tipo té',
@@ -416,7 +416,7 @@ List<List<List<List<String>>>> opciones = [
       [
         '2 tazas tipo desayuno',
         '1 taza tipo desayuno',
-        '> 1 taza tipo desayuno',
+        '< 1 taza tipo desayuno',
       ],
       [
         '1 porción tamaño cajita de fósforos chica o 1/2 tarjeta SUBE o 2 cdas soperas diaria',
@@ -494,7 +494,7 @@ List<List<List<List<String>>>> opciones = [
       [
         '2 tazas tipo desayuno',
         '1 taza tipo desayuno',
-        '> 1 taza tipo desayuno',
+        '< 1 taza tipo desayuno',
       ],
       [
         '1 porción tamaño cajita de fósforos chica o 1/2 tarjeta SUBE o 2 cdas soperas',

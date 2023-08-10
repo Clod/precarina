@@ -89,7 +89,7 @@ class _DietScreenState extends State<DietScreen> {
         int valorASumar = selections[i][0]!;
         if (valorASumar == 0) {
           valorASumar = 2;
-        } else if (valorASumar == 0) {
+        } else if (valorASumar == 2) {
           valorASumar = 0;
         }
         score += valorASumar;

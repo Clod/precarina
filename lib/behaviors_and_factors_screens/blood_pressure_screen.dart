@@ -25,7 +25,7 @@ class BloodPressureScreen extends StatefulWidget {
 
 class _BloodPressureScreenState extends State<BloodPressureScreen> {
   final _formKey = GlobalKey<FormBuilderState>();
-  final _controllerSex = TextEditingController();
+  // final _controllerSex = TextEditingController();
   final _controllerSistAP = TextEditingController();
   final _controllerDiastPA = TextEditingController();
   var bpFormatter = MaskTextInputFormatter(
@@ -42,6 +42,11 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
   List<String> results = ["", ""];
   String diagnose = "";
   String score = "";
+
+  // I cannot enable accept button until the SnackBar
+  bool _acceptButtonDisabled = true;
+
+  bool _cancelButtonDisabled = false;
 
   @override
   void initState() {
@@ -246,8 +251,11 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                           child: const Text("Calcular"),
                           onPressed: () {
                             if (_formKey.currentState!.validate() == true) {
+                              // I will not enable cancellation until SnackBar gets dismissed
+                              _cancelButtonDisabled = true;
+                              _acceptButtonDisabled = true;
                               FocusScope.of(context).unfocus();
-                              PatientSex ps = (_controllerSex.text == "V" || _controllerSex.text == "v") ? PatientSex.male : PatientSex.female;
+                              // PatientSex ps = (_controllerSex.text == "V" || _controllerSex.text == "v") ? PatientSex.male : PatientSex.female;
                               results = searchBloodPressurePercentiles(
                                 sex: precaModel.patientSex == PatientSex.female ? PatientSex.female : PatientSex.male,
                                 height: precaModel.height!,
@@ -262,6 +270,8 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                                   action: SnackBarAction(
                                     label: 'OK',
                                     onPressed: () {
+                                      _cancelButtonDisabled = false;
+                                      _acceptButtonDisabled = false;
                                       ScaffoldMessenger.of(context).hideCurrentSnackBar();
                                       setState(() {
                                         diagnose = results[0];
@@ -296,15 +306,16 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                           children: [
                             // Cancel Button
                             ElevatedButton(
-                              child: Text(AppLocalizations.of(context)!.txtButtonCancel),
-                              onPressed: () {
+                              onPressed: _cancelButtonDisabled ? null : () {
                                 FocusScope.of(context).unfocus();
                                 Navigator.maybePop(context);
                               },
+                              child: Text(AppLocalizations.of(context)!.txtButtonCancel),
                             ),
                             const HorizontalSpace(width: 15.0),
+                            // Accept
                             ElevatedButton(
-                              onPressed: () {
+                              onPressed: _acceptButtonDisabled ? null : () {
                                 FocusScope.of(context).unfocus();
                                 debugPrint("BP value en Screen: ${precaModel.bloodPressureValue}");
                                 precaModel.calculateAverage();
@@ -326,7 +337,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
     );
   }
 
-  String calculateScore(String diagnose, value) {
+  String calculateScore(String diagnose, String medicado) {
     int score = 0;
 
     switch (diagnose) {
@@ -340,7 +351,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
         score = 0;
     }
 
-    if (score >= 20) score -= 20;
+    if (medicado == "S" && score >= 20) score -= 20;
 
     precaModel.bloodPressureValue = score;
 

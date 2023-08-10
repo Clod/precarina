@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:precarina/help_pages/blood_pressure_help.dart';
-import 'package:precarina/help_pages/item_help.dart';
+import 'package:precarina/help_pages/physical_activity_help.dart';
 import 'package:precarina/help_pages/smoke_exposure_help.dart';
-
-import 'bmi_help.dart';
-import 'diet_help.dart';
-import 'sleep_help.dart';
+import 'package:precarina/help_pages/bmi_help.dart';
+import 'package:precarina/help_pages/cholesterol_help.dart';
+import 'package:precarina/help_pages/diabetes_help.dart';
+import 'package:precarina/help_pages/diet_help.dart';
+import 'package:precarina/help_pages/sleep_help.dart';
 
 // https://blog.logrocket.com/how-to-add-navigation-drawer-flutter/
 class HelpDrawer extends StatelessWidget {
@@ -50,7 +51,8 @@ class HelpDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.monitor_weight),
+            leading: const Icon(Icons.balance),
+            // leading: const Icon(Icons.scale),
             title: Text(AppLocalizations.of(context)!.txtBodyMassIndexButton),
             onTap: () {
               Navigator.push(
@@ -71,6 +73,32 @@ class HelpDrawer extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => SmokeExposureHelp(
                       title: AppLocalizations.of(context)!.txtSmokeExposureButton, content: AppLocalizations.of(context)!.txtSmokeExposureHelp),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.lunch_dining),
+            title: Text(AppLocalizations.of(context)!.txtCholesterolButton),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      CholesterolHelp(title: AppLocalizations.of(context)!.txtCholesterolButton, content: AppLocalizations.of(context)!.txtCholesterolHelp),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.sports_tennis),
+            title: Text(AppLocalizations.of(context)!.txtPhysicalActivityButton),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      PhysicalActivityHelp(title: AppLocalizations.of(context)!.txtPhysicalActivityButton, content: AppLocalizations.of(context)!.txtPhysicalActivityHelp),
                 ),
               );
             },
@@ -98,7 +126,7 @@ class HelpDrawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      ItemHelp(title: AppLocalizations.of(context)!.txtDiabetesButton, content: AppLocalizations.of(context)!.txtDiabetesHelp),
+                      DiabetesHelp(title: AppLocalizations.of(context)!.txtDiabetesButton, content: AppLocalizations.of(context)!.txtDiabetesHelp),
                 ),
               );
             },

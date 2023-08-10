@@ -26,7 +26,8 @@
   "txtPhysicalActivityButton" : "Physical Activity",
   "txtPhysicalActivityDialog" : "Minutes of moderate or greater intensity activity per week. Ages: 6 to 9.",
   "txtPhysicalActivityDialogOptions" : "≥ 420 minutes|360 - 419 minutes|300 - 359 minutes|240 - 299 minutes|120 - 239 minutes|1 - 119 minutes|No activity",
-  
+  "txtPhysicalActivityHelp" : "",
+
   "txtBodyMassIndexButton" : "BMI",
   "txtBodyMassIndexDialog" : "BMI percentiles for age and sex, starting in infancy.",
   "txtBodyMassIndexDialogOptions" : "5th - < 85th percentile|85th - < 95th|95th percentile - < 120% of the 95th percentile|120% of the 95th - < 140% of the 95th percentile|≥ 140% of the 95th percentile",
@@ -60,6 +61,7 @@
   "txtCholesterolDialog" : "Non-HDL cholesterol (mg/dL), starting no later than age 9 - 11y and earlier per clinician discretion",
   "txtCholesterolDialogOptions" : "<100 |<100 (drug-treated) |100 - 119 |120 - 144 |145 - 189 |≥ 190",
   "txtCholesterolWarning" : "",
+  "txtCholesterolHelp" : "",
 
   "txtLongPressGauge" : "Long press the gauge to reset all values.",
 

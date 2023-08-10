@@ -20,13 +20,14 @@ List<String> searchBloodPressurePercentiles({
   double alturaTabla = 0;
 
   if (sex == PatientSex.female) sexIndex = "females";
-  
-  var bpTablePercs = ['50','90','95', '95 + 12 mmHg'];
+
+  // Percentile values in the table.
+  var bpTablePercs = ['50', '90', '95', '95 + 12 mmHg'];
 
   // I select heights array according to sex and age
   List<double> heights = heightBoth[sexIndex]![age - 1];
 
-  // Now I select the matrix according to sex and age
+  // Now I select the matrixes according to sex and age
   List<List<int>> diastMatrix = diastolicBoth[sexIndex]![age - 1];
 
   List<List<int>> sistMatrix = sistolicBoth[sexIndex]![age - 1];
@@ -42,18 +43,24 @@ List<String> searchBloodPressurePercentiles({
   int row2 = 1;
   int row3 = 2;
   int row4 = 3;
-  
+
   String patientDignose;
 
   // Diastolic Pressure
+  // I pick the column to search according to patient's height
+  // If patient's height is not in the table I pick the immediate higher
   if (height <= heights[col1]) {
     alturaTabla = heights[col1];
+    // If patients diastolic pressure (diastBP) is below the lowest in the table I pick the latter
     if (diastBP <= diastMatrix[row1][col1]) {
       valorTablaDiast = diastMatrix[row1][col1];
       diastBpPerc = bpTablePercs[0];
     } else if (diastBP <= diastMatrix[row2][col1]) {
+      // Pressure value immediate below patient's
       valorTablaDiastA = diastMatrix[row1][col1];
+      // Pressure value immediate above patient's
       valorTablaDiast = diastMatrix[row2][col1];
+      // I keep the one immediate above
       diastBpPerc = bpTablePercs[1];
     } else if (diastBP <= diastMatrix[row3][col1]) {
       valorTablaDiastA = diastMatrix[row2][col1];
@@ -347,13 +354,13 @@ List<String> searchBloodPressurePercentiles({
     }
   }
 
-/*  
+/*
   Paciente normotenso , ( serían los casos en que ambos valores son menores a percentilo 90)
   Paciente prehipertenso ( cuando uno o los dos valores dan igual a  90 y menor a 95)
   Paciente hipertenso leve ( cuando al menos un valor o los dos dan igual a  95 y menor a 95+12)
   Paciente hipertenso severo (cuando al menos uno o los dos valores dan igual o más de 95+12)
   */
-  
+
   patientDignose = "Paciente normotenso";
   if (sistBpPerc == bpTablePercs[1] || diastBpPerc == bpTablePercs[1]) patientDignose = "Paciente prehipertenso";
   if (sistBpPerc == bpTablePercs[2] || diastBpPerc == bpTablePercs[2]) patientDignose = "Paciente hipertenso leve";
@@ -365,6 +372,7 @@ List<String> searchBloodPressurePercentiles({
   debugPrint("PAS: $sistBP Perc Sistólica: $sistBpPerc basado en tabla: $valorTablaSist");
   debugPrint("PAD: $diastBP Perc Diastólica: $diastBpPerc basado en tabla: $valorTablaDiast");
 
+/*
   String sexo = (sex == PatientSex.female)
       ? "Para una nena de $height cm de altura se utilizó la altura de la tabla $alturaTabla\n"
       : "Para un varón de $height cm de altura se utilizó la altura de la tabla $alturaTabla\n";
@@ -388,5 +396,40 @@ List<String> searchBloodPressurePercentiles({
     result +=
         'El percentilo de PAD determinado es de $diastBpPerc por encontrarse su valor entre los valores tabulados para $valorTablaDiastA y $valorTablaDiast\n';
   }
+*/
+
+  String result;
+  // valorTablaSistA == 0 means patient's BP is not within a range but is below the lowest value
+  if (sistBpPerc == bpTablePercs[0] && valorTablaSistA == 0) {
+    result = "El percentilo de PAS determinado es menor a percentilo 50\n";
+  } else if (sistBpPerc == bpTablePercs[0]) {
+    result = "El percentilo de PAS determinado es igual a 50\n";
+  } else if (sistBpPerc == bpTablePercs[1]) {
+    result = "El percentilo de PAS determinado está entre 50 y 90\n";
+  } else if (sistBpPerc == bpTablePercs[2]) {
+    result = "El percentilo de PAS determinado está entre 50 y 90\n";
+    // valorTablaSistA == 1000 means patient's BP is not within a range but is above the highest value
+  } else if (sistBpPerc == bpTablePercs[3] && valorTablaSistA != 1000) {
+    result = "El percentilo de PAS determinado está entre 95 y 95 + 12 mmHg\n";
+  } else {
+    result = "El percentilo de PAS determinado está por encima de percentilo 95 + 12 mmHg\n";
+  }
+
+  // valorTablaDiastA == 0 means patient's BP is not within a range but is below the lowest value
+  if (diastBpPerc == bpTablePercs[0] && valorTablaDiastA == 0) {
+    result += "El percentilo de PAD determinado es menor a percentilo 50\n";
+  } else if (diastBpPerc == bpTablePercs[0]) {
+    result += "El percentilo de PAD determinado es igual a 50\n";
+  } else if (diastBpPerc == bpTablePercs[1]) {
+    result += "El percentilo de PAD determinado está entre 50 y 90\n";
+  } else if (diastBpPerc == bpTablePercs[2]) {
+    result += "El percentilo de PAD determinado está entre 50 y 90\n";
+    // valorTablaSistA == 1000 means patient's BP is not within a range but is above the highest value
+  } else if (diastBpPerc == bpTablePercs[3] && valorTablaDiastA != 1000) {
+    result += "El percentilo de PAD determinado está entre 95 y 95 + 12 mmHg\n";
+  } else {
+    result += "El percentilo de PAD determinado está por encima de percentilo 95 + 12 mmHg\n";
+  }
+
   return [patientDignose, result];
 }
