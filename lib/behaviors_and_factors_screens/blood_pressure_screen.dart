@@ -34,14 +34,14 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
     type: MaskAutoCompletionType.eager,
   );
 
-  var precaModel = PrecarinaModel();
+  var _precaModel = PrecarinaModel();
 
-  String pasHint = "Ej.: 120";
-  String padHint = "Ej.: 80";
+  final String _pasHint = "Ej.: 120";
+  final String _padHint = "Ej.: 80";
 
-  List<String> results = ["", ""];
-  String diagnose = "";
-  String score = "";
+  List<String> _results = ["", ""];
+  String _diagnose = "";
+  String _score = "";
 
   // I cannot enable accept button until the SnackBar
   bool _acceptButtonDisabled = true;
@@ -54,7 +54,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
     // This callback will get called AFTER the Widget is built
     WidgetsBinding.instance.addPostFrameCallback((_) {
       showWarning(context);
-      precaModel = Provider.of<PrecarinaModel>(context, listen: false);
+      _precaModel = Provider.of<PrecarinaModel>(context, listen: false);
     });
   }
 
@@ -115,7 +115,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                                     controller: _controllerSistAP,
                                     textAlign: TextAlign.center,
                                     decoration: InputDecoration(
-                                      hintText: pasHint,
+                                      hintText: _pasHint,
                                       border: InputBorder.none,
                                       focusedBorder: const OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
@@ -177,7 +177,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                                     controller: _controllerDiastPA,
                                     textAlign: TextAlign.center,
                                     decoration: InputDecoration(
-                                      hintText: padHint,
+                                      hintText: _padHint,
                                       border: InputBorder.none,
                                       focusedBorder: const OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
@@ -256,16 +256,16 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                               _acceptButtonDisabled = true;
                               FocusScope.of(context).unfocus();
                               // PatientSex ps = (_controllerSex.text == "V" || _controllerSex.text == "v") ? PatientSex.male : PatientSex.female;
-                              results = searchBloodPressurePercentiles(
-                                sex: precaModel.patientSex == PatientSex.female ? PatientSex.female : PatientSex.male,
-                                height: precaModel.height!,
-                                age: precaModel.ageYears!,
+                              _results = searchBloodPressurePercentiles(
+                                sex: _precaModel.patientSex == PatientSex.female ? PatientSex.female : PatientSex.male,
+                                height: _precaModel.height!,
+                                age: _precaModel.ageYears!,
                                 sistBP: int.parse(_controllerSistAP.text),
                                 diastBP: int.parse(_controllerDiastPA.text),
                               );
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text(results[1]),
+                                  content: Text(_results[1]),
                                   duration: const Duration(days: 1),
                                   action: SnackBarAction(
                                     label: 'OK',
@@ -274,8 +274,8 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                                       _acceptButtonDisabled = false;
                                       ScaffoldMessenger.of(context).hideCurrentSnackBar();
                                       setState(() {
-                                        diagnose = results[0];
-                                        score = calculateScore(diagnose, _formKey.currentState!.fields['Medicado']?.value);
+                                        _diagnose = _results[0];
+                                        _score = calculateScore(_diagnose, _formKey.currentState!.fields['Medicado']?.value);
                                       });
                                     },
                                   ),
@@ -286,7 +286,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                         ),
                         const VerticalSpace(height: 15.0),
                         Text(
-                          diagnose,
+                          _diagnose,
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 21.0,
@@ -294,7 +294,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                         ),
                         const VerticalSpace(height: 5.0),
                         Text(
-                          score,
+                          _score,
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 21.0,
@@ -317,8 +317,16 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                             ElevatedButton(
                               onPressed: _acceptButtonDisabled ? null : () {
                                 FocusScope.of(context).unfocus();
-                                debugPrint("BP value en Screen: ${precaModel.bloodPressureValue}");
-                                precaModel.calculateAverage();
+                                debugPrint("BP value en Screen: ${_precaModel.bloodPressureValue}");
+
+                                RegExp regExp = RegExp(r"Score: (\d+)");
+
+                                Match? match = regExp.firstMatch(_score);
+                                  String digitsString = match!.group(1)!;
+                                  int scoreInt = int.parse(digitsString);
+
+                                _precaModel.bloodPressureValue = scoreInt;
+                                _precaModel.calculateAverage();
                                 Navigator.of(context).pop();
                               },
                               child: Text(AppLocalizations.of(context)!.txtButtonAccept),
@@ -353,7 +361,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
 
     if (medicado == "S" && score >= 20) score -= 20;
 
-    precaModel.bloodPressureValue = score;
+    _precaModel.bloodPressureValue = score;
 
     return "Score: $score";
   }

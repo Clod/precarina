@@ -53,54 +53,56 @@ class _CholesterolScreenState extends State<CholesterolScreen> {
               ),
               Expanded(
                 flex: 3,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    ...(() {
-                      List<SizedBox> sbList = [];
-                      for (int i = 0; i < optionsTexts.length; i++) {
-                        sbList.add(
-                          SizedBox(
-                            width: 300.0,
-                            child: RadioListTile(
-                              title: Text(optionsTexts[i]),
-                              value: cholesterolValues[i],
-                              groupValue: _selectedOption,
-                              onChanged: (value) {
-                                setState(() {
-                                  enableAcceptButton = true;
-                                  _selectedOption = value;
-                                });
-                              },
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ...(() {
+                        List<SizedBox> sbList = [];
+                        for (int i = 0; i < optionsTexts.length; i++) {
+                          sbList.add(
+                            SizedBox(
+                              width: 300.0,
+                              child: RadioListTile(
+                                title: Text(optionsTexts[i]),
+                                value: cholesterolValues[i],
+                                groupValue: _selectedOption,
+                                onChanged: (value) {
+                                  setState(() {
+                                    enableAcceptButton = true;
+                                    _selectedOption = value;
+                                  });
+                                },
+                              ),
                             ),
+                          );
+                        }
+                        return sbList;
+                      })(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            child: Text(AppLocalizations.of(context)!.txtButtonCancel),
+                            onPressed: () => Navigator.maybePop(context),
                           ),
-                        );
-                      }
-                      return sbList;
-                    })(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          child: Text(AppLocalizations.of(context)!.txtButtonCancel),
-                          onPressed: () => Navigator.maybePop(context),
-                        ),
-                        const HorizontalSpace(width: 10.0),
-                        ElevatedButton(
-                          onPressed: enableAcceptButton
-                              ? () {
-                                  precaModel.cholesterolValue = _selectedOption;
-                                  debugPrint("Cholesterol Value en Screen: ${precaModel.cholesterolValue}");
-                                  precaModel.calculateAverage();
-                                  Navigator.of(context).pop();
-                                }
-                              : null,
-                          child: Text(AppLocalizations.of(context)!.txtButtonAccept),
-                        ),
-                      ],
-                    ),
-                  ],
+                          const HorizontalSpace(width: 10.0),
+                          ElevatedButton(
+                            onPressed: enableAcceptButton
+                                ? () {
+                                    precaModel.cholesterolValue = _selectedOption;
+                                    debugPrint("Cholesterol Value en Screen: ${precaModel.cholesterolValue}");
+                                    precaModel.calculateAverage();
+                                    Navigator.of(context).pop();
+                                  }
+                                : null,
+                            child: Text(AppLocalizations.of(context)!.txtButtonAccept),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

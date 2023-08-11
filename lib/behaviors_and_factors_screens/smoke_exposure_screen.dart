@@ -56,55 +56,57 @@ class _SmokeExposureScreenState extends State<SmokeExposureScreen> {
               ),
               Expanded(
                 flex: 3,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ...(() {
-                      List<Widget> sbList = [];
-                      for (int i = 0; i < optionsTexts.length; i++) {
-                        sbList.add(
-                          SizedBox(
-                            width: 300.0,
-                            child: RadioListTile(
-                              title: Text(optionsTexts[i]),
-                              value: smokeExposureValues[i],
-                              groupValue: _selectedOption,
-                              onChanged: (value) {
-                                setState(() {
-                                  enableAcceptButton = true;
-                                  _selectedOption = value;
-                                });
-                              },
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      ...(() {
+                        List<Widget> sbList = [];
+                        for (int i = 0; i < optionsTexts.length; i++) {
+                          sbList.add(
+                            SizedBox(
+                              width: 300.0,
+                              child: RadioListTile(
+                                title: Text(optionsTexts[i]),
+                                value: smokeExposureValues[i],
+                                groupValue: _selectedOption,
+                                onChanged: (value) {
+                                  setState(() {
+                                    enableAcceptButton = true;
+                                    _selectedOption = value;
+                                  });
+                                },
+                              ),
                             ),
+                          );
+                          sbList.add(const VerticalSpace(height: 5.0));
+                        }
+                        return sbList;
+                      })(),
+                      const VerticalSpace(height: 15.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            child: Text(AppLocalizations.of(context)!.txtButtonCancel),
+                            onPressed: () => Navigator.maybePop(context),
                           ),
-                        );
-                        sbList.add(const VerticalSpace(height: 5.0));
-                      }
-                      return sbList;
-                    })(),
-                    const VerticalSpace(height: 15.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          child: Text(AppLocalizations.of(context)!.txtButtonCancel),
-                          onPressed: () => Navigator.maybePop(context),
-                        ),
-                        const HorizontalSpace(width: 10.0),
-                        ElevatedButton(
-                          onPressed: enableAcceptButton
-                              ? () {
-                            precaModel.smokeValue = _selectedOption;
-                            debugPrint("Smoke Exposure Value en Screen: ${precaModel.smokeValue}");
-                            precaModel.calculateAverage();
-                            Navigator.of(context).pop();
-                          }
-                              : null,
-                          child: Text(AppLocalizations.of(context)!.txtButtonAccept),
-                        ),
-                      ],
-                    ),
-                  ],
+                          const HorizontalSpace(width: 10.0),
+                          ElevatedButton(
+                            onPressed: enableAcceptButton
+                                ? () {
+                              precaModel.smokeValue = _selectedOption;
+                              debugPrint("Smoke Exposure Value en Screen: ${precaModel.smokeValue}");
+                              precaModel.calculateAverage();
+                              Navigator.of(context).pop();
+                            }
+                                : null,
+                            child: Text(AppLocalizations.of(context)!.txtButtonAccept),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

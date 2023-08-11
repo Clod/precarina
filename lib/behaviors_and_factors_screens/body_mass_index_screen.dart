@@ -200,6 +200,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                             child: const Text("Cancelar"),
                           ),
                           const SizedBox(width: 10.0),
+                          // Accept button
                           ElevatedButton(
                             //   final _BodyMassIndexValues = [100, 70, 30, 15, 0];
                             // "5to - < percentil 85
@@ -215,6 +216,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                               } else {
                                 precaModel.bmiValue = 30;
                               }
+                              precaModel.calculateAverage();
                               Navigator.pop(context);
                             },
                             child: const Text("Aceptar"),

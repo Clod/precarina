@@ -22,8 +22,26 @@ class PrecarinaModel extends ChangeNotifier {
   int? ageMonths;
 
   calculateAverage() {
-    average = (dietValue != null) ? dietValue!.toDouble() : 0.0;
-    notifyListeners(); // TODO: hace falta????
+    if (dietValue != null &&
+        physicalActivityValue != null &&
+        smokeValue != null &&
+        sleepValue != null &&
+        bmiValue != null &&
+        cholesterolValue != null &&
+        diabetesValue != null &&
+        bloodPressureValue != null) {
+      average = (dietValue!.toDouble() +
+              physicalActivityValue!.toDouble() +
+              smokeValue!.toDouble() +
+              sleepValue!.toDouble() +
+              bmiValue!.toDouble() +
+              cholesterolValue!.toDouble() +
+              diabetesValue!.toDouble() +
+              bloodPressureValue!.toDouble()) /
+          8;
+    }
+    // Notify the changes to main_screen so it updates de linear gauges
+    notifyListeners();
   }
 
   /// Internal, private state of the cart.
@@ -39,7 +57,7 @@ class PrecarinaModel extends ChangeNotifier {
         "\nHeight: $height"
         "\nWeight Kilos: $weightKilos"
         "\nWeight Kilos: $weightGrams"
-        "\nDate of Birth: ${dateOfBirth.toString().substring(0,10)}"
+        "\nDate of Birth: ${dateOfBirth.toString().substring(0, 10)}"
         "\nAge Years: $ageYears"
         "\nAge Months: $ageMonths";
 
