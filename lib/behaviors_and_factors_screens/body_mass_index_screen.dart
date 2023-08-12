@@ -53,11 +53,7 @@ void _loadModel() async {
 }
 
 class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
-  var precaModel = PrecarinaModel();
-
-  BuildContext? bc;
-
-  bool enableAcceptButton = true;
+  var _precaModel = PrecarinaModel();
 
   String _imc = "";
   String _percentil = "";
@@ -75,16 +71,16 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
       [0.00]
     ];
 
-    double? totalWeight = precaModel.weightKilos! + precaModel.weightGrams! / 1000.0;
+    double? totalWeight = _precaModel.weightKilos! + _precaModel.weightGrams! / 1000.0;
 
-    double imc = totalWeight / pow((precaModel.height! / 100.0), 2);
+    double imc = totalWeight / pow((_precaModel.height! / 100.0), 2);
 
-    double edad = precaModel.ageYears! + precaModel.ageMonths! / 12.0;
+    double edad = _precaModel.ageYears! + _precaModel.ageMonths! / 12.0;
 
     input[0][1] = imc;
     input[0][0] = edad;
 
-    if (precaModel.patientSex == PatientSex.female) {
+    if (_precaModel.patientSex == PatientSex.female) {
       input[0][2] = 1.0;
       input[0][3] = 0.0;
     } else {
@@ -127,7 +123,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
     }
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      precaModel = Provider.of<PrecarinaModel>(context, listen: false);
+      _precaModel = Provider.of<PrecarinaModel>(context, listen: false);
     });
   }
 
@@ -138,7 +134,6 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
     // final bmiValues = [100, 70, 30, 15, 0];
     // List<String> optionsTexts = AppLocalizations.of(context)!.txtBodyMassIndexDialogOptions.split("|");
 
-    bc = context;
     // final Orientation orientation = MediaQuery.of(context).orientation;
     // final Size dialogSize = (orientation == Orientation.portrait) ? Size(400, 600) : Size(600, 400);
 
@@ -183,9 +178,34 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                         style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
                       ),
                       const VerticalSpace(height: 15.0),
+                      const Text(
+                        "Score: ",
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                      ),
+                      const VerticalSpace(height: 5.0),
+                      Text(
+                        _precaModel.bmiValue != null ? _precaModel.bmiValue!.toString() : 'Presione "Calcular"',
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+                      ),
+                      const VerticalSpace(height: 15.0),
                       ElevatedButton(
                         onPressed: () {
                           _getResults(context);
+                          // percentile 5 to < percentil 85 => 100
+                          if (_percentilValue < 85) {
+                            _precaModel.bmiValue = 100;
+                            // percentile 85  to < percentil 95 => 70
+                          } else if (_percentilValue < 97) {
+                            _precaModel.bmiValue = 70;
+                            // percentile 97 to < 120% of percentile 97 => 30
+                            // 120% of percentil 97 to < 140% of percentile 97 => 15
+                            // ≥ 140% of percentile 97 => 0
+                          } else {
+                            _precaModel.bmiValue = getScoreOver97();
+                            debugPrint("Score over 97: ${_precaModel.bmiValue.toString()}");
+                            // _precaModel.notifyListeners();
+                          }
+                          _precaModel.calculateAverage();
                         },
                         child: const Text("Calcular"),
                       ),
@@ -194,7 +214,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                         children: [
                           ElevatedButton(
                             onPressed: () {
-                              precaModel.bmiValue = null;
+                              _precaModel.bmiValue = null;
                               Navigator.pop(context);
                             },
                             child: const Text("Cancelar"),
@@ -202,21 +222,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                           const SizedBox(width: 10.0),
                           // Accept button
                           ElevatedButton(
-                            //   final _BodyMassIndexValues = [100, 70, 30, 15, 0];
-                            // "5to - < percentil 85
-                            // 85 - < percentil 95
-                            // percentil 95 - < 120% del percentil 95
-                            // 120% del percentil 95 - < 140% del percentil 95
-                            // ≥ 140% del percentil 95",
                             onPressed: () {
-                              if (_percentilValue <= 85) {
-                                precaModel.bmiValue = 100;
-                              } else if (_percentilValue <= 85) {
-                                precaModel.bmiValue = 70;
-                              } else {
-                                precaModel.bmiValue = 30;
-                              }
-                              precaModel.calculateAverage();
                               Navigator.pop(context);
                             },
                             child: const Text("Aceptar"),
@@ -247,5 +253,28 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
         ),
       ),
     );
+  }
+
+  int? getScoreOver97() {
+    // Convert age from years-months to years-fraction of years as digitalized from the curves
+    // Although curves' x axis are year and months it was much easier to measure as franctions of years
+    double age = _precaModel.ageYears! + _precaModel.ageMonths! / 12;
+    // No let's get the BMI for 97% at said age
+    // According to the regression, fot 97%: bmi = -0.008237121887635776 age^3 +  0.28450418735930744 age^2 -2.1290147029215354 age + 23.20470735832494   (R^2 = 0.9996795012472375)
+
+    double bmi97 = -0.008237121887635776 * pow(age,3) +  0.28450418735930744 * pow(age,2) -2.1290147029215354 * age + 23.20470735832494;
+
+    // percentile 97 to < 120% of percentile 97 => 30
+    // 120% of percentil 97 to < 140% of percentile 97 => 15
+    // ≥ 140% of percentile 97 => 0
+
+    if (_percentilValue < bmi97 * 1.2) {
+      return 30;
+    }
+    if (_percentilValue < bmi97 * 1.4) {
+      return 15;
+    } else {
+      return 0;
+    }
   }
 }
