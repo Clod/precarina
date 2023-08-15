@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 class BmiHelp extends StatelessWidget {
   const BmiHelp({
@@ -10,9 +11,27 @@ class BmiHelp extends StatelessWidget {
   final String title;
   final String content;
 
+  /*
+  var data = "El índice de masa corporal (IMC) es el criterio más usado para medir la masa corporal en" "relación a la altura y el indicador práctico y universalmente aplicable, barato y no invasivo" "para identificar el sobrepeso y la obesidad. En niños y adolescentes no hay valores absolutos (" "por las modificaciones con la edad) sino que se dispone de tablas de percentilos que definen"
+              "sobrepeso (> Plo 85 y < Plo 97 ) y obesidad (>Plo 97)."
+      "#  \n"
+      "#  \n"
+      "### Bibliografía\n"
+      "Manual de Obesidad en Pediatría. Editorial Lugones. 2023\n"
+   ;
+*/
+
+  final data = "El índice de masa corporal (IMC) es el criterio más usado para medir la masa corporal en" "relación a la altura y el indicador práctico y universalmente aplicable, barato y no invasivo" "para identificar el sobrepeso y la obesidad. En niños y adolescentes no hay valores absolutos (" "por las modificaciones con la edad) sino que se dispone de tablas de percentilos que definen"
+  "sobrepeso (> Plo 85 y < Plo 97 ) y obesidad (>Plo 97)."
+  "#  \n"
+  "#  \n"
+  "### Bibliografía\n"
+  "Manual de Obesidad en Pediatría. Editorial Lugones. 2023\n"
+  ;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return      Scaffold(
       appBar: AppBar(
         title: Text(
           title,
@@ -23,11 +42,24 @@ class BmiHelp extends StatelessWidget {
           ),
         ),
       ),
-      body: const SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Text("El índice de masa corporal (IMC) es una medida simple y confiable para evaluar el estado nutricional de una persona adulta. Se calcula dividiendo el peso de la persona en kilos por el cuadrado de su altura en metros. Un IMC entre 18.5 y 24.9 se considera normal, mientras que un IMC por debajo de 18.5 indica bajo peso y por encima de 25 sobrepeso. El IMC provee una buena estimación del contenido de grasa corporal y se relaciona con el riesgo de enfermedades crónicas. Sin embargo, tiene limitaciones ya que no distingue entre masa grasa y masa muscular. Por esto, el IMC debe interpretarse en el contexto de la evaluación clínica general de cada individuo."),
-        )
+      body: SafeArea(
+        child: Markdown(
+          data: data,
+          styleSheet: MarkdownStyleSheet(
+            em: const TextStyle(
+              color: Colors.red,
+            ),
+            p: const TextStyle(
+              fontSize: 14,
+            ),
+            tableHead: const TextStyle(
+              fontSize: 14,
+            ),
+            tableBody: const TextStyle(
+              fontSize: 14,
+            ),
+          ),
+        ),
       ),
     );
   }

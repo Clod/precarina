@@ -1,4 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
+
+
+/*
+"El entorno alimentario actual se caracteriza por una elevada oferta y accesibilidad de alimentos de "
+"alta densidad energética y baja calidad nutricional, con gran contenido de sal, azúcares y grasas, "
+"que han reemplazado el consumo de alimentos naturales que aportan fibra, vitaminas y otros minerales "
+"entre otros nutrientes beneficiosos para la salud. Esta modificación en los patrones de consumo constituyen "
+"un importante riesgo para la salud cardiovascular."
+
+"Se recomienda incorporar a diario alimentos de todos los grupos y realizar al menos 30 minutos de actividad "
+"física; tomar a diario 8 vasos de agua segura; consumir a diario 5 porciones de frutas y verduras en variedad "
+"de tipo y colores, y reducir el uso de sal y el consumo de alimentos con alto contenido de sodio. "
+"Limitar el consumo de bebidas azucaradas y de alimentos con elevado contenido de grasas, azucares y sal; "
+"consumir diariamente leche, yogur o quesos, preferentemente descremados; consumir carnes magras, aumentar"
+"el consumo de pescado e incluir huevo en la alimentación; consumir legumbres; consumir aceite crudo como "
+"condimento, frutos secos o semillas y limitar el consumo de bebidas alcohólicas.\n"
+      "#  \n"
+      "#  \n"
+      "### Bibliografía\n"
+"-Manual para la aplicación de la Guías alimentarias para la población argentina. "
+https://www.argentina.gob.ar/alimentacion-saludable/comer-sano."
+"-Dietary Guidelines for Americans 2020-25. t DietaryGuidelines.gov"
+*/
 
 class DietHelp extends StatelessWidget {
   const DietHelp({
@@ -9,6 +33,26 @@ class DietHelp extends StatelessWidget {
 
   final String title;
   final String content;
+
+  final data = "El entorno alimentario actual se caracteriza por una elevada oferta y accesibilidad de alimentos de "
+      "alta densidad energética y baja calidad nutricional, con gran contenido de sal, azúcares y grasas, "
+      "que han reemplazado el consumo de alimentos naturales que aportan fibra, vitaminas y otros minerales "
+      "entre otros nutrientes beneficiosos para la salud. Esta modificación en los patrones de consumo constituyen "
+      "un importante riesgo para la salud cardiovascular.\n"
+      "#  \n"
+      "Se recomienda incorporar a diario alimentos de todos los grupos y realizar al menos 30 minutos de actividad "
+      "física; tomar a diario 8 vasos de agua segura; consumir a diario 5 porciones de frutas y verduras en variedad "
+      "de tipo y colores, y reducir el uso de sal y el consumo de alimentos con alto contenido de sodio. "
+      "Limitar el consumo de bebidas azucaradas y de alimentos con elevado contenido de grasas, azucares y sal; "
+      "consumir diariamente leche, yogur o quesos, preferentemente descremados; consumir carnes magras, aumentar"
+      "el consumo de pescado e incluir huevo en la alimentación; consumir legumbres; consumir aceite crudo como "
+      "condimento, frutos secos o semillas y limitar el consumo de bebidas alcohólicas.\n"
+      "#  \n"
+      "#  \n"
+      "### Bibliografía\n"
+      "-Manual para la aplicación de la Guías alimentarias para la población argentina. \n"
+      "https://www.argentina.gob.ar/alimentacion-saludable/comer-sano."
+      "-Dietary Guidelines for Americans 2020-25. t DietaryGuidelines.gov";
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +67,22 @@ class DietHelp extends StatelessWidget {
           ),
         ),
       ),
-      body: const SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
-                "Mantener una dieta saludable es de suma importancia para nuestro bienestar y calidad de vida. Nuestra alimentación tiene un impacto directo en nuestra salud física y mental, y puede influir en la prevención de diversas enfermedades crónicas.\n"
-                "Una dieta saludable proporciona los nutrientes esenciales que nuestro cuerpo necesita para funcionar correctamente. Incluye una variedad de alimentos frescos y naturales, como frutas, verduras, granos enteros, proteínas magras y grasas saludables. Estos alimentos nos brindan vitaminas, minerales, antioxidantes y fibra dietética, que son fundamentales para el buen funcionamiento del organismo.\n"
-                "Una de las principales ventajas de una dieta saludable es el control del peso corporal. Consumir alimentos equilibrados y moderar las porciones nos ayuda a mantener un peso adecuado y prevenir la obesidad. El sobrepeso y la obesidad están asociados con numerosos problemas de salud, como enfermedades cardíacas, diabetes tipo 2, hipertensión y ciertos tipos de cáncer. Al adoptar una dieta saludable, reducimos el riesgo de desarrollar estas enfermedades y promovemos un peso saludable.\n"
-                "Además, una alimentación adecuada fortalece nuestro sistema inmunológico, lo que nos ayuda a prevenir enfermedades e infecciones. Los nutrientes presentes en una dieta equilibrada contribuyen a la producción de glóbulos blancos, anticuerpos y otras sustancias que nos protegen contra virus y bacterias. Una dieta deficiente puede debilitar nuestras defensas y hacernos más susceptibles a enfermedades.\n"
-                "Asimismo, una dieta saludable tiene un impacto positivo en nuestra salud mental. Estudios han demostrado que una alimentación balanceada puede reducir el riesgo de depresión, ansiedad y otros trastornos mentales. Algunos nutrientes, como los ácidos grasos omega-3 y ciertas vitaminas del complejo B, desempeñan un papel crucial en la función cerebral y en la regulación del estado de ánimo.\n"
-                "En resumen, mantener una dieta saludable es esencial para preservar nuestra salud y bienestar. No se trata solo de contar calorías, sino de elegir alimentos nutritivos que nos proporcionen los elementos necesarios para un funcionamiento óptimo del cuerpo y la mente. Al hacerlo, podemos prevenir enfermedades, controlar nuestro peso, fortalecer nuestro sistema inmunológico y mejorar nuestra salud mental. Adoptar buenos hábitos alimentarios es una inversión a largo plazo en nuestra calidad de vida.\n"),
+      body: SafeArea(
+        child: Markdown(
+          data: data,
+          styleSheet: MarkdownStyleSheet(
+            em: const TextStyle(
+              color: Colors.red,
+            ),
+            p: const TextStyle(
+              fontSize: 14,
+            ),
+            tableHead: const TextStyle(
+              fontSize: 14,
+            ),
+            tableBody: const TextStyle(
+              fontSize: 14,
+            ),
           ),
         ),
       ),

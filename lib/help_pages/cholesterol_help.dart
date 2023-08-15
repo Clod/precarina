@@ -1,4 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
+
+/*
+  var data =
+
+"Lípidos: la dislipidemia presente en la infancia se arrastra hacia la adultez y es un marcador de riesgo" "para el desarrollo de aterosclerosis."
+"En la obesidad generalmente se encuentra un aumento de los niveles de triglicéridos, bajo colesterol de" "HDL y leve aumento del colesterol de >LDL."
+      "#  \n"
+      "#  \n"
+      "| |ACEPTABLE | LIMITE | ALTO |\n"
+      "|---|---|-----------|------------------|\n"
+      "| Triglicéridos 0-9 años 10-19 años | ≤75 ≤ 90 | 75-99 90-129 | ≥100 ≥130 |\n"
+      "| Col LDL | ≤110 |  110-129 |≥130 |\n"
+      "| Col HDL | ≥170 | 170-199 | ≥200 | \n"
+      "| Col Total | ≥45 | 40-45 | ≤40 | \n"
+      "#  \n"
+      "#  \n"
+      "### Bibliografía\n"
+      "- Consenso sobre manejo de las dislipidemias en pediatría. Arch Argent Pediatr 2015;113(2):177-186";
+*/
+
+var data =
+    "Lípidos: la dislipidemia presente en la infancia se arrastra hacia la adultez y es un marcador de riesgo" "para el desarrollo de aterosclerosis."
+    "En la obesidad generalmente se encuentra un aumento de los niveles de triglicéridos, bajo colesterol de" "HDL y leve aumento del colesterol de >LDL.\n"
+    "#  \n"
+    "#  \n"
+    "| |ACEPT. | LIMITE | ALTO |\n"
+    "|---|-----|-----------|------------------|\n"
+    "| Trig. 0-9 años | ≤75 | 75-99 | ≥100 |\n"
+    "| Trig. 10-19 años | ≤ 90 | 90-129 | ≥130 |\n"
+    "| Col LDL | ≤110 |  110-129 |≥130 |\n"
+    "| Col HDL | ≥170 | 170-199 | ≥200 | \n"
+    "| Col Total | ≥45 | 40-45 | ≤40 | \n"
+    "#  \n"
+    "#  \n"
+    "### Bibliografía\n"
+    "- Consenso sobre manejo de las dislipidemias en pediatría. Arch Argent Pediatr 2015;113(2):177-186";
 
 class CholesterolHelp extends StatelessWidget {
   const CholesterolHelp({
@@ -23,13 +60,24 @@ class CholesterolHelp extends StatelessWidget {
           ),
         ),
       ),
-      body: const SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text("Mantener niveles normales de colesterol es de suma importancia para la salud de los niños. El colesterol es una sustancia necesaria para el funcionamiento del cuerpo, pero cuando los niveles están desequilibrados, puede ser perjudicial. El exceso de colesterol puede acumularse en las arterias, obstruyéndolas y dificultando el flujo sanguíneo adecuado. Esto aumenta el riesgo de enfermedades cardiovasculares, como la arteriosclerosis y los problemas cardíacos. Controlar los niveles de colesterol desde la infancia es crucial, ya que los hábitos de alimentación y estilo de vida adquiridos durante esta etapa pueden tener un impacto duradero en la salud. Fomentar una dieta equilibrada, rica en frutas, verduras y alimentos bajos en grasas saturadas, junto con la práctica regular de ejercicio, puede ayudar a mantener el colesterol en niveles saludables y promover una vida sana en el futuro."),
+      body: SafeArea(
+        child: Markdown(
+          data: data,
+          styleSheet: MarkdownStyleSheet(
+            em: const TextStyle(
+              color: Colors.red,
+            ),
+            p: const TextStyle(
+              fontSize: 14,
+            ),
+            tableHead: const TextStyle(
+              fontSize: 14,
+            ),
+            tableBody: const TextStyle(
+              fontSize: 14,
+            ),
           ),
-        )
+        ),
       ),
     );
   }
