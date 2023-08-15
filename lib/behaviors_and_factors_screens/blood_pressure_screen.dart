@@ -10,11 +10,11 @@ import 'package:precarina/behaviors_and_factors_screens/pages_header.dart';
 import 'package:precarina/model/precarina_model.dart';
 import 'package:provider/provider.dart';
 
-import '../aux_functions/lose_input_warning.dart';
-import '../aux_functions/search_blood_pressure_percentile.dart';
-import '../aux_functions/show_blood_pressure_warning.dart';
-import '../aux_widgets/vertical_space.dart';
-import '../help_pages/help_drawer.dart';
+import 'package:precarina/aux_functions/lose_input_warning.dart';
+import 'package:precarina/aux_functions/search_blood_pressure_percentile.dart';
+import 'package:precarina/aux_functions/show_blood_pressure_warning.dart';
+import 'package:precarina/aux_widgets/vertical_space.dart';
+import 'package:precarina/help_pages/help_drawer.dart';
 
 class BloodPressureScreen extends StatefulWidget {
   const BloodPressureScreen({super.key});

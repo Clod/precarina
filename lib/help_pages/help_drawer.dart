@@ -154,7 +154,7 @@ class HelpDrawer extends StatelessWidget {
               Icons.local_play,
             ),
             applicationName: 'PRECARINA',
-            applicationVersion: '1.0.0',
+            applicationVersion: '1.0.0 Build 8',
             applicationLegalese:
                 'Esta app es y será gratuitua y de código abierto.\nSu única finalidad es promover la salud cardiovascular desde la infancia.',
             aboutBoxChildren: [
