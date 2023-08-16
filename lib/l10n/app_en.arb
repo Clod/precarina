@@ -47,8 +47,7 @@
 
   "txtDiabetesButton" : "Diabetes",
   "txtDiabetesDialog" : "FBG (mg/dL) or HbA1c (%) symptom-based screening at any age or risk-based screening starting at age ≥10y of age or onset of puberty per clinician discretion",
-  "txtDiabetesDialogOptions" : "No history of diabetes and FBG<100 (or HbA1c < 5.7) |No diabetes and FBG 100 - 125 (or HbA1c 5.7 - 6.4) (prediabetes) |Diabetes with HbA1c < 7.0 |Diabetes with HbA1c 7.0 - 7.9 |Diabetes with HbA1c 8.0 - 8.9 |Diabetes with HbA1c 9.0 - 9.9 |Diabetes with HbA1c ≥ 10",
-  "txtDiabetesHelp" : "**FBG** stands for Fasting Blood Glucose. This is a test that measures the level of glucose (sugar) in the blood after fasting for a certain period of time. \n\n**HbA1c** stands for Glycated Hemoglobin and is a blood test that measures the average blood glucose levels over the past 2-3 months. Hemoglobin is a protein in red blood cells that carries oxygen throughout the body. When glucose in the blood binds to hemoglobin, the result is glycated hemoglobin, or HbA1c.",
+  "txtDiabetesDialogOptions": "Sin antecedentes de diabetes y FBG<100 mg/dL (o HbA1c < 5.7 %) |Sin diabetes y FBG 100 - 125 mg/dL (o HbA1c 5.7 - 6.4 %) (prediabetes) |Diabetes con HbA1c < 7.0 % |Diabetes con HbA1c 7.0 - 7.9 % |Diabetes con HbA1c 8.0 - 8.9 % |Diabetes con HbA1c 9.0 - 9.9 % |Diabetes con HbA1c ≥ 10 %",  "txtDiabetesHelp" : "**FBG** stands for Fasting Blood Glucose. This is a test that measures the level of glucose (sugar) in the blood after fasting for a certain period of time. \n\n**HbA1c** stands for Glycated Hemoglobin and is a blood test that measures the average blood glucose levels over the past 2-3 months. Hemoglobin is a protein in red blood cells that carries oxygen throughout the body. When glucose in the blood binds to hemoglobin, the result is glycated hemoglobin, or HbA1c.",
   "txtDiabetesWarning" : "",
 
   "txtBloodPressureButton" : "Blood Pressure",
@@ -59,7 +58,7 @@
 
   "txtCholesterolButton" : "Cholesterol",
   "txtCholesterolDialog" : "Non-HDL cholesterol (mg/dL), starting no later than age 9 - 11y and earlier per clinician discretion",
-  "txtCholesterolDialogOptions" : "<100 |<100 (drug-treated) |100 - 119 |120 - 144 |145 - 189 |≥ 190",
+  "txtCholesterolDialogOptions" : "<100 mg/dl|<100 mg/dl(drug-treated) |100 - 119 mg/dl|120 - 144 mg/dl|145 - 189 mg/dl|≥ 190 mg/dl",
   "txtCholesterolWarning" : "",
   "txtCholesterolHelp" : "",
 
