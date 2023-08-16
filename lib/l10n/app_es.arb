@@ -36,7 +36,7 @@
 
   "txtSleepButton": "Sueño",
   "txtSleepDialog": "Horas promedio de sueño por noche (o por 24 h para edad ≤ 5)",
-  "txtSleepDialogOptions": "Rango óptimo apropiado para la edad|< 1h por encima del rango óptimo|< 1h por debajo del rango óptimo|1 - < 2h por debajo o ≥1h por encima del rango óptimo|2 - < 3h por debajo del rango óptimo|≥ 3h por debajo del rango óptimo",
+  "txtSleepDialogOptions": "Menos de 8 h/d|8 a menos de 9 h/d|9 a menos de 10 h/d|10 a menos de 11 h/d|11 a menos de 12 h/d|12 a menos de 13 h/d|13 a 14 h/d|Más de 14 h/d",
   "txtSleepWarning": "",
 
   "txtSmokeExposureButton": "Exposición al humo",
