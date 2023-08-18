@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:precarina/behaviors_and_factors_screens/pa.dart';
 import 'package:precarina/model/precarina_model.dart';
 import 'package:provider/provider.dart';
 import 'package:precarina/behaviors_and_factors_screens/pages_header.dart';
@@ -54,51 +55,34 @@ class _PhysicalActivityScreenState extends State<PhysicalActivityScreen> {
               ),
               Expanded(
                 flex: 3,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ...(() {
-                      List<SizedBox> sbList = [];
-                      for (int i = 0; i < optionsTexts.length; i++) {
-                        sbList.add(SizedBox(
-                          width: 300.0,
-                          child: RadioListTile(
-                            title: Text(optionsTexts[i]),
-                            value: physicalActivityValues[i],
-                            groupValue: _selectedOption,
-                            onChanged: (value) {
-                              setState(() {
-                                enableAcceptButton = true;
-                                _selectedOption = value;
-                              });
-                            },
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      PhysicalActivitySurvey(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            child: Text(AppLocalizations.of(context)!.txtButtonCancel),
+                            onPressed: () => Navigator.maybePop(context),
                           ),
-                        ));
-                      }
-                      return sbList;
-                    })(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          child: Text(AppLocalizations.of(context)!.txtButtonCancel),
-                          onPressed: () => Navigator.maybePop(context),
-                        ),
-                        const HorizontalSpace(width: 10.0),
-                        ElevatedButton(
-                          onPressed: enableAcceptButton
-                              ? () {
-                                  precaModel.physicalActivityValue = _selectedOption;
-                                  debugPrint("Physical Activity Value en Screen: ${precaModel.physicalActivityValue}");
-                                  precaModel.calculateAverage();
-                                  Navigator.of(context).pop();
-                                }
-                              : null,
-                          child: Text(AppLocalizations.of(context)!.txtButtonAccept),
-                        ),
-                      ],
-                    ),
-                  ],
+                          const HorizontalSpace(width: 10.0),
+                          ElevatedButton(
+                            onPressed: enableAcceptButton
+                                ? () {
+                                    precaModel.physicalActivityValue = _selectedOption;
+                                    debugPrint("Physical Activity Value en Screen: ${precaModel.physicalActivityValue}");
+                                    precaModel.calculateAverage();
+                                    Navigator.of(context).pop();
+                                  }
+                                : null,
+                            child: Text(AppLocalizations.of(context)!.txtButtonAccept),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

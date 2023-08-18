@@ -29,6 +29,11 @@ class BmiHelp extends StatelessWidget {
   "Manual de Obesidad en Pediatría. Editorial Lugones. 2023\n"
   ;
 
+  /*
+  BMI: It is the most commonly used criterion to measure body mass in relation to height and is a practical and universally applicable indicator. It is a cost-effective and non-invasive method to identify overweight and obesity. In children and adolescents, there are no absolute values (due to modifications with age), but instead, percentile tables are used to define overweight (> 85th percentile and < 97th percentile) and obesity (> 97th percentile).
+However, tables and graphics are not a convenient way to determine percentile values and are almost rather error-prone. Therefore, for the PRACARINA app, we trained a Machine Learning model with data from the World Health Organization (WHO) and the National Center for Health Statistics (NCHS) from 2007. This approach allows users to simply enter the necessary data for calculating BMI (namely height and weight). Subsequently, the model utilizes the calculated BMI and the patient's age to estimate the appropriate BMI percentile.
+   */
+
   @override
   Widget build(BuildContext context) {
     return      Scaffold(
