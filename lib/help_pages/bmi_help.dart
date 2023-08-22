@@ -21,8 +21,9 @@ class BmiHelp extends StatelessWidget {
    ;
 */
 
-  final data = "El índice de masa corporal (IMC) es el criterio más usado para medir la masa corporal en" "relación a la altura y el indicador práctico y universalmente aplicable, barato y no invasivo" "para identificar el sobrepeso y la obesidad. En niños y adolescentes no hay valores absolutos (" "por las modificaciones con la edad) sino que se dispone de tablas de percentilos que definen"
-  "sobrepeso (> Plo 85 y < Plo 97 ) y obesidad (>Plo 97)."
+  final data = "El índice de masa corporal (IMC) es el criterio más usado para medir la masa corporal en" "relación a la altura y el indicador práctico y universalmente aplicable, barato y no invasivo" "para identificar el sobrepeso y la obesidad.\n"
+      "#  \n"
+  "En niños y adolescentes, se utilizan tablas de percentiles para definir el sobrepeso (> percentil 85 y < percentil 95), la obesidad (> percentil 95) y la obesidad grave (> percentil 99). Por lo tanto, para la aplicación PRECARINA, entrenamos un modelo de Machine Learning con datos de la Organización Mundial de la Salud (OMS) y el Centro Nacional de Salud para estimar el percentil del IMC."
   "#  \n"
   "#  \n"
   "### Bibliografía\n"

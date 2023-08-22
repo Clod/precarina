@@ -47,7 +47,7 @@
 
   "txtDiabetesButton": "Diabetes",
   "txtDiabetesDialog": "Detección basada en síntomas de FBG (mg/dL) o HbA1c (%) a cualquier edad, o detección basada en riesgo a partir de los 10 años de edad o el inicio de la pubertad a discreción del clínico",
-  "txtDiabetesDialogOptions": "Sin antecedentes de diabetes y FBG<100 mg/dL (o HbA1c < 5.7 %) |Sin diabetes y FBG 100 - 125 mg/dL (o HbA1c 5.7 - 6.4 %) (prediabetes) |Diabetes con HbA1c < 7.0 % |Diabetes con HbA1c 7.0 - 7.9 % |Diabetes con HbA1c 8.0 - 8.9 % |Diabetes con HbA1c 9.0 - 9.9 % |Diabetes con HbA1c ≥ 10 %",
+  "txtDiabetesDialogOptions": "Sin antecedentes de diabetes y FBG<100 mg/dL (o HbA1c < 5.7 %) |Prediabetes por FBG 100 - 125 mg/dL (o HbA1c 5.7 - 6.4 %)|Diabetes con HbA1c < 7.0 % |Diabetes con HbA1c 7.0 - 7.9 % |Diabetes con HbA1c 8.0 - 8.9 % |Diabetes con HbA1c 9.0 - 9.9 % |Diabetes con HbA1c ≥ 10 %",
   "txtDiabetesHelp": "**FBG (del Ingés Fasting Blood Glucose)** significa Glucemia en ayunas. Esta es una prueba que mide el nivel de glucosa en la sangre después de ayunar por un cierto período de tiempo. \n\n**HbA1c** significa Hemoglobina Glucosilada y es una prueba de sangre que mide los niveles promedio de glucosa en la sangre durante los últimos 2-3 meses. La hemoglobina es una proteína en los glóbulos rojos que transporta oxígeno por todo el cuerpo. Cuando la glucosa en la sangre se une a la hemoglobina, el resultado es hemoglobina glucosilada o HbA1c.\"",
   "txtDiabetesWarning": "",
 

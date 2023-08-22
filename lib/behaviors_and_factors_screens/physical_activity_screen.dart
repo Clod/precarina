@@ -5,9 +5,9 @@ import 'package:precarina/model/precarina_model.dart';
 import 'package:provider/provider.dart';
 import 'package:precarina/behaviors_and_factors_screens/pages_header.dart';
 
-import '../aux_functions/lose_input_warning.dart';
-import '../aux_widgets/horizontal_space.dart';
-import '../help_pages/help_drawer.dart';
+import 'package:precarina/aux_functions/lose_input_warning.dart';
+import 'package:precarina/aux_widgets/horizontal_space.dart';
+import 'package:precarina/help_pages/help_drawer.dart';
 
 class PhysicalActivityScreen extends StatefulWidget {
   const PhysicalActivityScreen({super.key});
@@ -23,7 +23,10 @@ class _PhysicalActivityScreenState extends State<PhysicalActivityScreen> {
 
   int? _selectedOption;
 
-  bool enableAcceptButton = false;
+  bool enableAcceptButton = true;
+
+  final GlobalKey<PhysicalActivitySurveyState> innerWidgetKey = GlobalKey<PhysicalActivitySurveyState>();
+  //final PhysicalActivitySurvey _physicalActivitySurvey =  PhysicalActivitySurvey(key: innerWidgetKey);
 
   @override
   void initState() {
@@ -59,7 +62,7 @@ class _PhysicalActivityScreenState extends State<PhysicalActivityScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      PhysicalActivitySurvey(),
+                      PhysicalActivitySurvey(key: innerWidgetKey),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -74,7 +77,26 @@ class _PhysicalActivityScreenState extends State<PhysicalActivityScreen> {
                                     precaModel.physicalActivityValue = _selectedOption;
                                     debugPrint("Physical Activity Value en Screen: ${precaModel.physicalActivityValue}");
                                     precaModel.calculateAverage();
-                                    Navigator.of(context).pop();
+                                    bool isRedBackground = innerWidgetKey.currentState!.triggerCalculation();
+                                    // Show a SnackBar with a button and make it stay until the button is pressed
+                                    // The background of the SnackBar can be red or black depending on the value of
+                                    // boolean
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Score: ${precaModel.physicalActivityValue}'),
+                                        duration: const Duration(days: 1),
+                                        backgroundColor: isRedBackground ? Colors.red : Colors.black,
+                                        action: SnackBarAction(
+                                          label: 'Ok',
+                                          onPressed: () {
+                                            // Hide virtual keyboard
+                                            FocusScope.of(context).unfocus();
+                                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ),
+                                    );
                                   }
                                 : null,
                             child: Text(AppLocalizations.of(context)!.txtButtonAccept),

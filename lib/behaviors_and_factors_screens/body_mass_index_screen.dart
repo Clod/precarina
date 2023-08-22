@@ -6,8 +6,8 @@ import 'package:precarina/aux_widgets/vertical_space.dart';
 import 'package:precarina/behaviors_and_factors_screens/pages_header.dart';
 import 'package:precarina/model/precarina_model.dart';
 import 'package:provider/provider.dart';
-import '../aux_functions/lose_input_warning.dart';
-import '../help_pages/help_drawer.dart';
+import 'package:precarina/aux_functions/lose_input_warning.dart';
+import 'package:precarina/help_pages/help_drawer.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
 late final Interpreter _interpreter;
@@ -57,10 +57,12 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
 
   String _imc = "";
   String _percentil = "";
+  String _diagnose = "";
 
   int _percentilValue = 0;
 
-  _getResults(BuildContext context) {
+  // Estimate percentile using ML model
+  _estimatePercentile(BuildContext context) {
     // Hide the keyboard
     FocusScope.of(context).unfocus();
     // var input = [[7.011268, 12.637012, 0.0, 1.0]];
@@ -110,6 +112,10 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
         _percentil = '$_percentilValue %';
       }
     });
+
+    // Now let's go fo the diagnose
+
+    _diagnose = _determineDignose(_percentilValue);
   }
 
   @override
@@ -177,6 +183,16 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                         _percentil,
                         style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
                       ),
+                      const VerticalSpace(height: 10.0),
+                      const Text(
+                        "Diagnóstico: ",
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                      ),
+                      const VerticalSpace(height: 5.0),
+                      Text(
+                        _diagnose,
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+                      ),
                       const VerticalSpace(height: 15.0),
                       const Text(
                         "Score: ",
@@ -190,7 +206,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                       const VerticalSpace(height: 15.0),
                       ElevatedButton(
                         onPressed: () {
-                          _getResults(context);
+                          _estimatePercentile(context);
                           // percentile 5 to < percentil 85 => 100
                           if (_percentilValue < 85) {
                             _precaModel.bmiValue = 100;
@@ -255,6 +271,26 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
     );
   }
 
+  String _determineDignose(int percentile) {
+    /*
+    overweight (>85th percentile and <95th percentile) and obesity (>95th percentile) and severe obesity (>99th percentile) .
+    Therefore, for the PRECARINA application, we trained a Machine Learning model with data from the World Health Organization (
+    WHO) and the National Center for Health to estimate the BMI percentile.
+     */
+
+    if (percentile > 99) {
+      return "Obesidad severa";
+    } else if (percentile > 95) {
+      return "Obesidad";
+    } else if (percentile > 85) {
+      return "Sobrepeso";
+    } else {
+      return "Peso normal";
+    }
+
+    return "";
+  }
+
   int? getScoreOver97() {
     // Convert age from years-months to years-fraction of years as digitalized from the curves
     // Although curves' x axis are year and months it was much easier to measure as franctions of years
@@ -262,7 +298,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
     // No let's get the BMI for 97% at said age
     // According to the regression, fot 97%: bmi = -0.008237121887635776 age^3 +  0.28450418735930744 age^2 -2.1290147029215354 age + 23.20470735832494   (R^2 = 0.9996795012472375)
 
-    double bmi97 = -0.008237121887635776 * pow(age,3) +  0.28450418735930744 * pow(age,2) -2.1290147029215354 * age + 23.20470735832494;
+    double bmi97 = -0.008237121887635776 * pow(age, 3) + 0.28450418735930744 * pow(age, 2) - 2.1290147029215354 * age + 23.20470735832494;
 
     // percentile 97 to < 120% of percentile 97 => 30
     // 120% of percentil 97 to < 140% of percentile 97 => 15

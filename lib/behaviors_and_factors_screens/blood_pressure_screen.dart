@@ -325,7 +325,8 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                                   String digitsString = match!.group(1)!;
                                   int scoreInt = int.parse(digitsString);
 
-                                _precaModel.bloodPressureValue = scoreInt;
+                                _precaModel.bloodPressureValue = 25;
+//                                _precaModel.bloodPressureValue = scoreInt;
                                 _precaModel.calculateAverage();
                                 Navigator.of(context).pop();
                               },
