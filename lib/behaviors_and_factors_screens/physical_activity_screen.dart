@@ -9,6 +9,10 @@ import 'package:precarina/aux_functions/lose_input_warning.dart';
 import 'package:precarina/aux_widgets/horizontal_space.dart';
 import 'package:precarina/help_pages/help_drawer.dart';
 
+
+// Cartel rojo. El puntaje se mantiene pero aparece advertencia de que igual se lo considera sedentario
+// Minutos totales porque todos los días de actividad pueden ser distintos
+// validaciones
 class PhysicalActivityScreen extends StatefulWidget {
   const PhysicalActivityScreen({super.key});
 

@@ -85,11 +85,12 @@ List<String> searchBloodPressurePercentiles({
   if (diastBP < diastPressMatrix[0][col]) {
     valorTablaDiast = diastPressMatrix[0][col];
     diastBpPerc = bpTablePercs[0];
+    patDiagPad = PatientDiagnosePad.patientDignoseNorm;
     diastBelow = true;
   } else if (diastBP == diastPressMatrix[0][col]) {
     valorTablaDiast = diastPressMatrix[0][col];
-    diastBpPerc = bpTablePercs[0];
     patDiagPad = PatientDiagnosePad.patientDignoseNorm;
+    diastBpPerc = bpTablePercs[0];
   } else if (diastBP > diastPressMatrix[0][col] && diastBP <= diastPressMatrix[1][col]) {
     valorTablaDiast = diastPressMatrix[1][col];
     diastBpPerc = bpTablePercs[1];
@@ -128,8 +129,8 @@ List<String> searchBloodPressurePercentiles({
   // Ahora recorro las filas de la tabla de presiones sistólicas
   if (sistBP < sistPressMatrix[0][col]) {
     valorTablaSist = sistPressMatrix[0][col];
-    patDiagPas = PatientDiagnosePas.patientDignoseNorm;
     sistBpPerc = bpTablePercs[0];
+    patDiagPas = PatientDiagnosePas.patientDignoseNorm;
     sistBelow = true;
   } else if (sistBP == sistPressMatrix[0][col]) {
     valorTablaSist = sistPressMatrix[0][col];
@@ -198,8 +199,7 @@ List<String> searchBloodPressurePercentiles({
   // valorTablaSistA == 0 means patient's BP is not within a range but is below the lowest value
   if (sistBpPerc == bpTablePercs[0] && sistBelow == true) {
     result = resultPasUnder_50;
-  }
-  if (sistBpPerc == bpTablePercs[0]) {
+  } else if (sistBpPerc == bpTablePercs[0]) {
     result = resultPasEqual_50;
   } else if (sistBpPerc == bpTablePercs[1]) {
     result = resultPas_50to90;
@@ -214,8 +214,7 @@ List<String> searchBloodPressurePercentiles({
   // valorTablaDiastA == 0 means patient's BP is not within a range but is below the lowest value
   if (diastBpPerc == bpTablePercs[0] && diastBelow == true) {
     result += resultPadUnder_50;
-  }
-  if (diastBpPerc == bpTablePercs[0]) {
+  } else if (diastBpPerc == bpTablePercs[0]) {
     result += resultPadEqual_50;
   } else if (diastBpPerc == bpTablePercs[1]) {
     result += resultPad_50to90;

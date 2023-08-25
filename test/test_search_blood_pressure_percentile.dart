@@ -170,4 +170,25 @@ void main() {
       ]),
     );
   });
+
+  test('searchBloodPressurePercentiles test', () {
+    // Test case 3.1
+    debugPrint("***************************************************************");
+    debugPrint("Test 3.1");
+    expect(
+      searchBloodPressurePercentiles(
+        sex: PatientSex.male,
+        height: 170.0,
+        age: 13,
+        sistBP: 100,
+        diastBP: 60,
+      ),
+      equals([
+        'Paciente normotenso',
+        'El percentilo de PAS determinado es menor a percentilo 50\n'
+            'El percentilo de PAD determinado es menor a percentilo 50\n'
+      ]),
+    );
+
+  });
 }
