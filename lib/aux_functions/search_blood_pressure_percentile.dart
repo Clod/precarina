@@ -1,25 +1,26 @@
 import 'package:flutter/cupertino.dart';
+import 'package:localization/localization.dart';
 import 'package:precarina/model/precarina_model.dart';
 import 'package:precarina/model/pressure_data.dart';
 
-String resultPasUnder_50 = "El percentilo de PAS determinado es menor a percentilo 50\n";
-String resultPasEqual_50 = "El percentilo de PAS determinado es igual a 50\n";
-String resultPas_50to90 = "El percentilo de PAS determinado está entre 50 y 90\n";
-String resultPas_90to95 = "El percentilo de PAS determinado está entre 90 y 95\n";
-String resultPas_95to95plus12 = "El percentilo de PAS determinado está entre 95 y 95 + 12 mmHg\n";
-String resultPasAbove_95plus12 = "El percentilo de PAS determinado está por encima de percentilo 95 + 12 mmHg\n";
-
-String resultPadUnder_50 = "El percentilo de PAD determinado es menor a percentilo 50\n";
-String resultPadEqual_50 = "El percentilo de PAD determinado es igual a 50\n";
-String resultPad_50to90 = "El percentilo de PAD determinado está entre 50 y 90\n";
-String resultPad_90to95 = "El percentilo de PAD determinado está entre 90 y 95\n";
-String resultPad_95to95plus12 = "El percentilo de PAD determinado está entre 95 y 95 + 12 mmHg\n";
-String resultPadAbove_95plus12 = "El percentilo de PAD determinado está por encima de percentilo 95 + 12 mmHg\n";
-
-String patientDignoseHT2 = "Paciente con hipertensión estadio 2";
-String patientDignoseHT1 = "Paciente con hipertensión estadio 1";
-String patientDignoseHT = "Paciente prehipertenso";
-String patientDignoseNorm = "Paciente normotenso";
+// String resultPasUnder_50 = "El percentilo de PAS determinado es menor a percentilo 50\n";
+// String resultPasEqual_50 = "El percentilo de PAS determinado es igual a 50\n";
+// String resultPas_50to90 = "El percentilo de PAS determinado está entre 50 y 90\n";
+// String resultPas_90to95 = "El percentilo de PAS determinado está entre 90 y 95\n";
+// String resultPas_95to95plus12 = "El percentilo de PAS determinado está entre 95 y 95 + 12 mmHg\n";
+// String resultPasAbove_95plus12 = "El percentilo de PAS determinado está por encima de percentilo 95 + 12 mmHg\n";
+//
+// String resultPadUnder_50 = "El percentilo de PAD determinado es menor a percentilo 50\n";
+// String resultPadEqual_50 = "El percentilo de PAD determinado es igual a 50\n";
+// String resultPad_50to90 = "El percentilo de PAD determinado está entre 50 y 90\n";
+// String resultPad_90to95 = "El percentilo de PAD determinado está entre 90 y 95\n";
+// String resultPad_95to95plus12 = "El percentilo de PAD determinado está entre 95 y 95 + 12 mmHg\n";
+// String resultPadAbove_95plus12 = "El percentilo de PAD determinado está por encima de percentilo 95 + 12 mmHg\n";
+//
+// String patientDignoseHT2 = "Paciente con hipertensión estadio 2";
+// String patientDignoseHT1 = "Paciente con hipertensión estadio 1";
+// String patientDignoseHT = "Paciente prehipertenso";
+// String patientDignoseNorm = "Paciente normotenso";
 
 enum PatientDiagnosePas { patientDignoseHT2, patientDignoseHT1, patientDignoseHT, patientDignoseNorm }
 
@@ -180,13 +181,13 @@ List<String> searchBloodPressurePercentiles({
 */
 
   if (patDiagPas == PatientDiagnosePas.patientDignoseHT2 || patDiagPad == PatientDiagnosePad.patientDignoseHT2) {
-    patientDignose = patientDignoseHT2;
+    patientDignose = "patientDignoseHT2".i18n();
   } else if (patDiagPas == PatientDiagnosePas.patientDignoseHT1 || patDiagPad == PatientDiagnosePad.patientDignoseHT1) {
-    patientDignose = patientDignoseHT1;
+    patientDignose = "patientDignoseHT1".i18n();
   } else if (patDiagPas == PatientDiagnosePas.patientDignoseHT || patDiagPad == PatientDiagnosePad.patientDignoseHT) {
-    patientDignose = patientDignoseHT;
+    patientDignose = "patientDignoseHT".i18n();
   } else {
-    patientDignose = patientDignoseNorm;
+    patientDignose = "patientDignoseNorm".i18n();
   }
 
   debugPrint("Diagnóstico: $patientDignose");
@@ -198,32 +199,32 @@ List<String> searchBloodPressurePercentiles({
   String result;
   // valorTablaSistA == 0 means patient's BP is not within a range but is below the lowest value
   if (sistBpPerc == bpTablePercs[0] && sistBelow == true) {
-    result = resultPasUnder_50;
+    result = "resultPasUnder_50".i18n();
   } else if (sistBpPerc == bpTablePercs[0]) {
-    result = resultPasEqual_50;
+    result = "resultPasEqual_50".i18n();
   } else if (sistBpPerc == bpTablePercs[1]) {
-    result = resultPas_50to90;
+    result = "resultPas_50to90".i18n();
   } else if (sistBpPerc == bpTablePercs[2]) {
-    result = resultPas_90to95;
+    result = "resultPas_90to95".i18n();
   } else if (sistBpPerc == bpTablePercs[3] && sistAvove == true) {
-    result = resultPasAbove_95plus12;
+    result = "resultPasAbove_95plus12".i18n();
   } else {
-    result = resultPas_95to95plus12;
+    result = "resultPas_95to95plus12".i18n();
   }
 
   // valorTablaDiastA == 0 means patient's BP is not within a range but is below the lowest value
   if (diastBpPerc == bpTablePercs[0] && diastBelow == true) {
-    result += resultPadUnder_50;
+    result += "resultPadUnder_50".i18n();
   } else if (diastBpPerc == bpTablePercs[0]) {
-    result += resultPadEqual_50;
+    result += "resultPadEqual_50".i18n();
   } else if (diastBpPerc == bpTablePercs[1]) {
-    result += resultPad_50to90;
+    result += "resultPad_50to90".i18n();
   } else if (diastBpPerc == bpTablePercs[2]) {
-    result += resultPad_90to95;
+    result += "resultPad_90to95".i18n();
   } else if (diastBpPerc == bpTablePercs[3] && diastAvove == true) {
-    result += resultPadAbove_95plus12;
+    result += "resultPadAbove_95plus12".i18n();
   } else {
-    result += resultPad_95to95plus12;
+    result += "resultPad_95to95plus12".i18n();
   }
 
   return [patientDignose, result];

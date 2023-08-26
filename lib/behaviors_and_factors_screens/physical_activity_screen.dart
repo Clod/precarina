@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:precarina/behaviors_and_factors_screens/pa.dart';
+import 'package:precarina/aux_widgets/physical_activity_survey.dart';
 import 'package:precarina/model/precarina_model.dart';
 import 'package:provider/provider.dart';
 import 'package:precarina/behaviors_and_factors_screens/pages_header.dart';

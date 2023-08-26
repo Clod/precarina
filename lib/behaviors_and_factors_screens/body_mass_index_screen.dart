@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:localization/localization.dart';
 import 'package:precarina/aux_widgets/vertical_space.dart';
 import 'package:precarina/behaviors_and_factors_screens/pages_header.dart';
 import 'package:precarina/model/precarina_model.dart';
@@ -164,8 +165,8 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                   child: Column(
                     children: [
                       const VerticalSpace(height: 15.0),
-                      const Text(
-                        "Índice de masa corporal: ",
+                       Text(
+                        "txtBMI".i18n() ,
                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
                       ),
                       const VerticalSpace(height: 5.0),
@@ -174,8 +175,8 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                         style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
                       ),
                       const VerticalSpace(height: 10.0),
-                      const Text(
-                        "Percentilo: ",
+                       Text(
+                        "txtPercentile".i18n(),
                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
                       ),
                       const VerticalSpace(height: 5.0),
@@ -184,8 +185,8 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                         style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
                       ),
                       const VerticalSpace(height: 10.0),
-                      const Text(
-                        "Diagnóstico: ",
+                       Text(
+                        "txtDiagnose".i18n(),
                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
                       ),
                       const VerticalSpace(height: 5.0),
@@ -194,13 +195,13 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                         style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
                       ),
                       const VerticalSpace(height: 15.0),
-                      const Text(
-                        "Score: ",
+                       Text(
+                        "txtScore".i18n(),
                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
                       ),
                       const VerticalSpace(height: 5.0),
                       Text(
-                        _precaModel.bmiValue != null ? _precaModel.bmiValue!.toString() : 'Presione "Calcular"',
+                        _precaModel.bmiValue != null ? _precaModel.bmiValue!.toString() : "txtPressCalc".i18n(),
                         style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
                       ),
                       const VerticalSpace(height: 15.0),
@@ -223,7 +224,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                           }
                           _precaModel.calculateAverage();
                         },
-                        child: const Text("Calcular"),
+                        child:  Text("txtCalculate".i18n()),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -233,7 +234,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                               _precaModel.bmiValue = null;
                               Navigator.pop(context);
                             },
-                            child: const Text("Cancelar"),
+                            child:  Text( "txtCancel".i18n()),
                           ),
                           const SizedBox(width: 10.0),
                           // Accept button
@@ -241,7 +242,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child: const Text("Aceptar"),
+                            child: Text("txtAccept".i18n()),
                           ),
                         ],
                       )
@@ -259,10 +260,10 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
   showSnackbar(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: const Text("No se cargó el traductor \n Por favor \n Avise al soporte técnico"),
+        content:  Text("txtTradNotLaded".i18n()),
         duration: const Duration(days: 1),
         action: SnackBarAction(
-          label: 'Listo',
+          label: "txtDone".i18n(),
           onPressed: () {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
           },
@@ -279,13 +280,13 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
      */
 
     if (percentile > 99) {
-      return "Obesidad severa";
+      return "txtSevereObesity".i18n();
     } else if (percentile > 95) {
-      return "Obesidad";
+      return "txtObesity".i18n();
     } else if (percentile > 85) {
-      return "Sobrepeso";
+      return "txtOverWeight".i18n();
     } else {
-      return "Peso normal";
+      return "txtNormalWeight".i18n();
     }
 
     return "";

@@ -22,6 +22,27 @@ class BloodPressureScreen extends StatefulWidget {
   @override
   State<BloodPressureScreen> createState() => _BloodPressureScreenState();
 }
+/*
+
+"txtExamplePAS".i18n() = "Ej.: 120";
+"txtExamplePAD".i18n() = "Ej.: 80";
+"txtPAS".i18n() = "PA Sistólica: ";
+"txtPAD".i18n() = "PA Distólica: ";
+"txtReceivesMEdication".i18n() = "Recibe medicación";
+"txtRequired".i18n() = " Requerido";
+"txtCalculate".i18n() = "Calcular";
+"txtOK".i18n() = "OK";
+"txtCancel".i18n() = "Cancelar";
+"txtAccept".i18n() = "Aceptar";
+"txtPatientNormal".i18n() = "Paciente normotenso";
+"txtPatHT".i18n() = "Paciente prehipertenso";
+"txtPatHt1".i18n() = "Paciente hipertenso leve";
+"txtPatHt2".i18n() = "Paciente hipertenso severo";
+"txtYes".i18n() = "S";
+"txtNo".i18n() = "N";
+"txtScore".i18n() = "Score: ";
+
+*/
 
 class _BloodPressureScreenState extends State<BloodPressureScreen> {
   final _formKey = GlobalKey<FormBuilderState>();
@@ -36,8 +57,8 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
 
   var _precaModel = PrecarinaModel();
 
-  final String _pasHint = "Ej.: 120";
-  final String _padHint = "Ej.: 80";
+  final String _pasHint = "txtExamplePAS".i18n();
+  final String _padHint = "txtExamplePAD".i18n();
 
   List<String> _results = ["", ""];
   String _diagnose = "";
@@ -91,7 +112,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text("PA Sistólica:   "),
+                            Text("txtPAS".i18n()),
                             Stack(
                               children: [
                                 Container(
@@ -135,7 +156,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                                       [
                                         (val) {
                                           debugPrint("Validando");
-                                          return val!.isEmpty ? 'Requerido' : null;
+                                          return val!.isEmpty ? 'txtRequired'.i18n() : null;
                                         },
                                         FormBuilderValidators.required(errorText: "     Requerido"),
                                         FormBuilderValidators.numeric(),
@@ -153,7 +174,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text("PA Distólica:   "),
+                            Text("txtPAD".i18n()),
                             Stack(
                               children: [
                                 Container(
@@ -219,19 +240,19 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                             autovalidateMode: AutovalidateMode.onUserInteraction,
                             labelStyle: const TextStyle(fontSize: 25.0),
                             // initialValue: "N/I",
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               isDense: true,
                               label: Text(
-                                "Recibe medicación",
-                                style: TextStyle(fontSize: 20.0),
+                                "txtReceivesMedication".i18n(),
+                                style: const TextStyle(fontSize: 20.0),
                               ),
-                              contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
-                              border: OutlineInputBorder(),
+                              contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
+                              border: const OutlineInputBorder(),
                             ),
                             alignment: WrapAlignment.spaceAround,
-                            options: const [
-                              FormBuilderChipOption(value: "S"),
-                              FormBuilderChipOption(value: "N"),
+                            options: [
+                              FormBuilderChipOption(value: "txtYes".i18n()),
+                              FormBuilderChipOption(value: "txtNo".i18n()),
                             ],
                             validator: FormBuilderValidators.compose(
                               [
@@ -248,7 +269,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                         const VerticalSpace(height: 15.0),
                         // Trigger interpolation button
                         ElevatedButton(
-                          child: const Text("Calcular"),
+                          child: Text("txtCalculate".i18n()),
                           onPressed: () {
                             if (_formKey.currentState!.validate() == true) {
                               // I will not enable cancellation until SnackBar gets dismissed
@@ -306,29 +327,33 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                           children: [
                             // Cancel Button
                             ElevatedButton(
-                              onPressed: _cancelButtonDisabled ? null : () {
-                                FocusScope.of(context).unfocus();
-                                Navigator.maybePop(context);
-                              },
+                              onPressed: _cancelButtonDisabled
+                                  ? null
+                                  : () {
+                                      FocusScope.of(context).unfocus();
+                                      Navigator.maybePop(context);
+                                    },
                               child: Text(AppLocalizations.of(context)!.txtButtonCancel),
                             ),
                             const HorizontalSpace(width: 15.0),
                             // Accept
                             ElevatedButton(
-                              onPressed: _acceptButtonDisabled ? null : () {
-                                FocusScope.of(context).unfocus();
-                                debugPrint("BP value en Screen: ${_precaModel.bloodPressureValue}");
+                              onPressed: _acceptButtonDisabled
+                                  ? null
+                                  : () {
+                                      FocusScope.of(context).unfocus();
+                                      debugPrint("BP value en Screen: ${_precaModel.bloodPressureValue}");
 
-                                RegExp regExp = RegExp(r"Score: (\d+)");
+                                      RegExp regExp = RegExp(r"Score: (\d+)");
 
-                                Match? match = regExp.firstMatch(_score);
-                                  String digitsString = match!.group(1)!;
-                                  int scoreInt = int.parse(digitsString);
+                                      Match? match = regExp.firstMatch(_score);
+                                      String digitsString = match!.group(1)!;
+                                      int scoreInt = int.parse(digitsString);
 
-                                _precaModel.bloodPressureValue = scoreInt;
-                                _precaModel.calculateAverage();
-                                Navigator.of(context).pop();
-                              },
+                                      _precaModel.bloodPressureValue = scoreInt;
+                                      _precaModel.calculateAverage();
+                                      Navigator.of(context).pop();
+                                    },
                               child: Text(AppLocalizations.of(context)!.txtButtonAccept),
                             ),
                           ],
@@ -348,21 +373,20 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
   String calculateScore(String diagnose, String medicado) {
     int score = 0;
 
-    switch (diagnose) {
-      case "Paciente normotenso":
-        score = 100;
-      case "Paciente prehipertenso":
-        score = 66;
-      case "Paciente hipertenso leve":
-        score = 33;
-      case "Paciente hipertenso severo":
-        score = 0;
+    if (diagnose == "patientDignoseNorm".i18n()) {
+      score = 100;
+    } else if (diagnose == "patientDignoseHT".i18n()) {
+      score = 66;
+    } else if (diagnose == "patientDignoseHT1".i18n()) {
+      score = 33;
+    } else if (diagnose == "patientDignoseHT2".i18n()) {
+      score = 0;
     }
 
-    if (medicado == "S" && score >= 20) score -= 20;
+    if (medicado == "txtYes".i18n() && score >= 20) score -= 20;
 
     _precaModel.bloodPressureValue = score;
 
-    return "Score: $score";
+    return "txtScore".i18n() + score.toString();
   }
 }

@@ -85,35 +85,6 @@ class MyHomePageState extends State<MyHomePage> {
   late BuildContext bc;
   bool tcAccepted = false;
 
-  // showHint(BuildContext context, String title, String body) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return AlertDialog(
-  //         title: Text(
-  //           title,
-  //           style: const TextStyle(fontSize: 16.0),
-  //         ),
-  //         content: SizedBox(
-  //             width: 400,
-  //             height: 400,
-  //             child: SingleChildScrollView(
-  //               child: Text(
-  //                 body,
-  //                 style: const TextStyle(fontSize: 14.0),
-  //               ),
-  //             ),),
-  //         actions: [
-  //           TextButton(
-  //             onPressed: () => Navigator.of(context).pop(),
-  //             child: const Text('OK'),
-  //           ),
-  //         ],
-  //       );
-  //     },
-  //   );
-  // }
-
   @override
   void initState() {
     super.initState();

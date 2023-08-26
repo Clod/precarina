@@ -34,3 +34,6 @@ Carolina Gvirtzman: polisomnoguti@gmail.com
 
 OJO: después de agregarlos al proyecto en Firebase hay que agregarlos al release!!!
 Si no, las invitaciones no salen.
+
+
+
