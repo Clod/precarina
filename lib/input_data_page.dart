@@ -78,7 +78,6 @@ class _InputDataPageState extends State<InputDataPage> {
         LocalDateTime a = LocalDateTime.now();
         LocalDateTime b = LocalDateTime.dateTime(pickedDate);
         Period diff = a.periodSince(b);
-
         // debugPrint("years: ${diff.years}; months: ${diff.months}; days: ${diff.days}; hours: ${diff.hours}; minutes: ${diff.minutes}; seconds: ${diff.seconds}");
         _textContAnios.text = diff.years.toString();
         _textContMeses.text = diff.months.toString();
@@ -120,38 +119,44 @@ class _InputDataPageState extends State<InputDataPage> {
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 150.0,
-                  child: RadioListTile(
-                    title: Text("sexFemale".i18n()),
-                    value: PatientSex.female,
-                    groupValue: _selectedOption,
-                    onChanged: (value) {
-                      setState(() {
-                        _selectedOption = value;
-                        _showSexError = false;
-                      });
-                    },
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.yellow[100],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 150.0,
+                    child: RadioListTile(
+                      title: Text("sexFemale".i18n()),
+                      value: PatientSex.female,
+                      groupValue: _selectedOption,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedOption = value;
+                          _showSexError = false;
+                        });
+                      },
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: 150.0,
-                  child: RadioListTile(
-                    title: Text("sexMale".i18n()),
-                    value: PatientSex.male,
-                    groupValue: _selectedOption,
-                    onChanged: (value) {
-                      setState(() {
-                        _selectedOption = value;
-                        _showSexError = false;
-                      });
-                    },
+                  SizedBox(
+                    width: 150.0,
+                    child: RadioListTile(
+                      title: Text("sexMale".i18n()),
+                      value: PatientSex.male,
+                      groupValue: _selectedOption,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedOption = value;
+                          _showSexError = false;
+                        });
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             if (_showSexError)
               Text(
@@ -186,7 +191,7 @@ class _InputDataPageState extends State<InputDataPage> {
                       height: 48.0,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
-                        color: Colors.grey[300],
+                        color: Colors.yellow[100],
                       ),
                     ),
                     SizedBox(
@@ -253,7 +258,7 @@ class _InputDataPageState extends State<InputDataPage> {
                       height: 48.0,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
-                        color: Colors.grey[300],
+                        color: Colors.yellow[100],
                       ),
                     ),
                     SizedBox(
@@ -302,7 +307,7 @@ class _InputDataPageState extends State<InputDataPage> {
                     height: 48.0,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: Colors.grey[300],
+                      color: Colors.yellow[100],
                     ),
                   ),
                   SizedBox(
@@ -381,7 +386,11 @@ class _InputDataPageState extends State<InputDataPage> {
                   ),
                   Expanded(
                     child: FormBuilderDropdown(
+                      iconEnabledColor: Colors.blue,
+                      dropdownColor: Colors.yellow[50],
                       decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.yellow[100],
                         isDense: true,
                         contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                         border: const OutlineInputBorder(),
@@ -413,8 +422,12 @@ class _InputDataPageState extends State<InputDataPage> {
                   ),
                   Expanded(
                     child: FormBuilderDropdown(
+                      iconEnabledColor: Colors.blue,
+                      dropdownColor: Colors.yellow[50],
                       decoration: InputDecoration(
                         isDense: true,
+                        filled: true,
+                        fillColor: Colors.yellow[100],
                         contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                         border: const OutlineInputBorder(),
                         labelText: "labelMonths".i18n(),

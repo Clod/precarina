@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:localization/localization.dart';
 import 'package:precarina/aux_widgets/vertical_space.dart';
 import 'package:precarina/model/precarina_model.dart';
 import 'package:provider/provider.dart';
@@ -13,15 +16,22 @@ class PhysicalActivitySurvey extends StatefulWidget {
 class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
   var precaModel = PrecarinaModel();
 
-  int p1Value = 0;
-  int p2Value = 0;
-  int p3Value = 2;
-  int p4Value = 0;
-  int p5Value = 1;
-  int p6Value = 0;
+  int _daysWithPhysicalActivity = 0;
+  int _weeklyMinsOfActValue = 0;
+  int _transpToSchoolTypeValue = 2;
+  int _blocksToSchoolValue = 0;
+  int _classesPerWeekValue = 1;
+  int _dailyMinsOfScreenValue = 0;
   TextEditingController p6Controller = TextEditingController();
-  TextEditingController p4Controller = TextEditingController();
-  TextEditingController p2Controller = TextEditingController();
+  final TextEditingController _blocksToSchoolController = TextEditingController();
+  final TextEditingController _weeklyMinsOfActController = TextEditingController();
+  final TextEditingController _dailyMinsOfScreenController = TextEditingController();
+
+  final _weeklyMinsOfActivityKey = GlobalKey<FormFieldState<String>>();
+  final _blocksToSchoolKey = GlobalKey<FormFieldState<String>>();
+  final _dailyMinsOfScreenKey = GlobalKey<FormFieldState<String>>();
+
+  final formKey = GlobalKey<FormBuilderState>();
 
   bool disableQ2 = true;
   bool disableQ4 = true;
@@ -36,263 +46,344 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'P1. ¿Cuántos días por semana práctica deportes, juegos, ejercicios físicos, danza u otra actividad física?',
-            style: TextStyle(fontSize: 18),
-          ),
-          const Text(
-            '(Considerar sólo actividades practicadas fuera del ámbito escolar)',
-            style: TextStyle(fontSize: 12),
-          ),
-          const VerticalSpace(height: 8),
-          RadioListTile(
-            title: const Text('Ninguno (pasar a P3)'),
-            value: 0,
-            groupValue: p1Value,
-            onChanged: physicalActiveDaysChoice,
-          ),
-          RadioListTile(
-            title: const Text('1 día por semana'),
-            value: 1,
-            groupValue: p1Value,
-            onChanged: physicalActiveDaysChoice,
-          ),
-          RadioListTile(
-            title: const Text('2 días por semana'),
-            value: 2,
-            groupValue: p1Value,
-            onChanged: physicalActiveDaysChoice,
-          ),
-          RadioListTile(
-            title: const Text('3 días por semana'),
-            value: 3,
-            groupValue: p1Value,
-            onChanged: physicalActiveDaysChoice,
-          ),
-          RadioListTile(
-            title: const Text('4 días por semana'),
-            value: 4,
-            groupValue: p1Value,
-            onChanged: physicalActiveDaysChoice,
-          ),
-          RadioListTile(
-            title: const Text('5 días por semana'),
-            value: 5,
-            groupValue: p1Value,
-            onChanged: physicalActiveDaysChoice,
-          ),
-          RadioListTile(
-            title: const Text('6 días por semana'),
-            value: 6,
-            groupValue: p1Value,
-            onChanged: physicalActiveDaysChoice,
-          ),
-          RadioListTile(
-            title: const Text('7 días por semana'),
-            value: 7,
-            groupValue: p1Value,
-            onChanged: physicalActiveDaysChoice,
-          ),
-          const VerticalSpace(height: 16),
-          Text(
-            'P2. ¿Cuánto tiempo en total dedica habitualmente en esos días a realizar deportes, juegos, ejercicios físicos, danza u otra actividad física?',
-            style: TextStyle(
-              fontSize: 18,
-              color: (disableQ2 ? Colors.black38 : Colors.black87),
+      child: FormBuilder(
+        key: formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "physicalActivityQ1".i18n(),
+              style: const TextStyle(fontSize: 18),
             ),
-          ),
-          const VerticalSpace(height: 8),
-          AbsorbPointer(
-            absorbing: disableQ2,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Text(
+              "physicalActivityQ1Note".i18n(),
+              style: const TextStyle(fontSize: 12),
+            ),
+            const VerticalSpace(height: 8),
+            Column(
               children: [
-                Container(
-                  width: 45.0,
-                  color: Colors.yellow[100],
-                  child: TextField(
-                    controller: p2Controller,
-                    keyboardType: TextInputType.number,
-                    maxLength: 3,
-                    textAlign: TextAlign.center,
-                    onChanged: (value) {
-                      setState(() {
-                        p2Value = int.tryParse(value)!;
-                      });
-                    },
-                    decoration: const InputDecoration(
-                      counterText: '', // Hide the counter text
-                    ),
-                  ),
+                RadioListTile(
+                  title: Text("physicalActivityQ1Opt1".i18n()),
+                  value: 0,
+                  groupValue: _daysWithPhysicalActivity,
+                  onChanged: physicalActiveDaysChoice,
                 ),
-                Text(
-                  " mins.",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: (disableQ2 ? Colors.black38 : Colors.black87),
-                  ),
+                RadioListTile(
+                  title: Text("physicalActivityQ1Opt2".i18n()),
+                  value: 1,
+                  groupValue: _daysWithPhysicalActivity,
+                  onChanged: physicalActiveDaysChoice,
+                ),
+                RadioListTile(
+                  title: Text("physicalActivityQ1Opt3".i18n()),
+                  value: 2,
+                  groupValue: _daysWithPhysicalActivity,
+                  onChanged: physicalActiveDaysChoice,
+                ),
+                RadioListTile(
+                  title: Text("physicalActivityQ1Opt4".i18n()),
+                  value: 3,
+                  groupValue: _daysWithPhysicalActivity,
+                  onChanged: physicalActiveDaysChoice,
+                ),
+                RadioListTile(
+                  title: Text("physicalActivityQ1Opt5".i18n()),
+                  value: 4,
+                  groupValue: _daysWithPhysicalActivity,
+                  onChanged: physicalActiveDaysChoice,
+                ),
+                RadioListTile(
+                  title: Text("physicalActivityQ1Opt6".i18n()),
+                  value: 5,
+                  groupValue: _daysWithPhysicalActivity,
+                  onChanged: physicalActiveDaysChoice,
+                ),
+                RadioListTile(
+                  title: Text("physicalActivityQ1Opt7".i18n()),
+                  value: 6,
+                  groupValue: _daysWithPhysicalActivity,
+                  onChanged: physicalActiveDaysChoice,
+                ),
+                RadioListTile(
+                  title: Text("physicalActivityQ1Opt8".i18n()),
+                  value: 7,
+                  groupValue: _daysWithPhysicalActivity,
+                  onChanged: physicalActiveDaysChoice,
                 ),
               ],
             ),
-          ),
-          const VerticalSpace(height: 16),
-          const Text(
-            'P3. ¿Habitualmente como suele transportarse a la escuela?',
-            style: TextStyle(fontSize: 18),
-          ),
-          const VerticalSpace(height: 8),
-          RadioListTile(
-            title: const Text('Caminando'),
-            value: 0,
-            groupValue: p3Value,
-            onChanged: onPickTransport,
-          ),
-          RadioListTile(
-            title: const Text('Bicicleta'),
-            value: 1,
-            groupValue: p3Value,
-            onChanged: onPickTransport,
-          ),
-          RadioListTile(
-            title: const Text('Transporte motorizado (auto, moto, colectivo, subte, pre-metro, tren)'),
-            value: 2,
-            groupValue: p3Value,
-            onChanged: onPickTransport,
-          ),
-          const VerticalSpace(height: 16),
-          Text(
-            'P4. ¿A cuántas cuadras de su casa queda la escuela o el colegio al que asiste?',
-            style: TextStyle(
-              fontSize: 18.0,
-              color: (disableQ4 ? Colors.black38 : Colors.black87),
-            ),
-          ),
-          const VerticalSpace(height: 8),
-          AbsorbPointer(
-            absorbing: disableQ4,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 45.0,
-                  color: Colors.yellow[100],
-                  child: TextField(
-                    controller: p4Controller,
-                    keyboardType: TextInputType.number,
-                    maxLength: 2,
-                    textAlign: TextAlign.center,
-                    onChanged: (value) {
-                      setState(() {
-                        p4Value = int.tryParse(value)!;
-                      });
-                    },
-                    decoration: const InputDecoration(
-                      counterText: '', // Hide the counter text
-                    ),
-                  ),
-                ),
-                Text(
-                  " cuadras",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: (disableQ4 ? Colors.black38 : Colors.black87),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const VerticalSpace(height: 16),
-          const Text(
-            'P5. ¿Cuántas veces por semana tiene clases de Educación Física en la escuela?',
-            style: TextStyle(fontSize: 18),
-          ),
-          const VerticalSpace(height: 8),
-          RadioListTile(
-            title: const Text('1 vez por semana'),
-            value: 1,
-            groupValue: p5Value,
-            onChanged: daysOfPaClasses,
-          ),
-          RadioListTile(
-            title: const Text('2 veces por semana'),
-            value: 2,
-            groupValue: p5Value,
-            onChanged: daysOfPaClasses,
-          ),
-          RadioListTile(
-            title: const Text('3 veces por semana'),
-            value: 3,
-            groupValue: p5Value,
-            onChanged: daysOfPaClasses,
-          ),
-          RadioListTile(
-            title: const Text('4 veces por semana'),
-            value: 4,
-            groupValue: p5Value,
-            onChanged: daysOfPaClasses,
-          ),
-          RadioListTile(
-            title: const Text('5 veces por semana'),
-            value: 5,
-            groupValue: p5Value,
-            onChanged: daysOfPaClasses,
-          ),
-          RadioListTile(
-            title: const Text('6 veces por semana'),
-            value: 6,
-            groupValue: p5Value,
-            onChanged: daysOfPaClasses,
-          ),
-          const VerticalSpace(height: 16),
-          const Text(
-            'P6. ¿Cuántos minutos por día pasa frente a una pantalla de computadora, tablet, celular o televisor?',
-            style: TextStyle(fontSize: 18),
-          ),
-          const VerticalSpace(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 45.0,
-                color: Colors.yellow[100],
-                child: TextField(
-                  controller: p6Controller,
-                  keyboardType: TextInputType.number,
-                  maxLength: 3,
-                  textAlign: TextAlign.center,
-                  onChanged: (value) {
-                    setState(() {
-                      p6Value = int.tryParse(value)!;
-                    });
-                  },
-                  decoration: const InputDecoration(
-                    counterText: '', // Hide the counter text
-                  ),
-                ),
+            const VerticalSpace(height: 16),
+            Text(
+              "physicalActivityQ2".i18n(),
+              style: TextStyle(
+                fontSize: 18,
+                color: (disableQ2 ? Colors.black38 : Colors.black87),
               ),
-              const Text("  minutos"),
-            ],
-          ),
-        ],
+            ),
+            const VerticalSpace(height: 8),
+            AbsorbPointer(
+              absorbing: disableQ2,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 55.0,
+                    decoration: BoxDecoration(
+                      color: Colors.yellow[100],
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: FormBuilderTextField(
+                      validator: (val) => !disableQ2 && val!.isEmpty ? "txtRequired".i18n() : null,
+                      key: _weeklyMinsOfActivityKey,
+                      name: "WeeklyMinsOfActivity",
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      textAlign: TextAlign.center,
+                      maxLength: 3,
+                      controller: _weeklyMinsOfActController,
+                      decoration: const InputDecoration(
+                        counterText: '', // Hide the counter text
+                        border: InputBorder.none,
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(15.0),
+                          ),
+                          borderSide: BorderSide(color: Colors.blue),
+                        ),
+                        contentPadding: EdgeInsets.symmetric(
+                          vertical: 5,
+                          horizontal: 10,
+                        ),
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          _weeklyMinsOfActValue = int.tryParse(value!)!;
+                        });
+                      },
+                      onTap: () {
+                        _weeklyMinsOfActivityKey.currentState?.reset();
+                      },
+                    ),
+                  ),
+                  Text(
+                    " mins.",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: (disableQ2 ? Colors.black38 : Colors.black87),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const VerticalSpace(height: 16),
+            Text(
+              "physicalActivityQ3".i18n(),
+              style: TextStyle(fontSize: 18),
+            ),
+            const VerticalSpace(height: 8),
+            Column(
+              children: [
+                RadioListTile(
+                  title: Text("physicalActivityQ3Opt1".i18n()),
+                  value: 0,
+                  groupValue: _transpToSchoolTypeValue,
+                  onChanged: onPickTransport,
+                ),
+                RadioListTile(
+                  title: Text("physicalActivityQ3Opt2".i18n()),
+                  value: 1,
+                  groupValue: _transpToSchoolTypeValue,
+                  onChanged: onPickTransport,
+                ),
+                RadioListTile(
+                  title: Text("physicalActivityQ3Opt3".i18n()),
+                  value: 2,
+                  groupValue: _transpToSchoolTypeValue,
+                  onChanged: onPickTransport,
+                ),
+              ],
+            ),
+            const VerticalSpace(height: 16),
+            Text(
+              "physicalActivityQ4".i18n(),
+              style: TextStyle(
+                fontSize: 18.0,
+                color: (disableQ4 ? Colors.black38 : Colors.black87),
+              ),
+            ),
+            const VerticalSpace(height: 8),
+            AbsorbPointer(
+              absorbing: disableQ4,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 45.0,
+                    decoration: BoxDecoration(
+                      color: Colors.yellow[100],
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: FormBuilderTextField(
+                      validator: (val) => !disableQ4 && val!.isEmpty ? "txtRequired".i18n() : null,
+                      key: _blocksToSchoolKey,
+                      name: "BlocksToSchool",
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      textAlign: TextAlign.center,
+                      maxLength: 2,
+                      controller: _blocksToSchoolController,
+                      decoration: const InputDecoration(
+                        counterText: '', // Hide the counter text
+                        border: InputBorder.none,
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(15.0),
+                          ),
+                          borderSide: BorderSide(color: Colors.blue),
+                        ),
+                        contentPadding: EdgeInsets.symmetric(
+                          vertical: 5,
+                          horizontal: 10,
+                        ),
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          _blocksToSchoolValue = int.tryParse(value!)!;
+                        });
+                      },
+                      onTap: () {
+                        _blocksToSchoolKey.currentState?.reset();
+                      },
+                    ),
+                  ),
+                  Text(
+                    " physicalActivityBlocks".i18n(),
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: (disableQ4 ? Colors.black38 : Colors.black87),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const VerticalSpace(height: 16),
+            Text(
+              "physicalActivityQ5".i18n(),
+              style: const TextStyle(fontSize: 18),
+            ),
+            const VerticalSpace(height: 8),
+            RadioListTile(
+              title: Text("physicalActivityQ5Opt0".i18n()),
+              value: 0,
+              groupValue: _classesPerWeekValue,
+              onChanged: daysOfPaClasses,
+            ),
+            RadioListTile(
+              title: Text("physicalActivityQ5Opt1".i18n()),
+              value: 1,
+              groupValue: _classesPerWeekValue,
+              onChanged: daysOfPaClasses,
+            ),
+            RadioListTile(
+              title: Text("physicalActivityQ5Opt2".i18n()),
+              value: 2,
+              groupValue: _classesPerWeekValue,
+              onChanged: daysOfPaClasses,
+            ),
+            RadioListTile(
+              title: Text("physicalActivityQ5Opt3".i18n()),
+              value: 3,
+              groupValue: _classesPerWeekValue,
+              onChanged: daysOfPaClasses,
+            ),
+            RadioListTile(
+              title: Text("physicalActivityQ5Opt4".i18n()),
+              value: 4,
+              groupValue: _classesPerWeekValue,
+              onChanged: daysOfPaClasses,
+            ),
+            RadioListTile(
+              title: Text("physicalActivityQ5Opt5".i18n()),
+              value: 5,
+              groupValue: _classesPerWeekValue,
+              onChanged: daysOfPaClasses,
+            ),
+            RadioListTile(
+              title: Text("physicalActivityQ5Opt6".i18n()),
+              value: 6,
+              groupValue: _classesPerWeekValue,
+              onChanged: daysOfPaClasses,
+            ),
+            const VerticalSpace(height: 16),
+            Text(
+              "physicalActivityQ6".i18n(),
+              style: TextStyle(fontSize: 18),
+            ),
+            const VerticalSpace(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 55.0,
+                  decoration: BoxDecoration(
+                    color: Colors.yellow[100],
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  child: FormBuilderTextField(
+                    //validator: (val) => val!.isEmpty ? "txtRequired".i18n() : null,
+                    key: _dailyMinsOfScreenKey,
+                    name: "DailyMinsOfScreen",
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    textAlign: TextAlign.center,
+                    maxLength: 3,
+                    controller: _dailyMinsOfScreenController,
+                    decoration: const InputDecoration(
+                      counterText: '', // Hide the counter text
+                      border: InputBorder.none,
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(15.0),
+                        ),
+                        borderSide: BorderSide(color: Colors.blue),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(
+                        vertical: 5,
+                        horizontal: 10,
+                      ),
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        value != null ? _dailyMinsOfScreenValue = (int.tryParse(value) ?? 0) : _dailyMinsOfScreenValue = 0;
+                      });
+                    },
+                    onTap: () {
+                      _dailyMinsOfScreenKey.currentState?.reset();
+                    },
+                  ),
+                ),
+                Text("physicalActivityMinutes".i18n()),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
   void daysOfPaClasses(value) {
     setState(() {
-      p5Value = value;
+      _classesPerWeekValue = value;
     });
   }
 
   void onPickTransport(value) {
     setState(() {
-      p3Value = value;
-      if (p3Value == 2) {
+      _transpToSchoolTypeValue = value;
+      if (_transpToSchoolTypeValue == 2) {
         disableQ4 = true;
-        p4Controller.clear();
+        FocusScope.of(context).unfocus();
+        _blocksToSchoolController.clear();
       } else {
         disableQ4 = false;
       }
@@ -302,10 +393,10 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
   void physicalActiveDaysChoice(value) {
     FocusScope.of(context).unfocus();
     setState(() {
-      p1Value = value;
-      if (p1Value == 0) {
+      _daysWithPhysicalActivity = value;
+      if (_daysWithPhysicalActivity == 0) {
         disableQ2 = true;
-        p2Controller.clear();
+        _weeklyMinsOfActController.clear();
       } else {
         disableQ2 = false;
       }
@@ -345,30 +436,26 @@ TATE (minutos/día) = (10 x((P4/14,5) x 60)) / 7
 */
 
   bool triggerCalculation() {
-
     debugPrint("Empezando con los cálculos");
     // Clases de Educación Física
-    int weeklyClases = p5Value;
+    int weeklyClases = _classesPerWeekValue;
     debugPrint("Weekly classes: $weeklyClases");
 
-    // Actividad física
-    int weeklyActivities = p1Value + 1;
-
     // Tiempo de actividad física en minutos diarios
-    int tad = (weeklyActivities * p2Value / 7).truncate();
+    int tad = (_weeklyMinsOfActValue / 7).truncate();
 
     debugPrint("TAD: $tad");
 
     // Tiempo de transporte escolar en minutos diarios
     int tate = 0;
 
-    switch (p3Value) {
+    switch (_transpToSchoolTypeValue) {
       case 0:
-        tate = (10 * ((p4Value / 43.2) * 60) / 7).truncate();
+        tate = (10 * ((_blocksToSchoolValue / 43.2) * 60) / 7).truncate();
         break;
       case 1:
         double factor = precaModel.ageYears! > 14 ? 14.5 : 13.0;
-        tate = (10 * ((p4Value / factor) * 60) / 7).truncate();
+        tate = (10 * ((_blocksToSchoolValue / factor) * 60) / 7).truncate();
         break;
       default:
         break;
@@ -391,6 +478,6 @@ TATE (minutos/día) = (10 x((P4/14,5) x 60)) / 7
     if (precaModel.physicalActivityValue! > 100) precaModel.physicalActivityValue = 100;
 
     // Si pasa más de 120 minutos en la compu el snackbar es rojo
-    return p6Value >= 120 ? true : false;
+    return _dailyMinsOfScreenValue >= 120 ? true : false;
   }
 }
