@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:localization/localization.dart';
 import 'package:precarina/help_pages/blood_pressure_help.dart';
 import 'package:precarina/help_pages/physical_activity_help.dart';
 import 'package:precarina/help_pages/smoke_exposure_help.dart';
@@ -84,8 +85,8 @@ class HelpDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      CholesterolHelp(title: AppLocalizations.of(context)!.txtCholesterolButton, content: AppLocalizations.of(context)!.txtCholesterolHelp),
+                  builder: (context) => CholesterolHelp(
+                      title: AppLocalizations.of(context)!.txtCholesterolButton, content: AppLocalizations.of(context)!.txtCholesterolHelp),
                 ),
               );
             },
@@ -97,8 +98,8 @@ class HelpDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      PhysicalActivityHelp(title: AppLocalizations.of(context)!.txtPhysicalActivityButton, content: AppLocalizations.of(context)!.txtPhysicalActivityHelp),
+                  builder: (context) => PhysicalActivityHelp(
+                      title: AppLocalizations.of(context)!.txtPhysicalActivityButton, content: AppLocalizations.of(context)!.txtPhysicalActivityHelp),
                 ),
               );
             },
@@ -155,8 +156,7 @@ class HelpDrawer extends StatelessWidget {
             ),
             applicationName: 'PRECARINA',
             applicationVersion: '1.0.1 Build 10',
-            applicationLegalese:
-                'Esta app es y será gratuitua y de código abierto.\nSu única finalidad es promover la salud cardiovascular desde la infancia.',
+            applicationLegalese: "txtApplicationLegalese".i18n(),
             aboutBoxChildren: [
               const SizedBox(
                 height: 5.0,
@@ -169,7 +169,7 @@ class HelpDrawer extends StatelessWidget {
                 ),
               )
             ],
-            child: const Text('Información sobre la app', style: TextStyle(fontWeight: FontWeight.bold)),
+            child: Text("txtAboutApp".i18n(), style: const TextStyle(fontWeight: FontWeight.bold)),
           ),
         ],
       ),

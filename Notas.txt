@@ -36,4 +36,6 @@ OJO: después de agregarlos al proyecto en Firebase hay que agregarlos al releas
 Si no, las invitaciones no salen.
 
 
+Editor HTML online:
 
+https://htmlg.com/html-editor/
