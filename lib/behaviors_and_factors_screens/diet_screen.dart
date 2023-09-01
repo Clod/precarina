@@ -85,7 +85,6 @@ class _DietScreenState extends State<DietScreen> {
       if (selections[i][0] != null) {
         // Esta porquería es porque muestro el item que vale 2 a la izquierda
         // y el que vale 0 a la derecha.
-        // TODO: corregirlo en la vesión bilingüe
         int valorASumar = selections[i][0]!;
         if (valorASumar == 0) {
           valorASumar = 2;

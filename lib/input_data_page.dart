@@ -112,7 +112,7 @@ class _InputDataPageState extends State<InputDataPage> {
               ),
             ),
             const SizedBox(
-              height: 20.0,
+              height: 5.0,
             ),
             Text(
               "inputSex".i18n(),

@@ -10,7 +10,7 @@ class PrecarinaModel extends ChangeNotifier {
   int? diabetesValue;
   int? bloodPressureValue;
 
-  double average = 0.0;
+  double? average;
 
 //  String? sex;
   PatientSex? patientSex;
@@ -39,15 +39,10 @@ class PrecarinaModel extends ChangeNotifier {
               diabetesValue!.toDouble() +
               bloodPressureValue!.toDouble()) /
           8;
+    } else {
+      average = null;
     }
     // Notify the changes to main_screen so it updates de linear gauges
-    notifyListeners();
-  }
-
-  /// Internal, private state of the cart.
-  /// Removes all items from the cart.
-  void removeAll() {
-    // This call tells the widgets that are listening to this model to rebuild.
     notifyListeners();
   }
 
@@ -62,6 +57,19 @@ class PrecarinaModel extends ChangeNotifier {
         "\nAge Months: $ageMonths";
 
     return patientData;
+  }
+
+  void resetValues() {
+    dietValue = null;
+    physicalActivityValue = null;
+    smokeValue = null;
+    sleepValue = null;
+    bmiValue = null;
+    cholesterolValue = null;
+    diabetesValue = null;
+    bloodPressureValue = null;
+    average = null;
+    notifyListeners();
   }
 }
 

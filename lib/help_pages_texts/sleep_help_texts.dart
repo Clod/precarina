@@ -1,4 +1,4 @@
-const spanishText =  r"""
+const spanishText = r"""
               <h2>Horas recomendadas de sueño según edad</h2>
               <ul>
                 <li>4-12 meses de vida: 12-16 hs/ dia incluyendo siestas regulares.</li>
@@ -8,32 +8,32 @@ const spanishText =  r"""
                 <li>13-18 años: 8-10 hs/dia</li>
               </ul>
               <h6>Tabla de horarios de sueño recomendados</h6>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Edad</th>
-                    <th>Apropiado</th>
-                    <th>Inapropiado</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>3-5 años</td>
-                    <td>10-13 hs/día</td>
-                    <td>&lt; 10 ó &gt; 14 hs/día</td>
-                  </tr>
-                  <tr>
-                    <td>6-12 años</td>
-                    <td>9-12 hs/día</td>
-                    <td>&lt; 9 ó &gt; 13 hs/día</td>
-                  </tr>
-                  <tr>
-                    <td>13-18 años</td>
-                    <td>8-10 hs/día</td>
-                    <td>&lt; 8 ó &gt; 10 hs/día</td>
-                  </tr>
-                </tbody>
-              </table>
+ <table align="center" border="2" cellpadding="3">
+	<thead>
+		<tr>
+			<th style="text-align:center">Edad</th>
+			<th style="text-align:center">Apropiado</th>
+			<th style="text-align:center">Inapropiado</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align:center">3-5</td>
+			<td style="text-align:center">10-13 hs/día</td>
+			<td style="text-align:center">&lt; 10 &oacute; &gt; 14 hs/día</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">6-12</td>
+			<td style="text-align:center">9-12 hs/día</td>
+			<td style="text-align:center">&lt; 9 &oacute; &gt; 13 hs/día</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">13-18</td>
+			<td style="text-align:center">8-10 hs/día</td>
+			<td style="text-align:center">&lt; 8 &oacute; &gt; 10 hs/día</td>
+		</tr>
+	</tbody>
+</table>
               <h3>Bibliografía</h3>
               <ol>
                 <li>Paruthi S, Brooks LJ, D'Ambrosio C, Hall WA, Kotagal S, Lloyd RM, Malow BA, Maski K, Nichols C, Quan SF, Rosen CL, Troester MM, Wise MS. Consensus Statement of the American Academy of Sleep Medicine on the Recommended Amount of Sleep for Healthy Children: Methodology and Discussion. J Clin Sleep Med. 2016 Nov 15;12(11):1549-1561. doi: 10.5664/jcsm.6288. PMID: 27707447; PMCID: PMC5078711.</li>
@@ -44,7 +44,7 @@ const spanishText =  r"""
 
     """;
 
-const englishText =  r"""
+const englishText = r"""
 
               <h3>Recommended sleep hours according to age</h3>
 

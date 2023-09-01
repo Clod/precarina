@@ -79,7 +79,7 @@ class HelpDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.lunch_dining),
+            leading: const Icon(Icons.fastfood),
             title: Text(AppLocalizations.of(context)!.txtCholesterolButton),
             onTap: () {
               Navigator.push(
@@ -120,7 +120,7 @@ class HelpDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.icecream),
+            leading: const Icon(Icons.cookie),
             title: Text(AppLocalizations.of(context)!.txtDiabetesButton),
             onTap: () {
               Navigator.push(
@@ -155,7 +155,7 @@ class HelpDrawer extends StatelessWidget {
               Icons.local_play,
             ),
             applicationName: 'PRECARINA',
-            applicationVersion: '1.0.1 Build 10',
+            applicationVersion: '2.0.0 Build 13',
             applicationLegalese: "txtApplicationLegalese".i18n(),
             aboutBoxChildren: [
               const SizedBox(
@@ -165,7 +165,7 @@ class HelpDrawer extends StatelessWidget {
                 height: 300.0,
                 width: 150.0,
                 child: SingleChildScrollView(
-                  child: Html(data: AppLocalizations.of(context)!.txtAbout),
+                  child: Html(data: "txtAbout".i18n()),
                 ),
               )
             ],

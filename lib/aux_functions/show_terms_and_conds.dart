@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_exit_app/flutter_exit_app.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:localization/localization.dart';
 import 'package:precarina/aux_widgets/vertical_space.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -11,7 +11,7 @@ showTandC(BuildContext context, Function setAccepted) {
     builder: (BuildContext context) {
       return AlertDialog(
         title: Text(
-          AppLocalizations.of(context)!.txtImportantNotice,
+          "txtImportantNotice".i18n(),
           textAlign: TextAlign.center,
           style: const TextStyle(color: Colors.deepOrange, fontSize: 16.0, fontWeight: FontWeight.bold),
         ),
@@ -24,13 +24,13 @@ showTandC(BuildContext context, Function setAccepted) {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  AppLocalizations.of(context)!.txtReadCarefully,
+                  "txtReadCarefully".i18n(),
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const VerticalSpace(height: 10.0),
                 Text(
-                  AppLocalizations.of(context)!.txtAppPurpose,
+                  "txtAppPurpose".i18n(),
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
@@ -49,7 +49,7 @@ showTandC(BuildContext context, Function setAccepted) {
                 ),
                 const VerticalSpace(height: 10.0),
                 Text(
-                  AppLocalizations.of(context)!.txtFundamentalsLocation,
+                  "txtFundamentalsLocation".i18n(),
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
@@ -58,7 +58,7 @@ showTandC(BuildContext context, Function setAccepted) {
                     await launchUrl(Uri.parse('https://www.ahajournals.org/doi/10.1161/CIR.0000000000001078'));
                   },
                   child: Text(
-                    AppLocalizations.of(context)!.txtLifeEssentialEightObjective,
+                    "txtLifeEssentialEightObjective".i18n(),
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       decoration: TextDecoration.underline,
@@ -67,7 +67,7 @@ showTandC(BuildContext context, Function setAccepted) {
                   ),
                 ),
                 Text(
-                  AppLocalizations.of(context)!.txtPaperAuthors,
+                  "txtPaperAuthors".i18n(),
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
@@ -84,7 +84,7 @@ showTandC(BuildContext context, Function setAccepted) {
               // FlutterExitApp.exitApp(iosForceExit: true);
               FlutterExitApp.exitApp();
             },
-            child: Text(AppLocalizations.of(context)!.txtButtonRejectTandC),
+            child: Text("txtButtonRejectTandC".i18n()),
           ),
           TextButton(
               onPressed: () {
@@ -92,7 +92,7 @@ showTandC(BuildContext context, Function setAccepted) {
                 setAccepted();
                 Navigator.of(context).pop();
               },
-              child: Text(AppLocalizations.of(context)!.txtButtonAcceptTandC)),
+              child: Text("txtButtonAcceptTandC".i18n())),
         ],
       );
     },

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:localization/localization.dart';
 import 'package:precarina/behaviors_and_factors_screens/blood_pressure_screen.dart';
 import 'package:precarina/behaviors_and_factors_screens/body_mass_index_screen.dart';
 import 'package:precarina/behaviors_and_factors_screens/cholesterol_screen.dart';
@@ -9,6 +11,7 @@ import 'package:precarina/aux_widgets/pretty_gauge.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'aux_widgets/vertical_space.dart';
 import 'behaviors_and_factors_screens/diabetes_screen.dart';
 import 'behaviors_and_factors_screens/sleep_screen.dart';
 import 'help_pages/help_drawer.dart';
@@ -55,16 +58,19 @@ class _MainScreenState extends State<MainScreen> {
             children: <Widget>[
               buildOneRow(context, AppLocalizations.of(context)!.txtDietButton, Colors.red, const DietScreen(), precaModel.dietValue),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(
-                  context, AppLocalizations.of(context)!.txtPhysicalActivityButton, Colors.red, const PhysicalActivityScreen(), precaModel.physicalActivityValue),
+              buildOneRow(context, AppLocalizations.of(context)!.txtPhysicalActivityButton, Colors.red, const PhysicalActivityScreen(),
+                  precaModel.physicalActivityValue),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(context, AppLocalizations.of(context)!.txtSmokeExposureButton, Colors.red, const SmokeExposureScreen(), precaModel.smokeValue),
+              buildOneRow(
+                  context, AppLocalizations.of(context)!.txtSmokeExposureButton, Colors.red, const SmokeExposureScreen(), precaModel.smokeValue),
               const Expanded(child: SizedBox(height: 5)),
               buildOneRow(context, AppLocalizations.of(context)!.txtSleepButton, Colors.red, const SleepScreen(), precaModel.sleepValue),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(context, AppLocalizations.of(context)!.txtBodyMassIndexButton, Colors.blue, const BodyMassIndexScreen(), precaModel.bmiValue),
+              buildOneRow(
+                  context, AppLocalizations.of(context)!.txtBodyMassIndexButton, Colors.blue, const BodyMassIndexScreen(), precaModel.bmiValue),
               const Expanded(child: SizedBox(height: 5)),
-              buildOneRow(context, AppLocalizations.of(context)!.txtCholesterolButton, Colors.blue, const CholesterolScreen(), precaModel.cholesterolValue),
+              buildOneRow(
+                  context, AppLocalizations.of(context)!.txtCholesterolButton, Colors.blue, const CholesterolScreen(), precaModel.cholesterolValue),
               const Expanded(child: SizedBox(height: 5)),
               buildOneRow(context, AppLocalizations.of(context)!.txtDiabetesButton, Colors.blue, const DiabetesScreen(), precaModel.diabetesValue),
               const Expanded(child: SizedBox(height: 5)),
@@ -72,9 +78,7 @@ class _MainScreenState extends State<MainScreen> {
                   precaModel.bloodPressureValue),
               const Expanded(child: SizedBox(height: 5)),
               GestureDetector(
-                onLongPress: () => setState(() {
-                  // resetValues();
-                }),
+                onLongPress: () => precaModel.resetValues(), // notifylisteners() ensures update of UI
                 child: buildPrettyGauge(precaModel.average),
               ),
               GestureDetector(
@@ -116,18 +120,6 @@ class _MainScreenState extends State<MainScreen> {
                   builder: (context) => screenToGo,
                 ),
               );
-              // setState(() {
-              //   (valorDieta == null) ? (valorDieta = 0) : (valorDieta = valorDieta! + 1);
-              // });
-              // As this is a new list with new objets, the picked value is not included
-              // I need to search for the equivalent object (I search for the same value
-              // because the laguage might have changes in the middle.
-
-              // optionsFull.forEach((element) {
-              //   if (element.code.toString() == seleccion.code.toString()) {
-              //     seleccion = element;
-              //   }
-              // }
             },
             child: Text(
               textoBoton,
@@ -158,27 +150,91 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  PrettyGauge buildPrettyGauge(value) {
+  Widget buildPrettyGauge(value) {
     debugPrint("Dibujando PrettyGauge con valor $value");
-    return PrettyGauge(
-      gaugeSize: 190, // Size of a sqare that contains the Gauge
-      // https://meyerweb.com/eric/tools/color-blend/#FFEB3B:4CAF50:3:rgbd
-      segments: [
-        GaugeSegment('Low', 10, Colors.red),
-        GaugeSegment('', 10, const Color.fromRGBO(246, 101, 55, 1.0)),
-        GaugeSegment('', 10, const Color.fromRGBO(248, 134, 56, 1.0)),
-        GaugeSegment('', 10, const Color.fromRGBO(251, 168, 57, 1.0)),
-        GaugeSegment('', 10, const Color.fromRGBO(253, 201, 58, 1.0)),
-        GaugeSegment('Medium High', 10, Colors.yellow),
-        GaugeSegment('', 10, const Color.fromRGBO(210, 220, 64, 1.0)),
-        GaugeSegment('', 10, const Color.fromRGBO(182, 215, 64, 1.0)),
-        GaugeSegment('', 10, const Color.fromRGBO(155, 210, 65, 1.0)),
-        GaugeSegment('', 10, const Color.fromRGBO(121, 190, 75, 1.0)), // New shade of green
-        GaugeSegment('High', 10, Colors.green),
-      ],
-      currentValue: value,
-      displayWidget: const Text('Score', style: TextStyle(fontSize: 16)),
-    );
+
+    if (precaModel.average != null) {
+      return PrettyGauge(
+        gaugeSize: 190, // Size of a sqare that contains the Gauge
+        // https://meyerweb.com/eric/tools/color-blend/#FFEB3B:4CAF50:3:rgbd
+        segments: [
+          GaugeSegment('Low', 10, Colors.red),
+          GaugeSegment('', 10, const Color.fromRGBO(246, 101, 55, 1.0)),
+          GaugeSegment('', 10, const Color.fromRGBO(248, 134, 56, 1.0)),
+          GaugeSegment('', 10, const Color.fromRGBO(251, 168, 57, 1.0)),
+          GaugeSegment('', 10, const Color.fromRGBO(253, 201, 58, 1.0)),
+          GaugeSegment('Medium High', 10, Colors.yellow),
+          GaugeSegment('', 10, const Color.fromRGBO(210, 220, 64, 1.0)),
+          GaugeSegment('', 10, const Color.fromRGBO(182, 215, 64, 1.0)),
+          GaugeSegment('', 10, const Color.fromRGBO(155, 210, 65, 1.0)),
+          GaugeSegment('', 10, const Color.fromRGBO(121, 190, 75, 1.0)), // New shade of green
+          GaugeSegment('High', 10, Colors.green),
+        ],
+        currentValue: value,
+        displayWidget: const Text('Score', style: TextStyle(fontSize: 16)),
+      );
+    } else {
+      return Container(
+        decoration: BoxDecoration(
+          color: Colors.red,
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        height: 190.0,
+        width: 300.0,
+        child: Center(
+          child: Html(
+            data: r'''
+<p style="text-align:center"><span style="font-size:16px"><strong><span style="color:#ffffff">IMPORTANTE</span></strong></span></p>
+
+<p style="text-align:center"><span style="font-size:14px"><span style="color:#ffffff">Luego de cargar toda la informaci&oacute;n se mostrar&aacute; el score. El mismo es orientativo y</span></span></p>
+
+<p style="text-align:center"><span style="font-size:14px"><span style="color:#ffffff"><u>NO PUEDE REEMPLAZAR LA CONSULTA PERI&Oacute;DICA CON UN M&Eacute;DICO</u></span></span></p>
+''',
+          ),
+        ),
+      );
+    }
+
+/*    return Stack(
+        children: [
+      PrettyGauge(
+        gaugeSize: 190, // Size of a sqare that contains the Gauge
+        // https://meyerweb.com/eric/tools/color-blend/#FFEB3B:4CAF50:3:rgbd
+        segments: [
+          GaugeSegment('Low', 10, Colors.red),
+          GaugeSegment('', 10, const Color.fromRGBO(246, 101, 55, 1.0)),
+          GaugeSegment('', 10, const Color.fromRGBO(248, 134, 56, 1.0)),
+          GaugeSegment('', 10, const Color.fromRGBO(251, 168, 57, 1.0)),
+          GaugeSegment('', 10, const Color.fromRGBO(253, 201, 58, 1.0)),
+          GaugeSegment('Medium High', 10, Colors.yellow),
+          GaugeSegment('', 10, const Color.fromRGBO(210, 220, 64, 1.0)),
+          GaugeSegment('', 10, const Color.fromRGBO(182, 215, 64, 1.0)),
+          GaugeSegment('', 10, const Color.fromRGBO(155, 210, 65, 1.0)),
+          GaugeSegment('', 10, const Color.fromRGBO(121, 190, 75, 1.0)), // New shade of green
+          GaugeSegment('High', 10, Colors.green),
+        ],
+        currentValue: value,
+        displayWidget: const Text('Score', style: TextStyle(fontSize: 16)),
+      ),
+      Container(
+        decoration: BoxDecoration(
+          color: Colors.red,
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        height: 190.0,
+        width: 300.0,
+        child: Center(
+          child: Html(
+            data: r'''
+<p style="text-align:center"><span style="font-size:16px"><strong><span style="color:#ffffff">IMPORTANTE</span></strong></span></p>
+
+<p style="text-align:center"><span style="font-size:14px"><span style="color:#ffffff">Luego de cargar toda la informaci&oacute;n se mostrar&aacute; el score. El mismo es orientativo y</span></span></p>
+
+<p style="text-align:center"><span style="font-size:14px"><span style="color:#ffffff"><u>NO PUEDE REEMPLAZAR LA CONSULTA PERI&Oacute;DICA CON UN M&Eacute;DICO</u></span></span></p>
+''',
+          ),
+        ),
+      )
+    ]);*/
   }
 }
-

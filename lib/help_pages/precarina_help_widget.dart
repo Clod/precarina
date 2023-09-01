@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'package:precarina/help_pages_texts/sleep_help_texts.dart';
 
-class SleepHelp extends StatelessWidget {
-  const SleepHelp({
-    Key? key,
+class PrecarinaHelpWidget extends StatelessWidget {
+
+  const PrecarinaHelpWidget({
+    super.key,
     required this.title,
-    required this.content,
-  }) : super(key: key);
+    required this.context,
+    required this.spanishText,    required this.englishText,
+  });
 
   final String title;
-  final String content;
+  final BuildContext context;
+  final String spanishText;
+  final String englishText;
 
   @override
   Widget build(BuildContext context) {

@@ -39,3 +39,10 @@ Si no, las invitaciones no salen.
 Editor HTML online:
 https://onlinehtmleditor.dev/
 https://htmlg.com/html-editor/
+
+Link al congreso:
+
+https://www.wcpccs2023.org/event/1da8563e-0f65-486c-88df-70c3db431af5/summary
+
+Link a los participantes del Congreso:
+https://www.wcpccs2023.org/event/1da8563e-0f65-486c-88df-70c3db431af5/websitePage:f3433ae0-cdc1-47f9-bfa9-9fdc490f09d9

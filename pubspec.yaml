@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # of the product and file versions while build-number is used as the build suffix.
 
 # NO OLVIDAR CAMBIAR EL ABOUT (MNEMONIC A: Edit -> Bookmarks -> Go to manemonic)
-version: 1.0.1+10
+version: 2.0.0+13
 # NO OLVIDAR CAMBIAR EL ABOUT
 
 environment:
