@@ -38,9 +38,11 @@ It can be downloaded for free in both PayStore and AppStore:
 
 <p></p>
 
+<div style="display: flex;">
   <img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 1.png" alt="Screen1" style="width: 15%; height: auto;">
   <img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 2.png" alt="Screen2" style="width: 15%; height: auto;">
   <img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 3.png" alt="Screen3" style="width: 15%; height: auto;">
+</div>
 
 ## MEDICAL INFORMATION
 
