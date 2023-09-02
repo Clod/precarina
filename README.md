@@ -28,19 +28,20 @@ It can be downloaded for free in both PayStore and AppStore:
 
 <p></p>
 
+<div style="display: flex; justify-content: center;">
   <a href="https://play.google.com/store/apps/details?id=ar.net.grasso.precarina&pcampaignid=web_share">
     <img src="./readme_imgs/google_play.png" alt="Google Play" style="width: 30%; height: auto;">
   </a>
   <a href="https://apps.apple.com/ar/app/precarina/id6451156229?l=en-GB">
     <img src="./readme_imgs/app_store.png" alt="App Store" style="width: 30%; height: auto;">
   </a>
-
+</div>
 
 <p></p>
 
-<div style="display: flex;">
-  <img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 1.png" alt="Screen1" style="width: 15%; height: auto;">
-  <img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 2.png" alt="Screen2" style="width: 15%; height: auto;">
+<div style="display: flex; justify-content: center;">
+  <img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 1.png" alt="Screen1" style="width: 15%; height: auto; margin-right: 20px;">
+  <img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 2.png" alt="Screen2" style="width: 15%; height: auto; margin-right: 20px;">
   <img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 3.png" alt="Screen3" style="width: 15%; height: auto;">
 </div>
 
@@ -54,12 +55,18 @@ The short and medium-term health outcomes (including tracking metrics in adolesc
   
  PRECARINA is a 100% Flutter app but for the Body Mass Index (BMI) Module a Tensor Flow model was trained to estimate BMI percentiles. To that end, the following graphs were used to determine the values used to train the model:
 
-  <img src="readme_imgs/IMC mujeres.png" alt="Screen1" style="width: 35%; height: auto;">
+
+<div style="display: flex; justify-content: center;">
+  <img src="readme_imgs/IMC mujeres.png" alt="Screen1" style="width: 35%; height: auto; margin-right: 20px">
   <img src="readme_imgs/IMC varones.png" alt="Screen2" style="width: 35%; height: auto;">
+</div>
 
-<p></p>
+<p>
+</p>
+
+<p>
 The training was made using Python by means of a Jupyter Notebook project (./Complements/IMC.ipmb)
-
+</p>
 
 
  
