@@ -1,9 +1,10 @@
 # PRECARINA 
 
+
+
 ## INTRODUCTION  
 
-PRECARINA was presented as a poster at the [8th World Congress of Pediatric Cardiology and Cardiac Surgery:]
-(https://www.wcpccs2023.org/event/1da8563e-0f65-486c-88df-70c3db431af5/summary)
+PRECARINA was presented as a poster at the [8th World Congress of Pediatric Cardiology and Cardiac Surgery:](https://www.wcpccs2023.org/event/1da8563e-0f65-486c-88df-70c3db431af5/summary)
 
 
 <div style="display: flex; justify-content: center;">
@@ -18,10 +19,11 @@ ANGELA SARDELLA | App PRECARINA: **PRE**vención **CAR**diovascular **IN**fantil
 
 <p></p>
 
-<img src="./readme_imgs/Slide1.jpg" alt="Image" style="width: 90%; height: auto;">
+<img src="./readme_imgs/Slide1.jpg" alt="Image" style="width: 100%; height: auto;">
 
 <p></p>
 
+## Download
 It can be downloaded for free in both PayStore and AppStore:
 
 <p></p>
@@ -36,9 +38,9 @@ It can be downloaded for free in both PayStore and AppStore:
 
 <p></p>
 
-<img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 1.png" alt="Screen1" style="width: 30%; height: auto;">
-<img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 2.png" alt="Screen2" style="width: 30%; height: auto;">
-<img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 3.png" alt="Screen3" style="width: 30%; height: auto;">
+<img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 1.png" alt="Screen1" style="width: 20%; height: auto;">
+<img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 2.png" alt="Screen2" style="width: 20%; height: auto;">
+<img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 3.png" alt="Screen3" style="width: 20%; height: auto;">
 
 ## MEDICAL INFORMATION
 
@@ -50,9 +52,10 @@ The short and medium-term health outcomes (including tracking metrics in adolesc
   
  PRECARINA is a 100% Flutter app but for the Body Mass Index (BMI) Module a Tensor Flow model was trained to estimate BMI percentiles. To that end, the following graphs were used to determine the values used to train the model:
 
-XXX AGREAGAR GRAFICOS
+<img src="readme_imgs/IMC mujeres.png" alt="Screen1" style="width: 35%; height: auto;">
+<img src="readme_imgs/IMC varones.png" alt="Screen2" style="width: 35%; height: auto;">
 
-The training was made using Python by means of a Jupyter Notebook project (XXX AGREGAR REFERENCIA)
+The training was made using Python by means of a Jupyter Notebook project (./Complements/IMC.ipmb)
 
 
 
