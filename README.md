@@ -38,9 +38,9 @@ It can be downloaded for free in both PayStore and AppStore:
 
 <p></p>
 
-<img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 1.png" alt="Screen1" style="width: 15%; height: auto;">
-<img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 2.png" alt="Screen2" style="width: 15%; height: auto;">
-<img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 3.png" alt="Screen3" style="width: 15%; height: auto;">
+  <img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 1.png" alt="Screen1" style="width: 15%; height: auto;">
+  <img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 2.png" alt="Screen2" style="width: 15%; height: auto;">
+  <img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 3.png" alt="Screen3" style="width: 15%; height: auto;">
 
 ## MEDICAL INFORMATION
 
@@ -52,8 +52,8 @@ The short and medium-term health outcomes (including tracking metrics in adolesc
   
  PRECARINA is a 100% Flutter app but for the Body Mass Index (BMI) Module a Tensor Flow model was trained to estimate BMI percentiles. To that end, the following graphs were used to determine the values used to train the model:
 
-<img src="readme_imgs/IMC mujeres.png" alt="Screen1" style="width: 35%; height: auto;">
-<img src="readme_imgs/IMC varones.png" alt="Screen2" style="width: 35%; height: auto;">
+  <img src="readme_imgs/IMC mujeres.png" alt="Screen1" style="width: 35%; height: auto;">
+  <img src="readme_imgs/IMC varones.png" alt="Screen2" style="width: 35%; height: auto;">
 
 <p></p>
 The training was made using Python by means of a Jupyter Notebook project (./Complements/IMC.ipmb)
