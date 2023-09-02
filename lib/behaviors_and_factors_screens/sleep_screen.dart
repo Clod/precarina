@@ -54,7 +54,7 @@ class _SleepScreenState extends State<SleepScreen> {
 
   late BuildContext bc;
 
-  int? _selectedOption;
+  // int? _selectedOption;
 
   bool enableAcceptButton = false;
 
@@ -129,7 +129,7 @@ class _SleepScreenState extends State<SleepScreen> {
                           const HorizontalSpace(width: 15.0),
                           ElevatedButton(
                             onPressed: enableAcceptButton
-                                ? () {;
+                                ? () {
                                     debugPrint("Sueño Value en Screen: ${precaModel.sleepValue}");
                                     precaModel.calculateAverage();
                                     Navigator.of(context).pop();

@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'package:localization/localization.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class BmiHelp extends StatelessWidget {
   const BmiHelp({
@@ -77,7 +73,7 @@ However, tables and graphics are not a convenient way to determine percentile va
 
     final locale = Localizations.localeOf(context);
 
-    final _localizedValues = <String, Map<String, String>>{
+    final localizedValues = <String, Map<String, String>>{
       'en': {
         'title': englishText,
       },
@@ -102,7 +98,7 @@ However, tables and graphics are not a convenient way to determine percentile va
           child: Padding(
             padding: const EdgeInsets.all(18.0),
             child: HtmlWidget(
-        _localizedValues[locale.languageCode]!['title']!
+        localizedValues[locale.languageCode]!['title']!
         /*
             Html(
                 data: "txtBmiHelp".i18n(),
