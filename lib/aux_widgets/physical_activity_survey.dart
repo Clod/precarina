@@ -157,7 +157,10 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
                       ),
                       onChanged: (value) {
                         setState(() {
-                          _weeklyMinsOfActValue = int.tryParse(value!)!;
+                          if (value != null && value != "") {
+                            debugPrint("el puto value: $value");
+                            _weeklyMinsOfActValue = int.tryParse(value)!;
+                          }
                         });
                       },
                       onTap: () {
@@ -178,7 +181,7 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
             const VerticalSpace(height: 16),
             Text(
               "physicalActivityQ3".i18n(),
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
             const VerticalSpace(height: 8),
             Column(
@@ -248,7 +251,7 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
                       ),
                       onChanged: (value) {
                         setState(() {
-                          _blocksToSchoolValue = int.tryParse(value!)!;
+                          if (value != null && value != "") _blocksToSchoolValue = int.tryParse(value)!;
                         });
                       },
                       onTap: () {
@@ -317,7 +320,7 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
             const VerticalSpace(height: 16),
             Text(
               "physicalActivityQ6".i18n(),
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
             const VerticalSpace(height: 8),
             Row(
@@ -354,7 +357,7 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
                     ),
                     onChanged: (value) {
                       setState(() {
-                        value != null ? _dailyMinsOfScreenValue = (int.tryParse(value) ?? 0) : _dailyMinsOfScreenValue = 0;
+                        (value != null && value != "") ? _dailyMinsOfScreenValue = (int.tryParse(value) ?? 0) : _dailyMinsOfScreenValue = 0;
                       });
                     },
                     onTap: () {

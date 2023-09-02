@@ -155,7 +155,7 @@ class HelpDrawer extends StatelessWidget {
               Icons.local_play,
             ),
             applicationName: 'PRECARINA',
-            applicationVersion: '2.0.0 Build 13',
+            applicationVersion: '2.0.0 Build 14',
             applicationLegalese: "txtApplicationLegalese".i18n(),
             aboutBoxChildren: [
               const SizedBox(

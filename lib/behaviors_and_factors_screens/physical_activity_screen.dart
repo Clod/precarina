@@ -10,6 +10,8 @@ import 'package:precarina/aux_functions/lose_input_warning.dart';
 import 'package:precarina/aux_widgets/horizontal_space.dart';
 import 'package:precarina/help_pages/help_drawer.dart';
 
+import '../aux_widgets/vertical_space.dart';
+
 // Cartel rojo. El puntaje se mantiene pero aparece advertencia de que igual se lo considera sedentario
 // Minutos totales porque todos los días de actividad pueden ser distintos
 // validaciones
@@ -40,10 +42,12 @@ class _PhysicalActivityScreenState extends State<PhysicalActivityScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final physicalActivityValues = [100, 90, 80, 60, 40, 20, 0];
-    List<String> optionsTexts = AppLocalizations.of(context)!.txtPhysicalActivityDialogOptions.split("|");
+
+    // List<String> optionsTexts = AppLocalizations.of(context)!.txtPhysicalActivityDialogOptions.split("|");
 
     bc = context;
+
+    double height = MediaQuery.of(context).size.height;
 
     return WillPopScope(
       onWillPop: () => showInputLostWarning(context),
@@ -54,67 +58,64 @@ class _PhysicalActivityScreenState extends State<PhysicalActivityScreen> {
         ),
         drawer: const HelpDrawer(),
         body: SafeArea(
-          child: Column(
+          child: Stack(
             children: [
-              const Expanded(
-                flex: 1,
-                child: PagesHeader(),
-              ),
-              Expanded(
-                flex: 3,
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      PhysicalActivitySurvey(key: innerWidgetKey),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ElevatedButton(
-                            child: Text(AppLocalizations.of(context)!.txtButtonCancel),
-                            onPressed: () => Navigator.maybePop(context),
-                          ),
-                          const HorizontalSpace(width: 10.0),
-                          ElevatedButton(
-                            onPressed: enableAcceptButton
-                                ? () {
-                                    if (innerWidgetKey.currentState!.formKey.currentState!.validate() == true) {
-                                      precaModel.physicalActivityValue = _selectedOption;
-                                      debugPrint("Physical Activity Value en Screen: ${precaModel.physicalActivityValue}");
-                                      precaModel.calculateAverage();
-                                      bool isRedBackground = innerWidgetKey.currentState!.triggerCalculation();
-                                      // Show a SnackBar with a button and make it stay until the button is pressed
-                                      // The background of the SnackBar can be red or black depending on the value of
-                                      // boolean
-                                      String snackBarText = 'Score: ${precaModel.physicalActivityValue}';
-                                      if (isRedBackground) {snackBarText += "physicalActivitySedentaryWarning".i18n();}
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(snackBarText),
-                                          duration: const Duration(days: 1),
-                                          backgroundColor: isRedBackground ? Colors.red : Colors.black,
-                                          action: SnackBarAction(
-                                            label: 'Ok',
-                                            onPressed: () {
-                                              // Hide virtual keyboard
-                                              FocusScope.of(context).unfocus();
-                                              ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                    ;
-                                  }
-                                : null,
-                            child: Text(AppLocalizations.of(context)!.txtButtonAccept),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+              SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    VerticalSpace(height: (15.0 + height /4)),
+                    PhysicalActivitySurvey(key: innerWidgetKey),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          child: Text(AppLocalizations.of(context)!.txtButtonCancel),
+                          onPressed: () => Navigator.maybePop(context),
+                        ),
+                        const HorizontalSpace(width: 10.0),
+                        ElevatedButton(
+                          onPressed: enableAcceptButton
+                              ? () {
+                            if (innerWidgetKey.currentState!.formKey.currentState!.validate() == true) {
+                              precaModel.physicalActivityValue = _selectedOption;
+                              debugPrint("Physical Activity Value en Screen: ${precaModel.physicalActivityValue}");
+                              precaModel.calculateAverage();
+                              bool isRedBackground = innerWidgetKey.currentState!.triggerCalculation();
+                              // Show a SnackBar with a button and make it stay until the button is pressed
+                              // The background of the SnackBar can be red or black depending on the value of
+                              // boolean
+                              String snackBarText = 'Score: ${precaModel.physicalActivityValue}';
+                              if (isRedBackground) {snackBarText += "physicalActivitySedentaryWarning".i18n();}
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(snackBarText),
+                                  duration: const Duration(days: 1),
+                                  backgroundColor: isRedBackground ? Colors.red : Colors.black,
+                                  action: SnackBarAction(
+                                    label: 'Ok',
+                                    onPressed: () {
+                                      // Hide virtual keyboard
+                                      FocusScope.of(context).unfocus();
+                                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ),
+                              );
+                            }
+                          }
+                              : null,
+                          child: Text(AppLocalizations.of(context)!.txtButtonAccept),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
+              ),
+              SizedBox(
+                height: height / 4,
+                child: const PagesHeader(),
               ),
             ],
           ),

@@ -15,6 +15,7 @@
   "txtCancelModalText": "¿Desea descartarlos?",
   "txtCancelModalDiscard": "Descartar",
   "txtCancelModalVolver": "Volver",
+  "txtAppleWarning": "<p style=\"text-align:center\"><span style=\"font-size:16px\"><strong><span style=\"color:#ffffff\">IMPORTANTE</span></strong></span></p>\n\n<p style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"color:#ffffff\">Luego de cargar toda la información se mostrará el score. El mismo es sólo orientativo y</span></span></p>\n\n<p style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"color:#ffffff\"><u>NO PUEDE REEMPLAZAR EL CONTROL PERIÓDICO DE UN MÉDICO</u></span></span></p>\n",
   "DATA INPUT START": "*************************************************************************************************************************************",
   "patientsDataInputTitle": "Ingrese los datos del paciente",
   "inputSex": "Escoja el sexo",

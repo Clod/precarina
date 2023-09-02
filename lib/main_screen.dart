@@ -11,7 +11,6 @@ import 'package:precarina/aux_widgets/pretty_gauge.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'aux_widgets/vertical_space.dart';
 import 'behaviors_and_factors_screens/diabetes_screen.dart';
 import 'behaviors_and_factors_screens/sleep_screen.dart';
 import 'help_pages/help_drawer.dart';
@@ -183,13 +182,7 @@ class _MainScreenState extends State<MainScreen> {
         width: 300.0,
         child: Center(
           child: Html(
-            data: r'''
-<p style="text-align:center"><span style="font-size:16px"><strong><span style="color:#ffffff">IMPORTANTE</span></strong></span></p>
-
-<p style="text-align:center"><span style="font-size:14px"><span style="color:#ffffff">Luego de cargar toda la informaci&oacute;n se mostrar&aacute; el score. El mismo es orientativo y</span></span></p>
-
-<p style="text-align:center"><span style="font-size:14px"><span style="color:#ffffff"><u>NO PUEDE REEMPLAZAR LA CONSULTA PERI&Oacute;DICA CON UN M&Eacute;DICO</u></span></span></p>
-''',
+            data: "txtAppleWarning".i18n(),
           ),
         ),
       );
