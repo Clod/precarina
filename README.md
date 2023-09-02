@@ -55,6 +55,7 @@ The short and medium-term health outcomes (including tracking metrics in adolesc
 <img src="readme_imgs/IMC mujeres.png" alt="Screen1" style="width: 35%; height: auto;">
 <img src="readme_imgs/IMC varones.png" alt="Screen2" style="width: 35%; height: auto;">
 
+<p></p>
 The training was made using Python by means of a Jupyter Notebook project (./Complements/IMC.ipmb)
 
 
