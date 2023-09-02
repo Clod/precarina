@@ -167,7 +167,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                       const VerticalSpace(height: 15.0),
                        Text(
                         "txtBMI".i18n() ,
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
                       ),
                       const VerticalSpace(height: 5.0),
                       Text(
@@ -177,7 +177,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                       const VerticalSpace(height: 10.0),
                        Text(
                         "txtPercentile".i18n(),
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
                       ),
                       const VerticalSpace(height: 5.0),
                       Text(
@@ -187,7 +187,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                       const VerticalSpace(height: 10.0),
                        Text(
                         "txtDiagnose".i18n(),
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
                       ),
                       const VerticalSpace(height: 5.0),
                       Text(
@@ -197,7 +197,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                       const VerticalSpace(height: 15.0),
                        Text(
                         "txtScore".i18n(),
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
                       ),
                       const VerticalSpace(height: 5.0),
                       Text(
@@ -288,8 +288,6 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
     } else {
       return "txtNormalWeight".i18n();
     }
-
-    return "";
   }
 
   int? getScoreOver97() {

@@ -12,14 +12,14 @@ class CholesterolHelp extends StatelessWidget {
   final String title;
   final String content;
 
-  static const _localizedValues = <String, Map<String, String>>{
-    'en': {
-      'title': textEnglish,
-    },
-    'es': {
-      'title': textSpanish,
-    },
-  };
+  // static const _localizedValues = <String, Map<String, String>>{
+  //   'en': {
+  //     'title': textEnglish,
+  //   },
+  //   'es': {
+  //     'title': textSpanish,
+  //   },
+  // };
 
   @override
   Widget build(BuildContext context) {
