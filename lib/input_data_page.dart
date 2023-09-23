@@ -10,6 +10,7 @@ import 'package:precarina/main_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:time_machine/time_machine.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'model/precarina_model.dart';
 
@@ -100,8 +101,30 @@ class _InputDataPageState extends State<InputDataPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            SizedBox(
+              height: 150.0,
+              width: 150.0,
+              child: Image.asset(
+                'assets/images/socaba_redondo.png',
+
+              ),
+            ),
+            GestureDetector(
+              onTap: () async {
+                await launchUrl(Uri.parse('https://www.socaba.net'));
+              },
+              child: const Text(
+                'Sociedad de Cardiología de Buenos aires',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  decoration: TextDecoration.underline,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                ),
+              ),
+            ),
             const VerticalSpace(
-              height: 10.0,
+              height: 5.0,
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -168,7 +191,7 @@ class _InputDataPageState extends State<InputDataPage> {
               height: 5.0,
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(4.0),
               child: Text(
                 "inputHeight".i18n(),
                 textAlign: TextAlign.center,
@@ -176,7 +199,7 @@ class _InputDataPageState extends State<InputDataPage> {
               ),
             ),
             const SizedBox(
-              height: 10.0,
+              height: 5.0,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -235,7 +258,7 @@ class _InputDataPageState extends State<InputDataPage> {
               ],
             ),
             const SizedBox(
-              height: 20.0,
+              height: 10.0,
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -244,9 +267,6 @@ class _InputDataPageState extends State<InputDataPage> {
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
               ),
-            ),
-            const SizedBox(
-              height: 10.0,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -350,7 +370,7 @@ class _InputDataPageState extends State<InputDataPage> {
               ],
             ),
             const SizedBox(
-              height: 30.0,
+              height: 20.0,
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),

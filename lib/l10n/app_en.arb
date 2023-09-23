@@ -54,7 +54,7 @@
   "txtBloodPressureWarning": "<h3 style=\"text-align:center;\">CORRECT TECHNIQUE FOR MEASURING BLOOD PRESSURE IN PEDIATRICS</h3> <p>With the patient at rest and calm, measurement should be taken with an appropriate-sized cuff for the child, with a cuff bladder that covers 2/3 of the arm's diameter and 2/3 of its length. Three readings should be taken and averaged. If values greater than the 90th percentile are recorded, they should be confirmed with auscultatory technique.</p><p><span style=\"color:red\">For proper use of the app, in case of recordings greater than the 90th percentile, the values to be entered must be the average of 3 readings taken during different consultations, with 3 readings per consultation.</span></p>",
   "txtCholesterolButton": "Cholesterol",
   "txtCholesterolDialog": "Non-HDL cholesterol (mg/dL), starting no later than age 9 - 11y and earlier per clinician discretion",
-  "txtCholesterolDialogOptions": "<100 mg/dl|<100 mg/dl(drug-treated) |100 - 119 mg/dl|120 - 144 mg/dl|145 - 189 mg/dl|≥ 190 mg/dl",
+  "txtCholesterolDialogOptions": "< 170 mg/dl|170 - 199 mg/dl|≥ 200 mg/dl",
   "txtCholesterolWarning": "",
   "txtCholesterolHelp": "",
   "txtLongPressGauge": "Long press the gauge to reset all values.",

@@ -40,8 +40,8 @@ It can be downloaded for free in both PayStore and AppStore:
 <p></p>
 
 <div style="display: flex; justify-content: center; align-items: center;">
-  <img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 1.png" alt="Screen1" style="width: 15%; height: auto; margin-right: 20px;">
-  <img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 2.png" alt="Screen2" style="width: 15%; height: auto; margin-right: 20px;">
+  <img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 1.png" alt="Screen1" style="width: 15%; height: auto; margin-right: 30px;">
+  <img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 2.png" alt="Screen2" style="width: 15%; height: auto; margin-right: 30px;">
   <img src="readme_imgs/Simulator Screenshot - iPhone 14 Plus - 3.png" alt="Screen3" style="width: 15%; height: auto;">
 </div>
 
@@ -57,7 +57,7 @@ The short and medium-term health outcomes (including tracking metrics in adolesc
 
 
 <div style="display: flex; justify-content: center; align-items: center;">
-  <img src="readme_imgs/IMC mujeres.png" alt="Screen1" style="width: 35%; height: auto; margin-right: 20px">
+  <img src="readme_imgs/IMC mujeres.png" alt="Screen1" style="width: 35%; height: auto; margin-right: 40px">
   <img src="readme_imgs/IMC varones.png" alt="Screen2" style="width: 35%; height: auto;">
 </div>
 

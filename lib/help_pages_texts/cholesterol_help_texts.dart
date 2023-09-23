@@ -61,20 +61,6 @@ ALTO
 <pre>Col HDL</pre>
 </td>
 <td style="border: 1px solid black; text-align: center; height: 50px; width: 92.4453px;">
-≥170
-</td>
-<td style="border: 1px solid black; text-align: center; height: 50px; width: 76.7891px;">
-170-199
-</td>
-<td style="border: 1px solid black; text-align: center; height: 50px; width: 53.3125px;">
-≥200
-</td>
-</tr>
-<tr style="height: 50px;">
-<td style="border: 1px solid black; height: 50px; width: 147.227px;">
-<pre>Col Total</pre>
-</td>
-<td style="border: 1px solid black; text-align: center; height: 50px; width: 92.4453px;">
 ≥45
 </td>
 <td style="border: 1px solid black; text-align: center; height: 50px; width: 76.7891px;">
@@ -82,6 +68,20 @@ ALTO
 </td>
 <td style="border: 1px solid black; text-align: center; height: 50px; width: 53.3125px;">
 ≤40
+</td>
+</tr>
+<tr style="height: 50px;">
+<td style="border: 1px solid black; height: 50px; width: 147.227px;">
+<pre>Col Total</pre>
+</td>
+<td style="border: 1px solid black; text-align: center; height: 50px; width: 92.4453px;">
+<170
+</td>
+<td style="border: 1px solid black; text-align: center; height: 50px; width: 76.7891px;">
+170-199
+</td>
+<td style="border: 1px solid black; text-align: center; height: 50px; width: 53.3125px;">
+≥200
 </td>
 </tr>
 </tbody>
@@ -138,7 +138,7 @@ HIGH
 </tr>
 <tr style="height: 50px;">
 <td style="border: 1px solid black; height: 50px; width: 147.227px;">
-<pre>Chol LDL</pre>
+<pre>LDL Chol.</pre>
 </td>
 <td style="border: 1px solid black; text-align: center; height: 50px; width: 92.4453px;">
 ≤110
@@ -152,21 +152,7 @@ HIGH
 </tr>
 <tr style="height: 50px;">
 <td style="border: 1px solid black; height: 50px; width: 147.227px;">
-<pre>Chol HDL</pre>
-</td>
-<td style="border: 1px solid black; text-align: center; height: 50px; width: 92.4453px;">
-≥170
-</td>
-<td style="border: 1px solid black; text-align: center; height: 50px; width: 76.7891px;">
-170-199
-</td>
-<td style="border: 1px solid black; text-align: center; height: 50px; width: 53.3125px;">
-≥200
-</td>
-</tr>
-<tr style="height: 50px;">
-<td style="border: 1px solid black; height: 50px; width: 147.227px;">
-<pre>Total Cholesterol</pre>
+<pre>HDL Chol.</pre>
 </td>
 <td style="border: 1px solid black; text-align: center; height: 50px; width: 92.4453px;">
 ≥45
@@ -176,6 +162,20 @@ HIGH
 </td>
 <td style="border: 1px solid black; text-align: center; height: 50px; width: 53.3125px;">
 ≤40
+</td>
+</tr>
+<tr style="height: 50px;">
+<td style="border: 1px solid black; height: 50px; width: 147.227px;">
+<pre>Total Chol.</pre>
+</td>
+<td style="border: 1px solid black; text-align: center; height: 50px; width: 92.4453px;">
+<170
+</td>
+<td style="border: 1px solid black; text-align: center; height: 50px; width: 76.7891px;">
+170-199
+</td>
+<td style="border: 1px solid black; text-align: center; height: 50px; width: 53.3125px;">
+≥200
 </td>
 </tr>
 </tbody>
