@@ -31,6 +31,7 @@ class _CholesterolScreenState extends State<CholesterolScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Score values
     final cholesterolValues = [100, 50 , 0];
     List<String> optionsTexts = AppLocalizations.of(context)!.txtCholesterolDialogOptions.split("|");
 

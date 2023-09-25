@@ -116,7 +116,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
 
     // Now let's go fo the diagnose
 
-    _diagnose = _determineDignose(_percentilValue);
+    _diagnose = _determineDiagnose(_percentilValue);
   }
 
   @override
@@ -272,7 +272,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
     );
   }
 
-  String _determineDignose(int percentile) {
+  String _determineDiagnose(int percentile) {
     /*
     overweight (>85th percentile and <95th percentile) and obesity (>95th percentile) and severe obesity (>99th percentile) .
     Therefore, for the PRECARINA application, we trained a Machine Learning model with data from the World Health Organization (

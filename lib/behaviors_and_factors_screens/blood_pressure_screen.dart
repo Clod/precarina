@@ -105,7 +105,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      VerticalSpace(height: (15.0 + height /4)),
+                      VerticalSpace(height: (15.0 + height / 4)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -374,14 +374,30 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
   String calculateScore(String diagnose, String medicado) {
     int score = 0;
 
-    if (diagnose == "patientDignoseNorm".i18n()) {
-      score = 100;
-    } else if (diagnose == "patientDignoseHT".i18n()) {
-      score = 66;
-    } else if (diagnose == "patientDignoseHT1".i18n()) {
-      score = 33;
-    } else if (diagnose == "patientDignoseHT2".i18n()) {
-      score = 0;
+    if (_precaModel.ageYears! < 16) {
+      if (diagnose == "patientDiagnoseNorm".i18n()) {
+        score = 100;
+      } else if (diagnose == "patientDiagnoseHT".i18n()) {
+        score = 66;
+      } else if (diagnose == "patientDiagnoseHT1".i18n()) {
+        score = 33;
+      } else if (diagnose == "patientDiagnoseHT2".i18n()) {
+        score = 0;
+      } else {
+        score = 0;
+      }
+    } else {
+      if (diagnose == "patientDiagnoseNorm".i18n()) {
+        score = 100;
+      } else if (diagnose == "patientDiagnoseHT".i18n()) {
+        score = 75;
+      } else if (diagnose == "patientDiagnoseHT1".i18n()) {
+        score = 50;
+      } else if (diagnose == "patientDiagnoseHT2".i18n()) {
+        score = 25;
+      } else {
+        score = 0;
+      }
     }
 
     if (medicado == "txtYes".i18n() && score >= 20) score -= 20;

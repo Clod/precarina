@@ -17,14 +17,14 @@ import 'package:precarina/model/pressure_data.dart';
 // String resultPad_95to95plus12 = "El percentilo de PAD determinado está entre 95 y 95 + 12 mmHg\n";
 // String resultPadAbove_95plus12 = "El percentilo de PAD determinado está por encima de percentilo 95 + 12 mmHg\n";
 //
-// String patientDignoseHT2 = "Paciente con hipertensión estadio 2";
-// String patientDignoseHT1 = "Paciente con hipertensión estadio 1";
-// String patientDignoseHT = "Paciente prehipertenso";
-// String patientDignoseNorm = "Paciente normotenso";
+// String patientDiagnoseHT2 = "Paciente con hipertensión estadio 2";
+// String patientDiagnoseHT1 = "Paciente con hipertensión estadio 1";
+// String patientDiagnoseHT = "Paciente prehipertenso";
+// String patientDiagnoseNorm = "Paciente normotenso";
 
-enum PatientDiagnosePas { patientDignoseHT2, patientDignoseHT1, patientDignoseHT, patientDignoseNorm }
+enum PatientDiagnosePas { patientDiagnoseHT2, patientDiagnoseHT1, patientDiagnoseHT, patientDiagnoseNorm }
 
-enum PatientDiagnosePad { patientDignoseHT2, patientDignoseHT1, patientDignoseHT, patientDignoseNorm }
+enum PatientDiagnosePad { patientDiagnoseHT2, patientDiagnoseHT1, patientDiagnoseHT, patientDiagnoseNorm }
 
 PatientDiagnosePas? patDiagPas;
 PatientDiagnosePad? patDiagPad;
@@ -50,6 +50,24 @@ List<String> searchBloodPressurePercentiles({
   List<List<int>> diastPressMatrix;
   List<double> heightsMatrix;
 
+  String patientDiagnose;
+
+  if (age >= 16) {
+    if (sistBP < 130 && diastBP < 85) {
+      patientDiagnose = "patientDiagnoseNorm".i18n();
+    } else if (sistBP <= 139 && diastBP <= 89) {
+      patientDiagnose = "patientDiagnoseHT".i18n();
+    } else if (sistBP <= 159 && diastBP <= 99) {
+      patientDiagnose = "patientDiagnoseHT1".i18n();
+    } else if (sistBP <= 179 && diastBP <= 109) {
+      patientDiagnose = "patientDiagnoseHT2".i18n();
+    } else {
+      patientDiagnose = "patientDiagnoseHT3".i18n();
+    }
+
+    return [patientDiagnose, "resultAgeOver16".i18n()];
+  }
+
   if (sex == PatientSex.female) {
     sistPressMatrix = femaleSistPressMatrix[age - 1];
     diastPressMatrix = femaleDiastPressMatrix[age - 1];
@@ -62,8 +80,6 @@ List<String> searchBloodPressurePercentiles({
 
   // Percentile values in the table.
   var bpTablePercs = ['50', '90', '95', '95 + 12 mmHg'];
-
-  String patientDignose;
 
   int col = 0;
   // A partir de la altura determino la columna a usar.
@@ -86,44 +102,44 @@ List<String> searchBloodPressurePercentiles({
   if (diastBP < diastPressMatrix[0][col]) {
     valorTablaDiast = diastPressMatrix[0][col];
     diastBpPerc = bpTablePercs[0];
-    patDiagPad = PatientDiagnosePad.patientDignoseNorm;
+    patDiagPad = PatientDiagnosePad.patientDiagnoseNorm;
     diastBelow = true;
   } else if (diastBP == diastPressMatrix[0][col]) {
     valorTablaDiast = diastPressMatrix[0][col];
-    patDiagPad = PatientDiagnosePad.patientDignoseNorm;
+    patDiagPad = PatientDiagnosePad.patientDiagnoseNorm;
     diastBpPerc = bpTablePercs[0];
   } else if (diastBP > diastPressMatrix[0][col] && diastBP <= diastPressMatrix[1][col]) {
     valorTablaDiast = diastPressMatrix[1][col];
     diastBpPerc = bpTablePercs[1];
     if (diastBP == diastPressMatrix[1][col]) {
-      patDiagPad = PatientDiagnosePad.patientDignoseHT;
+      patDiagPad = PatientDiagnosePad.patientDiagnoseHT;
     } else {
-      patDiagPad = PatientDiagnosePad.patientDignoseNorm;
+      patDiagPad = PatientDiagnosePad.patientDiagnoseNorm;
     }
   } else if (diastBP > diastPressMatrix[1][col] && diastBP <= diastPressMatrix[2][col]) {
     valorTablaDiast = diastPressMatrix[2][col];
     diastBpPerc = bpTablePercs[2];
     if (diastBP == diastPressMatrix[2][col]) {
-      patDiagPad = PatientDiagnosePad.patientDignoseHT1;
+      patDiagPad = PatientDiagnosePad.patientDiagnoseHT1;
     } else {
-      patDiagPad = PatientDiagnosePad.patientDignoseHT;
+      patDiagPad = PatientDiagnosePad.patientDiagnoseHT;
     }
   } else if (diastBP > diastPressMatrix[2][col] && diastBP <= diastPressMatrix[3][col]) {
     valorTablaDiast = diastPressMatrix[3][col];
     diastBpPerc = bpTablePercs[3];
     if (diastBP == diastPressMatrix[3][col]) {
-      patDiagPad = PatientDiagnosePad.patientDignoseHT2;
+      patDiagPad = PatientDiagnosePad.patientDiagnoseHT2;
     } else {
-      patDiagPad = PatientDiagnosePad.patientDignoseHT1;
+      patDiagPad = PatientDiagnosePad.patientDiagnoseHT1;
     }
   } else if (diastBP == diastPressMatrix[3][col]) {
     valorTablaDiast = diastPressMatrix[3][col];
     diastBpPerc = bpTablePercs[3];
-    patDiagPad = PatientDiagnosePad.patientDignoseHT2;
+    patDiagPad = PatientDiagnosePad.patientDiagnoseHT2;
   } else if (diastBP > diastPressMatrix[3][col]) {
     valorTablaDiast = diastPressMatrix[3][col];
     diastBpPerc = bpTablePercs[3];
-    patDiagPad = PatientDiagnosePad.patientDignoseHT2;
+    patDiagPad = PatientDiagnosePad.patientDiagnoseHT2;
     diastAvove = true;
   }
 
@@ -131,44 +147,44 @@ List<String> searchBloodPressurePercentiles({
   if (sistBP < sistPressMatrix[0][col]) {
     valorTablaSist = sistPressMatrix[0][col];
     sistBpPerc = bpTablePercs[0];
-    patDiagPas = PatientDiagnosePas.patientDignoseNorm;
+    patDiagPas = PatientDiagnosePas.patientDiagnoseNorm;
     sistBelow = true;
   } else if (sistBP == sistPressMatrix[0][col]) {
     valorTablaSist = sistPressMatrix[0][col];
-    patDiagPas = PatientDiagnosePas.patientDignoseNorm;
+    patDiagPas = PatientDiagnosePas.patientDiagnoseNorm;
     sistBpPerc = bpTablePercs[0];
   } else if (sistBP > sistPressMatrix[0][col] && sistBP <= sistPressMatrix[1][col]) {
     valorTablaSist = sistPressMatrix[1][col];
     sistBpPerc = bpTablePercs[1];
     if (sistBP == sistPressMatrix[1][col]) {
-      patDiagPas = PatientDiagnosePas.patientDignoseHT;
+      patDiagPas = PatientDiagnosePas.patientDiagnoseHT;
     } else {
-      patDiagPas = PatientDiagnosePas.patientDignoseNorm;
+      patDiagPas = PatientDiagnosePas.patientDiagnoseNorm;
     }
   } else if (sistBP > sistPressMatrix[1][col] && sistBP <= sistPressMatrix[2][col]) {
     valorTablaSist = sistPressMatrix[2][col];
     sistBpPerc = bpTablePercs[2];
     if (sistBP == sistPressMatrix[2][col]) {
-      patDiagPas = PatientDiagnosePas.patientDignoseHT1;
+      patDiagPas = PatientDiagnosePas.patientDiagnoseHT1;
     } else {
-      patDiagPas = PatientDiagnosePas.patientDignoseHT;
+      patDiagPas = PatientDiagnosePas.patientDiagnoseHT;
     }
   } else if (sistBP > sistPressMatrix[2][col] && sistBP <= sistPressMatrix[3][col]) {
     valorTablaSist = sistPressMatrix[3][col];
     sistBpPerc = bpTablePercs[3];
     if (sistBP == sistPressMatrix[3][col]) {
-      patDiagPas = PatientDiagnosePas.patientDignoseHT2;
+      patDiagPas = PatientDiagnosePas.patientDiagnoseHT2;
     } else {
-      patDiagPas = PatientDiagnosePas.patientDignoseHT1;
+      patDiagPas = PatientDiagnosePas.patientDiagnoseHT1;
     }
   } else if (sistBP == sistPressMatrix[3][col]) {
     valorTablaSist = sistPressMatrix[3][col];
     sistBpPerc = bpTablePercs[3];
-    patDiagPas = PatientDiagnosePas.patientDignoseHT2;
+    patDiagPas = PatientDiagnosePas.patientDiagnoseHT2;
   } else if (sistBP > sistPressMatrix[3][col]) {
     valorTablaSist = sistPressMatrix[3][col];
     sistBpPerc = bpTablePercs[3];
-    patDiagPas = PatientDiagnosePas.patientDignoseHT2;
+    patDiagPas = PatientDiagnosePas.patientDiagnoseHT2;
     sistAvove = true;
   }
 
@@ -180,17 +196,17 @@ List<String> searchBloodPressurePercentiles({
   Paciente con hipertensión estadio 2 (cuando al menos uno o los dos valores dan igual o más de 95+12)
 */
 
-  if (patDiagPas == PatientDiagnosePas.patientDignoseHT2 || patDiagPad == PatientDiagnosePad.patientDignoseHT2) {
-    patientDignose = "patientDignoseHT2".i18n();
-  } else if (patDiagPas == PatientDiagnosePas.patientDignoseHT1 || patDiagPad == PatientDiagnosePad.patientDignoseHT1) {
-    patientDignose = "patientDignoseHT1".i18n();
-  } else if (patDiagPas == PatientDiagnosePas.patientDignoseHT || patDiagPad == PatientDiagnosePad.patientDignoseHT) {
-    patientDignose = "patientDignoseHT".i18n();
+  if (patDiagPas == PatientDiagnosePas.patientDiagnoseHT2 || patDiagPad == PatientDiagnosePad.patientDiagnoseHT2) {
+    patientDiagnose = "patientDiagnoseHT2".i18n();
+  } else if (patDiagPas == PatientDiagnosePas.patientDiagnoseHT1 || patDiagPad == PatientDiagnosePad.patientDiagnoseHT1) {
+    patientDiagnose = "patientDiagnoseHT1".i18n();
+  } else if (patDiagPas == PatientDiagnosePas.patientDiagnoseHT || patDiagPad == PatientDiagnosePad.patientDiagnoseHT) {
+    patientDiagnose = "patientDiagnoseHT".i18n();
   } else {
-    patientDignose = "patientDignoseNorm".i18n();
+    patientDiagnose = "patientDiagnoseNorm".i18n();
   }
 
-  debugPrint("Diagnóstico: $patientDignose");
+  debugPrint("Diagnóstico: $patientDiagnose");
 
   debugPrint("Altura tabla utilizada: ${heightsMatrix[col]}");
   debugPrint("PAS: $sistBP Perc Sistólica: $sistBpPerc basado en tabla: $valorTablaSist");
@@ -227,5 +243,5 @@ List<String> searchBloodPressurePercentiles({
     result += "resultPad_95to95plus12".i18n();
   }
 
-  return [patientDignose, result];
+  return [patientDiagnose, result];
 }

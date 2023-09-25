@@ -7,7 +7,7 @@ String resultPasUnder_50 = "El percentilo de PAS determinado es menor a percenti
 String resultPasEqual_50 = "El percentilo de PAS determinado es igual a 50\n";
 String resultPas_50to90 = "El percentilo de PAS determinado está entre 50 y 90\n";
 String resultPas_90to95 = "El percentilo de PAS determinado está entre 90 y 95\n";
-String resultPas_95to95plus12 = "El percentilo de PAS determinado está entre 95 y 95 + 12 mmHg\n";
+String resultPas_95to95plus12 = "resultPas_95to95plus12";
 String resultPasAbove_95plus12 = "El percentilo de PAS determinado está por encima de percentilo 95 + 12 mmHg\n";
 
 String resultPadUnder_50 = "El percentilo de PAD determinado es menor a percentilo 50\n";
@@ -17,178 +17,280 @@ String resultPad_90to95 = "El percentilo de PAD determinado está entre 90 y 95\
 String resultPad_95to95plus12 = "El percentilo de PAD determinado está entre 95 y 95 + 12 mmHg\n";
 String resultPadAbove_95plus12 = "El percentilo de PAD determinado está por encima de percentilo 95 + 12 mmHg\n";
 
-String patientDignoseHT2 = "Paciente con hipertensión estadio 2";
-String patientDignoseHT1 = "Paciente con hipertensión estadio 1";
-String patientDignoseHT = "Paciente prehipertenso";
-String patientDignoseNorm = "Paciente normotenso";
+String patientDiagnoseHT2 = "Paciente con hipertensión estadio 2";
+String patientDiagnoseHT1 = "Paciente con hipertensión estadio 1";
+String patientDiagnoseHT = "Paciente prehipertenso";
+String patientDiagnoseNorm = "Paciente normotenso";
 
 void main() {
-  test('searchBloodPressurePercentiles test', () {
-    // Test case 1
-    debugPrint("***************************************************************");
-    debugPrint("Test 1.1");
-    expect(
-      searchBloodPressurePercentiles(
-        sex: PatientSex.male,
-        height: 125.0,
-        age: 9,
-        sistBP: 130,
-        diastBP: 190,
-      ),
-      equals([
-        'Paciente con hipertensión estadio 2',
-        'El percentilo de PAS determinado está por encima de percentilo 95 + 12 mmHg\n'
-            'El percentilo de PAD determinado está por encima de percentilo 95 + 12 mmHg\n'
-      ]),
-    );
+  group('Math operations', () {
+    test('searchBloodPressurePercentiles test', () {
+      // Test case 1
+      debugPrint("***************************************************************");
+      debugPrint("Test 1.1");
+      expect(
+        searchBloodPressurePercentiles(
+          sex: PatientSex.male,
+          height: 125.0,
+          age: 9,
+          sistBP: 130,
+          diastBP: 190,
+        ),
+        equals([
+          'patientDiagnoseHT2',
+          'resultPasAbove_95plus12'
+              'resultPadAbove_95plus12'
+        ]),
+      );
 
-    // Test case 2
-    debugPrint("***************************************************************");
-    debugPrint("Test 1.2");
-    expect(
-      searchBloodPressurePercentiles(
-        sex: PatientSex.male,
-        height: 125.0,
-        age: 9,
-        sistBP: 100,
-        diastBP: 60,
-      ),
-      equals([
-        'Paciente normotenso',
-        'El percentilo de PAS determinado está entre 50 y 90\n'
-            'El percentilo de PAD determinado está entre 50 y 90\n'
-      ]),
-    );
+      // Test case 2
+      debugPrint("***************************************************************");
+      debugPrint("Test 1.2");
+      expect(
+        searchBloodPressurePercentiles(
+          sex: PatientSex.male,
+          height: 125.0,
+          age: 9,
+          sistBP: 100,
+          diastBP: 60,
+        ),
+        equals([
+          'patientDiagnoseNorm',
+          'resultPas_50to90'
+              'resultPad_50to90'
+        ]),
+      );
 
-    // Test case 3
-    debugPrint("***************************************************************");
-    debugPrint("Test 1.3");
-    expect(
-      searchBloodPressurePercentiles(
-        sex: PatientSex.male,
-        height: 125.0,
-        age: 9,
-        sistBP: 108,
-        diastBP: 72,
-      ),
-      equals([
-        'Paciente prehipertenso',
-        'El percentilo de PAS determinado está entre 90 y 95\n'
-            'El percentilo de PAD determinado está entre 90 y 95\n'
-      ]),
-    );
+      // Test case 3
+      debugPrint("***************************************************************");
+      debugPrint("Test 1.3");
+      expect(
+        searchBloodPressurePercentiles(
+          sex: PatientSex.male,
+          height: 125.0,
+          age: 9,
+          sistBP: 108,
+          diastBP: 72,
+        ),
+        equals([
+          'patientDiagnoseHT',
+          'resultPas_90to95'
+              'resultPad_90to95'
+        ]),
+      );
 
-    // Test case 4
-    debugPrint("***************************************************************");
-    debugPrint("Test 1.4");
-    expect(
-      searchBloodPressurePercentiles(
-        sex: PatientSex.male,
-        height: 125.0,
-        age: 9,
-        sistBP: 120,
-        diastBP: 76,
-      ),
-      equals([
-        'Paciente con hipertensión estadio 1',
-        'El percentilo de PAS determinado está entre 95 y 95 + 12 mmHg\n'
-            'El percentilo de PAD determinado está entre 95 y 95 + 12 mmHg\n'
-      ]),
-    );
+      // Test case 4
+      debugPrint("***************************************************************");
+      debugPrint("Test 1.4");
+      expect(
+        searchBloodPressurePercentiles(
+          sex: PatientSex.male,
+          height: 125.0,
+          age: 9,
+          sistBP: 120,
+          diastBP: 76,
+        ),
+        equals([
+          'patientDiagnoseHT1',
+          'resultPas_95to95plus12'
+              'resultPad_95to95plus12'
+        ]),
+      );
+    });
   });
 
-  test('searchBloodPressurePercentiles test', () {
-    // Test case 2.1
-    debugPrint("***************************************************************");
-    debugPrint("Test 2.1");
-    expect(
-      searchBloodPressurePercentiles(
-        sex: PatientSex.male,
-        height: 103.0,
-        age: 3,
-        sistBP: 107,
-        diastBP: 63,
-      ),
-      equals([
-        'Paciente prehipertenso',
-        'El percentilo de PAS determinado está entre 90 y 95\n'
-            'El percentilo de PAD determinado está entre 90 y 95\n'
-      ]),
-    );
+  group('Math operations', () {
+    test('searchBloodPressurePercentiles test', () {
+      // Test case 2.1
+      debugPrint("***************************************************************");
+      debugPrint("Test 2.1");
+      expect(
+        searchBloodPressurePercentiles(
+          sex: PatientSex.male,
+          height: 103.0,
+          age: 3,
+          sistBP: 107,
+          diastBP: 63,
+        ),
+        equals([
+          'patientDiagnoseHT',
+          'resultPas_90to95'
+              'resultPad_90to95'
+        ]),
+      );
 
-    // Test case 2.2
-    debugPrint("***************************************************************");
-    debugPrint("Test 2.2");
-    expect(
-      searchBloodPressurePercentiles(
-        sex: PatientSex.male,
-        height: 162.0,
-        age: 14,
-        sistBP: 110,
-        diastBP: 80,
-      ),
-      equals([
-        "Paciente con hipertensión estadio 1",
-        'El percentilo de PAS determinado está entre 50 y 90\n'
-            'El percentilo de PAD determinado está entre 95 y 95 + 12 mmHg\n'
-      ]),
-    );
+      // Test case 2.2
+      debugPrint("***************************************************************");
+      debugPrint("Test 2.2");
+      expect(
+        searchBloodPressurePercentiles(
+          sex: PatientSex.male,
+          height: 162.0,
+          age: 14,
+          sistBP: 110,
+          diastBP: 80,
+        ),
+        equals([
+          "patientDiagnoseHT1",
+          'resultPas_50to90'
+              'resultPad_95to95plus12'
+        ]),
+      );
 
-    // Test case 2.3
-    debugPrint("***************************************************************");
-    debugPrint("Test 2.3");
-    expect(
-      searchBloodPressurePercentiles(
-        sex: PatientSex.female,
-        height: 142.0,
-        age: 8,
-        sistBP: 120,
-        diastBP: 80,
-      ),
-      equals([
-        "Paciente con hipertensión estadio 1",
-        "El percentilo de PAS determinado está entre 95 y 95 + 12 mmHg\n"
-            "El percentilo de PAD determinado está entre 95 y 95 + 12 mmHg\n"
-      ]),
-    );
+      // Test case 2.3
+      debugPrint("***************************************************************");
+      debugPrint("Test 2.3");
+      expect(
+        searchBloodPressurePercentiles(
+          sex: PatientSex.female,
+          height: 142.0,
+          age: 8,
+          sistBP: 120,
+          diastBP: 80,
+        ),
+        equals([
+          "patientDiagnoseHT1",
+          "resultPas_95to95plus12"
+              "resultPad_95to95plus12"
+        ]),
+      );
 
-    // Test case 2.4
-    debugPrint("***************************************************************");
-    debugPrint("Test 2.4");
-    expect(
-      searchBloodPressurePercentiles(
-        sex: PatientSex.female,
-        height: 90.0,
-        age: 6,
-        sistBP: 125,
-        diastBP: 86,
-      ),
-      equals([
-        'Paciente con hipertensión estadio 2',
-        'El percentilo de PAS determinado está por encima de percentilo 95 + 12 mmHg\n'
-            'El percentilo de PAD determinado está por encima de percentilo 95 + 12 mmHg\n'
-      ]),
-    );
+      // Test case 2.4
+      debugPrint("***************************************************************");
+      debugPrint("Test 2.4");
+      expect(
+        searchBloodPressurePercentiles(
+          sex: PatientSex.female,
+          height: 90.0,
+          age: 6,
+          sistBP: 125,
+          diastBP: 86,
+        ),
+        equals([
+          'patientDiagnoseHT2',
+          'resultPasAbove_95plus12'
+              'resultPadAbove_95plus12'
+        ]),
+      );
+    });
   });
 
-  test('searchBloodPressurePercentiles test', () {
-    // Test case 3.1
-    debugPrint("***************************************************************");
-    debugPrint("Test 3.1");
-    expect(
-      searchBloodPressurePercentiles(
-        sex: PatientSex.male,
-        height: 170.0,
-        age: 13,
-        sistBP: 100,
-        diastBP: 60,
-      ),
-      equals([
-        'Paciente normotenso',
-        'El percentilo de PAS determinado es menor a percentilo 50\n'
-            'El percentilo de PAD determinado es menor a percentilo 50\n'
-      ]),
-    );
+  group('Tests ', () {
+    test('searchBloodPressurePercentiles test', () {
+      // Test case 3.1
+      debugPrint("***************************************************************");
+      debugPrint("Test 3.1");
+      expect(
+        searchBloodPressurePercentiles(
+          sex: PatientSex.male,
+          height: 170.0,
+          age: 13,
+          sistBP: 100,
+          diastBP: 60,
+        ),
+        equals([
+          'patientDiagnoseNorm',
+          'resultPasUnder_50'
+              'resultPadUnder_50'
+        ]),
+      );
+    });
+  });
 
+  group('Test 16 & 16+ yars old ', () {
+    test('searchBloodPressurePercentiles test', () {
+      // Test case 4.1
+      debugPrint("***************************************************************");
+      debugPrint("Test 4.1");
+      expect(
+        searchBloodPressurePercentiles(
+          sex: PatientSex.female,
+          height: 150.0,
+          age: 16,
+          sistBP: 165,
+          diastBP: 105,
+        ),
+        equals([
+          'patientDiagnoseHT2',
+          'resultAgeOver16'
+        ]),
+      );
+    });
+
+    test('searchBloodPressurePercentiles test', () {
+      // Test case 4.2
+      debugPrint("***************************************************************");
+      debugPrint("Test 4.2");
+      expect(
+        searchBloodPressurePercentiles(
+          sex: PatientSex.male,
+          height: 180.0,
+          age: 16,
+          sistBP: 126,
+          diastBP: 70,
+        ),
+        equals([
+          'patientDiagnoseNorm',
+          'resultAgeOver16'
+        ]),
+      );
+    });
+
+    test('searchBloodPressurePercentiles test', () {
+      // Test case 4.3
+      debugPrint("***************************************************************");
+      debugPrint("Test 4.3");
+      expect(
+        searchBloodPressurePercentiles(
+          sex: PatientSex.female,
+          height: 150.0,
+          age: 16,
+          sistBP: 142,
+          diastBP: 70,
+        ),
+        equals([
+          'patientDiagnoseHT1',
+          'resultAgeOver16'
+        ]),
+      );
+    });
+
+    test('searchBloodPressurePercentiles test', () {
+      // Test case 4.4
+      debugPrint("***************************************************************");
+      debugPrint("Test 4.4");
+      expect(
+        searchBloodPressurePercentiles(
+          sex: PatientSex.female,
+          height: 160.0,
+          age: 17,
+          sistBP: 154,
+          diastBP: 90,
+        ),
+        equals([
+          'patientDiagnoseHT1',
+          'resultAgeOver16'
+        ]),
+      );
+    });
+
+    test('searchBloodPressurePercentiles test', () {
+      // Test case 4.5
+      debugPrint("***************************************************************");
+      debugPrint("Test 4.5");
+      expect(
+        searchBloodPressurePercentiles(
+          sex: PatientSex.male,
+          height: 160.0,
+          age: 16,
+          sistBP: 182,
+          diastBP: 110,
+        ),
+        equals([
+          'patientDiagnoseHT3',
+          'resultAgeOver16'
+        ]),
+      );
+    });
   });
 }
