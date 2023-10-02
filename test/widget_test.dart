@@ -7,13 +7,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:precarina/main.dart';
+import 'package:precarina/behaviors_and_factors_screens/blood_pressure_screen.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(const BloodPressureScreen());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

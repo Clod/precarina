@@ -260,7 +260,7 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
                     ),
                   ),
                   Text(
-                    " physicalActivityBlocks".i18n(),
+                    "physicalActivityBlocks".i18n(),
                     style: TextStyle(
                       fontSize: 18,
                       color: (disableQ4 ? Colors.black38 : Colors.black87),

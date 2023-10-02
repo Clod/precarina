@@ -46,3 +46,25 @@ https://www.wcpccs2023.org/event/1da8563e-0f65-486c-88df-70c3db431af5/summary
 
 Link a los participantes del Congreso:
 https://www.wcpccs2023.org/event/1da8563e-0f65-486c-88df-70c3db431af5/websitePage:f3433ae0-cdc1-47f9-bfa9-9fdc490f09d9
+
+claudiograsso@192 Downloads % ./sqlite3 blood_pressure.db
+create table percentiles(id INTEGER PRIMARY KEY, sex TEXT, age INTEGER, height REAL, systolic INTEGER, diastolic INTEGER, percentile TEXT);
+
+
+Con sexo y edad busco la altura inmediátamente superior
+
+select * from heights where age = age and sex = sex and height <= height
+
+si me da vacío me aseguro que la altura sea mayor que la máxima para esa edad y sexo
+
+Con edad, sexo y altura estándar busco el registro cuya PAS sea >= que la del paciente.
+Como puede haber varias, me quedo con la menor y esa me determina el percentil y, por ende, el
+diagnóstico para PAS
+
+Repetir para PAD
+
+Tomar el peor caso.
+
+
+
+----------------------------------

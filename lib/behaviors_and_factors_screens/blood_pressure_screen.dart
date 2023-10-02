@@ -11,7 +11,7 @@ import 'package:precarina/model/precarina_model.dart';
 import 'package:provider/provider.dart';
 
 import 'package:precarina/aux_functions/lose_input_warning.dart';
-import 'package:precarina/aux_functions/search_blood_pressure_percentile.dart';
+import 'package:precarina/aux_functions/search_blood_pressure_percentile_db.dart';
 import 'package:precarina/aux_functions/show_blood_pressure_warning.dart';
 import 'package:precarina/aux_widgets/vertical_space.dart';
 import 'package:precarina/help_pages/help_drawer.dart';
@@ -267,18 +267,20 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                       // Trigger interpolation button
                       ElevatedButton(
                         child: Text("txtCalculate".i18n()),
-                        onPressed: () {
+                        onPressed: () async {
                           if (_formKey.currentState!.validate() == true) {
                             // I will not enable cancellation until SnackBar gets dismissed
                             _cancelButtonDisabled = true;
                             _acceptButtonDisabled = true;
+                            debugPrint("Escuendo el teclado");
                             FocusScope.of(context).unfocus();
                             // PatientSex ps = (_controllerSex.text == "V" || _controllerSex.text == "v") ? PatientSex.male : PatientSex.female;
-                            _results = searchBloodPressurePercentiles(
+                            debugPrint("Llamo a la función");
+                            _results = await searchBloodPressurePercentiles(
                               sex: _precaModel.patientSex == PatientSex.female ? PatientSex.female : PatientSex.male,
                               height: _precaModel.height!,
                               age: _precaModel.ageYears!,
-                              sistBP: int.parse(_controllerSistAP.text),
+                              systBP: int.parse(_controllerSistAP.text),
                               diastBP: int.parse(_controllerDiastPA.text),
                             );
                             ScaffoldMessenger.of(context).showSnackBar(

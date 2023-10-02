@@ -36,6 +36,8 @@ List<String> searchBloodPressurePercentiles({
   required int sistBP,
   required int diastBP,
 }) {
+  debugPrint("Entrando a la función");
+
   String? diastBpPerc;
   String? sistBpPerc;
   int valorTablaSist = 0;
@@ -51,6 +53,8 @@ List<String> searchBloodPressurePercentiles({
   List<double> heightsMatrix;
 
   String patientDiagnose;
+
+  debugPrint("Preguntanto edad");
 
   if (age >= 16) {
     if (sistBP < 130 && diastBP < 85) {
@@ -68,11 +72,15 @@ List<String> searchBloodPressurePercentiles({
     return [patientDiagnose, "resultAgeOver16".i18n()];
   }
 
+  debugPrint("Es menor que 16");
+
   if (sex == PatientSex.female) {
+    debugPrint("Es mujer");
     sistPressMatrix = femaleSistPressMatrix[age - 1];
     diastPressMatrix = femaleDiastPressMatrix[age - 1];
     heightsMatrix = femaleHeightsMatrix[age - 1];
   } else {
+    debugPrint("Es varón");
     sistPressMatrix = maleSistPressMatrix[age - 1];
     diastPressMatrix = maleDiastPressMatrix[age - 1];
     heightsMatrix = maleHeightsMatrix[age - 1];
@@ -82,6 +90,8 @@ List<String> searchBloodPressurePercentiles({
   var bpTablePercs = ['50', '90', '95', '95 + 12 mmHg'];
 
   int col = 0;
+
+  debugPrint("Determinando altura");
   // A partir de la altura determino la columna a usar.
   // La edad determina la fila.
   if (height <= heightsMatrix[0]) {
@@ -97,6 +107,8 @@ List<String> searchBloodPressurePercentiles({
       }
     }
   }
+
+  debugPrint("Altura determinada");
 
   // Ahora recorro las filas de la tabla de presiones diastólicas
   if (diastBP < diastPressMatrix[0][col]) {

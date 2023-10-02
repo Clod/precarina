@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:precarina/aux_functions/search_blood_pressure_percentile.dart';
+import 'package:precarina/aux_functions/search_blood_pressure_percentile_db.dart';
 import 'package:precarina/model/precarina_model.dart';
+
+import 'package:flutter/widgets.dart';
+
 
 String resultPasUnder_50 = "El percentilo de PAS determinado es menor a percentilo 50\n";
 String resultPasEqual_50 = "El percentilo de PAS determinado es igual a 50\n";
@@ -22,9 +25,10 @@ String patientDiagnoseHT1 = "Paciente con hipertensión estadio 1";
 String patientDiagnoseHT = "Paciente prehipertenso";
 String patientDiagnoseNorm = "Paciente normotenso";
 
-void main() {
+void main() async {
+
   group('Math operations', () {
-    test('searchBloodPressurePercentiles test', () {
+    test('searchBloodPressurePercentiles test', () async {
       // Test case 1
       debugPrint("***************************************************************");
       debugPrint("Test 1.1");
@@ -33,8 +37,8 @@ void main() {
           sex: PatientSex.male,
           height: 125.0,
           age: 9,
-          sistBP: 130,
-          diastBP: 190,
+          systBP: 190,
+          diastBP: 130,
         ),
         equals([
           'patientDiagnoseHT2',
@@ -51,7 +55,7 @@ void main() {
           sex: PatientSex.male,
           height: 125.0,
           age: 9,
-          sistBP: 100,
+          systBP: 100,
           diastBP: 60,
         ),
         equals([
@@ -69,7 +73,7 @@ void main() {
           sex: PatientSex.male,
           height: 125.0,
           age: 9,
-          sistBP: 108,
+          systBP: 108,
           diastBP: 72,
         ),
         equals([
@@ -87,7 +91,7 @@ void main() {
           sex: PatientSex.male,
           height: 125.0,
           age: 9,
-          sistBP: 120,
+          systBP: 120,
           diastBP: 76,
         ),
         equals([
@@ -109,7 +113,7 @@ void main() {
           sex: PatientSex.male,
           height: 103.0,
           age: 3,
-          sistBP: 107,
+          systBP: 107,
           diastBP: 63,
         ),
         equals([
@@ -127,7 +131,7 @@ void main() {
           sex: PatientSex.male,
           height: 162.0,
           age: 14,
-          sistBP: 110,
+          systBP: 110,
           diastBP: 80,
         ),
         equals([
@@ -145,7 +149,7 @@ void main() {
           sex: PatientSex.female,
           height: 142.0,
           age: 8,
-          sistBP: 120,
+          systBP: 120,
           diastBP: 80,
         ),
         equals([
@@ -163,7 +167,7 @@ void main() {
           sex: PatientSex.female,
           height: 90.0,
           age: 6,
-          sistBP: 125,
+          systBP: 125,
           diastBP: 86,
         ),
         equals([
@@ -185,7 +189,7 @@ void main() {
           sex: PatientSex.male,
           height: 170.0,
           age: 13,
-          sistBP: 100,
+          systBP: 100,
           diastBP: 60,
         ),
         equals([
@@ -207,7 +211,7 @@ void main() {
           sex: PatientSex.female,
           height: 150.0,
           age: 16,
-          sistBP: 165,
+          systBP: 165,
           diastBP: 105,
         ),
         equals([
@@ -226,7 +230,7 @@ void main() {
           sex: PatientSex.male,
           height: 180.0,
           age: 16,
-          sistBP: 126,
+          systBP: 126,
           diastBP: 70,
         ),
         equals([
@@ -245,7 +249,7 @@ void main() {
           sex: PatientSex.female,
           height: 150.0,
           age: 16,
-          sistBP: 142,
+          systBP: 142,
           diastBP: 70,
         ),
         equals([
@@ -264,7 +268,7 @@ void main() {
           sex: PatientSex.female,
           height: 160.0,
           age: 17,
-          sistBP: 154,
+          systBP: 154,
           diastBP: 90,
         ),
         equals([
@@ -283,7 +287,7 @@ void main() {
           sex: PatientSex.male,
           height: 160.0,
           age: 16,
-          sistBP: 182,
+          systBP: 182,
           diastBP: 110,
         ),
         equals([
