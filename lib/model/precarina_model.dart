@@ -10,6 +10,10 @@ class PrecarinaModel extends ChangeNotifier {
   int? diabetesValue;
   int? bloodPressureValue;
 
+  bool showGreenSmiley = false;
+  bool showRedSmiley = false;
+  bool showYellowSmiley = false;
+
   double? average;
 
 //  String? sex;
@@ -39,6 +43,13 @@ class PrecarinaModel extends ChangeNotifier {
               diabetesValue!.toDouble() +
               bloodPressureValue!.toDouble()) /
           8;
+      if (average! < 33) {
+        showRedSmiley = true;
+      } else if (average! > 66) {
+        showGreenSmiley = true;
+      } else {
+        showYellowSmiley = true;
+      }
     } else {
       average = null;
     }
@@ -69,6 +80,9 @@ class PrecarinaModel extends ChangeNotifier {
     diabetesValue = null;
     bloodPressureValue = null;
     average = null;
+    showGreenSmiley = false;
+    showRedSmiley = false;
+    showYellowSmiley = false;
     notifyListeners();
   }
 }

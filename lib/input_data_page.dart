@@ -101,27 +101,58 @@ class _InputDataPageState extends State<InputDataPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            SizedBox(
-              height: 150.0,
-              width: 150.0,
-              child: Image.asset(
-                'assets/images/socaba_redondo.png',
-
-              ),
-            ),
-            GestureDetector(
-              onTap: () async {
-                await launchUrl(Uri.parse('https://www.socaba.net'));
-              },
-              child: const Text(
-                'Sociedad de Cardiología de Buenos aires',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  decoration: TextDecoration.underline,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 130.0,
+                      width: 130.0,
+                      child: Image.asset(
+                        'assets/images/socaba_redondo.png',
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        await launchUrl(Uri.parse('https://www.socaba.net'));
+                      },
+                      child: const Text(
+                        'Sociedad de Cardiología\nde Buenos aires',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
+                Column(children: [
+                  SizedBox(
+                    height: 130.0,
+                    width: 130.0,
+                    child: Image.asset(
+                      'assets/images/hospital_gutierrez.png',
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      await launchUrl(Uri.parse('https://buenosaires.gob.ar/salud/hospital-de-ninos-dr-ricardo-gutierrez'));
+                    },
+                    child: const Text(
+                      'Hospital de Niños\nRicardo Gutiérrez',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                ])
+              ],
             ),
             const VerticalSpace(
               height: 5.0,

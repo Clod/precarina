@@ -76,9 +76,66 @@ class _MainScreenState extends State<MainScreen> {
               buildOneRow(context, AppLocalizations.of(context)!.txtBloodPressureButton, Colors.blue, const BloodPressureScreen(),
                   precaModel.bloodPressureValue),
               const Expanded(child: SizedBox(height: 5)),
-              GestureDetector(
-                onLongPress: () => precaModel.resetValues(), // notifylisteners() ensures update of UI
-                child: buildPrettyGauge(precaModel.average),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Stack(children: [
+                    Visibility(
+                      visible: precaModel.showGreenSmiley,
+                      child: Image.asset(
+                        "assets/images/green_smiley.png",
+                        width: 50.0,
+                        height: 50.0,
+                      ),
+                    ),
+                    Visibility(
+                      visible: precaModel.showYellowSmiley,
+                      child: Image.asset(
+                        "assets/images/yellow_smiley.png",
+                        width: 50.0,
+                        height: 50.0,
+                      ),
+                    ),
+                    Visibility(
+                      visible: precaModel.showRedSmiley,
+                      child: Image.asset(
+                        "assets/images/red_smiley.png",
+                        width: 50.0,
+                        height: 50.0,
+                      ),
+                    )
+                  ]),
+                  GestureDetector(
+                    onLongPress: () => precaModel.resetValues(), // notifylisteners() ensures update of UI
+                    child: buildPrettyGauge(precaModel.average),
+                  ),
+                  Stack(children: [
+                    Visibility(
+                      visible: precaModel.showGreenSmiley,
+                      child: Image.asset(
+                        "assets/images/green_smiley.png",
+                        width: 50.0,
+                        height: 50.0,
+                      ),
+                    ),
+                    Visibility(
+                      visible: precaModel.showYellowSmiley,
+                      child: Image.asset(
+                        "assets/images/yellow_smiley.png",
+                        width: 50.0,
+                        height: 50.0,
+                      ),
+                    ),
+                    Visibility(
+                      visible: precaModel.showRedSmiley,
+                      child: Image.asset(
+                        "assets/images/red_smiley.png",
+                        width: 50.0,
+                        height: 50.0,
+                      ),
+                    )
+                  ]),
+                ],
               ),
               GestureDetector(
                 onTap: () async {
