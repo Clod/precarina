@@ -182,7 +182,7 @@ Future<List<String>> searchBloodPressurePercentiles({
     result = "resultPasEqual_50".i18n();
     patDiagPas = PatientDiagnosePas.patientDiagnoseNorm;
     // Entre 50+ y 90
-  } else if (systBP > syst50 && systBP <= syst90) {
+  } else if (systBP > syst50 && systBP < syst90) {
     result = "resultPas_50to90".i18n();
     // 90
     if (systBP == syst90) {
@@ -192,7 +192,7 @@ Future<List<String>> searchBloodPressurePercentiles({
       patDiagPas = PatientDiagnosePas.patientDiagnoseNorm;
     }
     // Entre 90 y 95
-  } else if (systBP > syst90 && systBP <= syst95) {
+  } else if (systBP >= syst90 && systBP < syst95) {
     result = "resultPas_90to95".i18n();
     // =95
     if (systBP == syst95) {
@@ -202,14 +202,14 @@ Future<List<String>> searchBloodPressurePercentiles({
       patDiagPas = PatientDiagnosePas.patientDiagnoseHT;
     }
     // +95 y <= 95+12
-  } else if (systBP > syst95 && systBP <= syst95plus12) {
+  } else if (systBP >= syst95 && systBP < syst95plus12) {
     result = "resultPas_95to95plus12".i18n();
     if (systBP == syst95plus12) {
       patDiagPas = PatientDiagnosePas.patientDiagnoseHT2;
     } else {
       patDiagPas = PatientDiagnosePas.patientDiagnoseHT1;
     }
-  } else if (systBP >= syst95plus12) {
+  } else if (systBP > syst95plus12) {
     result = "resultPasAbove_95plus12".i18n();
     patDiagPas = PatientDiagnosePas.patientDiagnoseHT2;
   }
@@ -224,7 +224,7 @@ Future<List<String>> searchBloodPressurePercentiles({
     result += "resultPadEqual_50".i18n();
     patDiagPad = PatientDiagnosePad.patientDiagnoseNorm;
     // Entre 50+ y 90
-  } else if (diastBP > diast50 && diastBP <=diast90) {
+  } else if (diastBP >= diast50 && diastBP < diast90) {
     result += "resultPad_50to90".i18n();
     // 90
     if (diastBP == diast90) {
@@ -234,7 +234,7 @@ Future<List<String>> searchBloodPressurePercentiles({
       patDiagPad = PatientDiagnosePad.patientDiagnoseNorm;
     }
     // Entre 90 y 95
-  } else if (diastBP > diast90 && diastBP <= diast95) {
+  } else if (diastBP >= diast90 && diastBP < diast95) {
     result += "resultPad_90to95".i18n();
     // =95
     if (diastBP == diast95) {
@@ -244,14 +244,14 @@ Future<List<String>> searchBloodPressurePercentiles({
       patDiagPad = PatientDiagnosePad.patientDiagnoseHT;
     }
     // +95 y <= 95+12
-  } else if (diastBP > diast95 && diastBP <= diast95plus12) {
+  } else if (diastBP >= diast95 && diastBP <= diast95plus12) {
     result += "resultPad_95to95plus12".i18n();
     if (diastBP == diast95plus12) {
       patDiagPad = PatientDiagnosePad.patientDiagnoseHT2;
     } else {
       patDiagPad = PatientDiagnosePad.patientDiagnoseHT1;
     }
-  } else if (diastBP >= diast95plus12) {
+  } else if (diastBP > diast95plus12) {
     result += "resultPadAbove_95plus12".i18n();
     patDiagPad = PatientDiagnosePad.patientDiagnoseHT2;
   }

@@ -107,8 +107,8 @@ class _InputDataPageState extends State<InputDataPage> {
                 Column(
                   children: [
                     SizedBox(
-                      height: 130.0,
-                      width: 130.0,
+                      height: 110.0,
+                      width: 110.0,
                       child: Image.asset(
                         'assets/images/socaba_redondo.png',
                       ),
@@ -123,6 +123,7 @@ class _InputDataPageState extends State<InputDataPage> {
                         style: TextStyle(
                           decoration: TextDecoration.underline,
                           fontWeight: FontWeight.bold,
+                          fontSize: 12.0,
                           color: Colors.blue,
                         ),
                       ),
@@ -131,8 +132,8 @@ class _InputDataPageState extends State<InputDataPage> {
                 ),
                 Column(children: [
                   SizedBox(
-                    height: 130.0,
-                    width: 130.0,
+                    height: 110.0,
+                    width: 110.0,
                     child: Image.asset(
                       'assets/images/hospital_gutierrez.png',
                     ),
@@ -147,6 +148,7 @@ class _InputDataPageState extends State<InputDataPage> {
                       style: TextStyle(
                         decoration: TextDecoration.underline,
                         fontWeight: FontWeight.bold,
+                        fontSize: 12.0,
                         color: Colors.blue,
                       ),
                     ),

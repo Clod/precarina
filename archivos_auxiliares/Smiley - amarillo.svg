@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3 (0e150ed, 2023-07-21)"
+   sodipodi:docname="Smiley - amarillo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.92737795"
+     inkscape:cx="396.81772"
+     inkscape:cy="561.25984"
+     inkscape:window-width="2016"
+     inkscape:window-height="1184"
+     inkscape:window-x="253"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g1"
+       inkscape:export-filename="yellow_miley.png"
+       inkscape:export-xdpi="55.642677"
+       inkscape:export-ydpi="55.642677">
+      <circle
+         style="fill:#ffff00;stroke-width:0.264583"
+         id="path1"
+         cx="104.99136"
+         cy="123.82131"
+         r="57.06052" />
+      <g
+         id="g13"
+         transform="translate(0.47490692)">
+        <circle
+           style="fill:#1a1a1a;stroke:#000000;stroke-width:0.264583"
+           id="path4"
+           cx="83.349792"
+           cy="107.27377"
+           r="7.132565" />
+        <circle
+           style="fill:#1a1a1a;stroke:#000000;stroke-width:0.264583"
+           id="circle4"
+           cx="125.68312"
+           cy="107.27377"
+           r="7.132565" />
+      </g>
+      <path
+         style="fill:#1a1a1a;stroke:#000000;stroke-width:1.965;stroke-dasharray:none"
+         d="M 79.212888,148.07205 H 130.76984"
+         id="path13"
+         sodipodi:nodetypes="cc" />
+    </g>
+  </g>
+</svg>
