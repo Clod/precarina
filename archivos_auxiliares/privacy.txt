@@ -1,0 +1,35 @@
+<strong>Effective Date:</strong> January 1st, 2024
+
+The developer is committed to protecting the privacy of our users. This Privacy Policy explains how we do not collect, use, and/or disclose information in connection with our mobile application, PRECARINA (the "App").
+<h3>Does PRECARINA collect any information?</h3>
+<strong><em>PRECARINA does not collect any personal information from its users.</em></strong>
+
+This includes:
+<ul>
+ 	<li>Name</li>
+ 	<li>Email address</li>
+ 	<li>Phone number</li>
+ 	<li>Location data</li>
+ 	<li>Contact information</li>
+ 	<li>Device identifiers</li>
+ 	<li>Any other information that could be used to identify an individual user</li>
+ 	<li>Information Used for Calculations</li>
+</ul>
+The App allows users to input data for the purpose of performing calculations within the App itself.
+
+This data includes:
+<ul>
+ 	<li>Gender</li>
+ 	<li>Age</li>
+ 	<li>Height</li>
+ 	<li>Weight</li>
+</ul>
+This data is used solely for performing the calculations within the current session of the App and is never stored locally on the device or transmitted remotely. Once the user closes the App, all such data is lost.
+<h3>Do We Use Your Information?</h3>
+We do not use any personal information for any purpose.
+<h3>Information Sharing and Disclosure</h3>
+We do not share or disclose any information collected through the App with any third parties. Actually, we do not collect any.
+<h3>Contact:</h3>
+If you have any questions about this Privacy Policy, please contact us at:
+
+claudio.grasso@yahoo.com
