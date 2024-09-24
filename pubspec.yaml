@@ -18,8 +18,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # of the product and file versions while build-number is used as the build suffix.
 
 # NO OLVIDAR CAMBIAR EL ABOUT (MNEMONIC A: Edit -> Bookmarks -> Go to manemonic)
-version: 2.1.0+19
-# NO OLVIDAR CAMBIAR EL ABOUT
+version: 2.2.0+21
+# NO OLVIDAR CAMBIAR EL ABOUT (lib/help_pages/help_drawer.dart)
 
 environment:
   sdk: '>=3.0.5 <4.0.0'
@@ -44,7 +44,7 @@ dependencies:
   flutter_exit_app: ^1.1.2
   flutter_localizations:
     sdk: flutter
-  intl: ^0.18.0
+  intl: ^0.19.0
   url_launcher: ^6.1.12
   flutter_html: ^3.0.0-beta.2
   provider: ^6.0.5
@@ -57,14 +57,14 @@ dependencies:
   # Se ve desde los dos Runners (el de arriba y el del iconito)
   tflite_flutter: ^0.10.1
   # https://dart-lang.github.io/markdown/
-  flutter_markdown: ^0.6.17
+  flutter_markdown: ^0.7.2
   time_machine: ^0.9.17
   localization: ^2.1.0
   flutter_form_builder: ^9.1.0
   mask_text_input_formatter: ^2.5.0
-  form_builder_validators: ^9.0.0
+  form_builder_validators: ^10.0.1
   flutter_spinbox: ^0.13.1
-  flutter_widget_from_html: ^0.10.3
+  flutter_widget_from_html: ^0.15.1
   sqflite: ^2.3.0
   path: ^1.8.3
   path_provider: ^2.1.1
@@ -86,7 +86,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^4.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -10,6 +10,7 @@ import 'package:precarina/help_pages/cholesterol_help.dart';
 import 'package:precarina/help_pages/diabetes_help.dart';
 import 'package:precarina/help_pages/diet_help.dart';
 import 'package:precarina/help_pages/sleep_help.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // https://blog.logrocket.com/how-to-add-navigation-drawer-flutter/
 class HelpDrawer extends StatelessWidget {
@@ -155,9 +156,27 @@ class HelpDrawer extends StatelessWidget {
               Icons.local_play,
             ),
             applicationName: 'PRECARINA',
-            applicationVersion: '2.1.0 Build 19',
+            applicationVersion: '2.2.0 Build 20',
             applicationLegalese: "txtApplicationLegalese".i18n(),
             aboutBoxChildren: [
+              const SizedBox(
+                height: 5.0,
+              ),
+              GestureDetector(
+                onTap: () async {
+                  await launchUrl(Uri.parse('https://grasso.net.ar/precarina/precarina-data-security/'));
+                },
+                child: Text(
+                  "txtPrivacyPolicy".i18n(),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    decoration: TextDecoration.underline,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12.0,
+                    color: Colors.blue,
+                  ),
+                ),
+              ),
               const SizedBox(
                 height: 5.0,
               ),
