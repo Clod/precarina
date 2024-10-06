@@ -186,7 +186,7 @@ class _InputDataPageState extends State<InputDataPage> {
                   SizedBox(
                     width: 150.0,
                     child: RadioListTile(
-                      title: Text("sexFemale".i18n()),
+                      title: Text("sexFemale".i18n(), style: const TextStyle(fontSize: 14.0),),
                       value: PatientSex.female,
                       groupValue: _selectedOption,
                       onChanged: (value) {
@@ -200,7 +200,7 @@ class _InputDataPageState extends State<InputDataPage> {
                   SizedBox(
                     width: 150.0,
                     child: RadioListTile(
-                      title: Text("sexMale".i18n()),
+                      title: Text("sexMale".i18n(), style: const TextStyle(fontSize: 14.0),),
                       value: PatientSex.male,
                       groupValue: _selectedOption,
                       onChanged: (value) {
