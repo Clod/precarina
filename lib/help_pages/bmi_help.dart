@@ -3,10 +3,10 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 class BmiHelp extends StatelessWidget {
   const BmiHelp({
-    Key? key,
+    super.key,
     required this.title,
     required this.content,
-  }) : super(key: key);
+  });
 
   final String title;
   final String content;

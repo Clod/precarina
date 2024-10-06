@@ -4,10 +4,10 @@ import 'package:precarina/help_pages_texts/diet_help_texts.dart';
 
 class DietHelp extends StatelessWidget {
   const DietHelp({
-    Key? key,
+    super.key,
     required this.title,
     required this.content,
-  }) : super(key: key);
+  });
 
   final String title;
   final String content;

@@ -169,7 +169,7 @@ class _MainScreenState extends State<MainScreen> {
           width: 150.0,
           height: 35.0,
           child: ElevatedButton(
-            style: ButtonStyle(backgroundColor: MaterialStateProperty.all(buttonColor)),
+            style: ButtonStyle(backgroundColor: WidgetStateProperty.all(buttonColor)),
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(

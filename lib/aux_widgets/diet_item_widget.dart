@@ -6,7 +6,7 @@ class DietItem extends StatelessWidget {
   final String title;
   final List<String> opciones;
 
-  const DietItem({Key? key, required this.callback, required this.index, required this.title, required this.opciones}) : super(key: key);
+  const DietItem({super.key, required this.callback, required this.index, required this.title, required this.opciones});
 
   @override
   Widget build(BuildContext context) {

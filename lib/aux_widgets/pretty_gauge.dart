@@ -147,7 +147,7 @@ class PrettyGauge extends StatefulWidget {
   PrettyGaugeState createState() => PrettyGaugeState();
 
   const PrettyGauge(
-      {Key? key,
+      {super.key,
       this.gaugeSize = 200,
       this.segments,
       this.minValue = 0,
@@ -160,8 +160,7 @@ class PrettyGauge extends StatefulWidget {
       this.displayWidget,
       this.showMarkers = true,
       this.startMarkerStyle = const TextStyle(fontSize: 10, color: Colors.black),
-      this.endMarkerStyle = const TextStyle(fontSize: 10, color: Colors.black)})
-      : super(key: key);
+      this.endMarkerStyle = const TextStyle(fontSize: 10, color: Colors.black)});
 }
 
 class PrettyGaugeState extends State<PrettyGauge> {

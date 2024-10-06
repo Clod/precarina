@@ -6,10 +6,10 @@ const spanishText ="La actividad física es de vital importancia para la salud d
 
 class PhysicalActivityHelp extends StatelessWidget {
   const PhysicalActivityHelp({
-    Key? key,
+    super.key,
     required this.title,
     required this.content,
-  }) : super(key: key);
+  });
 
   final String title;
   final String content;

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class VerticalSpace extends StatelessWidget {
   final double height;
 
-  const VerticalSpace({Key? key, required this.height}) : super(key: key);
+  const VerticalSpace({super.key, required this.height});
 
   @override
   Widget build(BuildContext context) {

@@ -4,10 +4,10 @@ import 'package:precarina/help_pages_texts/sleep_help_texts.dart';
 
 class SleepHelp extends StatelessWidget {
   const SleepHelp({
-    Key? key,
+    super.key,
     required this.title,
     required this.content,
-  }) : super(key: key);
+  });
 
   final String title;
   final String content;

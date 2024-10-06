@@ -4,10 +4,10 @@ import 'package:precarina/help_pages_texts/cholesterol_help_texts.dart';
 
 class CholesterolHelp extends StatelessWidget {
   const CholesterolHelp({
-    Key? key,
+    super.key,
     required this.title,
     required this.content,
-  }) : super(key: key);
+  });
 
   final String title;
   final String content;
