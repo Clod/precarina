@@ -95,7 +95,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
     debugPrint(imc.toString());
 
     _interpreter.run(input, output);
-// debugPrint the output
+    // debugPrint the output
     debugPrint(input.toString());
     debugPrint(output.toString());
     setState(() {
@@ -115,7 +115,6 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
     });
 
     // Now let's go fo the diagnose
-
     _diagnose = _determineDiagnose(_percentilValue);
   }
 
@@ -136,122 +135,123 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("Building Wdiget");
+    debugPrint("Building Widget");
 
-    // final bmiValues = [100, 70, 30, 15, 0];
-    // List<String> optionsTexts = AppLocalizations.of(context)!.txtBodyMassIndexDialogOptions.split("|");
-
-    // final Orientation orientation = MediaQuery.of(context).orientation;
-    // final Size dialogSize = (orientation == Orientation.portrait) ? Size(400, 600) : Size(600, 400);
-
-    return WillPopScope(
-      onWillPop: () => showInputLostWarning(context),
-      child: Scaffold(
-        // resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.txtBodyMassIndexButton),
+    return Scaffold(
+      // resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.txtBodyMassIndexButton),
+        // Add a back button that shows a warning dialog
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () async {
+            final shouldPop = await showInputLostWarning(context);
+            if (shouldPop && context.mounted) {
+              Navigator.of(context).pop();
+            }
+          },
         ),
-        drawer: const HelpDrawer(),
-        body: SafeArea(
-          child: Column(
-            children: [
-              const Expanded(
-                flex: 1,
-                child: PagesHeader(),
-              ),
-              Expanded(
-                flex: 3,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      const VerticalSpace(height: 15.0),
-                       Text(
-                        "txtBMI".i18n() ,
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
-                      ),
-                      const VerticalSpace(height: 5.0),
-                      Text(
-                        _imc,
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
-                      ),
-                      const VerticalSpace(height: 10.0),
-                       Text(
-                        "txtPercentile".i18n(),
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
-                      ),
-                      const VerticalSpace(height: 5.0),
-                      Text(
-                        _percentil,
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
-                      ),
-                      const VerticalSpace(height: 10.0),
-                       Text(
-                        "txtDiagnose".i18n(),
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
-                      ),
-                      const VerticalSpace(height: 5.0),
-                      Text(
-                        _diagnose,
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
-                      ),
-                      const VerticalSpace(height: 15.0),
-                       Text(
-                        "txtScore".i18n(),
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
-                      ),
-                      const VerticalSpace(height: 5.0),
-                      Text(
-                        _precaModel.bmiValue != null ? _precaModel.bmiValue!.toString() : "txtPressCalc".i18n(),
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
-                      ),
-                      const VerticalSpace(height: 15.0),
-                      ElevatedButton(
-                        onPressed: () {
-                          _estimatePercentile(context);
-                          // percentile 5 to < percentil 85 => 100
-                          if (_percentilValue < 85) {
-                            _precaModel.bmiValue = 100;
-                            // percentile 85  to < percentil 95 => 70
-                          } else if (_percentilValue < 97) {
-                            _precaModel.bmiValue = 70;
-                            // percentile 97 to < 120% of percentile 97 => 30
-                            // 120% of percentil 97 to < 140% of percentile 97 => 15
-                            // ≥ 140% of percentile 97 => 0
-                          } else {
-                            _precaModel.bmiValue = getScoreOver97();
-                            debugPrint("Score over 97: ${_precaModel.bmiValue.toString()}");
-                            // _precaModel.notifyListeners();
-                          }
-                          _precaModel.calculateAverage();
-                        },
-                        child:  Text("txtCalculate".i18n()),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              _precaModel.bmiValue = null;
-                              Navigator.pop(context);
-                            },
-                            child:  Text( "txtCancel".i18n()),
-                          ),
-                          const SizedBox(width: 10.0),
-                          // Accept button
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text("txtAccept".i18n()),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+      ),
+      drawer: const HelpDrawer(),
+      body: SafeArea(
+        child: Column(
+          children: [
+            const Expanded(
+              flex: 1,
+              child: PagesHeader(),
+            ),
+            Expanded(
+              flex: 3,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const VerticalSpace(height: 15.0),
+                    Text(
+                      "txtBMI".i18n(),
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                    ),
+                    const VerticalSpace(height: 5.0),
+                    Text(
+                      _imc,
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+                    ),
+                    const VerticalSpace(height: 10.0),
+                    Text(
+                      "txtPercentile".i18n(),
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                    ),
+                    const VerticalSpace(height: 5.0),
+                    Text(
+                      _percentil,
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+                    ),
+                    const VerticalSpace(height: 10.0),
+                    Text(
+                      "txtDiagnose".i18n(),
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                    ),
+                    const VerticalSpace(height: 5.0),
+                    Text(
+                      _diagnose,
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+                    ),
+                    const VerticalSpace(height: 15.0),
+                    Text(
+                      "txtScore".i18n(),
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                    ),
+                    const VerticalSpace(height: 5.0),
+                    Text(
+                      _precaModel.bmiValue != null ? _precaModel.bmiValue!.toString() : "txtPressCalc".i18n(),
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+                    ),
+                    const VerticalSpace(height: 15.0),
+                    ElevatedButton(
+                      onPressed: () {
+                        _estimatePercentile(context);
+                        // percentile 5 to < percentil 85 => 100
+                        if (_percentilValue < 85) {
+                          _precaModel.bmiValue = 100;
+                          // percentile 85  to < percentil 95 => 70
+                        } else if (_percentilValue < 97) {
+                          _precaModel.bmiValue = 70;
+                          // percentile 97 to < 120% of percentile 97 => 30
+                          // 120% of percentil 97 to < 140% of percentile 97 => 15
+                          // ≥ 140% of percentile 97 => 0
+                        } else {
+                          _precaModel.bmiValue = getScoreOver97();
+                          debugPrint("Score over 97: ${_precaModel.bmiValue.toString()}");
+                          // _precaModel.notifyListeners();
+                        }
+                        _precaModel.calculateAverage();
+                      },
+                      child: Text("txtCalculate".i18n()),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            _precaModel.bmiValue = null;
+                            Navigator.of(context).pop();
+                          },
+                          child: Text("txtCancel".i18n()),
+                        ),
+                        const SizedBox(width: 10.0),
+                        // Accept button
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text("txtAccept".i18n()),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
               ),
-            ], // Children
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -260,7 +260,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
   showSnackbar(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content:  Text("txtTradNotLaded".i18n()),
+        content: Text("txtTradNotLaded".i18n()),
         duration: const Duration(days: 1),
         action: SnackBarAction(
           label: "txtDone".i18n(),

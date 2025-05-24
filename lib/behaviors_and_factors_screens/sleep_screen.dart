@@ -68,83 +68,84 @@ class _SleepScreenState extends State<SleepScreen> {
   Widget build(BuildContext context) {
     bc = context;
 
-    return WillPopScope(
-      onWillPop: () => showInputLostWarning(context),
-      child: Scaffold(
-        // resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.txtSleepButton),
+    return Scaffold(
+      // resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.txtSleepButton),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => showInputLostWarning(context),
         ),
-        drawer: const HelpDrawer(),
-        body: SafeArea(
-          child: Column(
-            children: [
-              const Expanded(
-                flex: 1,
-                child: PagesHeader(),
-              ),
-              Expanded(
-                flex: 3,
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const VerticalSpace(height: 20.0),
-                      Text(
-                        "txtTotalSleepTime".i18n(),
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      const VerticalSpace(height: 15.0),
-                      Container(
-                        width: 80.0,
-                        color: Colors.yellow[200],
-                        child: CupertinoSpinBox(
-                          min: 1,
-                          max: 23,
-                          value: 0,
-                          showCursor: false,
-                          textStyle: const TextStyle(
-                            fontSize: 35.0,
-                            color: Colors.blueAccent,
-                          ),
-                          direction: Axis.vertical,
-                          onChanged: (value) {
-                            setState(() {
-                              enableAcceptButton = true;
-                              determineSleepScore(value.truncate());
-                            });
-                            debugPrint("$value");
-                          },
+      ),
+      drawer: const HelpDrawer(),
+      body: SafeArea(
+        child: Column(
+          children: [
+            const Expanded(
+              flex: 1,
+              child: PagesHeader(),
+            ),
+            Expanded(
+              flex: 3,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const VerticalSpace(height: 20.0),
+                    Text(
+                      "txtTotalSleepTime".i18n(),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    const VerticalSpace(height: 15.0),
+                    Container(
+                      width: 80.0,
+                      color: Colors.yellow[200],
+                      child: CupertinoSpinBox(
+                        min: 1,
+                        max: 23,
+                        value: 0,
+                        showCursor: false,
+                        textStyle: const TextStyle(
+                          fontSize: 35.0,
+                          color: Colors.blueAccent,
                         ),
+                        direction: Axis.vertical,
+                        onChanged: (value) {
+                          setState(() {
+                            enableAcceptButton = true;
+                            determineSleepScore(value.truncate());
+                          });
+                          debugPrint("$value");
+                        },
                       ),
-                      const VerticalSpace(height: 20.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ElevatedButton(
-                            child: Text(AppLocalizations.of(context)!.txtButtonCancel),
-                            onPressed: () => Navigator.maybePop(context),
-                          ),
-                          const HorizontalSpace(width: 15.0),
-                          ElevatedButton(
-                            onPressed: enableAcceptButton
-                                ? () {
-                                    debugPrint("Sueño Value en Screen: ${precaModel.sleepValue}");
-                                    precaModel.calculateAverage();
-                                    Navigator.of(context).pop();
-                                  }
-                                : null,
-                            child: Text(AppLocalizations.of(context)!.txtButtonAccept),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                    ),
+                    const VerticalSpace(height: 20.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          child: Text(AppLocalizations.of(context)!.txtButtonCancel),
+                          onPressed: () => Navigator.maybePop(context),
+                        ),
+                        const HorizontalSpace(width: 15.0),
+                        ElevatedButton(
+                          onPressed: enableAcceptButton
+                              ? () {
+                                  debugPrint("Sueño Value en Screen: ${precaModel.sleepValue}");
+                                  precaModel.calculateAverage();
+                                  Navigator.of(context).pop();
+                                }
+                              : null,
+                          child: Text(AppLocalizations.of(context)!.txtButtonAccept),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

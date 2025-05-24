@@ -129,74 +129,75 @@ class _DietScreenState extends State<DietScreen> {
       _indexAgeRange = 2;
     }
 
-    return WillPopScope(
-      onWillPop: () => showInputLostWarning(context),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.txtDietButton),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.txtDietButton),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => showInputLostWarning(context),
         ),
-        drawer: const HelpDrawer(),
-        body: SafeArea(
-          child: Column(
-            children: [
-              const Expanded(
-                flex: 1,
-                child: PagesHeader(),
-              ),
-              Expanded(
-                flex: 3,
-                child: Container(
-                  color: Colors.yellow[50],
-                  child: ListView(
-                    controller: _scrollController,
-                    children: [
-                      ..._dietItems(),
-                      const VerticalSpace(height: 15.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // Cancel button
-                          ElevatedButton(
-                            child: Text(AppLocalizations.of(context)!.txtButtonCancel),
-                            onPressed: () => Navigator.maybePop(context),
-                          ),
-                          const HorizontalSpace(width: 15.0),
-                          // Accept button
-                          ElevatedButton(
-                            onPressed: !_enableAcceptButton
-                                ? null
-                                : () {
-                                    _precaModel!.dietValue = _calculateScore(_foodIndex);
-                                    debugPrint("Diet Value en Screen: ${_precaModel!.dietValue}");
-                                    _precaModel!.calculateAverage();
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text("Score: ${_precaModel!.dietValue}"),
-                                        duration: const Duration(days: 1),
-                                        action: SnackBarAction(
-                                          label: 'OK',
-                                          onPressed: () {
-                                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                                            Navigator.of(context).pop();
-                                            // setState(() {
-                                            //   diagnose = results[0];
-                                            //   score = calculateScore(diagnose, _formKey.currentState!.fields['Medicado']?.value);
-                                            // });
-                                          },
-                                        ),
+      ),
+      drawer: const HelpDrawer(),
+      body: SafeArea(
+        child: Column(
+          children: [
+            const Expanded(
+              flex: 1,
+              child: PagesHeader(),
+            ),
+            Expanded(
+              flex: 3,
+              child: Container(
+                color: Colors.yellow[50],
+                child: ListView(
+                  controller: _scrollController,
+                  children: [
+                    ..._dietItems(),
+                    const VerticalSpace(height: 15.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // Cancel button
+                        ElevatedButton(
+                          child: Text(AppLocalizations.of(context)!.txtButtonCancel),
+                          onPressed: () => Navigator.maybePop(context),
+                        ),
+                        const HorizontalSpace(width: 15.0),
+                        // Accept button
+                        ElevatedButton(
+                          onPressed: !_enableAcceptButton
+                              ? null
+                              : () {
+                                  _precaModel!.dietValue = _calculateScore(_foodIndex);
+                                  debugPrint("Diet Value en Screen: ${_precaModel!.dietValue}");
+                                  _precaModel!.calculateAverage();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text("Score: ${_precaModel!.dietValue}"),
+                                      duration: const Duration(days: 1),
+                                      action: SnackBarAction(
+                                        label: 'OK',
+                                        onPressed: () {
+                                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                                          Navigator.of(context).pop();
+                                          // setState(() {
+                                          //   diagnose = results[0];
+                                          //   score = calculateScore(diagnose, _formKey.currentState!.fields['Medicado']?.value);
+                                          // });
+                                        },
                                       ),
-                                    );
-                                  },
-                            child: Text(AppLocalizations.of(context)!.txtButtonAccept),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                                    ),
+                                  );
+                                },
+                          child: Text(AppLocalizations.of(context)!.txtButtonAccept),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

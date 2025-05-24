@@ -55,7 +55,7 @@ dependencies:
   # In Xcode, go to Target Runner > Build Settings > Strip Style
   # Change from All Symbols to Non-Global Symbols (Está en el apartado Deployment)
   # Se ve desde los dos Runners (el de arriba y el del iconito)
-  tflite_flutter: ^0.10.1
+  tflite_flutter: ^0.11.0
   # https://dart-lang.github.io/markdown/
   flutter_markdown: ^0.7.2
   time_machine: ^0.9.17

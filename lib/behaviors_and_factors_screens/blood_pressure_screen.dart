@@ -87,286 +87,287 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
     // double height = MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
     double height = MediaQuery.of(context).size.height;
 
-    return WillPopScope(
-      onWillPop: () => showInputLostWarning(context),
-      child: Scaffold(
-        // resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          // title: Text(AppLocalizations.of(context)!.txtBloodPressureButton),
-          title: Text("txtBloodPressureButton".i18n()),
+    return Scaffold(
+      // resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        // title: Text(AppLocalizations.of(context)!.txtBloodPressureButton),
+        title: Text("txtBloodPressureButton".i18n()),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => showInputLostWarning(context),
         ),
-        drawer: const HelpDrawer(),
-        body: SafeArea(
-          child: FormBuilder(
-            key: _formKey,
-            child: Stack(
-              children: [
-                SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      VerticalSpace(height: (15.0 + height / 4)),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("txtPAS".i18n()),
-                          Stack(
-                            children: [
-                              Container(
-                                width: 100.0,
-                                height: 48.0,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.grey[300],
-                                ),
+      ),
+      drawer: const HelpDrawer(),
+      body: SafeArea(
+        child: FormBuilder(
+          key: _formKey,
+          child: Stack(
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    VerticalSpace(height: (15.0 + height / 4)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("txtPAS".i18n()),
+                        Stack(
+                          children: [
+                            Container(
+                              width: 100.0,
+                              height: 48.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.grey[300],
                               ),
-                              SizedBox(
-                                width: 100.0,
-                                child: FormBuilderTextField(
-                                  name: "PAS",
-                                  keyboardType: TextInputType.number,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  inputFormatters: [FilteringTextInputFormatter.digitsOnly, bpFormatter],
-                                  controller: _controllerSistAP,
-                                  textAlign: TextAlign.center,
-                                  decoration: InputDecoration(
-                                    hintText: _pasHint,
-                                    border: InputBorder.none,
-                                    focusedBorder: const OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(15.0),
-                                      ),
-                                      borderSide: BorderSide(color: Colors.blue),
-                                    ),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 5,
-                                      horizontal: 10,
-                                    ),
-                                  ),
-                                  onTap: () {
-                                    _formKey.currentState?.fields['PAS']?.reset();
-                                  },
-                                  validator: FormBuilderValidators.compose(
-                                    [
-                                      (val) {
-                                        debugPrint("Validando");
-                                        return val!.isEmpty ? 'txtRequired'.i18n() : null;
-                                      },
-                                      FormBuilderValidators.required(errorText: "     Requerido"),
-                                      FormBuilderValidators.numeric(),
-                                      // FormBuilderValidators.max(70),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Text(" mmHg"),
-                        ],
-                      ),
-                      const VerticalSpace(height: 15.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("txtPAD".i18n()),
-                          Stack(
-                            children: [
-                              Container(
-                                width: 100.0,
-                                height: 48.0,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.grey[300],
-                                ),
-                              ),
-                              SizedBox(
-                                width: 100.0,
-                                child: FormBuilderTextField(
-                                  name: 'PAD',
-                                  keyboardType: TextInputType.number,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  inputFormatters: [FilteringTextInputFormatter.digitsOnly, bpFormatter],
-                                  controller: _controllerDiastPA,
-                                  textAlign: TextAlign.center,
-                                  decoration: InputDecoration(
-                                    hintText: _padHint,
-                                    border: InputBorder.none,
-                                    focusedBorder: const OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(15.0),
-                                      ),
-                                      borderSide: BorderSide(color: Colors.blue),
-                                    ),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 5,
-                                      horizontal: 10,
-                                    ),
-                                  ),
-                                  onTap: () {
-                                    _formKey.currentState?.fields['PAD']?.reset();
-                                  },
-                                  validator: FormBuilderValidators.compose(
-                                    [
-                                      (val) {
-                                        debugPrint("Validando");
-                                        return val!.isEmpty ? 'Requerido' : null;
-                                      },
-                                      FormBuilderValidators.required(errorText: "     Requerido"),
-                                      FormBuilderValidators.numeric(),
-                                      // FormBuilderValidators.max(70),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Text(" mmHg"),
-                        ],
-                      ),
-                      const VerticalSpace(height: 20.0),
-                      SizedBox(
-                        width: 200.0,
-                        child: FormBuilderChoiceChip<String>(
-                          name: 'Medicado',
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          labelStyle: const TextStyle(fontSize: 25.0),
-                          // initialValue: "N/I",
-                          decoration: InputDecoration(
-                            isDense: true,
-                            label: Text(
-                              "txtReceivesMedication".i18n(),
-                              style: const TextStyle(fontSize: 20.0),
                             ),
-                            contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
-                            border: const OutlineInputBorder(),
-                          ),
-                          alignment: WrapAlignment.spaceAround,
-                          options: [
-                            FormBuilderChipOption(value: "txtYes".i18n()),
-                            FormBuilderChipOption(value: "txtNo".i18n()),
-                          ],
-                          validator: FormBuilderValidators.compose(
-                            [
-                              FormBuilderValidators.required(errorText: "     Requerido"),
-                            ],
-                          ),
-                          selectedColor: Colors.blueAccent,
-                          onChanged: (value) {
-                            // _formKey.currentState!.fields['Medicado']?.reset();
-                            _formKey.currentState!.fields['Medicado']?.validate();
-                          },
-                        ),
-                      ),
-                      const VerticalSpace(height: 15.0),
-                      // Trigger interpolation button
-                      ElevatedButton(
-                        child: Text("txtCalculate".i18n()),
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate() == true) {
-                            // I will not enable cancellation until SnackBar gets dismissed
-                            _cancelButtonDisabled = true;
-                            _acceptButtonDisabled = true;
-                            debugPrint("Escuendo el teclado");
-                            FocusScope.of(context).unfocus();
-                            // PatientSex ps = (_controllerSex.text == "V" || _controllerSex.text == "v") ? PatientSex.male : PatientSex.female;
-                            debugPrint("Llamo a la función");
-                            _results = await searchBloodPressurePercentiles(
-                              sex: _precaModel.patientSex == PatientSex.female ? PatientSex.female : PatientSex.male,
-                              height: _precaModel.height!,
-                              age: _precaModel.ageYears!,
-                              systBP: int.parse(_controllerSistAP.text),
-                              diastBP: int.parse(_controllerDiastPA.text),
-                            );
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(_results[1]),
-                                duration: const Duration(days: 1),
-                                action: SnackBarAction(
-                                  label: 'OK',
-                                  onPressed: () {
-                                    _cancelButtonDisabled = false;
-                                    _acceptButtonDisabled = false;
-//                                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                                    ScaffoldMessenger.of(context).removeCurrentSnackBar();
-                                    setState(() {
-                                      _diagnose = _results[0];
-                                      _score = calculateScore(_diagnose, _formKey.currentState!.fields['Medicado']?.value);
-                                    });
-                                  },
+                            SizedBox(
+                              width: 100.0,
+                              child: FormBuilderTextField(
+                                name: "PAS",
+                                keyboardType: TextInputType.number,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly, bpFormatter],
+                                controller: _controllerSistAP,
+                                textAlign: TextAlign.center,
+                                decoration: InputDecoration(
+                                  hintText: _pasHint,
+                                  border: InputBorder.none,
+                                  focusedBorder: const OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(15.0),
+                                    ),
+                                    borderSide: BorderSide(color: Colors.blue),
+                                  ),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 5,
+                                    horizontal: 10,
+                                  ),
+                                ),
+                                onTap: () {
+                                  _formKey.currentState?.fields['PAS']?.reset();
+                                },
+                                validator: FormBuilderValidators.compose(
+                                  [
+                                    (val) {
+                                      debugPrint("Validando");
+                                      return val!.isEmpty ? 'txtRequired'.i18n() : null;
+                                    },
+                                    FormBuilderValidators.required(errorText: "     Requerido"),
+                                    FormBuilderValidators.numeric(),
+                                    // FormBuilderValidators.max(70),
+                                  ],
                                 ),
                               ),
-                            );
-                          }
+                            ),
+                          ],
+                        ),
+                        const Text(" mmHg"),
+                      ],
+                    ),
+                    const VerticalSpace(height: 15.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("txtPAD".i18n()),
+                        Stack(
+                          children: [
+                            Container(
+                              width: 100.0,
+                              height: 48.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.grey[300],
+                              ),
+                            ),
+                            SizedBox(
+                              width: 100.0,
+                              child: FormBuilderTextField(
+                                name: 'PAD',
+                                keyboardType: TextInputType.number,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly, bpFormatter],
+                                controller: _controllerDiastPA,
+                                textAlign: TextAlign.center,
+                                decoration: InputDecoration(
+                                  hintText: _padHint,
+                                  border: InputBorder.none,
+                                  focusedBorder: const OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(15.0),
+                                    ),
+                                    borderSide: BorderSide(color: Colors.blue),
+                                  ),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 5,
+                                    horizontal: 10,
+                                  ),
+                                ),
+                                onTap: () {
+                                  _formKey.currentState?.fields['PAD']?.reset();
+                                },
+                                validator: FormBuilderValidators.compose(
+                                  [
+                                    (val) {
+                                      debugPrint("Validando");
+                                      return val!.isEmpty ? 'Requerido' : null;
+                                    },
+                                    FormBuilderValidators.required(errorText: "     Requerido"),
+                                    FormBuilderValidators.numeric(),
+                                    // FormBuilderValidators.max(70),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Text(" mmHg"),
+                      ],
+                    ),
+                    const VerticalSpace(height: 20.0),
+                    SizedBox(
+                      width: 200.0,
+                      child: FormBuilderChoiceChip<String>(
+                        name: 'Medicado',
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        labelStyle: const TextStyle(fontSize: 25.0),
+                        // initialValue: "N/I",
+                        decoration: InputDecoration(
+                          isDense: true,
+                          label: Text(
+                            "txtReceivesMedication".i18n(),
+                            style: const TextStyle(fontSize: 20.0),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
+                          border: const OutlineInputBorder(),
+                        ),
+                        alignment: WrapAlignment.spaceAround,
+                        options: [
+                          FormBuilderChipOption(value: "txtYes".i18n()),
+                          FormBuilderChipOption(value: "txtNo".i18n()),
+                        ],
+                        validator: FormBuilderValidators.compose(
+                          [
+                            FormBuilderValidators.required(errorText: "     Requerido"),
+                          ],
+                        ),
+                        selectedColor: Colors.blueAccent,
+                        onChanged: (value) {
+                          // _formKey.currentState!.fields['Medicado']?.reset();
+                          _formKey.currentState!.fields['Medicado']?.validate();
                         },
                       ),
-                      const VerticalSpace(height: 15.0),
-                      Text(
-                        _diagnose,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 21.0,
+                    ),
+                    const VerticalSpace(height: 15.0),
+                    // Trigger interpolation button
+                    ElevatedButton(
+                      child: Text("txtCalculate".i18n()),
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate() == true) {
+                          // I will not enable cancellation until SnackBar gets dismissed
+                          _cancelButtonDisabled = true;
+                          _acceptButtonDisabled = true;
+                          debugPrint("Escuendo el teclado");
+                          FocusScope.of(context).unfocus();
+                          // PatientSex ps = (_controllerSex.text == "V" || _controllerSex.text == "v") ? PatientSex.male : PatientSex.female;
+                          debugPrint("Llamo a la función");
+                          _results = await searchBloodPressurePercentiles(
+                            sex: _precaModel.patientSex == PatientSex.female ? PatientSex.female : PatientSex.male,
+                            height: _precaModel.height!,
+                            age: _precaModel.ageYears!,
+                            systBP: int.parse(_controllerSistAP.text),
+                            diastBP: int.parse(_controllerDiastPA.text),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(_results[1]),
+                              duration: const Duration(days: 1),
+                              action: SnackBarAction(
+                                label: 'OK',
+                                onPressed: () {
+                                  _cancelButtonDisabled = false;
+                                  _acceptButtonDisabled = false;
+//                                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                                  setState(() {
+                                    _diagnose = _results[0];
+                                    _score = calculateScore(_diagnose, _formKey.currentState!.fields['Medicado']?.value);
+                                  });
+                                },
+                              ),
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                    const VerticalSpace(height: 15.0),
+                    Text(
+                      _diagnose,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 21.0,
+                      ),
+                    ),
+                    const VerticalSpace(height: 5.0),
+                    Text(
+                      _score,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 21.0,
+                      ),
+                    ),
+                    const VerticalSpace(height: 15.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // Cancel Button
+                        ElevatedButton(
+                          onPressed: _cancelButtonDisabled
+                              ? null
+                              : () {
+                                  FocusScope.of(context).unfocus();
+                                  Navigator.maybePop(context);
+                                },
+                          child: Text(AppLocalizations.of(context)!.txtButtonCancel),
                         ),
-                      ),
-                      const VerticalSpace(height: 5.0),
-                      Text(
-                        _score,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 21.0,
+                        const HorizontalSpace(width: 15.0),
+                        // Accept
+                        ElevatedButton(
+                          onPressed: _acceptButtonDisabled
+                              ? null
+                              : () {
+                                  FocusScope.of(context).unfocus();
+                                  debugPrint("BP value en Screen: ${_precaModel.bloodPressureValue}");
+
+                                  RegExp regExp = RegExp(r"Score: (\d+)");
+
+                                  Match? match = regExp.firstMatch(_score);
+                                  String digitsString = match!.group(1)!;
+                                  int scoreInt = int.parse(digitsString);
+
+                                  _precaModel.bloodPressureValue = scoreInt;
+                                  _precaModel.calculateAverage();
+                                  Navigator.of(context).pop();
+                                },
+                          child: Text(AppLocalizations.of(context)!.txtButtonAccept),
                         ),
-                      ),
-                      const VerticalSpace(height: 15.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // Cancel Button
-                          ElevatedButton(
-                            onPressed: _cancelButtonDisabled
-                                ? null
-                                : () {
-                                    FocusScope.of(context).unfocus();
-                                    Navigator.maybePop(context);
-                                  },
-                            child: Text(AppLocalizations.of(context)!.txtButtonCancel),
-                          ),
-                          const HorizontalSpace(width: 15.0),
-                          // Accept
-                          ElevatedButton(
-                            onPressed: _acceptButtonDisabled
-                                ? null
-                                : () {
-                                    FocusScope.of(context).unfocus();
-                                    debugPrint("BP value en Screen: ${_precaModel.bloodPressureValue}");
-
-                                    RegExp regExp = RegExp(r"Score: (\d+)");
-
-                                    Match? match = regExp.firstMatch(_score);
-                                    String digitsString = match!.group(1)!;
-                                    int scoreInt = int.parse(digitsString);
-
-                                    _precaModel.bloodPressureValue = scoreInt;
-                                    _precaModel.calculateAverage();
-                                    Navigator.of(context).pop();
-                                  },
-                            child: Text(AppLocalizations.of(context)!.txtButtonAccept),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  height: height / 4,
-                  child: const PagesHeader(),
-                ),
-              ],
-            ),
+              ),
+              SizedBox(
+                height: height / 4,
+                child: const PagesHeader(),
+              ),
+            ],
           ),
         ),
       ),

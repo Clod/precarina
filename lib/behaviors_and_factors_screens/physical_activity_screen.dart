@@ -49,76 +49,77 @@ class _PhysicalActivityScreenState extends State<PhysicalActivityScreen> {
 
     double height = MediaQuery.of(context).size.height;
 
-    return WillPopScope(
-      onWillPop: () => showInputLostWarning(context),
-      child: Scaffold(
-        // resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.txtPhysicalActivityButton),
+    return Scaffold(
+      // resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.txtPhysicalActivityButton),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => showInputLostWarning(context),
         ),
-        drawer: const HelpDrawer(),
-        body: SafeArea(
-          child: Stack(
-            children: [
-              SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    VerticalSpace(height: (15.0 + height /4)),
-                    PhysicalActivitySurvey(key: innerWidgetKey),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          child: Text(AppLocalizations.of(context)!.txtButtonCancel),
-                          onPressed: () => Navigator.maybePop(context),
-                        ),
-                        const HorizontalSpace(width: 10.0),
-                        ElevatedButton(
-                          onPressed: enableAcceptButton
-                              ? () {
-                            if (innerWidgetKey.currentState!.formKey.currentState!.validate() == true) {
-                              precaModel.physicalActivityValue = _selectedOption;
-                              debugPrint("Physical Activity Value en Screen: ${precaModel.physicalActivityValue}");
-                              precaModel.calculateAverage();
-                              bool isRedBackground = innerWidgetKey.currentState!.triggerCalculation();
-                              // Show a SnackBar with a button and make it stay until the button is pressed
-                              // The background of the SnackBar can be red or black depending on the value of
-                              // boolean
-                              String snackBarText = 'Score: ${precaModel.physicalActivityValue}';
-                              if (isRedBackground) {snackBarText += "physicalActivitySedentaryWarning".i18n();}
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(snackBarText),
-                                  duration: const Duration(days: 1),
-                                  backgroundColor: isRedBackground ? Colors.red : Colors.black,
-                                  action: SnackBarAction(
-                                    label: 'Ok',
-                                    onPressed: () {
-                                      // Hide virtual keyboard
-                                      FocusScope.of(context).unfocus();
-                                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
+      ),
+      drawer: const HelpDrawer(),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  VerticalSpace(height: (15.0 + height /4)),
+                  PhysicalActivitySurvey(key: innerWidgetKey),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        child: Text(AppLocalizations.of(context)!.txtButtonCancel),
+                        onPressed: () => Navigator.maybePop(context),
+                      ),
+                      const HorizontalSpace(width: 10.0),
+                      ElevatedButton(
+                        onPressed: enableAcceptButton
+                            ? () {
+                          if (innerWidgetKey.currentState!.formKey.currentState!.validate() == true) {
+                            precaModel.physicalActivityValue = _selectedOption;
+                            debugPrint("Physical Activity Value en Screen: ${precaModel.physicalActivityValue}");
+                            precaModel.calculateAverage();
+                            bool isRedBackground = innerWidgetKey.currentState!.triggerCalculation();
+                            // Show a SnackBar with a button and make it stay until the button is pressed
+                            // The background of the SnackBar can be red or black depending on the value of
+                            // boolean
+                            String snackBarText = 'Score: ${precaModel.physicalActivityValue}';
+                            if (isRedBackground) {snackBarText += "physicalActivitySedentaryWarning".i18n();}
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(snackBarText),
+                                duration: const Duration(days: 1),
+                                backgroundColor: isRedBackground ? Colors.red : Colors.black,
+                                action: SnackBarAction(
+                                  label: 'Ok',
+                                  onPressed: () {
+                                    // Hide virtual keyboard
+                                    FocusScope.of(context).unfocus();
+                                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                                    Navigator.of(context).pop();
+                                  },
                                 ),
-                              );
-                            }
+                              ),
+                            );
                           }
-                              : null,
-                          child: Text(AppLocalizations.of(context)!.txtButtonAccept),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                        }
+                            : null,
+                        child: Text(AppLocalizations.of(context)!.txtButtonAccept),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              SizedBox(
-                height: height / 4,
-                child: const PagesHeader(),
-              ),
-            ],
-          ),
+            ),
+            SizedBox(
+              height: height / 4,
+              child: const PagesHeader(),
+            ),
+          ],
         ),
       ),
     );
