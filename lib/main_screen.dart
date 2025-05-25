@@ -8,7 +8,7 @@ import 'package:precarina/behaviors_and_factors_screens/physical_activity_screen
 import 'package:precarina/behaviors_and_factors_screens/smoke_exposure_screen.dart';
 import 'package:precarina/model/precarina_model.dart';
 import 'package:precarina/aux_widgets/pretty_gauge.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'behaviors_and_factors_screens/diabetes_screen.dart';

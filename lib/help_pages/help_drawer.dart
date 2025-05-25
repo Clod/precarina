@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../l10n/app_localizations.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:localization/localization.dart';
 import 'package:precarina/help_pages/blood_pressure_help.dart';
@@ -35,7 +35,8 @@ class HelpDrawer extends StatelessWidget {
             child: Center(
               child: Text(
                 AppLocalizations.of(context)!.txtGlossary,
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -46,8 +47,9 @@ class HelpDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      DietHelp(title: AppLocalizations.of(context)!.txtDietButton, content: AppLocalizations.of(context)!.txtDietHelp),
+                  builder: (context) => DietHelp(
+                      title: AppLocalizations.of(context)!.txtDietButton,
+                      content: AppLocalizations.of(context)!.txtDietHelp),
                 ),
               );
             },
@@ -61,7 +63,10 @@ class HelpDrawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => BmiHelp(
-                      title: AppLocalizations.of(context)!.txtBodyMassIndexButton, content: AppLocalizations.of(context)!.txtBodyMassIndextHelp),
+                      title:
+                          AppLocalizations.of(context)!.txtBodyMassIndexButton,
+                      content:
+                          AppLocalizations.of(context)!.txtBodyMassIndextHelp),
                 ),
               );
             },
@@ -74,7 +79,10 @@ class HelpDrawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => SmokeExposureHelp(
-                      title: AppLocalizations.of(context)!.txtSmokeExposureButton, content: AppLocalizations.of(context)!.txtSmokeExposureHelp),
+                      title:
+                          AppLocalizations.of(context)!.txtSmokeExposureButton,
+                      content:
+                          AppLocalizations.of(context)!.txtSmokeExposureHelp),
                 ),
               );
             },
@@ -87,20 +95,26 @@ class HelpDrawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => CholesterolHelp(
-                      title: AppLocalizations.of(context)!.txtCholesterolButton, content: AppLocalizations.of(context)!.txtCholesterolHelp),
+                      title: AppLocalizations.of(context)!.txtCholesterolButton,
+                      content:
+                          AppLocalizations.of(context)!.txtCholesterolHelp),
                 ),
               );
             },
           ),
           ListTile(
             leading: const Icon(Icons.sports_tennis),
-            title: Text(AppLocalizations.of(context)!.txtPhysicalActivityButton),
+            title:
+                Text(AppLocalizations.of(context)!.txtPhysicalActivityButton),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => PhysicalActivityHelp(
-                      title: AppLocalizations.of(context)!.txtPhysicalActivityButton, content: AppLocalizations.of(context)!.txtPhysicalActivityHelp),
+                      title: AppLocalizations.of(context)!
+                          .txtPhysicalActivityButton,
+                      content: AppLocalizations.of(context)!
+                          .txtPhysicalActivityHelp),
                 ),
               );
             },
@@ -127,8 +141,9 @@ class HelpDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      DiabetesHelp(title: AppLocalizations.of(context)!.txtDiabetesButton, content: AppLocalizations.of(context)!.txtDiabetesHelp),
+                  builder: (context) => DiabetesHelp(
+                      title: AppLocalizations.of(context)!.txtDiabetesButton,
+                      content: AppLocalizations.of(context)!.txtDiabetesHelp),
                 ),
               );
             },
@@ -164,7 +179,8 @@ class HelpDrawer extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () async {
-                  await launchUrl(Uri.parse('https://grasso.net.ar/precarina/precarina-data-security/'));
+                  await launchUrl(Uri.parse(
+                      'https://grasso.net.ar/precarina/precarina-data-security/'));
                 },
                 child: Text(
                   "txtPrivacyPolicy".i18n(),
@@ -188,7 +204,8 @@ class HelpDrawer extends StatelessWidget {
                 ),
               )
             ],
-            child: Text("txtAboutApp".i18n(), style: const TextStyle(fontWeight: FontWeight.bold)),
+            child: Text("txtAboutApp".i18n(),
+                style: const TextStyle(fontWeight: FontWeight.bold)),
           ),
         ],
       ),

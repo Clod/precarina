@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../l10n/app_localizations.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:localization/localization.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -9,7 +9,6 @@ import 'package:precarina/aux_widgets/horizontal_space.dart';
 import 'package:precarina/behaviors_and_factors_screens/pages_header.dart';
 import 'package:precarina/model/precarina_model.dart';
 import 'package:provider/provider.dart';
-
 import 'package:precarina/aux_functions/lose_input_warning.dart';
 import 'package:precarina/aux_functions/search_blood_pressure_percentile_db.dart';
 import 'package:precarina/aux_functions/show_blood_pressure_warning.dart';
@@ -247,36 +246,63 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                     const VerticalSpace(height: 20.0),
                     SizedBox(
                       width: 200.0,
-                      child: FormBuilderChoiceChip<String>(
+                      child: FormBuilderField(
                         name: 'Medicado',
                         autovalidateMode: AutovalidateMode.onUserInteraction,
-                        labelStyle: const TextStyle(fontSize: 25.0),
-                        // initialValue: "N/I",
-                        decoration: InputDecoration(
-                          isDense: true,
-                          label: Text(
-                            "txtReceivesMedication".i18n(),
-                            style: const TextStyle(fontSize: 20.0),
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 15.0, horizontal: 10.0),
-                          border: const OutlineInputBorder(),
-                        ),
-                        alignment: WrapAlignment.spaceAround,
-                        options: [
-                          FormBuilderChipOption(value: "txtYes".i18n()),
-                          FormBuilderChipOption(value: "txtNo".i18n()),
-                        ],
-                        validator: FormBuilderValidators.compose(
-                          [
-                            FormBuilderValidators.required(
-                                errorText: "     Requerido"),
-                          ],
-                        ),
-                        selectedColor: Colors.blueAccent,
-                        onChanged: (value) {
-                          // _formKey.currentState!.fields['Medicado']?.reset();
-                          _formKey.currentState!.fields['Medicado']?.validate();
+                        validator: FormBuilderValidators.compose([
+                          FormBuilderValidators.required(errorText: "     Requerido"),
+                        ]),
+                        builder: (FormFieldState<dynamic> field) {
+                          return InputDecorator(
+                            decoration: InputDecoration(
+                              isDense: true,
+                              label: Text(
+                                "txtReceivesMedication".i18n(),
+                                style: const TextStyle(fontSize: 20.0),
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 15.0, horizontal: 10.0),
+                              border: const OutlineInputBorder(),
+                              errorText: field.errorText,
+                            ),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                    ChoiceChip(
+                                      label: Text(
+                                        "txtYes".i18n(),
+                                        style: const TextStyle(fontSize: 25.0),
+                                      ),
+                                      selected: field.value == "txtYes".i18n(),
+                                      selectedColor: Colors.blueAccent,
+                                      onSelected: (selected) {
+                                        if (selected) {
+                                          field.didChange("txtYes".i18n());
+                                          field.validate();
+                                        }
+                                      },
+                                    ),
+                                    ChoiceChip(
+                                      label: Text(
+                                        "txtNo".i18n(),
+                                        style: const TextStyle(fontSize: 25.0),
+                                      ),
+                                      selected: field.value == "txtNo".i18n(),
+                                      selectedColor: Colors.blueAccent,
+                                      onSelected: (selected) {
+                                        if (selected) {
+                                          field.didChange("txtNo".i18n());
+                                          field.validate();
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          );
                         },
                       ),
                     ),

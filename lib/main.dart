@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:localization/localization.dart';
 import 'package:precarina/input_data_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'aux_functions/show_terms_and_conds.dart';
@@ -46,10 +46,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     LocalJsonLocalization.delegate.directories = ['lib/i18n'];
 
-    return  MaterialApp(
+    return MaterialApp(
       theme: ThemeData(
         textTheme: const TextTheme(
           bodyMedium: TextStyle(fontSize: 18.0),
@@ -92,13 +91,13 @@ class MyHomePageState extends State<MyHomePage> {
 
     if (flagShowTandC != false) {
       // Register a callback to execute after the widget is built
-      WidgetsBinding.instance.addPostFrameCallback((_) => showTandC(bc, () => prefs!.setBool('showTandC', false)));
+      WidgetsBinding.instance.addPostFrameCallback(
+          (_) => showTandC(bc, () => prefs!.setBool('showTandC', false)));
     }
   }
 
   @override
   Widget build(BuildContext context) {
-
     bc = context;
 
     return Scaffold(

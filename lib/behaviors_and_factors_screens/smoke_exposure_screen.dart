@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:precarina/aux_widgets/horizontal_space.dart';
 import 'package:precarina/behaviors_and_factors_screens/pages_header.dart';
 import 'package:precarina/model/precarina_model.dart';
@@ -7,6 +6,9 @@ import 'package:provider/provider.dart';
 import '../aux_functions/lose_input_warning.dart';
 import '../aux_widgets/vertical_space.dart';
 import '../help_pages/help_drawer.dart';
+import '../l10n/app_localizations.dart';
+
+
 
 class SmokeExposureScreen extends StatefulWidget {
   const SmokeExposureScreen({super.key});

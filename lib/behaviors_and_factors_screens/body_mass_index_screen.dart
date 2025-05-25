@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../l10n/app_localizations.dart';
 import 'package:localization/localization.dart';
 import 'package:precarina/aux_widgets/vertical_space.dart';
 import 'package:precarina/behaviors_and_factors_screens/pages_header.dart';
