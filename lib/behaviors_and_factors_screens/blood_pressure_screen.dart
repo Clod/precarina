@@ -72,9 +72,12 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
   @override
   void initState() {
     super.initState();
+
     // This callback will get called AFTER the Widget is built
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return; // Add mounted check
       showWarning(context);
+      if (!mounted) return; // Guard context use with mounted check
       _precaModel = Provider.of<PrecarinaModel>(context, listen: false);
     });
   }
@@ -131,7 +134,10 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                 ),
-                                inputFormatters: [FilteringTextInputFormatter.digitsOnly, bpFormatter],
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly,
+                                  bpFormatter
+                                ],
                                 controller: _controllerSistAP,
                                 textAlign: TextAlign.center,
                                 decoration: InputDecoration(
@@ -155,9 +161,12 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                                   [
                                     (val) {
                                       debugPrint("Validando");
-                                      return val!.isEmpty ? 'txtRequired'.i18n() : null;
+                                      return val!.isEmpty
+                                          ? 'txtRequired'.i18n()
+                                          : null;
                                     },
-                                    FormBuilderValidators.required(errorText: "     Requerido"),
+                                    FormBuilderValidators.required(
+                                        errorText: "     Requerido"),
                                     FormBuilderValidators.numeric(),
                                     // FormBuilderValidators.max(70),
                                   ],
@@ -193,7 +202,10 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                 ),
-                                inputFormatters: [FilteringTextInputFormatter.digitsOnly, bpFormatter],
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly,
+                                  bpFormatter
+                                ],
                                 controller: _controllerDiastPA,
                                 textAlign: TextAlign.center,
                                 decoration: InputDecoration(
@@ -219,7 +231,8 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                                       debugPrint("Validando");
                                       return val!.isEmpty ? 'Requerido' : null;
                                     },
-                                    FormBuilderValidators.required(errorText: "     Requerido"),
+                                    FormBuilderValidators.required(
+                                        errorText: "     Requerido"),
                                     FormBuilderValidators.numeric(),
                                     // FormBuilderValidators.max(70),
                                   ],
@@ -245,7 +258,8 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                             "txtReceivesMedication".i18n(),
                             style: const TextStyle(fontSize: 20.0),
                           ),
-                          contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 15.0, horizontal: 10.0),
                           border: const OutlineInputBorder(),
                         ),
                         alignment: WrapAlignment.spaceAround,
@@ -255,7 +269,8 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                         ],
                         validator: FormBuilderValidators.compose(
                           [
-                            FormBuilderValidators.required(errorText: "     Requerido"),
+                            FormBuilderValidators.required(
+                                errorText: "     Requerido"),
                           ],
                         ),
                         selectedColor: Colors.blueAccent,
@@ -278,27 +293,53 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                           FocusScope.of(context).unfocus();
                           // PatientSex ps = (_controllerSex.text == "V" || _controllerSex.text == "v") ? PatientSex.male : PatientSex.female;
                           debugPrint("Llamo a la función");
+                          
+                          // Store the BuildContext before async operation
+                          final scaffoldContext = context;
+                          
                           _results = await searchBloodPressurePercentiles(
-                            sex: _precaModel.patientSex == PatientSex.female ? PatientSex.female : PatientSex.male,
+                            sex: _precaModel.patientSex == PatientSex.female
+                                ? PatientSex.female
+                                : PatientSex.male,
                             height: _precaModel.height!,
                             age: _precaModel.ageYears!,
                             systBP: int.parse(_controllerSistAP.text),
                             diastBP: int.parse(_controllerDiastPA.text),
                           );
-                          ScaffoldMessenger.of(context).showSnackBar(
+
+                          // Check if State is still mounted
+                          if (!mounted) return;
+                          
+                          // Check if the BuildContext is still mounted
+                          if (!scaffoldContext.mounted) return;
+                          
+                          ScaffoldMessenger.of(scaffoldContext).showSnackBar(
                             SnackBar(
                               content: Text(_results[1]),
                               duration: const Duration(days: 1),
                               action: SnackBarAction(
                                 label: 'OK',
                                 onPressed: () {
+                                  // Store the BuildContext before using it
+                                  final btnContext = context;
+                                  
+                                  if (!mounted) return; // Check if State is still mounted
+                                  
                                   _cancelButtonDisabled = false;
                                   _acceptButtonDisabled = false;
 //                                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                                  
+                                  // Check if the BuildContext is still mounted
+                                  if (!btnContext.mounted) return;
+                                  
+                                  ScaffoldMessenger.of(btnContext)
+                                      .removeCurrentSnackBar();
                                   setState(() {
                                     _diagnose = _results[0];
-                                    _score = calculateScore(_diagnose, _formKey.currentState!.fields['Medicado']?.value);
+                                    _score = calculateScore(
+                                        _diagnose,
+                                        _formKey.currentState!
+                                            .fields['Medicado']?.value);
                                   });
                                 },
                               ),
@@ -335,7 +376,8 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                                   FocusScope.of(context).unfocus();
                                   Navigator.maybePop(context);
                                 },
-                          child: Text(AppLocalizations.of(context)!.txtButtonCancel),
+                          child: Text(
+                              AppLocalizations.of(context)!.txtButtonCancel),
                         ),
                         const HorizontalSpace(width: 15.0),
                         // Accept
@@ -344,7 +386,8 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                               ? null
                               : () {
                                   FocusScope.of(context).unfocus();
-                                  debugPrint("BP value en Screen: ${_precaModel.bloodPressureValue}");
+                                  debugPrint(
+                                      "BP value en Screen: ${_precaModel.bloodPressureValue}");
 
                                   RegExp regExp = RegExp(r"Score: (\d+)");
 
@@ -356,7 +399,8 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                                   _precaModel.calculateAverage();
                                   Navigator.of(context).pop();
                                 },
-                          child: Text(AppLocalizations.of(context)!.txtButtonAccept),
+                          child: Text(
+                              AppLocalizations.of(context)!.txtButtonAccept),
                         ),
                       ],
                     ),
