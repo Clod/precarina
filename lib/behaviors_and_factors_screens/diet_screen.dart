@@ -32,7 +32,8 @@ class _DietScreenState extends State<DietScreen> {
   // _foodIndex keeps the choice (0, 1 or 2) for each item of the list of options
   // This dirty trick is used to be able to pass ints by reference to the callback
   // Items is the list of kinds of foods
-  final List<List<int?>> _foodIndex = List.generate(Items.values.length, (_) => [null]);
+  final List<List<int?>> _foodIndex =
+      List.generate(Items.values.length, (_) => [null]);
 
   final ScrollController _scrollController = ScrollController();
 
@@ -58,22 +59,6 @@ class _DietScreenState extends State<DietScreen> {
         _enableAcceptButton = false;
       }
     }
-  }
-
-  // The list of presented options depends on both the sex and the age of the patient.
-  // Each DietItem() consist of a title y three options presented below it.
-  List<DietItem> _dietItems() {
-    for (var i = 0; i < Items.values.length; i++) {
-      _dietItemsList.add(
-        DietItem(
-          callback: foodCallback,   // called each time the user makes a choice
-          index: _foodIndex[i],     // indicates
-          title: titulo[i],
-          opciones: opciones[_indexSex!][_indexAgeRange!][i],
-        ),
-      );
-    }
-    return _dietItemsList;
   }
 
   int? _calculateScore(List<List<int?>> selections) {
@@ -110,6 +95,26 @@ class _DietScreenState extends State<DietScreen> {
   Widget build(BuildContext context) {
     // debugPrint("Data: ${_precaModel.toString()}");
     // debugPrint(_foodIndex.toString());
+    List<String> localizedTitulos = getTitulos(context);
+    List<List<List<List<String>>>> localizedOpciones = getOpciones(context);
+
+    // The list of presented options depends on both the sex and the age of the patient.
+    // Each DietItem() consist of a title y three options presented below it.
+    List<DietItem> dietItems() {
+      for (var i = 0; i < Items.values.length; i++) {
+        _dietItemsList.add(
+          DietItem(
+            callback: foodCallback, // called each time the user makes a choice
+            index: _foodIndex[i], // indicates
+            // title: titulo[i],
+            // opciones: opciones[_indexSex!][_indexAgeRange!][i],
+            title: localizedTitulos[i],
+            opciones: localizedOpciones[_indexSex!][_indexAgeRange!][i],
+          ),
+        );
+      }
+      return _dietItemsList;
+    }
 
     _precaModel = Provider.of<PrecarinaModel>(context, listen: false);
 
@@ -117,7 +122,9 @@ class _DietScreenState extends State<DietScreen> {
 
     // Select choices according to sex...
     if (_precaModel!.patientSex != null) {
-      _precaModel!.patientSex == PatientSex.male ? _indexSex = 0 : _indexSex = 1;
+      _precaModel!.patientSex == PatientSex.male
+          ? _indexSex = 0
+          : _indexSex = 1;
     }
 
     // ...and age range
@@ -152,14 +159,15 @@ class _DietScreenState extends State<DietScreen> {
                 child: ListView(
                   controller: _scrollController,
                   children: [
-                    ..._dietItems(),
+                    ...dietItems(),
                     const VerticalSpace(height: 15.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // Cancel button
                         ElevatedButton(
-                          child: Text(AppLocalizations.of(context)!.txtButtonCancel),
+                          child: Text(
+                              AppLocalizations.of(context)!.txtButtonCancel),
                           onPressed: () => Navigator.maybePop(context),
                         ),
                         const HorizontalSpace(width: 15.0),
@@ -168,17 +176,21 @@ class _DietScreenState extends State<DietScreen> {
                           onPressed: !_enableAcceptButton
                               ? null
                               : () {
-                                  _precaModel!.dietValue = _calculateScore(_foodIndex);
-                                  debugPrint("Diet Value en Screen: ${_precaModel!.dietValue}");
+                                  _precaModel!.dietValue =
+                                      _calculateScore(_foodIndex);
+                                  debugPrint(
+                                      "Diet Value en Screen: ${_precaModel!.dietValue}");
                                   _precaModel!.calculateAverage();
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
-                                      content: Text("Score: ${_precaModel!.dietValue}"),
+                                      content: Text(
+                                          "Score: ${_precaModel!.dietValue}"),
                                       duration: const Duration(days: 1),
                                       action: SnackBarAction(
                                         label: 'OK',
                                         onPressed: () {
-                                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                                          ScaffoldMessenger.of(context)
+                                              .hideCurrentSnackBar();
                                           Navigator.of(context).pop();
                                           // setState(() {
                                           //   diagnose = results[0];
@@ -189,7 +201,8 @@ class _DietScreenState extends State<DietScreen> {
                                     ),
                                   );
                                 },
-                          child: Text(AppLocalizations.of(context)!.txtButtonAccept),
+                          child: Text(
+                              AppLocalizations.of(context)!.txtButtonAccept),
                         ),
                       ],
                     ),
