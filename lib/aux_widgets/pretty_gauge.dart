@@ -1,4 +1,4 @@
-library pretty_gauge;
+// library pretty_gauge;
 
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
