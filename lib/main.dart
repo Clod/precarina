@@ -99,8 +99,9 @@ class MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     bc = context;
-
+    const Key mainScaffoldKey = ValueKey('mainScaffold');
     return Scaffold(
+      key: mainScaffoldKey,
       appBar: AppBar(
         title: const Text(
           'PRECARINA',

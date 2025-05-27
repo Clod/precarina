@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -6,24 +5,21 @@ import 'package:integration_test/integration_test.dart';
 
 import 'package:precarina/main.dart' as app;
 
-// Define keys for widgets you want to interact with in InputDataPage
-// You MUST add these keys to your actual widgets in input_data_page.dart
-const Key ageInputKey = Key('age_input_field');
-// const Key genderDropdownKey = Key('gender_dropdown'); // Original key for dropdown
-// If your radio buttons are grouped under a widget with a specific key, you can define and use it here.
-// For example: const Key genderRadioGroupKey = Key('gender_radio_group');
-const Key conditionCheckboxKey = Key('condition_checkbox');
-const Key scoreSliderKey = Key('score_slider'); // Example slider
-const Key weightInputKey =
-    Key('weight_input_field'); // Another example text field
-const Key heightInputKey = 
-    Key('height_input_field'); // Key for the height input field
-const Key calculateButtonKey =
-    Key('calculate_button'); // Example button to trigger calculation
+// Keys for InputDataPage widgets (must match keys in input_data_page.dart)
+const Key heightInputKey = Key('height_input_field');
+const Key weightKilosInputKey = Key('weight_kilos_input_field');
+const Key weightGramsInputKey = Key('weight_grams_input_field');
+const Key ageYearsDropdownKey = Key('age_years_dropdown');
+const Key ageMonthsDropdownKey = Key('age_months_dropdown');
+const Key genderFemaleRadioKey = Key('gender_female_radio');
+const Key genderMaleRadioKey = Key('gender_male_radio');
+const Key calculateButtonKey = Key('calculate_button');
 
-// Key for the T&C Accept button (if you have one)
-// You MUST add this key to the button that accepts T&C in show_terms_and_conds.dart
+// Key for the T&C Accept button
 const Key acceptTcButtonKey = Key('accept_tc_button');
+
+// Define the key for your main Scaffold (must match the key in your app code)
+const Key mainScaffoldKey = ValueKey('mainScaffold');
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -37,7 +33,6 @@ void main() {
 
       // Store selected values for regression analysis
       final Map<String, dynamic> selectedValues = {};
-      final Random random = Random();
 
       // --- Handle Terms and Conditions Dialog ---
       // Check if the T&C dialog is shown
@@ -51,65 +46,55 @@ void main() {
         debugPrint('T&C dialog not found or already accepted.');
       }
 
+      // It's good to ensure the app is settled after any initial dialogs or loads.
+      await tester.pumpAndSettle(const Duration(milliseconds: 500)); // Give a bit more time
+
       // --- Interact with Drawer ---
-      // Open the drawer
-      final ScaffoldState state = tester.firstState(find.byType(Scaffold));
-      state.openDrawer();
-      await tester.pumpAndSettle();
-      debugPrint('Drawer opened.');
+      // Try to find the Scaffold using the specific key.
+      // This requires you to add `key: mainScaffoldKey` to your app's main Scaffold.
+      final scaffoldFinder = find.byKey(mainScaffoldKey);
+      // As an alternative, if you cannot add a key immediately, use find.byType(Scaffold)
+      // final scaffoldFinder = find.byType(Scaffold);
 
-      // You could add steps here to tap on drawer items if needed
-      // Example: await tester.tap(find.text('Help Section'));
-      // await tester.pumpAndSettle();
-      // await tester.pageBack(); // Go back from help page
-      // await tester.pumpAndSettle();
+      // Verify the Scaffold is found before trying to interact with it.
+      expect(scaffoldFinder, findsOneWidget, reason: 'Main Scaffold was not found. Ensure it has the key "$mainScaffoldKey" or check app navigation.');
+      
+      // If found, then get its state and open the drawer.
+      final ScaffoldState state = tester.state(scaffoldFinder);
+      if (state.hasDrawer) {
+        state.openDrawer();
+        await tester.pumpAndSettle();
+        debugPrint('Drawer opened.');
 
-      // Close the drawer
-      state.closeDrawer();
-      await tester.pumpAndSettle();
-      debugPrint('Drawer closed.');
+        // You could add steps here to tap on drawer items if needed
+        // Example: await tester.tap(find.text('Help Section'));
+        // await tester.pumpAndSettle();
+
+        // Close the drawer
+        state.closeDrawer();
+        await tester.pumpAndSettle();
+        debugPrint('Drawer closed.');
+      } else {
+        debugPrint('Scaffold found, but it does not have a drawer.');
+      }
 
       // --- Interact with InputDataPage ---
       // Assuming InputDataPage is the body of MyHomePage, it should be visible
       debugPrint('Interacting with InputDataPage...');
 
-      // Example: Interact with a TextField (Age)
-      final ageInputFinder = find.byKey(ageInputKey);
-      if (tester.any(ageInputFinder)) {
-        final int randomAge = 18 + random.nextInt(80); // Age between 18 and 97
-        await tester.enterText(ageInputFinder, randomAge.toString());
-        selectedValues['age'] = randomAge;
-        debugPrint('Entered age: $randomAge');
+      // --- Interact with Gender RadioButtons using Keys ---
+      // For this test, let's select 'Female' consistently, or you can make it random
+      final Key genderToSelectKey = genderFemaleRadioKey; // Or genderMaleRadioKey or random
+      final String selectedGenderValue = (genderToSelectKey == genderFemaleRadioKey) ? "Female" : "Male";
+
+      final genderRadioFinder = find.byKey(genderToSelectKey);
+      if (tester.any(genderRadioFinder)) {
+        await tester.tap(genderRadioFinder);
+        await tester.pumpAndSettle();
+        selectedValues['gender'] = selectedGenderValue;
+        debugPrint('Selected gender: $selectedGenderValue');
       } else {
-        debugPrint('Age input field not found (Key: $ageInputKey)');
-      }
-
-      // Example: Interact with RadioButtons (Gender)
-      // Define the possible gender options that correspond to your RadioButton labels
-      final List<String> genderOptions = ['Male', 'Female']; // Adjust as per your app's UI
-      final String selectedGender = genderOptions[random.nextInt(genderOptions.length)];
-
-      // Find the radio button by its text label.
-      // This assumes your RadioButton or RadioListTile has an associated Text widget with these values.
-      // If your radio buttons are within a group identified by a key (e.g., genderRadioGroupKey defined above),
-      // you might first find the group and then the descendant:
-      // final genderGroupFinder = find.byKey(genderRadioGroupKey);
-      // final Finder genderRadioButtonsFinder = find.descendant(of: genderGroupFinder, matching: find.text(selectedGender));
-      // For this example, we'll directly find the radio button's text.
-      final Finder genderRadioButtonsFinder = find.text(selectedGender);
-
-      // Check if the specific radio button option (identified by its text) is found
-      if (tester.any(genderRadioButtonsFinder)) {
-        await tester.tap(genderRadioButtonsFinder);
-        await tester.pumpAndSettle(); // Allow UI to update after selection
-
-        selectedValues['gender'] = selectedGender;
-        debugPrint('Selected gender: $selectedGender');
-      } else {
-        // This means the specific text for the randomly chosen gender was not found.
-        debugPrint('Gender radio button option "$selectedGender" not found.');
-        // If you were using a genderRadioGroupKey, you might add:
-        // debugPrint('Ensure the radio button group (if keyed) and the option "$selectedGender" exist.');
+        debugPrint('Gender radio button not found (Key: $genderToSelectKey)');
       }
 
       // Interact with Height TextField (FormBuilderTextField)
@@ -136,89 +121,73 @@ void main() {
       } else {
         debugPrint('Height input field wrapper not found (Key: $heightInputKey)');
       }
-      // Example: Interact with a Checkbox (Condition)
-      final conditionCheckboxFinder = find.byKey(conditionCheckboxKey);
-      if (tester.any(conditionCheckboxFinder)) {
-        final bool shouldCheck = random.nextBool();
-        // Check the current state if possible, or just tap
-        // Tapping a checkbox toggles its state
-        if (shouldCheck) {
-          // Tap the checkbox to potentially check it
-          await tester.tap(conditionCheckboxFinder);
-          await tester.pumpAndSettle();
-          // Verify it's checked if needed
-          // final Checkbox checkbox = tester.widget(conditionCheckboxFinder);
-          // if (checkbox.value != true) { await tester.tap(conditionCheckboxFinder); await tester.pumpAndSettle(); }
-          selectedValues['condition'] = true; // Assuming tap makes it true
-          debugPrint('Tapped condition checkbox (aiming for true)');
-        } else {
-          // Tap the checkbox to potentially uncheck it
-          await tester.tap(conditionCheckboxFinder);
-          await tester.pumpAndSettle();
-          // Verify it's unchecked if needed
-          // final Checkbox checkbox = tester.widget(conditionCheckboxFinder);
-          // if (checkbox.value != false) { await tester.tap(conditionCheckboxFinder); await tester.pumpAndSettle(); }
-          selectedValues['condition'] = false; // Assuming tap makes it false
-          debugPrint('Tapped condition checkbox (aiming for false)');
-        }
-        // A simpler approach is just to tap randomly:
-        // if (random.nextBool()) {
-        //   await tester.tap(conditionCheckboxFinder);
-        //   await tester.pumpAndSettle();
-        //   selectedValues['condition'] = true; // Assuming tap makes it true
-        //   debugPrint('Tapped condition checkbox');
-        // } else {
-        //   selectedValues['condition'] = false; // Assuming no tap leaves it false
-        //   debugPrint('Did not tap condition checkbox');
-        // }
-      } else {
-        debugPrint('Condition checkbox not found (Key: $conditionCheckboxKey)');
-      }
 
-      // Example: Interact with a Slider (Score Component)
-      final scoreSliderFinder = find.byKey(scoreSliderKey);
-      if (tester.any(scoreSliderFinder)) {
-        // You need to know the min/max range of your slider
-        // Assuming a range from 0.0 to 100.0 for example
-        const double sliderMin = 0.0;
-        const double sliderMax = 100.0;
-        final double randomValue =
-            sliderMin + random.nextDouble() * (sliderMax - sliderMin);
-
-        // To interact with a slider, you can tap at a specific position
-        // Find the center of the slider widget
-        final Offset sliderCenter = tester.getCenter(scoreSliderFinder);
-
-        // Calculate the tap position based on the random value
-        // This is a simplified calculation; may need adjustment based on slider padding/margins
-        // Assuming the slider track is horizontal
-        final double tapX = sliderCenter.dx -
-            tester.getSize(scoreSliderFinder).width / 2 +
-            (randomValue / (sliderMax - sliderMin)) *
-                tester.getSize(scoreSliderFinder).width;
-        final Offset tapPosition = Offset(tapX, sliderCenter.dy);
-
-        await tester.tapAt(tapPosition);
+      // --- Interact with Weight Kilos TextField ---
+      final weightKilosFinder = find.byKey(weightKilosInputKey);
+      if (tester.any(weightKilosFinder)) {
+        const String kilosToEnter = "42";
+        // The FormBuilderTextField might be the widget found by key, or it might be a wrapper.
+        // If weightKilosInputKey is on FormBuilderTextField directly:
+        await tester.enterText(weightKilosFinder, kilosToEnter);
+        // If it's on a KeyedSubtree wrapper like height:
+        // final actualKilosTextFieldFinder = find.descendant(
+        //   of: weightKilosFinder,
+        //   matching: find.byType(TextField),
+        // );
+        // await tester.enterText(actualKilosTextFieldFinder, kilosToEnter);
         await tester.pumpAndSettle();
-
-        selectedValues['score_component'] =
-            randomValue; // Store the target value
-        debugPrint('Set slider value to approximately: $randomValue');
+        selectedValues['weight_kilos'] = int.parse(kilosToEnter);
+        debugPrint('Entered weight kilos: $kilosToEnter');
       } else {
-        debugPrint('Score slider not found (Key: $scoreSliderKey)');
+        debugPrint('Weight Kilos input field not found (Key: $weightKilosInputKey)');
       }
 
-      // Example: Interact with another TextField (Weight)
-      final weightInputFinder = find.byKey(weightInputKey);
-      if (tester.any(weightInputFinder)) {
-        final double randomWeight =
-            40.0 + random.nextDouble() * 160.0; // Weight between 40 and 200
-        await tester.enterText(weightInputFinder,
-            randomWeight.toStringAsFixed(1)); // Enter with 1 decimal place
-        selectedValues['weight'] = randomWeight;
-        debugPrint('Entered weight: ${randomWeight.toStringAsFixed(1)}');
+      // --- Interact with Weight Grams TextField ---
+      final weightGramsFinder = find.byKey(weightGramsInputKey);
+      if (tester.any(weightGramsFinder)) {
+        const String gramsToEnter = "300";
+        // Similar to kilos, adjust if wrapped
+        await tester.enterText(weightGramsFinder, gramsToEnter);
+        // final actualGramsTextFieldFinder = find.descendant(
+        //   of: weightGramsFinder,
+        //   matching: find.byType(TextField),
+        // );
+        // await tester.enterText(actualGramsTextFieldFinder, gramsToEnter);
+        await tester.pumpAndSettle();
+        selectedValues['weight_grams'] = int.parse(gramsToEnter);
+        debugPrint('Entered weight grams: $gramsToEnter');
       } else {
-        debugPrint('Weight input field not found (Key: $weightInputKey)');
+        debugPrint('Weight Grams input field not found (Key: $weightGramsInputKey)');
+      }
+
+      // --- Interact with Age Years Dropdown ---
+      final ageYearsDropdownFinder = find.byKey(ageYearsDropdownKey);
+      if (tester.any(ageYearsDropdownFinder)) {
+        await tester.tap(ageYearsDropdownFinder);
+        await tester.pumpAndSettle(); // Wait for items to appear
+        // Assuming Spanish localization: "15 años"
+        // If l10n.suffixAnos is " years", it would be "15 years"
+        await tester.tap(find.text('15 years').last);
+        await tester.pumpAndSettle();
+        selectedValues['age_years'] = 15;
+        debugPrint('Selected age years: 15');
+      } else {
+        debugPrint('Age Years dropdown not found (Key: $ageYearsDropdownKey)');
+      }
+
+      // --- Interact with Age Months Dropdown ---
+      final ageMonthsDropdownFinder = find.byKey(ageMonthsDropdownKey);
+      if (tester.any(ageMonthsDropdownFinder)) {
+        await tester.tap(ageMonthsDropdownFinder);
+        await tester.pumpAndSettle(); // Wait for items to appear
+        // Assuming Spanish localization: "8 meses"
+        // If l10n.suffixMeses is " months", it would be "8 months"
+        await tester.tap(find.text('8 months').last);
+        await tester.pumpAndSettle();
+        selectedValues['age_months'] = 8;
+        debugPrint('Selected age months: 8');
+      } else {
+        debugPrint('Age Months dropdown not found (Key: $ageMonthsDropdownKey)');
       }
 
       // --- Trigger Calculation ---

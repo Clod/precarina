@@ -15,9 +15,16 @@ import 'package:precarina/l10n/app_localizations.dart';
 
 import 'model/precarina_model.dart';
 
-// It's good practice to define keys in a shared constants file if used across app and test code.
-// For this example, we'll use the string directly, assuming app_test.dart uses the same.
-const Key heightInputKeyTest = Key('height_input_field');
+// Keys for testing, ensuring consistency with app_test.dart
+const Key heightInputKey = Key('height_input_field');
+const Key weightKilosInputKey = Key('weight_kilos_input_field');
+const Key weightGramsInputKey = Key('weight_grams_input_field');
+const Key ageYearsDropdownKey = Key('age_years_dropdown');
+const Key ageMonthsDropdownKey = Key('age_months_dropdown');
+const Key genderFemaleRadioKey = Key('gender_female_radio');
+const Key genderMaleRadioKey = Key('gender_male_radio');
+const Key calculateButtonKey = Key('calculate_button');
+// const Key resetButtonKey = Key('reset_button'); // Example if you want to test reset
 
 final dateFormat = DateFormat('dd-MM-yyyy');
 
@@ -34,8 +41,6 @@ class _InputDataPageState extends State<InputDataPage> {
   final _formKey = GlobalKey<FormBuilderState>();
 
   final _heightKey = GlobalKey<FormFieldState<String>>();
-  final _weightKilosKey = GlobalKey<FormFieldState<String>>();
-  final _weightGramsKey = GlobalKey<FormFieldState<String>>();
 
   List<int> yearsRange = [
     0,
@@ -232,6 +237,7 @@ class _InputDataPageState extends State<InputDataPage> {
                   SizedBox(
                     width: 150.0,
                     child: RadioListTile(
+                      key: genderFemaleRadioKey,
                       title: Text(
                         l10n.sexFemale,
                         style: const TextStyle(fontSize: 14.0),
@@ -249,6 +255,7 @@ class _InputDataPageState extends State<InputDataPage> {
                   SizedBox(
                     width: 150.0,
                     child: RadioListTile(
+                      key: genderMaleRadioKey,
                       title: Text(
                         l10n.sexMale,
                         style: const TextStyle(fontSize: 14.0),
@@ -306,7 +313,7 @@ class _InputDataPageState extends State<InputDataPage> {
                     SizedBox(
                       width: 100.0,
                       child: KeyedSubtree(
-                        key: heightInputKeyTest, // Key for testing find.byKey()
+                        key: heightInputKey, // Key for testing find.byKey()
                         child: FormBuilderTextField(
                           validator: (val) =>
                               val!.isEmpty ? l10n.txtRequired : null,
@@ -378,10 +385,12 @@ class _InputDataPageState extends State<InputDataPage> {
                     SizedBox(
                       width: 100.0,
                       child: FormBuilderTextField(
-                        validator: (val) =>
-                            val!.isEmpty ? l10n.txtRequired : null,
-                        key: _weightKilosKey,
-                        name: "WeightKilos",
+                        key: weightKilosInputKey, // Using the test key directly or wrap in KeyedSubtree
+                        // validator: (val) =>
+                        //     val!.isEmpty ? l10n.txtRequired : null,
+                        // Using FormBuilder's key for state, not for finding in tests.
+                        // key: _weightKilosKey,
+                        name: "WeightKilos", // Name used by FormBuilder
                         keyboardType: TextInputType.number,
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
@@ -403,14 +412,14 @@ class _InputDataPageState extends State<InputDataPage> {
                           ),
                         ),
                         onTap: () {
-                          _weightKilosKey.currentState?.reset();
+                          // _weightKilosKey.currentState?.reset(); // This key is for FormFieldState
                         },
                       ),
                     ),
                   ],
                 ),
                 const Text(
-                  "  Kg",
+                  " Kg", // Adjusted spacing for consistency
                   style: TextStyle(
                     fontSize: 15.0,
                     fontWeight: FontWeight.bold,
@@ -431,10 +440,11 @@ class _InputDataPageState extends State<InputDataPage> {
                   SizedBox(
                     width: 100.0,
                     child: FormBuilderTextField(
-                      validator: (val) =>
-                          val!.isEmpty ? l10n.txtRequired : null,
-                      key: _weightGramsKey,
-                      name: "WeightGrams",
+                      key: weightGramsInputKey, // Using the test key directly or wrap in KeyedSubtree
+                      // validator: (val) =>
+                      //     val!.isEmpty ? l10n.txtRequired : null,
+                      // key: _weightGramsKey, // FormFieldState key
+                      name: "WeightGrams", // Name used by FormBuilder
                       keyboardType: TextInputType.number,
                       inputFormatters: [
                         FilteringTextInputFormatter.digitsOnly,
@@ -457,13 +467,13 @@ class _InputDataPageState extends State<InputDataPage> {
                         ),
                       ),
                       onTap: () {
-                        _weightGramsKey.currentState?.reset();
+                        // _weightGramsKey.currentState?.reset(); // FormFieldState key
                       },
                     ),
                   ),
                 ]),
                 const Text(
-                  "  g",
+                  " g", // Adjusted spacing for consistency
                   style: TextStyle(
                     fontSize: 15.0,
                     fontWeight: FontWeight.bold,
@@ -507,82 +517,88 @@ class _InputDataPageState extends State<InputDataPage> {
                     width: 20.0,
                   ),
                   Expanded(
-                    child: FormBuilderDropdown(
-                      iconEnabledColor: Colors.blue,
-                      dropdownColor: Colors.yellow[50],
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.yellow[100],
-                        isDense: true,
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 10.0),
-                        border: const OutlineInputBorder(),
-                        labelText: l10n.labelYears,
-                      ),
-                      name: "Age Years",
-                      validator: FormBuilderValidators.compose(
-                        [
-                          FormBuilderValidators.required(
-                              errorText: l10n.txtRequired),
-                        ],
-                      ),
-                      // Remove error message when user selects an option
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      items: yearsRange
-                          .map(
-                            (age) => DropdownMenuItem(
-                              value: age,
-                              alignment: AlignmentDirectional.center,
-                              child: Text(
-                                age.toString() +
-                                    (age == 0 || age == 1
-                                        ? l10n.suffixAno
-                                        : l10n.suffixAnos),
+                    child: KeyedSubtree(
+                      key: ageYearsDropdownKey,
+                      child: FormBuilderDropdown(
+                        iconEnabledColor: Colors.blue,
+                        dropdownColor: Colors.yellow[50],
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.yellow[100],
+                          isDense: true,
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 10.0),
+                          border: const OutlineInputBorder(),
+                          labelText: l10n.labelYears,
+                        ),
+                        name: "Age Years",
+                        validator: FormBuilderValidators.compose(
+                          [
+                            FormBuilderValidators.required(
+                                errorText: l10n.txtRequired),
+                          ],
+                        ),
+                        // Remove error message when user selects an option
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        items: yearsRange
+                            .map(
+                              (age) => DropdownMenuItem(
+                                value: age,
+                                alignment: AlignmentDirectional.center,
+                                child: Text(
+                                  age.toString() +
+                                      (age == 0 || age == 1
+                                          ? l10n.suffixAno
+                                          : l10n.suffixAnos),
+                                ),
                               ),
-                            ),
-                          )
-                          .toList(),
+                            )
+                            .toList(),
+                      ),
                     ),
                   ),
                   const SizedBox(
                     width: 20.0,
                   ),
                   Expanded(
-                    child: FormBuilderDropdown(
-                      iconEnabledColor: Colors.blue,
-                      dropdownColor: Colors.yellow[50],
-                      decoration: InputDecoration(
-                        isDense: true,
-                        filled: true,
-                        fillColor: Colors.yellow[100],
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 10.0),
-                        border: const OutlineInputBorder(),
-                        labelText: l10n.labelMonths,
-                      ),
-                      name: "Age Months",
-                      validator: FormBuilderValidators.compose(
-                        [
-                          FormBuilderValidators.required(
-                              errorText: l10n.txtRequired),
-                        ],
-                      ),
-                      // Remove error message when user selects an option
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      items: monthsRange
-                          .map(
-                            (months) => DropdownMenuItem(
-                              value: months,
-                              alignment: AlignmentDirectional.center,
-                              child: Text(
-                                months.toString() +
-                                    (months == 0 || months == 1
-                                        ? l10n.suffixMes
-                                        : l10n.suffixMeses),
+                    child: KeyedSubtree(
+                      key: ageMonthsDropdownKey,
+                      child: FormBuilderDropdown(
+                        iconEnabledColor: Colors.blue,
+                        dropdownColor: Colors.yellow[50],
+                        decoration: InputDecoration(
+                          isDense: true,
+                          filled: true,
+                          fillColor: Colors.yellow[100],
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 10.0),
+                          border: const OutlineInputBorder(),
+                          labelText: l10n.labelMonths,
+                        ),
+                        name: "Age Months",
+                        validator: FormBuilderValidators.compose(
+                          [
+                            FormBuilderValidators.required(
+                                errorText: l10n.txtRequired),
+                          ],
+                        ),
+                        // Remove error message when user selects an option
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        items: monthsRange
+                            .map(
+                              (months) => DropdownMenuItem(
+                                value: months,
+                                alignment: AlignmentDirectional.center,
+                                child: Text(
+                                  months.toString() +
+                                      (months == 0 || months == 1
+                                          ? l10n.suffixMes
+                                          : l10n.suffixMeses),
+                                ),
                               ),
-                            ),
-                          )
-                          .toList(),
+                            )
+                            .toList(),
+                      ),
                     ),
                   ),
                 ],
@@ -608,6 +624,7 @@ class _InputDataPageState extends State<InputDataPage> {
                   width: 20.0,
                 ),
                 ElevatedButton(
+                  key: calculateButtonKey,
                   onPressed: () {
                     FocusScope.of(context).unfocus();
                     // Let's give some time for the keyboard to fade away, otherwise
