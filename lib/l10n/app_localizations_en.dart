@@ -85,7 +85,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get txtPhysicalActivityDialogOptions =>
-      '≥ 420 minutes|360:419 minutes|300:359 minutes|240:299 minutes|120:239 minutes|1:119 minutes|No activity';
+      '≥ 420 minutes|360 - 419 minutes|300 - 359 minutes|240 - 299 minutes|120 - 239 minutes|1 - 119 minutes|No activity';
 
   @override
   String get txtPhysicalActivityHelp => '';
@@ -99,7 +99,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get txtBodyMassIndexDialogOptions =>
-      '5th:< 85th percentile|85th:< 95th|95th percentile:< 120% of the 95th percentile|120% of the 95th:< 140% of the 95th percentile|≥ 140% of the 95th percentile';
+      '5th - < 85th percentile|85th - < 95th|95th percentile - < 120% of the 95th percentile|120% of the 95th - < 140% of the 95th percentile|≥ 140% of the 95th percentile';
 
   @override
   String get txtBodyMassIndextHelp =>
@@ -117,7 +117,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get txtSleepDialogOptions =>
-      'Age-appropriate optimal range|< 1h above optimal range|< 1h above optimal range|1:< 2h below or ≥1h above optimal range|2:< 3h below optimal range|≥ 3h below optimal range';
+      'Age-appropriate optimal range|< 1h above optimal range|< 1h above optimal range|1 - < 2h below or ≥1h above optimal range|2 - < 3h below optimal range|≥ 3h below optimal range';
 
   @override
   String get txtSleepWarning => '';
@@ -149,7 +149,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get txtDiabetesDialogOptions =>
-      'No history of diabetes and FBG<100 mg/dL (or HbA1c < 5.7%) | Prediabetes with FBG 100:125 mg/dL (or HbA1c 5.7:6.4%) | Diabetes with HbA1c < 7.0% | Diabetes with HbA1c 7.0:7.9% | Diabetes with HbA1c 8.0:8.9% | Diabetes with HbA1c 9.0:9.9% | Diabetes with HbA1c ≥ 10%';
+      'No history of diabetes and FBG<100 (or HbA1c < 5.7) |No diabetes and FBG 100 - 125 (or HbA1c 5.7 - 6.4) (prediabetes) |Diabetes with HbA1c < 7.0 |Diabetes with HbA1c 7.0 - 7.9 |Diabetes with HbA1c 8.0 - 8.9 |Diabetes with HbA1c 9.0 - 9.9 |Diabetes with HbA1c ≥ 10';
 
   @override
   String get txtDiabetesHelp =>
@@ -167,7 +167,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get txtBloodPressureDialogOptions =>
-      'Optimal (<90th percentile) |Optimal (<90th percentile) (treated) |Elevated (≥90th:<95th percentile or ≥ 120/80 mm Hg to <95th percentile, whichever is lower) |Elevated (≥90th:<95th percentile or ≥ 120/80 mm Hg to <95th percentile, whichever is lower) (treated) |Stage 1 hypertension (≥95th:<95th percentile + 12 mm Hg, or 130/80:139/89 mm Hg, whichever is lower |Stage 1 hypertension (≥95th:<95th percentile + 12 mm Hg, or 130/80:139/89 mm Hg, whichever is lower (treated) |Stage 2 hypertension (≥95th percentile + 12 mm Hg, or ≥140/90 mm Hg, whichever is lower) |Stage 2 hypertension (≥95th percentile + 12 mm Hg, or ≥140/90 mm Hg, whichever is lower) (treated) |Systolic BP ≥ 160 or ≥95th percentile + 30 mm Hg systolic BP, whichever is lower and/or diastolic BP ≥ 100 or ≥ 95th percentile + 20 mm Hg diastolic BP';
+      'Optimal (<90th percentile) |Optimal (<90th percentile) (treated) |Elevated (≥90th - <95th percentile or ≥ 120/80 mm Hg to <95th percentile, whichever is lower) |Elevated (≥90th - <95th percentile or ≥ 120/80 mm Hg to <95th percentile, whichever is lower) (treated) |Stage 1 hypertension (≥95th - <95th percentile + 12 mm Hg, or 130/80 - 139/89 mm Hg, whichever is lower |Stage 1 hypertension (≥95th - <95th percentile + 12 mm Hg, or 130/80 - 139/89 mm Hg, whichever is lower (treated) |Stage 2 hypertension (≥95th percentile + 12 mm Hg, or ≥140/90 mm Hg, whichever is lower) |Stage 2 hypertension (≥95th percentile + 12 mm Hg, or ≥140/90 mm Hg, whichever is lower) (treated) |Systolic BP ≥ 160 or ≥95th percentile + 30 mm Hg systolic BP, whichever is lower and/or diastolic BP ≥ 100 or ≥ 95th percentile + 20 mm Hg diastolic BP';
 
   @override
   String get txtBloodPressureHelp =>
@@ -182,11 +182,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get txtCholesterolDialog =>
-      'Non-HDL cholesterol (mg/dL), starting no later than age 9:11y and earlier per clinician discretion';
+      'Non-HDL cholesterol (mg/dL), starting no later than age 9 - 11y and earlier per clinician discretion';
 
   @override
   String get txtCholesterolDialogOptions =>
-      '< 170 mg/dl|170:199 mg/dl|≥ 200 mg/dl';
+      '<100 |<100 (drug-treated) |100 - 119 |120 - 144 |145 - 189 |≥ 190';
 
   @override
   String get txtCholesterolWarning => '';
@@ -198,10 +198,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get txtLongPressGauge => 'Long press the gauge to reset all values.';
 
   @override
-  String get txtGlossary => 'Important Information';
+  String get txtGlossary => 'Glossary';
 
   @override
-  String get txtAbout => '';
+  String get txtAbout =>
+      'This app has been developed based on the scientific and medical knowledge of a team of pediatricians from Dr. Ricardo Gutiérrez Children\'s Hospital in Buenos Aires, including:<br/><strong>Ángela Sardella</strong> - Médica Pediatra y Cardióloga Pediatra. <br/><strong>Marina Vaccari</strong> - Médica Pediatra y Cardióloga Infantil certificada en hipertensión arterial. <br/><strong>Maria Sol Elorriaga</strong> - Médica Pediatra, Cardióloga infantil y Deportóloga. <br/><strong>Barbara Wagmaister</strong> - Médica Pediatra y Cardióloga Pediatra.<br/><strong>Miriam Tonietti</strong> - Médica Pediatra especialista en Nutrición y Diabetes.</strong> <br/><strong>Patricia Palenque</strong> - Licenciada en Nutrición y Docente adscripta de la U.B.A.<span style=\"color:red\"><p>We suggest that this app be primarily considered as a tool for HEALTH PROFESSIONALS to assess and promote a healthy lifestyle in pediatric clinical practice, especially for younger ages. Formal scoring is optional and physicians should emphasize lifelong concepts and well-being rather than specific scores, given the scarcity of data to support a scoring framework.<br></br>Cardiovascular health should be assessed from childhood. Numerous studies have shown that there are abnormalities in pediatric ages and it is associated with subclinical CVD in middle age.</p></span><br></br> <p>The short and medium-term health outcomes (including tracking metrics in adolescence and adulthood) are strong enough for diet, physical activity (screen time and play), sleep, exposure to secondhand smoke, and body weight\n to be addressed and advised during routine visits for healthy children.</p>';
 
   @override
   String get txtVegetalesVerdes => 'Vegetales verdes';
@@ -1150,4 +1151,349 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get txtMoreThanNineUnitsWkFiveLargeOnePlateDailyDS =>
       'MT  9 us/wk or MT 5 large us/wk or MT 1 pl dy';
+
+  @override
+  String get txtImportantNotice => 'IMPORTANT NOTICE';
+
+  @override
+  String get txtAppleWarning =>
+      '<p style=\"text-align:center\"><span style=\"font-size:16px\"><strong><span style=\"color:#ffffff\">IMPORTANT</span></strong></span></p>\n\n<p style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"color:#ffffff\">After loading all the information, the score will be displayed. It is just indicative and</span></span></p>\n\n<p style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"color:#ffffff\"><u>CANNOT REPLACE REGULAR MEDICAL CHECK-UPS</u></span></span></p>\n';
+
+  @override
+  String get patientsDataInputTitle => 'Enter Patient\'s Data';
+
+  @override
+  String get txtSex => 'Sex: ';
+
+  @override
+  String get txtAge => 'Age: ';
+
+  @override
+  String get txtWeight => 'Weight: ';
+
+  @override
+  String get txtHeight => 'Height: ';
+
+  @override
+  String get inputSex => 'Sex';
+
+  @override
+  String get sexFemale => 'Female';
+
+  @override
+  String get sexMale => 'Male';
+
+  @override
+  String get inputHeight => 'Enter height';
+
+  @override
+  String get inputWeight => 'Enter weight';
+
+  @override
+  String get hintWeightKilos => 'Eg: 42';
+
+  @override
+  String get hintWeightGramos => 'Eg: 300';
+
+  @override
+  String get hintHeight => 'Eg.: 123,5';
+
+  @override
+  String get inputBirthDate => 'Enter birth date or age:';
+
+  @override
+  String get birthDate => 'Date of\n birth';
+
+  @override
+  String get labelYears => 'Years';
+
+  @override
+  String get labelMonths => 'Months';
+
+  @override
+  String get suffixAno => ' year';
+
+  @override
+  String get suffixAnos => ' years';
+
+  @override
+  String get suffixMes => ' month';
+
+  @override
+  String get suffixMeses => ' months';
+
+  @override
+  String get btnResetFields => 'Reset';
+
+  @override
+  String get btnContinue => 'Continue';
+
+  @override
+  String get physicalActivityQ1 =>
+      'Q1. How many days per week do you engage in sports, games, physical exercises, dance or other physical activities?';
+
+  @override
+  String get physicalActivityQ1Note =>
+      '(Consider only activities practiced outside of school)';
+
+  @override
+  String get physicalActivityQ1Opt1 => 'None (skip to Q3)';
+
+  @override
+  String get physicalActivityQ1Opt2 => '1 day per week';
+
+  @override
+  String get physicalActivityQ1Opt3 => '2 days per week';
+
+  @override
+  String get physicalActivityQ1Opt4 => '3 days per week';
+
+  @override
+  String get physicalActivityQ1Opt5 => '4 days per week';
+
+  @override
+  String get physicalActivityQ1Opt6 => '5 days per week';
+
+  @override
+  String get physicalActivityQ1Opt7 => '6 days per week';
+
+  @override
+  String get physicalActivityQ1Opt8 => 'Every day';
+
+  @override
+  String get physicalActivityQ2 =>
+      'Q2. How much total weekly time do you usually dedicate to sports, games, physical exercises, dance or other physical activities on those days?';
+
+  @override
+  String get physicalActivityQ3 => 'Q3. How do you usually commute to school?';
+
+  @override
+  String get physicalActivityQ3Opt1 => 'Walking';
+
+  @override
+  String get physicalActivityQ3Opt2 => 'Bicycle';
+
+  @override
+  String get physicalActivityQ3Opt3 =>
+      'Motorized transportation (car, motorcycle, bus, subway, tram, train)';
+
+  @override
+  String get physicalActivityQ4 =>
+      'Q4. How many blocks away from your home is the school you attend?';
+
+  @override
+  String get physicalActivityBlocks => ' blocks';
+
+  @override
+  String get physicalActivityQ5 =>
+      'Q5. How many times per week do you have Physical Education classes at school?';
+
+  @override
+  String get physicalActivityQ5Opt0 => 'None';
+
+  @override
+  String get physicalActivityQ5Opt1 => '1 time per week';
+
+  @override
+  String get physicalActivityQ5Opt2 => '2 times per week';
+
+  @override
+  String get physicalActivityQ5Opt3 => '3 times per week';
+
+  @override
+  String get physicalActivityQ5Opt4 => '4 times per week';
+
+  @override
+  String get physicalActivityQ5Opt5 => '5 times per week';
+
+  @override
+  String get physicalActivityQ5Opt6 => '6 times per week';
+
+  @override
+  String get physicalActivityQ6 =>
+      'Q6. How many minutes per day, on average, do you spend in front of a computer, tablet, cell phone, or television screen?';
+
+  @override
+  String get physicalActivityMinutes => ' daily minutes';
+
+  @override
+  String get physicalActivitySedentaryWarning =>
+      ' but is considered SEDENTARY if equal to or exceeding two hours of screen time per day.';
+
+  @override
+  String get txtBMI => 'Body Mass Index: ';
+
+  @override
+  String get txtPercentile => 'Percentile: ';
+
+  @override
+  String get txtDiagnose => 'Diagnose: ';
+
+  @override
+  String get txtPressCalc => 'Press \"Calculate\"';
+
+  @override
+  String get txtTradNotLaded =>
+      'Translator not loaded \n Please notify developer.';
+
+  @override
+  String get txtDone => 'Done';
+
+  @override
+  String get txtSevereObesity => 'Severe obesity';
+
+  @override
+  String get txtObesity => 'Obesity';
+
+  @override
+  String get txtOverWeight => 'Overwight';
+
+  @override
+  String get txtNormalWeight => 'Normal weight';
+
+  @override
+  String get txtTotalSleepTime =>
+      'Total daily sleep time\nincluding regular naps.';
+
+  @override
+  String get txtImportant => 'IMPORTANT\nREAD CAREFULLY!';
+
+  @override
+  String get txtExamplePAS => 'Ex.: 120';
+
+  @override
+  String get txtExamplePAD => 'Ex.: 80';
+
+  @override
+  String get txtPAS => 'Sistolic BP:   ';
+
+  @override
+  String get txtPAD => 'Diastolic BP:  ';
+
+  @override
+  String get txtReceivesMedication => 'Receives medication';
+
+  @override
+  String get txtRequired => ' Required';
+
+  @override
+  String get txtCalculate => 'Calculate';
+
+  @override
+  String get txtOK => 'OK';
+
+  @override
+  String get txtCancel => 'Cancel';
+
+  @override
+  String get txtAccept => 'Accept';
+
+  @override
+  String get txtPatientNormal => 'Patient with normal BP';
+
+  @override
+  String get txtPatHT => 'Prehipertense patient';
+
+  @override
+  String get txtPatHt1 => 'Hipertense 1';
+
+  @override
+  String get txtPatHt2 => 'Hipertense 2';
+
+  @override
+  String get txtYes => 'Y';
+
+  @override
+  String get txtNo => 'N';
+
+  @override
+  String get txtScore => 'Score: ';
+
+  @override
+  String get resultAgeOver16 =>
+      'Since the age of 16, percentiles are not evaluated, but rather the actual values of blood pressure are considered.';
+
+  @override
+  String get resultPasUnder_50 =>
+      'The determined SBP percentile is less than the 50th percentile\n';
+
+  @override
+  String get resultPasEqual_50 =>
+      'The determined SBP percentile is equal to the 50th percentile\n';
+
+  @override
+  String get resultPas_50to90 =>
+      'The determined SBP percentile is between the 50th and 90th percentiles\n';
+
+  @override
+  String get resultPas_90to95 =>
+      'The determined SBP percentile is between the 90th and 95th percentiles\n';
+
+  @override
+  String get resultPas_95to95plus12 =>
+      'The determined SBP percentile is between the 95th and 95th + 12 mmHg\n';
+
+  @override
+  String get resultPasAbove_95plus12 =>
+      'The determined SBP percentile is above the 95th percentile + 12 mmHg\n';
+
+  @override
+  String get resultPadUnder_50 =>
+      'The determined DBP percentile is less than the 50th percentile\n';
+
+  @override
+  String get resultPadEqual_50 =>
+      'The determined DBP percentile is equal to the 50th percentile\n';
+
+  @override
+  String get resultPad_50to90 =>
+      'The determined DBP percentile is between the 50th and 90th percentiles\n';
+
+  @override
+  String get resultPad_90to95 =>
+      'The determined DBP percentile is between the 90th and 95th percentiles\n';
+
+  @override
+  String get resultPad_95to95plus12 =>
+      'The determined DBP percentile is between the 95th and 95th + 12 mmHg\n';
+
+  @override
+  String get resultPadAbove_95plus12 =>
+      'The determined DBP percentile is above the 95th percentile + 12 mmHg\n';
+
+  @override
+  String get patientDiagnoseHT3 =>
+      'Patient diagnosed with stage 3 hypertension';
+
+  @override
+  String get patientDiagnoseHT2 =>
+      'Patient diagnosed with stage 2 hypertension';
+
+  @override
+  String get patientDiagnoseHT1 =>
+      'Patient diagnosed with stage 1 hypertension';
+
+  @override
+  String get patientDiagnoseHT => 'Patient diagnosed as prehypertensive';
+
+  @override
+  String get patientDiagnoseNorm => 'Patient diagnosed as normotensive';
+
+  @override
+  String get txtApplicationLegalese =>
+      'This app is free and open-source as its sole purpose is to promote cardiovascular health from childhood.';
+
+  @override
+  String get txtAboutApp => 'About PRECARINA';
+
+  @override
+  String get txtHelpFood =>
+      '<p>The current food environment is characterized by a high supply and accessibility of energy-dense and nutritionally poor foods, with high levels of salt, sugar, and fats. These foods have replaced the consumption of natural foods that provide fiber, vitamins, and other beneficial nutrients for health. This shift in consumption patterns poses a significant risk to cardiovascular health.</p>\n<p>It is recommended to incorporate foods from all food groups daily and engage in at least 30 minutes of physical activity. Drink 8 glasses of safe water daily. Consume 5 servings of fruits and vegetables daily, including a variety of types and colors. Reduce the use of salt and the consumption of foods high in sodium. Limit the intake of sugary beverages and foods with high levels of fats, sugars, and salt. Consume daily servings of low-fat milk, yogurt, or cheese. Include lean meats in the diet, increase fish consumption, and include eggs. Consume legumes. Use raw oil as a condiment and incorporate nuts or seeds. Limit the consumption of alcoholic beverages.</p>\n<h2 id=\"bibliography\">Bibliography</h2>\n<ol>\n<li><a href=\"https://www.argentina.gob.ar/alimentacion-saludable/comer-sano\">Manual for the application of the Dietary Guidelines for the Argentine population.</a></li><li>Dietary Guidelines for Americans 2020-25. t DietaryGuidelines.gov</li></ol>\n';
+
+  @override
+  String get txtBmiHelp =>
+      'The body mass index (BMI) is the most commonly used criterion to measure body mass in relation to height. It is a practical and universally applicable indicator, cheap, and non-invasive to identify overweight and obesity.</p><p lang=\"es-ES\">In children and adolescents, percentile charts are used to define overweight (> 85th percentile and < 95th percentile), obesity (> 95th percentile), and severe obesity (> 99th percentile). Therefore, for the PRECARINA application, we trained a Machine Learning model using data from the World Health Organization (WHO) and the National Health Center to estimate the BMI percentile.</p><h2 lang=\"es-ES\" class=\"western\">Bibliography</h2><p><span lang=\"es-ES\">Manual de Obesidad en Pediatría. Editorial Lugo</span>nes. 2023</p><p><br/><br/></p>';
+
+  @override
+  String get txtPrivacyPolicy => 'Privacy Policy';
 }

@@ -9,33 +9,34 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get txtReadCarefully => 'Please read carefully before using this app';
+  String get txtReadCarefully =>
+      'Por favor, lea cuidadosamente antes de usar esta aplicación';
 
   @override
   String get txtAppPurpose =>
-      'This app calculates the estimated cardiovascular health score as defined by the';
+      'Esta aplicación calcula el puntaje estimado de salud cardiovascular según lo definido por la';
 
   @override
   String get txtFundamentalsLocation =>
-      'The scoring system and criteria are thoroughly explained in:';
+      'El sistema de puntuación y los criterios se explican detalladamente en:';
 
   @override
   String get txtLifeEssentialEightObjective =>
-      'Life’s Essential 8: Updating and Enhancing the American Heart Association’s Construct of Cardiovascular Health: A Presidential Advisory From the American Heart Association';
+      'Life\'s Essential 8: Actualización y Mejora del Constructo de Salud Cardiovascular de la Asociación Americana del Corazón: Un Aviso Presidencial de la Asociación Americana del Corazón';
 
   @override
   String get txtPaperAuthors =>
-      'Published by: Donald M. Lloyd-Jones, MD, ScM, FAHA, Chair; Norrina B. Allen, PhD, MPH, FAHA; Cheryl A.M. Anderson, PhD, MPH, MS, FAHA; Terrie Black, DNP, MBA, CRRN, FAHA; LaPrincess C. Brewer, MD, MPH; Randi E. Foraker, PhD, MA, FAHA; Michael A. Grandner, PhD, MTR, FAHA; Helen Lavretsky, MD, MS; Amanda Marma Perak, MD, MS, FAHA; Garima Sharma, MD; Wayne Rosamond, PhD, MS, FAHA; on behalf of the American Heart Association';
+      'Publicado por: Donald M. Lloyd-Jones, MD, ScM, FAHA, presidente; Norrina B. Allen, PhD, MPH, FAHA; Cheryl A.M. Anderson, PhD, MPH, MS, FAHA; Terrie Black, DNP, MBA, CRRN, FAHA; LaPrincess C. Brewer, MD, MPH; Randi E. Foraker, PhD, MA, FAHA; Michael A. Grandner, PhD, MTR, FAHA; Helen Lavretsky, MD, MS; Amanda Marma Perak, MD, MS, FAHA; Garima Sharma, MD; Wayne Rosamond, PhD, MS, FAHA; en representación de la Asociación Americana del Corazón';
 
   @override
   String get txtFundamentalsLocationMainWindow =>
       'Click aquí para leer los fundamentos';
 
   @override
-  String get txtButtonAcceptTandC => 'Accept';
+  String get txtButtonAcceptTandC => 'Aceptar';
 
   @override
-  String get txtButtonRejectTandC => 'Cancel';
+  String get txtButtonRejectTandC => 'Salir';
 
   @override
   String get txtButtonWarnings => 'Aceptar';
@@ -117,7 +118,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get txtSleepDialogOptions =>
-      'Menos de 8 h/d|8 a menos de 9 h/d|9 a menos de 10 h/d|10 a menos de 11 h/d|11 a menos de 12 h/d|12 a menos de 13 h/d|13 a 14 h/d|Más de 14 h/d';
+      'Rango óptimo apropiado para la edad|< 1h por encima del rango óptimo|< 1h por debajo del rango óptimo|1 - < 2h por debajo o ≥1h por encima del rango óptimo|2 - < 3h por debajo del rango óptimo|≥ 3h por debajo del rango óptimo';
 
   @override
   String get txtSleepWarning => '';
@@ -149,7 +150,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get txtDiabetesDialogOptions =>
-      'Sin antecedentes de diabetes y FBG<100 mg/dL (o HbA1c < 5.7 %) |Prediabetes por FBG 100 - 125 mg/dL (o HbA1c 5.7 - 6.4 %)|Diabetes con HbA1c < 7.0 % |Diabetes con HbA1c 7.0 - 7.9 % |Diabetes con HbA1c 8.0 - 8.9 % |Diabetes con HbA1c 9.0 - 9.9 % |Diabetes con HbA1c ≥ 10 %';
+      'Sin antecedentes de diabetes y FBG<100 (o HbA1c < 5.7) |Sin diabetes y FBG 100 - 125 (o HbA1c 5.7 - 6.4) (prediabetes) |Diabetes con HbA1c < 7.0 |Diabetes con HbA1c 7.0 - 7.9 |Diabetes con HbA1c 8.0 - 8.9 |Diabetes con HbA1c 9.0 - 9.9 |Diabetes con HbA1c ≥ 10';
 
   @override
   String get txtDiabetesHelp =>
@@ -175,7 +176,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get txtBloodPressureWarning =>
-      '<p><h3 style=\"text-align:center;\">TÉCNICA CORRECTA DE MEDICIÓN DE LA PRESIÓN ARTERIAL EN PEDIATRÍA</h3></p><p>Con el paciente en reposo y tranquilo se debe realizar la medición con un brazalete adecuado al tamaño del niño, con una vejiga inflable del brazalete que cubra los 2/3 del diámetro del brazo y los 2/3 del largo. Se deben realizar 3 tomas y promediarlas. En caso de registrar valores mayores de percentilo 90 se deben confirmar los registros con técnica auscultatoria.</p><p><span style=\"color:red\">Para el uso correcto de la app, en caso de tener registros mayores a percentilo 90, el valor a ingresar debe ser el promedio de 3 registros realizados en 3 consultas diferentes, con 3 tomas en cada consulta.</span></p>';
+      '<p><h3 style=\"text-align:center;\">TÉCNICA CORRECTA DE MEDICIÓN DE LA PRESIÓN ARTERIAL EN PEDIATRÍA</h3></p><p>Con el paciente en reposo y tranquilo se debe realizar la medición con un brazalete adecuado al tamaño del niño, con una vejiga inflable del brazalete que cubra los 2/3 del diámetro del brazo y los 2/3 del largo. Se deben realizar 3 tomas y promediarlas. En caso de registrar valores mayores de percentilo 90 se deben confirmar los registros con técnica auscultatoria.</p><p><span style=\"color:red\">Para el correcto uso de la app en caso de tener registros mayores de percentilo 90 los valores a ingresar deben ser 3 promedios realizados en consultas diferentes, con 3 tomas por consulta.</span></p>';
 
   @override
   String get txtCholesterolButton => 'Colesterol';
@@ -186,7 +187,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get txtCholesterolDialogOptions =>
-      '< 170 mg/dl|170 - 199 mg/dl|≥ 200 mg/dl';
+      '<100 |<100 (medicado) |100 - 119 |120 - 144 |145 - 189 |≥ 190';
 
   @override
   String get txtCholesterolWarning => '';
@@ -196,14 +197,14 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get txtLongPressGauge =>
-      'Mantén presionado el indicador para restablecer todos los valores';
+      'Mantén presionado el indicador para resetear todos los valores';
 
   @override
-  String get txtGlossary => 'Información importante';
+  String get txtGlossary => 'Glosario';
 
   @override
   String get txtAbout =>
-      '<span style=\"color:red\"><p>Sugerimos que esta app sea considerada principalmente como una herramienta para evaluar y promover un estilo de vida saludable para la práctica clínica pediátrica y especialmente las edades más jóvenes. \n La puntuación formal es opcional y los médicos deben enfatizar los conceptos y el bienestar de por vida y no el puntaje específico, dada la escasez de datos para respaldar un marco de puntuación.<br></br>La salud cardiovascular debe valorarse desde la infancia. Numerosos estudios han demostrado que existen alteraciones en edades pediátricas y se asocia con ECV subclínica en la mediana edad.</p></span><br></br> <p>Los resultados de salud a corto y mediano plazo (incluido el seguimiento de las métricas en adolescencia y edad adulta) son lo suficientemente sólidos como para que la dieta, la actividad física (tiempo de pantalla y jugar), el sueño, la exposición al humo de segunda mano y el peso corporal\n sean objeto de atención y consejo  en visitas rutinarias de niño sano.</p>';
+      'Esta app ha sido desarrollada a partir del conocimiento científico y médico de un equipo de pediatras del Hospital de Niños Dr. Ricardo Gutiérrez de la ciudad de Buenos Aires, integrado por:<br/><strong>Ángela Sardella</strong> - Médica Pediatra y Cardióloga Pediatra. <br/><strong>Marina Vaccari</strong> - Médica Pediatra y Cardióloga Infantil certificada en hipertensión arterial. <br/><strong>Maria Sol Elorriaga</strong> - Médica Pediatra, Cardióloga infantil y Deportóloga., <br/><strong>Miriam Tonietti</strong> - Médica Pediatra especialista en Nutrición y Diabetes.</strong> <br/><strong>Patricia Palenque</strong> - Licenciada en Nutrición y Docente adscripta de la U.B.A.<br/><strong>Claudio Morós</strong> - Médico Cirujano y Cardiólogo de Cardiopatía Congénita.<br/><strong>Bárbara Wagmaister</strong> - Médica Pediatra y Cardióloga.<span style=\"color:red\"><p>Sugerimos que esta app sea considerada principalmente como una herramienta para evaluar y promover un estilo de vida saludable para la práctica clínica pediátrica y especialmente las edades más jóvenes. \n La puntuación formal es opcional y los médicos deben enfatizar los conceptos y el bienestar de por vida y no el puntaje específico, dada la escasez de datos para respaldar un marco de puntuación.<br></br>La salud cardiovascular debe valorarse desde la infancia. Numerosos estudios han demostrado que existen alteraciones en edades pediátricas y se asocia con ECV subclínica en la mediana edad.</p></span><br></br> <p>Los resultados de salud a corto y mediano plazo (incluido el seguimiento de las métricas en adolescencia y edad adulta) son lo suficientemente sólidos como para que la dieta, la actividad física (tiempo de pantalla y jugar), el sueño, la exposición al humo de segunda mano, el peso corporal y la presión arterial, sean objeto de atención y consejo  en visitas rutinarias de niño sano.</p>';
 
   @override
   String get txtVegetalesVerdes => 'Vegetales verdes';
@@ -1119,4 +1120,347 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get txtMoreThanNineUnitsWkFiveLargeOnePlateDailyDS =>
       'MÁS DE 9 unids/sem o MÁS DE 5 unids grandes/sem o MÁS DE 1 pl por día';
+
+  @override
+  String get txtImportantNotice => 'AVISO IMPORTANTE';
+
+  @override
+  String get txtAppleWarning =>
+      '<p style=\"text-align:center\"><span style=\"font-size:16px\"><strong><span style=\"color:#ffffff\">IMPORTANTE</span></strong></span></p>\n\n<p style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"color:#ffffff\">Luego de cargar toda la información se mostrará el score. El mismo es sólo orientativo y</span></span></p>\n\n<p style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"color:#ffffff\"><u>NO PUEDE REEMPLAZAR EL CONTROL PERIÓDICO DE UN MÉDICO</u></span></span></p>\n';
+
+  @override
+  String get patientsDataInputTitle => 'Ingrese los datos del paciente';
+
+  @override
+  String get txtSex => 'Sexo: ';
+
+  @override
+  String get txtAge => 'Edad: ';
+
+  @override
+  String get txtWeight => 'Peso: ';
+
+  @override
+  String get txtHeight => 'Estatura: ';
+
+  @override
+  String get inputSex => 'Escoja el sexo';
+
+  @override
+  String get sexFemale => 'Mujer';
+
+  @override
+  String get sexMale => 'Varón';
+
+  @override
+  String get inputHeight => 'Ingrese la altura';
+
+  @override
+  String get inputWeight => 'Ingrese el peso';
+
+  @override
+  String get hintWeightKilos => 'Ej.: 42';
+
+  @override
+  String get hintWeightGramos => 'Ej.: 300';
+
+  @override
+  String get hintHeight => 'Ej.: 123,5';
+
+  @override
+  String get inputBirthDate => 'Ingrese fecha de nacimiento o edad';
+
+  @override
+  String get birthDate => 'Fecha de\n nacimiento';
+
+  @override
+  String get labelYears => 'Años';
+
+  @override
+  String get labelMonths => 'Meses';
+
+  @override
+  String get suffixAno => ' año';
+
+  @override
+  String get suffixAnos => ' años';
+
+  @override
+  String get suffixMes => ' mes';
+
+  @override
+  String get suffixMeses => ' meses';
+
+  @override
+  String get btnResetFields => 'LImpiar';
+
+  @override
+  String get btnContinue => 'Continuar';
+
+  @override
+  String get physicalActivityQ1 =>
+      'P1. ¿Cuántos días por semana práctica deportes, juegos, ejercicios físicos, danza u otra actividad física?';
+
+  @override
+  String get physicalActivityQ1Note =>
+      '(Considerar sólo actividades practicadas fuera del ámbito escolar)';
+
+  @override
+  String get physicalActivityQ1Opt1 => 'Ninguno (pasar a P3)';
+
+  @override
+  String get physicalActivityQ1Opt2 => '1 día por semana';
+
+  @override
+  String get physicalActivityQ1Opt3 => '2 días por semana';
+
+  @override
+  String get physicalActivityQ1Opt4 => '3 días por semana';
+
+  @override
+  String get physicalActivityQ1Opt5 => '4 días por semana';
+
+  @override
+  String get physicalActivityQ1Opt6 => '5 días por semana';
+
+  @override
+  String get physicalActivityQ1Opt7 => '6 días por semana';
+
+  @override
+  String get physicalActivityQ1Opt8 => 'Todos los días';
+
+  @override
+  String get physicalActivityQ2 =>
+      'P2. ¿Cuánto tiempo semanal total dedica HABITUALMENTE en esos días a realizar deportes, juegos, ejercicios físicos, danza u otra actividad física?';
+
+  @override
+  String get physicalActivityQ3 =>
+      'P3. ¿Habitualmente cómo suele transportarse a la escuela?';
+
+  @override
+  String get physicalActivityQ3Opt1 => 'Caminado';
+
+  @override
+  String get physicalActivityQ3Opt2 => 'Bicicleta';
+
+  @override
+  String get physicalActivityQ3Opt3 =>
+      'Transporte motorizado (auto, moto, colectivo, subte, pre-metro, tren)';
+
+  @override
+  String get physicalActivityQ4 =>
+      'P4. ¿A cuántas cuadras de su casa queda la escuela o el colegio al que asiste?';
+
+  @override
+  String get physicalActivityBlocks => ' cuadras';
+
+  @override
+  String get physicalActivityQ5 =>
+      'P5. ¿Cuántas veces por semana tiene clases de Educación Física en la escuela?';
+
+  @override
+  String get physicalActivityQ5Opt0 => 'No tiene';
+
+  @override
+  String get physicalActivityQ5Opt1 => '1 vez por semana';
+
+  @override
+  String get physicalActivityQ5Opt2 => '2 veces por semana';
+
+  @override
+  String get physicalActivityQ5Opt3 => '3 veces por semana';
+
+  @override
+  String get physicalActivityQ5Opt4 => '4 veces por semana';
+
+  @override
+  String get physicalActivityQ5Opt5 => '5 veces por semana';
+
+  @override
+  String get physicalActivityQ5Opt6 => '6 veces por semana';
+
+  @override
+  String get physicalActivityQ6 =>
+      'P6. ¿Cuántos minutos por día, en promedio, pasa frente a una pantalla de computadora, tablet, celular o televisor?';
+
+  @override
+  String get physicalActivityMinutes => '  minutos diarios';
+
+  @override
+  String get physicalActivitySedentaryWarning =>
+      ' pero se considera SEDENTARIO por igualar o superar las DOS horas de pantalla diarias.';
+
+  @override
+  String get txtBMI => 'Índice de masa corporal: ';
+
+  @override
+  String get txtPercentile => 'Percentilo: ';
+
+  @override
+  String get txtDiagnose => 'Diagnóstico: ';
+
+  @override
+  String get txtPressCalc => 'Presione \"Calcular\"';
+
+  @override
+  String get txtTradNotLaded =>
+      'No se cargó el traductor \n Por favor \n Avise al desarrollador';
+
+  @override
+  String get txtDone => 'Listo';
+
+  @override
+  String get txtSevereObesity => 'Obesidad severa';
+
+  @override
+  String get txtObesity => 'Obesidad';
+
+  @override
+  String get txtOverWeight => 'Sobrepeso';
+
+  @override
+  String get txtNormalWeight => 'Peso normal';
+
+  @override
+  String get txtTotalSleepTime =>
+      'Total de horas diarias de sueño\nincluyendo siestas regulares.';
+
+  @override
+  String get txtImportant => 'IMPORTANTE\n¡LEER ATENTAMENTE!';
+
+  @override
+  String get txtExamplePAS => 'Ej.: 120';
+
+  @override
+  String get txtExamplePAD => 'Ej.: 80';
+
+  @override
+  String get txtPAS => 'PA Sistólica:   ';
+
+  @override
+  String get txtPAD => 'PA Diastólica:  ';
+
+  @override
+  String get txtReceivesMedication => 'Recibe medicación';
+
+  @override
+  String get txtRequired => ' Requerido';
+
+  @override
+  String get txtCalculate => 'Calcular';
+
+  @override
+  String get txtOK => 'OK';
+
+  @override
+  String get txtCancel => 'Cancelar';
+
+  @override
+  String get txtAccept => 'Aceptar';
+
+  @override
+  String get txtPatientNormal => 'Paciente normotenso';
+
+  @override
+  String get txtPatHT => 'Paciente prehipertenso';
+
+  @override
+  String get txtPatHt1 => 'Paciente hipertenso leve';
+
+  @override
+  String get txtPatHt2 => 'Paciente hipertenso severo';
+
+  @override
+  String get txtYes => 'S';
+
+  @override
+  String get txtNo => 'N';
+
+  @override
+  String get txtScore => 'Score: ';
+
+  @override
+  String get resultAgeOver16 =>
+      'A partir de los 16 años no se evalúan percentilos sino los valores de presión.';
+
+  @override
+  String get resultPasUnder_50 =>
+      'El percentilo de PAS determinado es menor a percentilo 50\n';
+
+  @override
+  String get resultPasEqual_50 =>
+      'El percentilo de PAS determinado es igual a 50\n';
+
+  @override
+  String get resultPas_50to90 =>
+      'El percentilo de PAS determinado está entre 50 y 90\n';
+
+  @override
+  String get resultPas_90to95 =>
+      'El percentilo de PAS determinado está entre 90 y 95\n';
+
+  @override
+  String get resultPas_95to95plus12 =>
+      'El percentilo de PAS determinado está entre 95 y 95 + 12 mmHg\n';
+
+  @override
+  String get resultPasAbove_95plus12 =>
+      'El percentilo de PAS determinado está por encima de percentilo 95 + 12 mmHg\n';
+
+  @override
+  String get resultPadUnder_50 =>
+      'El percentilo de PAD determinado es menor a percentilo 50\n';
+
+  @override
+  String get resultPadEqual_50 =>
+      'El percentilo de PAD determinado es igual a 50\n';
+
+  @override
+  String get resultPad_50to90 =>
+      'El percentilo de PAD determinado está entre 50 y 90\n';
+
+  @override
+  String get resultPad_90to95 =>
+      'El percentilo de PAD determinado está entre 90 y 95\n';
+
+  @override
+  String get resultPad_95to95plus12 =>
+      'El percentilo de PAD determinado está entre 95 y 95 + 12 mmHg\n';
+
+  @override
+  String get resultPadAbove_95plus12 =>
+      'El percentilo de PAD determinado está por encima de percentilo 95 + 12 mmHg\n';
+
+  @override
+  String get patientDiagnoseHT3 => 'Paciente con hipertensión estadio 3';
+
+  @override
+  String get patientDiagnoseHT2 => 'Paciente con hipertensión estadio 2';
+
+  @override
+  String get patientDiagnoseHT1 => 'Paciente con hipertensión estadio 1';
+
+  @override
+  String get patientDiagnoseHT => 'Paciente prehipertenso';
+
+  @override
+  String get patientDiagnoseNorm => 'Paciente normotenso';
+
+  @override
+  String get txtApplicationLegalese =>
+      'Esta aplicación es gratuita y de código abierto y su única finalidad es promover la salud cardiovascular desde la infancia.\n\n';
+
+  @override
+  String get txtAboutApp => 'Información sobre PRECARINA';
+
+  @override
+  String get txtHelpFood =>
+      '<p>El entorno alimentario actual se caracteriza por una elevada oferta y accesibilidad de alimentos de alta densidad energética y baja calidad nutricional, con gran contenido de sal, azúcares y grasas, que han reemplazado el consumo de alimentos naturales que aportan fibra, vitaminas y otros minerales entre otros nutrientes beneficiosos para la salud. Esta modificación en los patrones de consumo constituyen un importante riesgo para la salud cardiovascular.</p>\n<p>Se recomienda incorporar a diario alimentos de todos los grupos y realizar al menos 30 minutos de actividad física; tomar a diario 8 vasos de agua segura; consumir a diario 5 porciones de frutas y verduras en variedad de tipo y colores, y reducir el uso de sal y el consumo de alimentos con alto contenido de sodio. Limitar el consumo de bebidas azucaradas y de alimentos con elevado contenido de grasas, azucares y sal; consumir diariamente leche, yogur o quesos, preferentemente descremados; consumir carnes magras, aumentar el consumo de pescado e incluir huevo en la alimentación; consumir legumbres; consumir aceite crudo como condimento, frutos secos o semillas y limitar el consumo de bebidas alcohólicas.</p>\n<h2 id=\"bibliograf%C3%ADa\">Bibliografía</h2>\n<ol>\n<li><a href=\"https://www.argentina.gob.ar/alimentacion-saludable/comer-sano\">Manual para la aplicación de la Guías alimentarias para la población argentina.</a></li><li>Dietary Guidelines for Americans 2020-25. t DietaryGuidelines.gov</li></ol>\n';
+
+  @override
+  String get txtBmiHelp =>
+      'The body mass index (BMI) is the most commonly used criterion to measure body mass in relation to height. It is a practical and universally applicable indicator, cheap, and non-invasive to identify overweight and obesity.</p><p lang=\"es-ES\">In children and adolescents, percentile charts are used to define overweight (> 85th percentile and < 95th percentile), obesity (> 95th percentile), and severe obesity (> 99th percentile). Therefore, for the PRECARINA application, we trained a Machine Learning model using data from the World Health Organization (WHO) and the National Health Center to estimate the BMI percentile.</p><h2 lang=\"es-ES\" class=\"western\">Bibliography</h2><p><span lang=\"es-ES\">Manual de Obesidad en Pediatría. Editorial Lugo</span>nes. 2023</p><p><br/><br/></p>';
+
+  @override
+  String get txtPrivacyPolicy => 'Política de privacidad';
 }

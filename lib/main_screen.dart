@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:localization/localization.dart';
+//import 'package:localization/localization.dart';
 import 'package:precarina/behaviors_and_factors_screens/blood_pressure_screen.dart';
 import 'package:precarina/behaviors_and_factors_screens/body_mass_index_screen.dart';
 import 'package:precarina/behaviors_and_factors_screens/cholesterol_screen.dart';
@@ -239,7 +239,7 @@ class _MainScreenState extends State<MainScreen> {
         width: 300.0,
         child: Center(
           child: Html(
-            data: "txtAppleWarning".i18n(),
+            data: AppLocalizations.of(context)!.txtAppleWarning,
           ),
         ),
       );

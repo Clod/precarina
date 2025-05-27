@@ -4,13 +4,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
-import 'package:localization/localization.dart';
+// import 'package:localization/localization.dart';
 import 'package:precarina/aux_widgets/vertical_space.dart';
 import 'package:precarina/main_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:time_machine/time_machine.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:precarina/l10n/app_localizations.dart';
 
 import 'model/precarina_model.dart';
 
@@ -91,7 +92,7 @@ class _InputDataPageState extends State<InputDataPage> {
   @override
   Widget build(BuildContext context) {
     var precaModel = Provider.of<PrecarinaModel>(context);
-
+    final l10n = AppLocalizations.of(context)!;
     return SingleChildScrollView(
       // resizeToAvoidBottomInset: true,
       child: FormBuilder(
@@ -162,7 +163,7 @@ class _InputDataPageState extends State<InputDataPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "patientsDataInputTitle".i18n(),
+                l10n.patientsDataInputTitle,
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
               ),
@@ -171,7 +172,7 @@ class _InputDataPageState extends State<InputDataPage> {
               height: 5.0,
             ),
             Text(
-              "inputSex".i18n(),
+              l10n.inputSex,
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
@@ -186,7 +187,7 @@ class _InputDataPageState extends State<InputDataPage> {
                   SizedBox(
                     width: 150.0,
                     child: RadioListTile(
-                      title: Text("sexFemale".i18n(), style: const TextStyle(fontSize: 14.0),),
+                      title: Text(l10n.sexFemale, style: const TextStyle(fontSize: 14.0),),
                       value: PatientSex.female,
                       groupValue: _selectedOption,
                       onChanged: (value) {
@@ -200,7 +201,7 @@ class _InputDataPageState extends State<InputDataPage> {
                   SizedBox(
                     width: 150.0,
                     child: RadioListTile(
-                      title: Text("sexMale".i18n(), style: const TextStyle(fontSize: 14.0),),
+                      title: Text(l10n.sexMale, style: const TextStyle(fontSize: 14.0),),
                       value: PatientSex.male,
                       groupValue: _selectedOption,
                       onChanged: (value) {
@@ -216,7 +217,7 @@ class _InputDataPageState extends State<InputDataPage> {
             ),
             if (_showSexError)
               Text(
-                "txtRequired".i18n(),
+                l10n.txtRequired,
                 textAlign: TextAlign.center,
                 style: const TextStyle(color: Colors.red),
               ),
@@ -226,7 +227,7 @@ class _InputDataPageState extends State<InputDataPage> {
             Padding(
               padding: const EdgeInsets.all(4.0),
               child: Text(
-                "inputHeight".i18n(),
+                l10n.inputHeight,
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
               ),
@@ -253,7 +254,7 @@ class _InputDataPageState extends State<InputDataPage> {
                     SizedBox(
                       width: 100.0,
                       child: FormBuilderTextField(
-                        validator: (val) => val!.isEmpty ? "txtRequired".i18n() : null,
+                        validator: (val) => val!.isEmpty ? l10n.txtRequired : null,
                         name: "HeightKey",
                         key: _heightKey,
                         keyboardType: TextInputType.number,
@@ -262,7 +263,7 @@ class _InputDataPageState extends State<InputDataPage> {
                         controller: _textContAltura,
                         focusNode: _heightFocusNode,
                         decoration: InputDecoration(
-                          hintText: "hintHeight".i18n(),
+                          hintText: l10n.hintHeight,
                           border: InputBorder.none,
                           focusedBorder: const OutlineInputBorder(
                               borderRadius: BorderRadius.all(
@@ -296,7 +297,7 @@ class _InputDataPageState extends State<InputDataPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "inputWeight".i18n(),
+                l10n.inputWeight,
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
               ),
@@ -317,15 +318,15 @@ class _InputDataPageState extends State<InputDataPage> {
                     SizedBox(
                       width: 100.0,
                       child: FormBuilderTextField(
-                        validator: (val) => val!.isEmpty ? "txtRequired".i18n() : null,
+                        validator: (val) => val!.isEmpty ? l10n.txtRequired : null,
                         key: _weightKilosKey,
                         name: "WeightKilos",
                         keyboardType: TextInputType.number,
                         inputFormatters: [FilteringTextInputFormatter.digitsOnly, kilosWeightMaskFormatter],
                         textAlign: TextAlign.center,
                         controller: _textContKilos,
-                        decoration: InputDecoration(
-                          hintText: "hintWeightKilos".i18n(),
+                        decoration: InputDecoration(                          
+                          hintText: l10n.hintWeightKilos,
                           border: InputBorder.none,
                           focusedBorder: const OutlineInputBorder(
                               borderRadius: BorderRadius.all(
@@ -366,15 +367,15 @@ class _InputDataPageState extends State<InputDataPage> {
                   SizedBox(
                     width: 100.0,
                     child: FormBuilderTextField(
-                      validator: (val) => val!.isEmpty ? "txtRequired".i18n() : null,
+                      validator: (val) => val!.isEmpty ? l10n.txtRequired : null,
                       key: _weightGramsKey,
                       name: "WeightGrams",
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly, gramsWeightMaskFormatter],
                       textAlign: TextAlign.center,
                       controller: _textContGramos,
-                      decoration: InputDecoration(
-                        hintText: "hintWeightGramos".i18n(),
+                      decoration: InputDecoration(                        
+                        hintText: l10n.hintWeightGramos,
                         border: InputBorder.none,
                         focusedBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(
@@ -408,7 +409,7 @@ class _InputDataPageState extends State<InputDataPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "inputBirthDate".i18n(),
+                l10n.inputBirthDate,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 20.0,
@@ -430,7 +431,7 @@ class _InputDataPageState extends State<InputDataPage> {
                   ElevatedButton(
                     onPressed: () => _selectDate(context),
                     child: Text(
-                      "birthDate".i18n(),
+                      l10n.birthDate,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -447,12 +448,12 @@ class _InputDataPageState extends State<InputDataPage> {
                         isDense: true,
                         contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                         border: const OutlineInputBorder(),
-                        labelText: "labelYears".i18n(),
+                        labelText: l10n.labelYears,
                       ),
                       name: "Age Years",
                       validator: FormBuilderValidators.compose(
                         [
-                          FormBuilderValidators.required(errorText: "txtRequired".i18n()),
+                          FormBuilderValidators.required(errorText: l10n.txtRequired),
                         ],
                       ),
                       // Remove error message when user selects an option
@@ -463,7 +464,7 @@ class _InputDataPageState extends State<InputDataPage> {
                               value: age,
                               alignment: AlignmentDirectional.center,
                               child: Text(
-                                age.toString() + (age == 0 || age == 1 ? "suffixAno".i18n() : "suffixAnos".i18n()),
+                                age.toString() + (age == 0 || age == 1 ? l10n.suffixAno : l10n.suffixAnos),
                               ),
                             ),
                           )
@@ -483,12 +484,12 @@ class _InputDataPageState extends State<InputDataPage> {
                         fillColor: Colors.yellow[100],
                         contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                         border: const OutlineInputBorder(),
-                        labelText: "labelMonths".i18n(),
+                        labelText: l10n.labelMonths,
                       ),
                       name: "Age Months",
                       validator: FormBuilderValidators.compose(
                         [
-                          FormBuilderValidators.required(errorText: "txtRequired".i18n()),
+                          FormBuilderValidators.required(errorText: l10n.txtRequired),
                         ],
                       ),
                       // Remove error message when user selects an option
@@ -499,7 +500,7 @@ class _InputDataPageState extends State<InputDataPage> {
                               value: months,
                               alignment: AlignmentDirectional.center,
                               child: Text(
-                                months.toString() + (months == 0 || months == 1 ? "suffixMes".i18n() : "suffixMeses".i18n()),
+                                months.toString() + (months == 0 || months == 1 ? l10n.suffixMes : l10n.suffixMeses),
                               ),
                             ),
                           )
@@ -521,7 +522,7 @@ class _InputDataPageState extends State<InputDataPage> {
                     _resetearValores(context);
                   },
                   child: Text(
-                    "btnResetFields".i18n(),
+                    l10n.btnResetFields,
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -567,7 +568,7 @@ class _InputDataPageState extends State<InputDataPage> {
                     }
                   },
                   child: Text(
-                    "btnContinue".i18n(),
+                    l10n.btnContinue,
                     textAlign: TextAlign.center,
                   ),
                 ),

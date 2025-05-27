@@ -233,7 +233,7 @@ abstract class AppLocalizations {
   /// No description provided for @txtPhysicalActivityDialogOptions.
   ///
   /// In en, this message translates to:
-  /// **'≥ 420 minutes|360:419 minutes|300:359 minutes|240:299 minutes|120:239 minutes|1:119 minutes|No activity'**
+  /// **'≥ 420 minutes|360 - 419 minutes|300 - 359 minutes|240 - 299 minutes|120 - 239 minutes|1 - 119 minutes|No activity'**
   String get txtPhysicalActivityDialogOptions;
 
   /// No description provided for @txtPhysicalActivityHelp.
@@ -257,7 +257,7 @@ abstract class AppLocalizations {
   /// No description provided for @txtBodyMassIndexDialogOptions.
   ///
   /// In en, this message translates to:
-  /// **'5th:< 85th percentile|85th:< 95th|95th percentile:< 120% of the 95th percentile|120% of the 95th:< 140% of the 95th percentile|≥ 140% of the 95th percentile'**
+  /// **'5th - < 85th percentile|85th - < 95th|95th percentile - < 120% of the 95th percentile|120% of the 95th - < 140% of the 95th percentile|≥ 140% of the 95th percentile'**
   String get txtBodyMassIndexDialogOptions;
 
   /// No description provided for @txtBodyMassIndextHelp.
@@ -287,7 +287,7 @@ abstract class AppLocalizations {
   /// No description provided for @txtSleepDialogOptions.
   ///
   /// In en, this message translates to:
-  /// **'Age-appropriate optimal range|< 1h above optimal range|< 1h above optimal range|1:< 2h below or ≥1h above optimal range|2:< 3h below optimal range|≥ 3h below optimal range'**
+  /// **'Age-appropriate optimal range|< 1h above optimal range|< 1h above optimal range|1 - < 2h below or ≥1h above optimal range|2 - < 3h below optimal range|≥ 3h below optimal range'**
   String get txtSleepDialogOptions;
 
   /// No description provided for @txtSleepWarning.
@@ -341,7 +341,7 @@ abstract class AppLocalizations {
   /// No description provided for @txtDiabetesDialogOptions.
   ///
   /// In en, this message translates to:
-  /// **'No history of diabetes and FBG<100 mg/dL (or HbA1c < 5.7%) | Prediabetes with FBG 100:125 mg/dL (or HbA1c 5.7:6.4%) | Diabetes with HbA1c < 7.0% | Diabetes with HbA1c 7.0:7.9% | Diabetes with HbA1c 8.0:8.9% | Diabetes with HbA1c 9.0:9.9% | Diabetes with HbA1c ≥ 10%'**
+  /// **'No history of diabetes and FBG<100 (or HbA1c < 5.7) |No diabetes and FBG 100 - 125 (or HbA1c 5.7 - 6.4) (prediabetes) |Diabetes with HbA1c < 7.0 |Diabetes with HbA1c 7.0 - 7.9 |Diabetes with HbA1c 8.0 - 8.9 |Diabetes with HbA1c 9.0 - 9.9 |Diabetes with HbA1c ≥ 10'**
   String get txtDiabetesDialogOptions;
 
   /// No description provided for @txtDiabetesHelp.
@@ -371,7 +371,7 @@ abstract class AppLocalizations {
   /// No description provided for @txtBloodPressureDialogOptions.
   ///
   /// In en, this message translates to:
-  /// **'Optimal (<90th percentile) |Optimal (<90th percentile) (treated) |Elevated (≥90th:<95th percentile or ≥ 120/80 mm Hg to <95th percentile, whichever is lower) |Elevated (≥90th:<95th percentile or ≥ 120/80 mm Hg to <95th percentile, whichever is lower) (treated) |Stage 1 hypertension (≥95th:<95th percentile + 12 mm Hg, or 130/80:139/89 mm Hg, whichever is lower |Stage 1 hypertension (≥95th:<95th percentile + 12 mm Hg, or 130/80:139/89 mm Hg, whichever is lower (treated) |Stage 2 hypertension (≥95th percentile + 12 mm Hg, or ≥140/90 mm Hg, whichever is lower) |Stage 2 hypertension (≥95th percentile + 12 mm Hg, or ≥140/90 mm Hg, whichever is lower) (treated) |Systolic BP ≥ 160 or ≥95th percentile + 30 mm Hg systolic BP, whichever is lower and/or diastolic BP ≥ 100 or ≥ 95th percentile + 20 mm Hg diastolic BP'**
+  /// **'Optimal (<90th percentile) |Optimal (<90th percentile) (treated) |Elevated (≥90th - <95th percentile or ≥ 120/80 mm Hg to <95th percentile, whichever is lower) |Elevated (≥90th - <95th percentile or ≥ 120/80 mm Hg to <95th percentile, whichever is lower) (treated) |Stage 1 hypertension (≥95th - <95th percentile + 12 mm Hg, or 130/80 - 139/89 mm Hg, whichever is lower |Stage 1 hypertension (≥95th - <95th percentile + 12 mm Hg, or 130/80 - 139/89 mm Hg, whichever is lower (treated) |Stage 2 hypertension (≥95th percentile + 12 mm Hg, or ≥140/90 mm Hg, whichever is lower) |Stage 2 hypertension (≥95th percentile + 12 mm Hg, or ≥140/90 mm Hg, whichever is lower) (treated) |Systolic BP ≥ 160 or ≥95th percentile + 30 mm Hg systolic BP, whichever is lower and/or diastolic BP ≥ 100 or ≥ 95th percentile + 20 mm Hg diastolic BP'**
   String get txtBloodPressureDialogOptions;
 
   /// No description provided for @txtBloodPressureHelp.
@@ -395,13 +395,13 @@ abstract class AppLocalizations {
   /// No description provided for @txtCholesterolDialog.
   ///
   /// In en, this message translates to:
-  /// **'Non-HDL cholesterol (mg/dL), starting no later than age 9:11y and earlier per clinician discretion'**
+  /// **'Non-HDL cholesterol (mg/dL), starting no later than age 9 - 11y and earlier per clinician discretion'**
   String get txtCholesterolDialog;
 
   /// No description provided for @txtCholesterolDialogOptions.
   ///
   /// In en, this message translates to:
-  /// **'< 170 mg/dl|170:199 mg/dl|≥ 200 mg/dl'**
+  /// **'<100 |<100 (drug-treated) |100 - 119 |120 - 144 |145 - 189 |≥ 190'**
   String get txtCholesterolDialogOptions;
 
   /// No description provided for @txtCholesterolWarning.
@@ -425,13 +425,13 @@ abstract class AppLocalizations {
   /// No description provided for @txtGlossary.
   ///
   /// In en, this message translates to:
-  /// **'Important Information'**
+  /// **'Glossary'**
   String get txtGlossary;
 
   /// No description provided for @txtAbout.
   ///
   /// In en, this message translates to:
-  /// **''**
+  /// **'This app has been developed based on the scientific and medical knowledge of a team of pediatricians from Dr. Ricardo Gutiérrez Children\'s Hospital in Buenos Aires, including:<br/><strong>Ángela Sardella</strong> - Médica Pediatra y Cardióloga Pediatra. <br/><strong>Marina Vaccari</strong> - Médica Pediatra y Cardióloga Infantil certificada en hipertensión arterial. <br/><strong>Maria Sol Elorriaga</strong> - Médica Pediatra, Cardióloga infantil y Deportóloga. <br/><strong>Barbara Wagmaister</strong> - Médica Pediatra y Cardióloga Pediatra.<br/><strong>Miriam Tonietti</strong> - Médica Pediatra especialista en Nutrición y Diabetes.</strong> <br/><strong>Patricia Palenque</strong> - Licenciada en Nutrición y Docente adscripta de la U.B.A.<span style=\"color:red\"><p>We suggest that this app be primarily considered as a tool for HEALTH PROFESSIONALS to assess and promote a healthy lifestyle in pediatric clinical practice, especially for younger ages. Formal scoring is optional and physicians should emphasize lifelong concepts and well-being rather than specific scores, given the scarcity of data to support a scoring framework.<br></br>Cardiovascular health should be assessed from childhood. Numerous studies have shown that there are abnormalities in pediatric ages and it is associated with subclinical CVD in middle age.</p></span><br></br> <p>The short and medium-term health outcomes (including tracking metrics in adolescence and adulthood) are strong enough for diet, physical activity (screen time and play), sleep, exposure to secondhand smoke, and body weight\n to be addressed and advised during routine visits for healthy children.</p>'**
   String get txtAbout;
 
   /// No description provided for @txtVegetalesVerdes.
@@ -1917,6 +1917,636 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'MT  9 us/wk or MT 5 large us/wk or MT 1 pl dy'**
   String get txtMoreThanNineUnitsWkFiveLargeOnePlateDailyDS;
+
+  /// No description provided for @txtImportantNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'IMPORTANT NOTICE'**
+  String get txtImportantNotice;
+
+  /// No description provided for @txtAppleWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'<p style=\"text-align:center\"><span style=\"font-size:16px\"><strong><span style=\"color:#ffffff\">IMPORTANT</span></strong></span></p>\n\n<p style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"color:#ffffff\">After loading all the information, the score will be displayed. It is just indicative and</span></span></p>\n\n<p style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"color:#ffffff\"><u>CANNOT REPLACE REGULAR MEDICAL CHECK-UPS</u></span></span></p>\n'**
+  String get txtAppleWarning;
+
+  /// No description provided for @patientsDataInputTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Patient\'s Data'**
+  String get patientsDataInputTitle;
+
+  /// No description provided for @txtSex.
+  ///
+  /// In en, this message translates to:
+  /// **'Sex: '**
+  String get txtSex;
+
+  /// No description provided for @txtAge.
+  ///
+  /// In en, this message translates to:
+  /// **'Age: '**
+  String get txtAge;
+
+  /// No description provided for @txtWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight: '**
+  String get txtWeight;
+
+  /// No description provided for @txtHeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Height: '**
+  String get txtHeight;
+
+  /// No description provided for @inputSex.
+  ///
+  /// In en, this message translates to:
+  /// **'Sex'**
+  String get inputSex;
+
+  /// No description provided for @sexFemale.
+  ///
+  /// In en, this message translates to:
+  /// **'Female'**
+  String get sexFemale;
+
+  /// No description provided for @sexMale.
+  ///
+  /// In en, this message translates to:
+  /// **'Male'**
+  String get sexMale;
+
+  /// No description provided for @inputHeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter height'**
+  String get inputHeight;
+
+  /// No description provided for @inputWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter weight'**
+  String get inputWeight;
+
+  /// No description provided for @hintWeightKilos.
+  ///
+  /// In en, this message translates to:
+  /// **'Eg: 42'**
+  String get hintWeightKilos;
+
+  /// No description provided for @hintWeightGramos.
+  ///
+  /// In en, this message translates to:
+  /// **'Eg: 300'**
+  String get hintWeightGramos;
+
+  /// No description provided for @hintHeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Eg.: 123,5'**
+  String get hintHeight;
+
+  /// No description provided for @inputBirthDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter birth date or age:'**
+  String get inputBirthDate;
+
+  /// No description provided for @birthDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Date of\n birth'**
+  String get birthDate;
+
+  /// No description provided for @labelYears.
+  ///
+  /// In en, this message translates to:
+  /// **'Years'**
+  String get labelYears;
+
+  /// No description provided for @labelMonths.
+  ///
+  /// In en, this message translates to:
+  /// **'Months'**
+  String get labelMonths;
+
+  /// No description provided for @suffixAno.
+  ///
+  /// In en, this message translates to:
+  /// **' year'**
+  String get suffixAno;
+
+  /// No description provided for @suffixAnos.
+  ///
+  /// In en, this message translates to:
+  /// **' years'**
+  String get suffixAnos;
+
+  /// No description provided for @suffixMes.
+  ///
+  /// In en, this message translates to:
+  /// **' month'**
+  String get suffixMes;
+
+  /// No description provided for @suffixMeses.
+  ///
+  /// In en, this message translates to:
+  /// **' months'**
+  String get suffixMeses;
+
+  /// No description provided for @btnResetFields.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get btnResetFields;
+
+  /// No description provided for @btnContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get btnContinue;
+
+  /// No description provided for @physicalActivityQ1.
+  ///
+  /// In en, this message translates to:
+  /// **'Q1. How many days per week do you engage in sports, games, physical exercises, dance or other physical activities?'**
+  String get physicalActivityQ1;
+
+  /// No description provided for @physicalActivityQ1Note.
+  ///
+  /// In en, this message translates to:
+  /// **'(Consider only activities practiced outside of school)'**
+  String get physicalActivityQ1Note;
+
+  /// No description provided for @physicalActivityQ1Opt1.
+  ///
+  /// In en, this message translates to:
+  /// **'None (skip to Q3)'**
+  String get physicalActivityQ1Opt1;
+
+  /// No description provided for @physicalActivityQ1Opt2.
+  ///
+  /// In en, this message translates to:
+  /// **'1 day per week'**
+  String get physicalActivityQ1Opt2;
+
+  /// No description provided for @physicalActivityQ1Opt3.
+  ///
+  /// In en, this message translates to:
+  /// **'2 days per week'**
+  String get physicalActivityQ1Opt3;
+
+  /// No description provided for @physicalActivityQ1Opt4.
+  ///
+  /// In en, this message translates to:
+  /// **'3 days per week'**
+  String get physicalActivityQ1Opt4;
+
+  /// No description provided for @physicalActivityQ1Opt5.
+  ///
+  /// In en, this message translates to:
+  /// **'4 days per week'**
+  String get physicalActivityQ1Opt5;
+
+  /// No description provided for @physicalActivityQ1Opt6.
+  ///
+  /// In en, this message translates to:
+  /// **'5 days per week'**
+  String get physicalActivityQ1Opt6;
+
+  /// No description provided for @physicalActivityQ1Opt7.
+  ///
+  /// In en, this message translates to:
+  /// **'6 days per week'**
+  String get physicalActivityQ1Opt7;
+
+  /// No description provided for @physicalActivityQ1Opt8.
+  ///
+  /// In en, this message translates to:
+  /// **'Every day'**
+  String get physicalActivityQ1Opt8;
+
+  /// No description provided for @physicalActivityQ2.
+  ///
+  /// In en, this message translates to:
+  /// **'Q2. How much total weekly time do you usually dedicate to sports, games, physical exercises, dance or other physical activities on those days?'**
+  String get physicalActivityQ2;
+
+  /// No description provided for @physicalActivityQ3.
+  ///
+  /// In en, this message translates to:
+  /// **'Q3. How do you usually commute to school?'**
+  String get physicalActivityQ3;
+
+  /// No description provided for @physicalActivityQ3Opt1.
+  ///
+  /// In en, this message translates to:
+  /// **'Walking'**
+  String get physicalActivityQ3Opt1;
+
+  /// No description provided for @physicalActivityQ3Opt2.
+  ///
+  /// In en, this message translates to:
+  /// **'Bicycle'**
+  String get physicalActivityQ3Opt2;
+
+  /// No description provided for @physicalActivityQ3Opt3.
+  ///
+  /// In en, this message translates to:
+  /// **'Motorized transportation (car, motorcycle, bus, subway, tram, train)'**
+  String get physicalActivityQ3Opt3;
+
+  /// No description provided for @physicalActivityQ4.
+  ///
+  /// In en, this message translates to:
+  /// **'Q4. How many blocks away from your home is the school you attend?'**
+  String get physicalActivityQ4;
+
+  /// No description provided for @physicalActivityBlocks.
+  ///
+  /// In en, this message translates to:
+  /// **' blocks'**
+  String get physicalActivityBlocks;
+
+  /// No description provided for @physicalActivityQ5.
+  ///
+  /// In en, this message translates to:
+  /// **'Q5. How many times per week do you have Physical Education classes at school?'**
+  String get physicalActivityQ5;
+
+  /// No description provided for @physicalActivityQ5Opt0.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get physicalActivityQ5Opt0;
+
+  /// No description provided for @physicalActivityQ5Opt1.
+  ///
+  /// In en, this message translates to:
+  /// **'1 time per week'**
+  String get physicalActivityQ5Opt1;
+
+  /// No description provided for @physicalActivityQ5Opt2.
+  ///
+  /// In en, this message translates to:
+  /// **'2 times per week'**
+  String get physicalActivityQ5Opt2;
+
+  /// No description provided for @physicalActivityQ5Opt3.
+  ///
+  /// In en, this message translates to:
+  /// **'3 times per week'**
+  String get physicalActivityQ5Opt3;
+
+  /// No description provided for @physicalActivityQ5Opt4.
+  ///
+  /// In en, this message translates to:
+  /// **'4 times per week'**
+  String get physicalActivityQ5Opt4;
+
+  /// No description provided for @physicalActivityQ5Opt5.
+  ///
+  /// In en, this message translates to:
+  /// **'5 times per week'**
+  String get physicalActivityQ5Opt5;
+
+  /// No description provided for @physicalActivityQ5Opt6.
+  ///
+  /// In en, this message translates to:
+  /// **'6 times per week'**
+  String get physicalActivityQ5Opt6;
+
+  /// No description provided for @physicalActivityQ6.
+  ///
+  /// In en, this message translates to:
+  /// **'Q6. How many minutes per day, on average, do you spend in front of a computer, tablet, cell phone, or television screen?'**
+  String get physicalActivityQ6;
+
+  /// No description provided for @physicalActivityMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **' daily minutes'**
+  String get physicalActivityMinutes;
+
+  /// No description provided for @physicalActivitySedentaryWarning.
+  ///
+  /// In en, this message translates to:
+  /// **' but is considered SEDENTARY if equal to or exceeding two hours of screen time per day.'**
+  String get physicalActivitySedentaryWarning;
+
+  /// No description provided for @txtBMI.
+  ///
+  /// In en, this message translates to:
+  /// **'Body Mass Index: '**
+  String get txtBMI;
+
+  /// No description provided for @txtPercentile.
+  ///
+  /// In en, this message translates to:
+  /// **'Percentile: '**
+  String get txtPercentile;
+
+  /// No description provided for @txtDiagnose.
+  ///
+  /// In en, this message translates to:
+  /// **'Diagnose: '**
+  String get txtDiagnose;
+
+  /// No description provided for @txtPressCalc.
+  ///
+  /// In en, this message translates to:
+  /// **'Press \"Calculate\"'**
+  String get txtPressCalc;
+
+  /// No description provided for @txtTradNotLaded.
+  ///
+  /// In en, this message translates to:
+  /// **'Translator not loaded \n Please notify developer.'**
+  String get txtTradNotLaded;
+
+  /// No description provided for @txtDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get txtDone;
+
+  /// No description provided for @txtSevereObesity.
+  ///
+  /// In en, this message translates to:
+  /// **'Severe obesity'**
+  String get txtSevereObesity;
+
+  /// No description provided for @txtObesity.
+  ///
+  /// In en, this message translates to:
+  /// **'Obesity'**
+  String get txtObesity;
+
+  /// No description provided for @txtOverWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Overwight'**
+  String get txtOverWeight;
+
+  /// No description provided for @txtNormalWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Normal weight'**
+  String get txtNormalWeight;
+
+  /// No description provided for @txtTotalSleepTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Total daily sleep time\nincluding regular naps.'**
+  String get txtTotalSleepTime;
+
+  /// No description provided for @txtImportant.
+  ///
+  /// In en, this message translates to:
+  /// **'IMPORTANT\nREAD CAREFULLY!'**
+  String get txtImportant;
+
+  /// No description provided for @txtExamplePAS.
+  ///
+  /// In en, this message translates to:
+  /// **'Ex.: 120'**
+  String get txtExamplePAS;
+
+  /// No description provided for @txtExamplePAD.
+  ///
+  /// In en, this message translates to:
+  /// **'Ex.: 80'**
+  String get txtExamplePAD;
+
+  /// No description provided for @txtPAS.
+  ///
+  /// In en, this message translates to:
+  /// **'Sistolic BP:   '**
+  String get txtPAS;
+
+  /// No description provided for @txtPAD.
+  ///
+  /// In en, this message translates to:
+  /// **'Diastolic BP:  '**
+  String get txtPAD;
+
+  /// No description provided for @txtReceivesMedication.
+  ///
+  /// In en, this message translates to:
+  /// **'Receives medication'**
+  String get txtReceivesMedication;
+
+  /// No description provided for @txtRequired.
+  ///
+  /// In en, this message translates to:
+  /// **' Required'**
+  String get txtRequired;
+
+  /// No description provided for @txtCalculate.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculate'**
+  String get txtCalculate;
+
+  /// No description provided for @txtOK.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get txtOK;
+
+  /// No description provided for @txtCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get txtCancel;
+
+  /// No description provided for @txtAccept.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept'**
+  String get txtAccept;
+
+  /// No description provided for @txtPatientNormal.
+  ///
+  /// In en, this message translates to:
+  /// **'Patient with normal BP'**
+  String get txtPatientNormal;
+
+  /// No description provided for @txtPatHT.
+  ///
+  /// In en, this message translates to:
+  /// **'Prehipertense patient'**
+  String get txtPatHT;
+
+  /// No description provided for @txtPatHt1.
+  ///
+  /// In en, this message translates to:
+  /// **'Hipertense 1'**
+  String get txtPatHt1;
+
+  /// No description provided for @txtPatHt2.
+  ///
+  /// In en, this message translates to:
+  /// **'Hipertense 2'**
+  String get txtPatHt2;
+
+  /// No description provided for @txtYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Y'**
+  String get txtYes;
+
+  /// No description provided for @txtNo.
+  ///
+  /// In en, this message translates to:
+  /// **'N'**
+  String get txtNo;
+
+  /// No description provided for @txtScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Score: '**
+  String get txtScore;
+
+  /// No description provided for @resultAgeOver16.
+  ///
+  /// In en, this message translates to:
+  /// **'Since the age of 16, percentiles are not evaluated, but rather the actual values of blood pressure are considered.'**
+  String get resultAgeOver16;
+
+  /// No description provided for @resultPasUnder_50.
+  ///
+  /// In en, this message translates to:
+  /// **'The determined SBP percentile is less than the 50th percentile\n'**
+  String get resultPasUnder_50;
+
+  /// No description provided for @resultPasEqual_50.
+  ///
+  /// In en, this message translates to:
+  /// **'The determined SBP percentile is equal to the 50th percentile\n'**
+  String get resultPasEqual_50;
+
+  /// No description provided for @resultPas_50to90.
+  ///
+  /// In en, this message translates to:
+  /// **'The determined SBP percentile is between the 50th and 90th percentiles\n'**
+  String get resultPas_50to90;
+
+  /// No description provided for @resultPas_90to95.
+  ///
+  /// In en, this message translates to:
+  /// **'The determined SBP percentile is between the 90th and 95th percentiles\n'**
+  String get resultPas_90to95;
+
+  /// No description provided for @resultPas_95to95plus12.
+  ///
+  /// In en, this message translates to:
+  /// **'The determined SBP percentile is between the 95th and 95th + 12 mmHg\n'**
+  String get resultPas_95to95plus12;
+
+  /// No description provided for @resultPasAbove_95plus12.
+  ///
+  /// In en, this message translates to:
+  /// **'The determined SBP percentile is above the 95th percentile + 12 mmHg\n'**
+  String get resultPasAbove_95plus12;
+
+  /// No description provided for @resultPadUnder_50.
+  ///
+  /// In en, this message translates to:
+  /// **'The determined DBP percentile is less than the 50th percentile\n'**
+  String get resultPadUnder_50;
+
+  /// No description provided for @resultPadEqual_50.
+  ///
+  /// In en, this message translates to:
+  /// **'The determined DBP percentile is equal to the 50th percentile\n'**
+  String get resultPadEqual_50;
+
+  /// No description provided for @resultPad_50to90.
+  ///
+  /// In en, this message translates to:
+  /// **'The determined DBP percentile is between the 50th and 90th percentiles\n'**
+  String get resultPad_50to90;
+
+  /// No description provided for @resultPad_90to95.
+  ///
+  /// In en, this message translates to:
+  /// **'The determined DBP percentile is between the 90th and 95th percentiles\n'**
+  String get resultPad_90to95;
+
+  /// No description provided for @resultPad_95to95plus12.
+  ///
+  /// In en, this message translates to:
+  /// **'The determined DBP percentile is between the 95th and 95th + 12 mmHg\n'**
+  String get resultPad_95to95plus12;
+
+  /// No description provided for @resultPadAbove_95plus12.
+  ///
+  /// In en, this message translates to:
+  /// **'The determined DBP percentile is above the 95th percentile + 12 mmHg\n'**
+  String get resultPadAbove_95plus12;
+
+  /// No description provided for @patientDiagnoseHT3.
+  ///
+  /// In en, this message translates to:
+  /// **'Patient diagnosed with stage 3 hypertension'**
+  String get patientDiagnoseHT3;
+
+  /// No description provided for @patientDiagnoseHT2.
+  ///
+  /// In en, this message translates to:
+  /// **'Patient diagnosed with stage 2 hypertension'**
+  String get patientDiagnoseHT2;
+
+  /// No description provided for @patientDiagnoseHT1.
+  ///
+  /// In en, this message translates to:
+  /// **'Patient diagnosed with stage 1 hypertension'**
+  String get patientDiagnoseHT1;
+
+  /// No description provided for @patientDiagnoseHT.
+  ///
+  /// In en, this message translates to:
+  /// **'Patient diagnosed as prehypertensive'**
+  String get patientDiagnoseHT;
+
+  /// No description provided for @patientDiagnoseNorm.
+  ///
+  /// In en, this message translates to:
+  /// **'Patient diagnosed as normotensive'**
+  String get patientDiagnoseNorm;
+
+  /// No description provided for @txtApplicationLegalese.
+  ///
+  /// In en, this message translates to:
+  /// **'This app is free and open-source as its sole purpose is to promote cardiovascular health from childhood.'**
+  String get txtApplicationLegalese;
+
+  /// No description provided for @txtAboutApp.
+  ///
+  /// In en, this message translates to:
+  /// **'About PRECARINA'**
+  String get txtAboutApp;
+
+  /// No description provided for @txtHelpFood.
+  ///
+  /// In en, this message translates to:
+  /// **'<p>The current food environment is characterized by a high supply and accessibility of energy-dense and nutritionally poor foods, with high levels of salt, sugar, and fats. These foods have replaced the consumption of natural foods that provide fiber, vitamins, and other beneficial nutrients for health. This shift in consumption patterns poses a significant risk to cardiovascular health.</p>\n<p>It is recommended to incorporate foods from all food groups daily and engage in at least 30 minutes of physical activity. Drink 8 glasses of safe water daily. Consume 5 servings of fruits and vegetables daily, including a variety of types and colors. Reduce the use of salt and the consumption of foods high in sodium. Limit the intake of sugary beverages and foods with high levels of fats, sugars, and salt. Consume daily servings of low-fat milk, yogurt, or cheese. Include lean meats in the diet, increase fish consumption, and include eggs. Consume legumes. Use raw oil as a condiment and incorporate nuts or seeds. Limit the consumption of alcoholic beverages.</p>\n<h2 id=\"bibliography\">Bibliography</h2>\n<ol>\n<li><a href=\"https://www.argentina.gob.ar/alimentacion-saludable/comer-sano\">Manual for the application of the Dietary Guidelines for the Argentine population.</a></li><li>Dietary Guidelines for Americans 2020-25. t DietaryGuidelines.gov</li></ol>\n'**
+  String get txtHelpFood;
+
+  /// No description provided for @txtBmiHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'The body mass index (BMI) is the most commonly used criterion to measure body mass in relation to height. It is a practical and universally applicable indicator, cheap, and non-invasive to identify overweight and obesity.</p><p lang=\"es-ES\">In children and adolescents, percentile charts are used to define overweight (> 85th percentile and < 95th percentile), obesity (> 95th percentile), and severe obesity (> 99th percentile). Therefore, for the PRECARINA application, we trained a Machine Learning model using data from the World Health Organization (WHO) and the National Health Center to estimate the BMI percentile.</p><h2 lang=\"es-ES\" class=\"western\">Bibliography</h2><p><span lang=\"es-ES\">Manual de Obesidad en Pediatría. Editorial Lugo</span>nes. 2023</p><p><br/><br/></p>'**
+  String get txtBmiHelp;
+
+  /// No description provided for @txtPrivacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get txtPrivacyPolicy;
 }
 
 class _AppLocalizationsDelegate
