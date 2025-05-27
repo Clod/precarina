@@ -16,6 +16,8 @@ const Key conditionCheckboxKey = Key('condition_checkbox');
 const Key scoreSliderKey = Key('score_slider'); // Example slider
 const Key weightInputKey =
     Key('weight_input_field'); // Another example text field
+const Key heightInputKey = 
+    Key('height_input_field'); // Key for the height input field
 const Key calculateButtonKey =
     Key('calculate_button'); // Example button to trigger calculation
 
@@ -41,12 +43,12 @@ void main() {
       // Check if the T&C dialog is shown
       final acceptButtonFinder = find.byKey(acceptTcButtonKey);
       if (tester.any(acceptButtonFinder)) {
-        print('T&C dialog found. Accepting...');
+        debugPrint('T&C dialog found. Accepting...');
         await tester.tap(acceptButtonFinder);
         await tester.pumpAndSettle();
-        print('T&C accepted.');
+        debugPrint('T&C accepted.');
       } else {
-        print('T&C dialog not found or already accepted.');
+        debugPrint('T&C dialog not found or already accepted.');
       }
 
       // --- Interact with Drawer ---
@@ -54,7 +56,7 @@ void main() {
       final ScaffoldState state = tester.firstState(find.byType(Scaffold));
       state.openDrawer();
       await tester.pumpAndSettle();
-      print('Drawer opened.');
+      debugPrint('Drawer opened.');
 
       // You could add steps here to tap on drawer items if needed
       // Example: await tester.tap(find.text('Help Section'));
@@ -65,11 +67,11 @@ void main() {
       // Close the drawer
       state.closeDrawer();
       await tester.pumpAndSettle();
-      print('Drawer closed.');
+      debugPrint('Drawer closed.');
 
       // --- Interact with InputDataPage ---
       // Assuming InputDataPage is the body of MyHomePage, it should be visible
-      print('Interacting with InputDataPage...');
+      debugPrint('Interacting with InputDataPage...');
 
       // Example: Interact with a TextField (Age)
       final ageInputFinder = find.byKey(ageInputKey);
@@ -77,9 +79,9 @@ void main() {
         final int randomAge = 18 + random.nextInt(80); // Age between 18 and 97
         await tester.enterText(ageInputFinder, randomAge.toString());
         selectedValues['age'] = randomAge;
-        print('Entered age: $randomAge');
+        debugPrint('Entered age: $randomAge');
       } else {
-        print('Age input field not found (Key: $ageInputKey)');
+        debugPrint('Age input field not found (Key: $ageInputKey)');
       }
 
       // Example: Interact with RadioButtons (Gender)
@@ -102,14 +104,38 @@ void main() {
         await tester.pumpAndSettle(); // Allow UI to update after selection
 
         selectedValues['gender'] = selectedGender;
-        print('Selected gender: $selectedGender');
+        debugPrint('Selected gender: $selectedGender');
       } else {
         // This means the specific text for the randomly chosen gender was not found.
-        print('Gender radio button option "$selectedGender" not found.');
+        debugPrint('Gender radio button option "$selectedGender" not found.');
         // If you were using a genderRadioGroupKey, you might add:
-        // print('Ensure the radio button group (if keyed) and the option "$selectedGender" exist.');
+        // debugPrint('Ensure the radio button group (if keyed) and the option "$selectedGender" exist.');
       }
 
+      // Interact with Height TextField (FormBuilderTextField)
+      // The FormBuilderTextField is wrapped by a KeyedSubtree with heightInputKey
+      final heightInputWrapperFinder = find.byKey(heightInputKey);
+      if (tester.any(heightInputWrapperFinder)) {
+        const String heightValueToEnter = "123,5"; // Input matches mask '###,#'
+        const double conceptualHeightValue = 123.5; // The actual numeric value
+
+        // Find the actual TextField widget within the KeyedSubtree wrapper
+        final actualTextFieldFinder = find.descendant(
+          of: heightInputWrapperFinder,
+          matching: find.byType(TextField),
+        );
+
+        if (tester.any(actualTextFieldFinder)) {
+          await tester.enterText(actualTextFieldFinder, heightValueToEnter);
+          await tester.pumpAndSettle();
+          selectedValues['height'] = conceptualHeightValue;
+          debugPrint('Entered height: $heightValueToEnter (conceptual: $conceptualHeightValue)');
+        } else {
+          debugPrint('Actual TextField descendant not found for height input (Wrapper Key: $heightInputKey)');
+        }
+      } else {
+        debugPrint('Height input field wrapper not found (Key: $heightInputKey)');
+      }
       // Example: Interact with a Checkbox (Condition)
       final conditionCheckboxFinder = find.byKey(conditionCheckboxKey);
       if (tester.any(conditionCheckboxFinder)) {
@@ -124,7 +150,7 @@ void main() {
           // final Checkbox checkbox = tester.widget(conditionCheckboxFinder);
           // if (checkbox.value != true) { await tester.tap(conditionCheckboxFinder); await tester.pumpAndSettle(); }
           selectedValues['condition'] = true; // Assuming tap makes it true
-          print('Tapped condition checkbox (aiming for true)');
+          debugPrint('Tapped condition checkbox (aiming for true)');
         } else {
           // Tap the checkbox to potentially uncheck it
           await tester.tap(conditionCheckboxFinder);
@@ -133,20 +159,20 @@ void main() {
           // final Checkbox checkbox = tester.widget(conditionCheckboxFinder);
           // if (checkbox.value != false) { await tester.tap(conditionCheckboxFinder); await tester.pumpAndSettle(); }
           selectedValues['condition'] = false; // Assuming tap makes it false
-          print('Tapped condition checkbox (aiming for false)');
+          debugPrint('Tapped condition checkbox (aiming for false)');
         }
         // A simpler approach is just to tap randomly:
         // if (random.nextBool()) {
         //   await tester.tap(conditionCheckboxFinder);
         //   await tester.pumpAndSettle();
         //   selectedValues['condition'] = true; // Assuming tap makes it true
-        //   print('Tapped condition checkbox');
+        //   debugPrint('Tapped condition checkbox');
         // } else {
         //   selectedValues['condition'] = false; // Assuming no tap leaves it false
-        //   print('Did not tap condition checkbox');
+        //   debugPrint('Did not tap condition checkbox');
         // }
       } else {
-        print('Condition checkbox not found (Key: $conditionCheckboxKey)');
+        debugPrint('Condition checkbox not found (Key: $conditionCheckboxKey)');
       }
 
       // Example: Interact with a Slider (Score Component)
@@ -177,9 +203,9 @@ void main() {
 
         selectedValues['score_component'] =
             randomValue; // Store the target value
-        print('Set slider value to approximately: $randomValue');
+        debugPrint('Set slider value to approximately: $randomValue');
       } else {
-        print('Score slider not found (Key: $scoreSliderKey)');
+        debugPrint('Score slider not found (Key: $scoreSliderKey)');
       }
 
       // Example: Interact with another TextField (Weight)
@@ -190,9 +216,9 @@ void main() {
         await tester.enterText(weightInputFinder,
             randomWeight.toStringAsFixed(1)); // Enter with 1 decimal place
         selectedValues['weight'] = randomWeight;
-        print('Entered weight: ${randomWeight.toStringAsFixed(1)}');
+        debugPrint('Entered weight: ${randomWeight.toStringAsFixed(1)}');
       } else {
-        print('Weight input field not found (Key: $weightInputKey)');
+        debugPrint('Weight input field not found (Key: $weightInputKey)');
       }
 
       // --- Trigger Calculation ---
@@ -200,20 +226,20 @@ void main() {
       if (tester.any(calculateButtonFinder)) {
         await tester.tap(calculateButtonFinder);
         await tester.pumpAndSettle();
-        print('Tapped Calculate button.');
+        debugPrint('Tapped Calculate button.');
 
         // Add assertions here to check the result screen or updated UI
         // Example: expect(find.textContaining('Your Score:'), findsOneWidget);
       } else {
-        print('Calculate button not found (Key: $calculateButtonKey)');
+        debugPrint('Calculate button not found (Key: $calculateButtonKey)');
       }
 
-      // --- Print Stored Values ---
-      print('\n--- Randomly Selected Input Values ---');
+      // --- debugPrint Stored Values ---
+      debugPrint('\n--- Randomly Selected Input Values ---');
       selectedValues.forEach((key, value) {
-        print('$key: $value');
+        debugPrint('$key: $value');
       });
-      print('-------------------------------------\n');
+      debugPrint('-------------------------------------\n');
 
       // You can add more interactions or assertions here as needed
     });

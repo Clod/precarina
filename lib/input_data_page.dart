@@ -15,6 +15,10 @@ import 'package:precarina/l10n/app_localizations.dart';
 
 import 'model/precarina_model.dart';
 
+// It's good practice to define keys in a shared constants file if used across app and test code.
+// For this example, we'll use the string directly, assuming app_test.dart uses the same.
+const Key heightInputKeyTest = Key('height_input_field');
+
 final dateFormat = DateFormat('dd-MM-yyyy');
 
 class InputDataPage extends StatefulWidget {
@@ -33,7 +37,26 @@ class _InputDataPageState extends State<InputDataPage> {
   final _weightKilosKey = GlobalKey<FormFieldState<String>>();
   final _weightGramsKey = GlobalKey<FormFieldState<String>>();
 
-  List<int> yearsRange = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+  List<int> yearsRange = [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ];
   List<int> monthsRange = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
   late DateTime _dateTime;
@@ -46,15 +69,30 @@ class _InputDataPageState extends State<InputDataPage> {
   final TextEditingController _textContAnios = TextEditingController();
   final TextEditingController _textContMeses = TextEditingController();
 
-  var heightMaskFormatter = MaskTextInputFormatter(mask: '###,#', filter: {"#": RegExp(r'[0-9]')}, type: MaskAutoCompletionType.eager);
+  var heightMaskFormatter = MaskTextInputFormatter(
+      mask: '###,#',
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.eager);
 
-  var kilosWeightMaskFormatter = MaskTextInputFormatter(mask: '###', filter: {"#": RegExp(r'[0-9]')}, type: MaskAutoCompletionType.eager);
+  var kilosWeightMaskFormatter = MaskTextInputFormatter(
+      mask: '###',
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.eager);
 
-  var gramsWeightMaskFormatter = MaskTextInputFormatter(mask: '###', filter: {"#": RegExp(r'[0-9]')}, type: MaskAutoCompletionType.eager);
+  var gramsWeightMaskFormatter = MaskTextInputFormatter(
+      mask: '###',
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.eager);
 
-  var ageYearsMaskFormatter = MaskTextInputFormatter(mask: '##', filter: {"#": RegExp(r'[0-9]')}, type: MaskAutoCompletionType.eager);
+  var ageYearsMaskFormatter = MaskTextInputFormatter(
+      mask: '##',
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.eager);
 
-  var ageMonthsMaskFormatter = MaskTextInputFormatter(mask: '##', filter: {"#": RegExp(r'^[0-9]{1,2}$')}, type: MaskAutoCompletionType.eager);
+  var ageMonthsMaskFormatter = MaskTextInputFormatter(
+      mask: '##',
+      filter: {"#": RegExp(r'^[0-9]{1,2}$')},
+      type: MaskAutoCompletionType.eager);
 
   // String? _heightError;
   final _heightFocusNode = FocusNode();
@@ -72,8 +110,11 @@ class _InputDataPageState extends State<InputDataPage> {
   }
 
   Future<void> _selectDate(BuildContext context) async {
-    final DateTime? pickedDate =
-        await showDatePicker(context: context, initialDate: _currentDate, firstDate: DateTime(2000), lastDate: DateTime.now());
+    final DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: _currentDate,
+        firstDate: DateTime(2000),
+        lastDate: DateTime.now());
     if (pickedDate != null && pickedDate != _currentDate) {
       setState(() {
         _dateTime = pickedDate;
@@ -83,7 +124,8 @@ class _InputDataPageState extends State<InputDataPage> {
         // debugPrint("years: ${diff.years}; months: ${diff.months}; days: ${diff.days}; hours: ${diff.hours}; minutes: ${diff.minutes}; seconds: ${diff.seconds}");
         _textContAnios.text = diff.years.toString();
         _textContMeses.text = diff.months.toString();
-        _formKey.currentState?.fields['Age Years']?.setValue(diff.years); //value(diff.years);
+        _formKey.currentState?.fields['Age Years']
+            ?.setValue(diff.years); //value(diff.years);
         _formKey.currentState?.fields['Age Months']?.setValue(diff.months);
       });
     }
@@ -141,7 +183,8 @@ class _InputDataPageState extends State<InputDataPage> {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      await launchUrl(Uri.parse('https://buenosaires.gob.ar/salud/hospital-de-ninos-dr-ricardo-gutierrez'));
+                      await launchUrl(Uri.parse(
+                          'https://buenosaires.gob.ar/salud/hospital-de-ninos-dr-ricardo-gutierrez'));
                     },
                     child: const Text(
                       'Hospital de Niños\nRicardo Gutiérrez',
@@ -165,7 +208,8 @@ class _InputDataPageState extends State<InputDataPage> {
               child: Text(
                 l10n.patientsDataInputTitle,
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    fontSize: 22.0, fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(
@@ -174,7 +218,8 @@ class _InputDataPageState extends State<InputDataPage> {
             Text(
               l10n.inputSex,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              style:
+                  const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
             Container(
               decoration: BoxDecoration(
@@ -187,7 +232,10 @@ class _InputDataPageState extends State<InputDataPage> {
                   SizedBox(
                     width: 150.0,
                     child: RadioListTile(
-                      title: Text(l10n.sexFemale, style: const TextStyle(fontSize: 14.0),),
+                      title: Text(
+                        l10n.sexFemale,
+                        style: const TextStyle(fontSize: 14.0),
+                      ),
                       value: PatientSex.female,
                       groupValue: _selectedOption,
                       onChanged: (value) {
@@ -201,7 +249,10 @@ class _InputDataPageState extends State<InputDataPage> {
                   SizedBox(
                     width: 150.0,
                     child: RadioListTile(
-                      title: Text(l10n.sexMale, style: const TextStyle(fontSize: 14.0),),
+                      title: Text(
+                        l10n.sexMale,
+                        style: const TextStyle(fontSize: 14.0),
+                      ),
                       value: PatientSex.male,
                       groupValue: _selectedOption,
                       onChanged: (value) {
@@ -229,7 +280,8 @@ class _InputDataPageState extends State<InputDataPage> {
               child: Text(
                 l10n.inputHeight,
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    fontSize: 20.0, fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(
@@ -253,31 +305,38 @@ class _InputDataPageState extends State<InputDataPage> {
                     ),
                     SizedBox(
                       width: 100.0,
-                      child: FormBuilderTextField(
-                        validator: (val) => val!.isEmpty ? l10n.txtRequired : null,
-                        name: "HeightKey",
-                        key: _heightKey,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [FilteringTextInputFormatter.digitsOnly, heightMaskFormatter],
-                        textAlign: TextAlign.center,
-                        controller: _textContAltura,
-                        focusNode: _heightFocusNode,
-                        decoration: InputDecoration(
-                          hintText: l10n.hintHeight,
-                          border: InputBorder.none,
-                          focusedBorder: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15.0),
-                              ),
-                              borderSide: BorderSide(color: Colors.blue)),
-                          contentPadding: const EdgeInsets.symmetric(
-                            vertical: 5,
-                            horizontal: 10,
+                      child: KeyedSubtree(
+                        key: heightInputKeyTest, // Key for testing find.byKey()
+                        child: FormBuilderTextField(
+                          validator: (val) =>
+                              val!.isEmpty ? l10n.txtRequired : null,
+                          name: "HeightKey", // Name used by FormBuilder
+                          key:
+                              _heightKey, // GlobalKey for FormFieldState access (e.g., for reset)
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            heightMaskFormatter
+                          ],
+                          textAlign: TextAlign.center,
+                          controller: _textContAltura,
+                          focusNode: _heightFocusNode,
+                          decoration: InputDecoration(
+                            hintText: l10n.hintHeight,
+                            border: InputBorder.none,
+                            focusedBorder: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15.0)),
+                                borderSide: BorderSide(color: Colors.blue)),
+                            contentPadding: const EdgeInsets.symmetric(
+                              vertical: 5,
+                              horizontal: 10,
+                            ),
                           ),
+                          onTap: () {
+                            _heightKey.currentState?.reset();
+                          },
                         ),
-                        onTap: () {
-                          _heightKey.currentState?.reset();
-                        },
                       ),
                     ),
                   ],
@@ -299,7 +358,8 @@ class _InputDataPageState extends State<InputDataPage> {
               child: Text(
                 l10n.inputWeight,
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    fontSize: 20.0, fontWeight: FontWeight.bold),
               ),
             ),
             Row(
@@ -318,14 +378,18 @@ class _InputDataPageState extends State<InputDataPage> {
                     SizedBox(
                       width: 100.0,
                       child: FormBuilderTextField(
-                        validator: (val) => val!.isEmpty ? l10n.txtRequired : null,
+                        validator: (val) =>
+                            val!.isEmpty ? l10n.txtRequired : null,
                         key: _weightKilosKey,
                         name: "WeightKilos",
                         keyboardType: TextInputType.number,
-                        inputFormatters: [FilteringTextInputFormatter.digitsOnly, kilosWeightMaskFormatter],
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          kilosWeightMaskFormatter
+                        ],
                         textAlign: TextAlign.center,
                         controller: _textContKilos,
-                        decoration: InputDecoration(                          
+                        decoration: InputDecoration(
                           hintText: l10n.hintWeightKilos,
                           border: InputBorder.none,
                           focusedBorder: const OutlineInputBorder(
@@ -367,14 +431,18 @@ class _InputDataPageState extends State<InputDataPage> {
                   SizedBox(
                     width: 100.0,
                     child: FormBuilderTextField(
-                      validator: (val) => val!.isEmpty ? l10n.txtRequired : null,
+                      validator: (val) =>
+                          val!.isEmpty ? l10n.txtRequired : null,
                       key: _weightGramsKey,
                       name: "WeightGrams",
                       keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly, gramsWeightMaskFormatter],
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        gramsWeightMaskFormatter
+                      ],
                       textAlign: TextAlign.center,
                       controller: _textContGramos,
-                      decoration: InputDecoration(                        
+                      decoration: InputDecoration(
                         hintText: l10n.hintWeightGramos,
                         border: InputBorder.none,
                         focusedBorder: const OutlineInputBorder(
@@ -446,14 +514,16 @@ class _InputDataPageState extends State<InputDataPage> {
                         filled: true,
                         fillColor: Colors.yellow[100],
                         isDense: true,
-                        contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 10.0),
                         border: const OutlineInputBorder(),
                         labelText: l10n.labelYears,
                       ),
                       name: "Age Years",
                       validator: FormBuilderValidators.compose(
                         [
-                          FormBuilderValidators.required(errorText: l10n.txtRequired),
+                          FormBuilderValidators.required(
+                              errorText: l10n.txtRequired),
                         ],
                       ),
                       // Remove error message when user selects an option
@@ -464,7 +534,10 @@ class _InputDataPageState extends State<InputDataPage> {
                               value: age,
                               alignment: AlignmentDirectional.center,
                               child: Text(
-                                age.toString() + (age == 0 || age == 1 ? l10n.suffixAno : l10n.suffixAnos),
+                                age.toString() +
+                                    (age == 0 || age == 1
+                                        ? l10n.suffixAno
+                                        : l10n.suffixAnos),
                               ),
                             ),
                           )
@@ -482,14 +555,16 @@ class _InputDataPageState extends State<InputDataPage> {
                         isDense: true,
                         filled: true,
                         fillColor: Colors.yellow[100],
-                        contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 10.0),
                         border: const OutlineInputBorder(),
                         labelText: l10n.labelMonths,
                       ),
                       name: "Age Months",
                       validator: FormBuilderValidators.compose(
                         [
-                          FormBuilderValidators.required(errorText: l10n.txtRequired),
+                          FormBuilderValidators.required(
+                              errorText: l10n.txtRequired),
                         ],
                       ),
                       // Remove error message when user selects an option
@@ -500,7 +575,10 @@ class _InputDataPageState extends State<InputDataPage> {
                               value: months,
                               alignment: AlignmentDirectional.center,
                               child: Text(
-                                months.toString() + (months == 0 || months == 1 ? l10n.suffixMes : l10n.suffixMeses),
+                                months.toString() +
+                                    (months == 0 || months == 1
+                                        ? l10n.suffixMes
+                                        : l10n.suffixMeses),
                               ),
                             ),
                           )
@@ -539,15 +617,20 @@ class _InputDataPageState extends State<InputDataPage> {
 
                     if (_formKey.currentState?.validate() == true) {
                       // If decimals were ommitted complete with 0
-                      if (RegExp(r',\s*$').hasMatch(_textContAltura.text)) _textContAltura.text += '0';
+                      if (RegExp(r',\s*$').hasMatch(_textContAltura.text)) {
+                        _textContAltura.text += '0';
+                      }
                       // Let's change the comma to a period
                       _textContAltura.text.replaceAll(",", ".");
                       debugPrint("Altura: ${_textContAltura.text}");
-                      precaModel.height = double.parse(_textContAltura.text.replaceAll(",", "."));
+                      precaModel.height = double.parse(
+                          _textContAltura.text.replaceAll(",", "."));
                       precaModel.weightKilos = int.parse(_textContKilos.text);
                       precaModel.weightGrams = int.parse(_textContGramos.text);
-                      precaModel.ageYears = _formKey.currentState?.fields['Age Years']?.value;
-                      precaModel.ageMonths = _formKey.currentState?.fields['Age Months']?.value;
+                      precaModel.ageYears =
+                          _formKey.currentState?.fields['Age Years']?.value;
+                      precaModel.ageMonths =
+                          _formKey.currentState?.fields['Age Months']?.value;
 
                       precaModel.dateOfBirth = _dateTime;
                       precaModel.patientSex = _selectedOption;
