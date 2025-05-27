@@ -1,10 +1,9 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:precarina/l10n/app_localizations.dart';
 import 'package:precarina/model/precarina_model.dart';
 import 'dart:async';
-import 'package:localization/localization.dart';
 
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
@@ -39,6 +38,7 @@ PatientDiagnosePas? patDiagPas;
 PatientDiagnosePad? patDiagPad;
 
 Future<List<String>> searchBloodPressurePercentiles({
+  required BuildContext context,
   required PatientSex sex,
   required double height,
   required int age,
@@ -46,6 +46,8 @@ Future<List<String>> searchBloodPressurePercentiles({
   required int diastBP,
 }) async {
 
+  final l10n = AppLocalizations.of(context)!;
+   
   String result = "";
 
   String patientDiagnose;
@@ -53,18 +55,18 @@ Future<List<String>> searchBloodPressurePercentiles({
   // A partir de los 16 años se usa el criterio de adultos
   if (age >= 16) {
     if (systBP < 130 && diastBP < 85) {
-      patientDiagnose = "patientDiagnoseNorm".i18n();
+      patientDiagnose = l10n.patientDiagnoseNorm;
     } else if (systBP <= 139 && diastBP <= 89) {
-      patientDiagnose = "patientDiagnoseHT".i18n();
+      patientDiagnose = l10n.patientDiagnoseHT;
     } else if (systBP <= 159 && diastBP <= 99) {
-      patientDiagnose = "patientDiagnoseHT1".i18n();
+      patientDiagnose = l10n.patientDiagnoseHT1;
     } else if (systBP <= 179 && diastBP <= 109) {
-      patientDiagnose = "patientDiagnoseHT2".i18n();
+      patientDiagnose = l10n.patientDiagnoseHT2;
     } else {
-      patientDiagnose = "patientDiagnoseHT3".i18n();
+      patientDiagnose = l10n.patientDiagnoseHT3;
     }
 
-    return [patientDiagnose, "resultAgeOver16".i18n()];
+    return [patientDiagnose, l10n.resultAgeOver16];
   }
 
   // Si llegué hasta acá es porque tiene hasta 16 años inclusive
@@ -175,15 +177,15 @@ Future<List<String>> searchBloodPressurePercentiles({
   // Ahora recorro las filas de la tabla de presiones sistólicas para diagnosticar
   // < 50
   if (systBP < syst50) {
-    result = "resultPasUnder_50".i18n();
+    result = l10n.resultPasUnder_50;
     patDiagPas = PatientDiagnosePas.patientDiagnoseNorm;
     // == 50
   } else if (systBP == syst50) {
-    result = "resultPasEqual_50".i18n();
+    result = l10n.resultPasEqual_50;
     patDiagPas = PatientDiagnosePas.patientDiagnoseNorm;
     // Entre 50+ y 90
   } else if (systBP > syst50 && systBP < syst90) {
-    result = "resultPas_50to90".i18n();
+    result = l10n.resultPas_50to90;
     // 90
     if (systBP == syst90) {
       patDiagPas = PatientDiagnosePas.patientDiagnoseHT;
@@ -193,7 +195,7 @@ Future<List<String>> searchBloodPressurePercentiles({
     }
     // Entre 90 y 95
   } else if (systBP >= syst90 && systBP < syst95) {
-    result = "resultPas_90to95".i18n();
+    result = l10n.resultPas_90to95;
     // =95
     if (systBP == syst95) {
       patDiagPas = PatientDiagnosePas.patientDiagnoseHT1;
@@ -203,29 +205,29 @@ Future<List<String>> searchBloodPressurePercentiles({
     }
     // +95 y <= 95+12
   } else if (systBP >= syst95 && systBP < syst95plus12) {
-    result = "resultPas_95to95plus12".i18n();
+    result = l10n.resultPas_95to95plus12;
     if (systBP == syst95plus12) {
       patDiagPas = PatientDiagnosePas.patientDiagnoseHT2;
     } else {
       patDiagPas = PatientDiagnosePas.patientDiagnoseHT1;
     }
   } else if (systBP > syst95plus12) {
-    result = "resultPasAbove_95plus12".i18n();
+    result = l10n.resultPasAbove_95plus12;
     patDiagPas = PatientDiagnosePas.patientDiagnoseHT2;
   }
 
   // Ahora recorro las filas de la tabla de presiones diastólicas para completar el diagnóstico.
   // < 50
   if (diastBP < diast50) {
-    result += "resultPadUnder_50".i18n();
+    result += l10n.resultPadUnder_50;
     patDiagPad = PatientDiagnosePad.patientDiagnoseNorm;
     // == 50
   } else if (diastBP == diast50) {
-    result += "resultPadEqual_50".i18n();
+    result += l10n.resultPadEqual_50;
     patDiagPad = PatientDiagnosePad.patientDiagnoseNorm;
     // Entre 50+ y 90
   } else if (diastBP >= diast50 && diastBP < diast90) {
-    result += "resultPad_50to90".i18n();
+    result += l10n.resultPad_50to90;
     // 90
     if (diastBP == diast90) {
       patDiagPad = PatientDiagnosePad.patientDiagnoseHT;
@@ -235,7 +237,7 @@ Future<List<String>> searchBloodPressurePercentiles({
     }
     // Entre 90 y 95
   } else if (diastBP >= diast90 && diastBP < diast95) {
-    result += "resultPad_90to95".i18n();
+    result += l10n.resultPad_90to95;
     // =95
     if (diastBP == diast95) {
       patDiagPad = PatientDiagnosePad.patientDiagnoseHT1;
@@ -245,14 +247,14 @@ Future<List<String>> searchBloodPressurePercentiles({
     }
     // +95 y <= 95+12
   } else if (diastBP >= diast95 && diastBP <= diast95plus12) {
-    result += "resultPad_95to95plus12".i18n();
+    result += l10n.resultPad_95to95plus12;
     if (diastBP == diast95plus12) {
       patDiagPad = PatientDiagnosePad.patientDiagnoseHT2;
     } else {
       patDiagPad = PatientDiagnosePad.patientDiagnoseHT1;
     }
   } else if (diastBP > diast95plus12) {
-    result += "resultPadAbove_95plus12".i18n();
+    result += l10n.resultPadAbove_95plus12;
     patDiagPad = PatientDiagnosePad.patientDiagnoseHT2;
   }
 
@@ -265,13 +267,13 @@ Future<List<String>> searchBloodPressurePercentiles({
 */
 
   if (patDiagPas == PatientDiagnosePas.patientDiagnoseHT2 || patDiagPad == PatientDiagnosePad.patientDiagnoseHT2) {
-    patientDiagnose = patientDiagnoseHT2;
+    patientDiagnose = l10n.patientDiagnoseHT2;
   } else if (patDiagPas == PatientDiagnosePas.patientDiagnoseHT1 || patDiagPad == PatientDiagnosePad.patientDiagnoseHT1) {
-    patientDiagnose = patientDiagnoseHT1;
+    patientDiagnose = l10n.patientDiagnoseHT1;
   } else if (patDiagPas == PatientDiagnosePas.patientDiagnoseHT || patDiagPad == PatientDiagnosePad.patientDiagnoseHT) {
-    patientDiagnose = patientDiagnoseHT;
+    patientDiagnose = l10n.patientDiagnoseHT;
   } else {
-    patientDiagnose = patientDiagnoseNorm;
+    patientDiagnose = l10n.patientDiagnoseNorm;
   }
 
   debugPrint("Diagnóstico: $patientDiagnose");

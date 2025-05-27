@@ -1,4 +1,6 @@
 {
+  "txtPrecarina": "PRECARINA",
+
   "txtFundamentalsLocationMainWindow": "Click aquí para leer los fundamentos",
 
   "txtButtonWarnings": "Aceptar",
@@ -446,7 +448,7 @@
   "BLOOD PRESSURE END": "*************************************************************************************************************************************",
   "txtCholesterolButton": "Colesterol",
   "txtCholesterolDialog": "Colesterol no-HDL (mg/dL), iniciando a más tardar a los 9-11 años y antes, a discreción del médico.",
-  "txtCholesterolDialogOptions": "<100 |<100 (medicado) |100 - 119 |120 - 144 |145 - 189 |≥ 190",
+  "txtCholesterolDialogOptions_": "<100 |<100 (medicado) |100 - 119 |120 - 144 |145 - 189 |≥ 190",
   "txtCholesterolWarning": "",
   "txtLongPressGauge": "Mantén presionado el indicador para resetear todos los valores",
   "txtGlossary": "Glosario",

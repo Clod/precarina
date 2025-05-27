@@ -43,7 +43,6 @@ class SleepHelp extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child: HtmlWidget(localizedValues[locale.languageCode]!['title']!
               //htmlData,
-              //"txtCholesterolHelp".i18n(),
             ),
           ),
         ),

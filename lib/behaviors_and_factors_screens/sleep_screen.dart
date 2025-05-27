@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
-import 'package:localization/localization.dart';
+//import 'package:localization/localization.dart';
 import 'package:precarina/aux_widgets/horizontal_space.dart';
 import 'package:precarina/behaviors_and_factors_screens/pages_header.dart';
 import 'package:precarina/model/precarina_model.dart';
@@ -93,7 +93,7 @@ class _SleepScreenState extends State<SleepScreen> {
                   children: [
                     const VerticalSpace(height: 20.0),
                     Text(
-                      "txtTotalSleepTime".i18n(),
+                      AppLocalizations.of(context)!.txtTotalSleepTime,
                       textAlign: TextAlign.center,
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),

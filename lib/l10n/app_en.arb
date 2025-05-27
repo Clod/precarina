@@ -1,5 +1,5 @@
 {
-
+  "txtPrecarina": "PRECARINA",
   "txtReadCarefully": "Please read carefully before using this app",
   "txtAppPurpose": "This app calculates the estimated cardiovascular health score as defined by the",
   "txtFundamentalsLocation": "The scoring system and criteria are thoroughly explained in:",
@@ -456,7 +456,7 @@
   "txtBmiHelp": "The body mass index (BMI) is the most commonly used criterion to measure body mass in relation to height. It is a practical and universally applicable indicator, cheap, and non-invasive to identify overweight and obesity.</p><p lang=\"es-ES\">In children and adolescents, percentile charts are used to define overweight (> 85th percentile and < 95th percentile), obesity (> 95th percentile), and severe obesity (> 99th percentile). Therefore, for the PRECARINA application, we trained a Machine Learning model using data from the World Health Organization (WHO) and the National Health Center to estimate the BMI percentile.</p><h2 lang=\"es-ES\" class=\"western\">Bibliography</h2><p><span lang=\"es-ES\">Manual de Obesidad en Pediatría. Editorial Lugo</span>nes. 2023</p><p><br/><br/></p>",
   "txtCholesterolButton": "Cholesterol",
   "txtCholesterolDialog": "Non-HDL cholesterol (mg/dL), starting no later than age 9 - 11y and earlier per clinician discretion",
-  "txtCholesterolDialogOptions": "<100 |<100 (drug-treated) |100 - 119 |120 - 144 |145 - 189 |≥ 190",
+  "txtCholesterolDialogOptions_": "<100 |<100 (drug-treated) |100 - 119 |120 - 144 |145 - 189 |≥ 190",
   "txtCholesterolWarning": "",
   "txtLongPressGauge": "Long press the gauge to reset all values.",
   "txtGlossary": "Glossary",

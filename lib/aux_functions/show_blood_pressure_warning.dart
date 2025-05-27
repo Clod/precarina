@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import '../l10n/app_localizations.dart';
-import 'package:localization/localization.dart';
+//import 'package:localization/localization.dart';
 
 showWarning(BuildContext context) {
   WidgetsBinding.instance.addPostFrameCallback(
@@ -10,7 +10,7 @@ showWarning(BuildContext context) {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("txtImportant".i18n(), textAlign: TextAlign.center,),
+            title: Text(AppLocalizations.of(context)!.txtImportant, textAlign: TextAlign.center,),
             content: SizedBox(
               width: 300.0,
               height: 400.0,

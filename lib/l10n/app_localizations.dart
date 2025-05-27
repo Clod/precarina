@@ -98,6 +98,12 @@ abstract class AppLocalizations {
     Locale('es')
   ];
 
+  /// No description provided for @txtPrecarina.
+  ///
+  /// In en, this message translates to:
+  /// **'PRECARINA'**
+  String get txtPrecarina;
+
   /// No description provided for @txtReadCarefully.
   ///
   /// In en, this message translates to:
@@ -401,7 +407,7 @@ abstract class AppLocalizations {
   /// No description provided for @txtCholesterolDialogOptions.
   ///
   /// In en, this message translates to:
-  /// **'<100 |<100 (drug-treated) |100 - 119 |120 - 144 |145 - 189 |≥ 190'**
+  /// **'< 170 mg/dl|170:199 mg/dl|≥ 200 mg/dl'**
   String get txtCholesterolDialogOptions;
 
   /// No description provided for @txtCholesterolWarning.
@@ -2541,6 +2547,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The body mass index (BMI) is the most commonly used criterion to measure body mass in relation to height. It is a practical and universally applicable indicator, cheap, and non-invasive to identify overweight and obesity.</p><p lang=\"es-ES\">In children and adolescents, percentile charts are used to define overweight (> 85th percentile and < 95th percentile), obesity (> 95th percentile), and severe obesity (> 99th percentile). Therefore, for the PRECARINA application, we trained a Machine Learning model using data from the World Health Organization (WHO) and the National Health Center to estimate the BMI percentile.</p><h2 lang=\"es-ES\" class=\"western\">Bibliography</h2><p><span lang=\"es-ES\">Manual de Obesidad en Pediatría. Editorial Lugo</span>nes. 2023</p><p><br/><br/></p>'**
   String get txtBmiHelp;
+
+  /// No description provided for @txtCholesterolDialogOptions_.
+  ///
+  /// In en, this message translates to:
+  /// **'<100 |<100 (drug-treated) |100 - 119 |120 - 144 |145 - 189 |≥ 190'**
+  String get txtCholesterolDialogOptions_;
 
   /// No description provided for @txtPrivacyPolicy.
   ///

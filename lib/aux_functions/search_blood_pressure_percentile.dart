@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
-import 'package:localization/localization.dart';
+import 'package:flutter/widgets.dart';
 import 'package:precarina/model/precarina_model.dart';
 import 'package:precarina/model/pressure_data.dart';
+import 'package:precarina/l10n/app_localizations.dart';
 
 // String resultPasUnder_50 = "El percentilo de PAS determinado es menor a percentilo 50\n";
 // String resultPasEqual_50 = "El percentilo de PAS determinado es igual a 50\n";
@@ -30,12 +30,15 @@ PatientDiagnosePas? patDiagPas;
 PatientDiagnosePad? patDiagPad;
 
 List<String> searchBloodPressurePercentiles({
+  required BuildContext context,
   required PatientSex sex,
   required double height,
   required int age,
   required int sistBP,
   required int diastBP,
 }) {
+  final l10n = AppLocalizations.of(context)!;
+
   debugPrint("Entrando a la función");
 
   String? diastBpPerc;
@@ -58,18 +61,18 @@ List<String> searchBloodPressurePercentiles({
 
   if (age >= 16) {
     if (sistBP < 130 && diastBP < 85) {
-      patientDiagnose = "patientDiagnoseNorm".i18n();
+      patientDiagnose = l10n.patientDiagnoseNorm;
     } else if (sistBP <= 139 && diastBP <= 89) {
-      patientDiagnose = "patientDiagnoseHT".i18n();
+      patientDiagnose = l10n.patientDiagnoseHT;
     } else if (sistBP <= 159 && diastBP <= 99) {
-      patientDiagnose = "patientDiagnoseHT1".i18n();
+      patientDiagnose = l10n.patientDiagnoseHT1;
     } else if (sistBP <= 179 && diastBP <= 109) {
-      patientDiagnose = "patientDiagnoseHT2".i18n();
+      patientDiagnose = l10n.patientDiagnoseHT2;
     } else {
-      patientDiagnose = "patientDiagnoseHT3".i18n();
+      patientDiagnose = l10n.patientDiagnoseHT3;
     }
 
-    return [patientDiagnose, "resultAgeOver16".i18n()];
+    return [patientDiagnose, l10n.resultAgeOver16];
   }
 
   debugPrint("Es menor que 16");
@@ -209,13 +212,13 @@ List<String> searchBloodPressurePercentiles({
 */
 
   if (patDiagPas == PatientDiagnosePas.patientDiagnoseHT2 || patDiagPad == PatientDiagnosePad.patientDiagnoseHT2) {
-    patientDiagnose = "patientDiagnoseHT2".i18n();
+    patientDiagnose = l10n.patientDiagnoseHT2;
   } else if (patDiagPas == PatientDiagnosePas.patientDiagnoseHT1 || patDiagPad == PatientDiagnosePad.patientDiagnoseHT1) {
-    patientDiagnose = "patientDiagnoseHT1".i18n();
+    patientDiagnose = l10n.patientDiagnoseHT1;
   } else if (patDiagPas == PatientDiagnosePas.patientDiagnoseHT || patDiagPad == PatientDiagnosePad.patientDiagnoseHT) {
-    patientDiagnose = "patientDiagnoseHT".i18n();
+    patientDiagnose = l10n.patientDiagnoseHT;
   } else {
-    patientDiagnose = "patientDiagnoseNorm".i18n();
+    patientDiagnose = l10n.patientDiagnoseNorm;
   }
 
   debugPrint("Diagnóstico: $patientDiagnose");
@@ -227,32 +230,32 @@ List<String> searchBloodPressurePercentiles({
   String result;
   // valorTablaSistA == 0 means patient's BP is not within a range but is below the lowest value
   if (sistBpPerc == bpTablePercs[0] && sistBelow == true) {
-    result = "resultPasUnder_50".i18n();
+    result = l10n.resultPasUnder_50;
   } else if (sistBpPerc == bpTablePercs[0]) {
-    result = "resultPasEqual_50".i18n();
+    result = l10n.resultPasEqual_50;
   } else if (sistBpPerc == bpTablePercs[1]) {
-    result = "resultPas_50to90".i18n();
+    result = l10n.resultPas_50to90;
   } else if (sistBpPerc == bpTablePercs[2]) {
-    result = "resultPas_90to95".i18n();
+    result = l10n.resultPas_90to95;
   } else if (sistBpPerc == bpTablePercs[3] && sistAvove == true) {
-    result = "resultPasAbove_95plus12".i18n();
+    result = l10n.resultPasAbove_95plus12;
   } else {
-    result = "resultPas_95to95plus12".i18n();
+    result = l10n.resultPas_95to95plus12;
   }
 
   // valorTablaDiastA == 0 means patient's BP is not within a range but is below the lowest value
   if (diastBpPerc == bpTablePercs[0] && diastBelow == true) {
-    result += "resultPadUnder_50".i18n();
+    result += l10n.resultPadUnder_50;
   } else if (diastBpPerc == bpTablePercs[0]) {
-    result += "resultPadEqual_50".i18n();
+    result += l10n.resultPadEqual_50;
   } else if (diastBpPerc == bpTablePercs[1]) {
-    result += "resultPad_50to90".i18n();
+    result += l10n.resultPad_50to90;
   } else if (diastBpPerc == bpTablePercs[2]) {
-    result += "resultPad_90to95".i18n();
+    result += l10n.resultPad_90to95;
   } else if (diastBpPerc == bpTablePercs[3] && diastAvove == true) {
-    result += "resultPadAbove_95plus12".i18n();
+    result += l10n.resultPadAbove_95plus12;
   } else {
-    result += "resultPad_95to95plus12".i18n();
+    result += l10n.resultPad_95to95plus12;
   }
 
   return [patientDiagnose, result];

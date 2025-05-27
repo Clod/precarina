@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import '../l10n/app_localizations.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:localization/localization.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:precarina/aux_widgets/horizontal_space.dart';
 import 'package:precarina/behaviors_and_factors_screens/pages_header.dart';
@@ -21,27 +20,6 @@ class BloodPressureScreen extends StatefulWidget {
   @override
   State<BloodPressureScreen> createState() => _BloodPressureScreenState();
 }
-/*
-
-"txtExamplePAS".i18n() = "Ej.: 120";
-"txtExamplePAD".i18n() = "Ej.: 80";
-"txtPAS".i18n() = "PA Sistólica: ";
-"txtPAD".i18n() = "PA Distólica: ";
-"txtReceivesMEdication".i18n() = "Recibe medicación";
-"txtRequired".i18n() = " Requerido";
-"txtCalculate".i18n() = "Calcular";
-"txtOK".i18n() = "OK";
-"txtCancel".i18n() = "Cancelar";
-"txtAccept".i18n() = "Aceptar";
-"txtPatientNormal".i18n() = "Paciente normotenso";
-"txtPatHT".i18n() = "Paciente prehipertenso";
-"txtPatHt1".i18n() = "Paciente hipertenso leve";
-"txtPatHt2".i18n() = "Paciente hipertenso severo";
-"txtYes".i18n() = "S";
-"txtNo".i18n() = "N";
-"txtScore".i18n() = "Score: ";
-
-*/
 
 class _BloodPressureScreenState extends State<BloodPressureScreen> {
   final _formKey = GlobalKey<FormBuilderState>();
@@ -55,9 +33,6 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
   );
 
   var _precaModel = PrecarinaModel();
-
-  final String _pasHint = "txtExamplePAS".i18n();
-  final String _padHint = "txtExamplePAD".i18n();
 
   List<String> _results = ["", ""];
   String _diagnose = "";
@@ -83,17 +58,16 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     // final Orientation orientation = MediaQuery.of(context).orientation;
     // final Size dialogSize = (orientation == Orientation.portrait) ? Size(400, 600) : Size(600, 400);
 
     // double height = MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
     double height = MediaQuery.of(context).size.height;
-
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        // title: Text(AppLocalizations.of(context)!.txtBloodPressureButton),
-        title: Text("txtBloodPressureButton".i18n()),
+        title: Text(l10n.txtBloodPressureButton),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => showInputLostWarning(context),
@@ -113,7 +87,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("txtPAS".i18n()),
+                        Text(l10n.txtPAS),
                         Stack(
                           children: [
                             Container(
@@ -140,7 +114,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                                 controller: _controllerSistAP,
                                 textAlign: TextAlign.center,
                                 decoration: InputDecoration(
-                                  hintText: _pasHint,
+                                  hintText: l10n.txtExamplePAS,
                                   border: InputBorder.none,
                                   focusedBorder: const OutlineInputBorder(
                                     borderRadius: BorderRadius.all(
@@ -160,12 +134,11 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                                   [
                                     (val) {
                                       debugPrint("Validando");
-                                      return val!.isEmpty
-                                          ? 'txtRequired'.i18n()
-                                          : null;
+                                      return val!.isEmpty ? l10n.txtRequired : null;
                                     },
                                     FormBuilderValidators.required(
-                                        errorText: "     Requerido"),
+                                        errorText:
+                                            l10n.txtRequired), // Assuming " Requerido" is the desired format
                                     FormBuilderValidators.numeric(),
                                     // FormBuilderValidators.max(70),
                                   ],
@@ -181,7 +154,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("txtPAD".i18n()),
+                        Text(l10n.txtPAD),
                         Stack(
                           children: [
                             Container(
@@ -208,7 +181,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                                 controller: _controllerDiastPA,
                                 textAlign: TextAlign.center,
                                 decoration: InputDecoration(
-                                  hintText: _padHint,
+                                  hintText: l10n.txtExamplePAD,
                                   border: InputBorder.none,
                                   focusedBorder: const OutlineInputBorder(
                                     borderRadius: BorderRadius.all(
@@ -227,11 +200,11 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                                 validator: FormBuilderValidators.compose(
                                   [
                                     (val) {
-                                      debugPrint("Validando");
-                                      return val!.isEmpty ? 'Requerido' : null;
+                                      // debugPrint("Validando"); // Consider removing debugPrint
+                                      return val!.isEmpty ? l10n.txtRequired.trim() : null; // Or l10n.txtRequired if leading space is ok
                                     },
                                     FormBuilderValidators.required(
-                                        errorText: "     Requerido"),
+                                        errorText: l10n.txtRequired),
                                     FormBuilderValidators.numeric(),
                                     // FormBuilderValidators.max(70),
                                   ],
@@ -250,14 +223,14 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                         name: 'Medicado',
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: FormBuilderValidators.compose([
-                          FormBuilderValidators.required(errorText: "     Requerido"),
+                          FormBuilderValidators.required(errorText: l10n.txtRequired),
                         ]),
                         builder: (FormFieldState<dynamic> field) {
                           return InputDecorator(
                             decoration: InputDecoration(
                               isDense: true,
                               label: Text(
-                                "txtReceivesMedication".i18n(),
+                                l10n.txtReceivesMedication,
                                 style: const TextStyle(fontSize: 20.0),
                               ),
                               contentPadding: const EdgeInsets.symmetric(
@@ -272,28 +245,28 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                                   children: [
                                     ChoiceChip(
                                       label: Text(
-                                        "txtYes".i18n(),
+                                        l10n.txtYes,
                                         style: const TextStyle(fontSize: 25.0),
                                       ),
-                                      selected: field.value == "txtYes".i18n(),
+                                      selected: field.value == l10n.txtYes,
                                       selectedColor: Colors.blueAccent,
                                       onSelected: (selected) {
                                         if (selected) {
-                                          field.didChange("txtYes".i18n());
+                                          field.didChange(l10n.txtYes);
                                           field.validate();
                                         }
                                       },
                                     ),
                                     ChoiceChip(
                                       label: Text(
-                                        "txtNo".i18n(),
+                                        l10n.txtNo,
                                         style: const TextStyle(fontSize: 25.0),
                                       ),
-                                      selected: field.value == "txtNo".i18n(),
+                                      selected: field.value == l10n.txtNo,
                                       selectedColor: Colors.blueAccent,
                                       onSelected: (selected) {
                                         if (selected) {
-                                          field.didChange("txtNo".i18n());
+                                          field.didChange(l10n.txtNo);
                                           field.validate();
                                         }
                                       },
@@ -309,7 +282,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                     const VerticalSpace(height: 15.0),
                     // Trigger interpolation button
                     ElevatedButton(
-                      child: Text("txtCalculate".i18n()),
+                      child: Text(l10n.txtCalculate),
                       onPressed: () async {
                         if (_formKey.currentState!.validate() == true) {
                           // I will not enable cancellation until SnackBar gets dismissed
@@ -324,6 +297,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                           final scaffoldContext = context;
                           
                           _results = await searchBloodPressurePercentiles(
+                            context: context,
                             sex: _precaModel.patientSex == PatientSex.female
                                 ? PatientSex.female
                                 : PatientSex.male,
@@ -361,6 +335,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                                   ScaffoldMessenger.of(btnContext)
                                       .removeCurrentSnackBar();
                                   setState(() {
+                                    // _diagnose is already localized by searchBloodPressurePercentiles
                                     _diagnose = _results[0];
                                     _score = calculateScore(
                                         _diagnose,
@@ -403,7 +378,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                                   Navigator.maybePop(context);
                                 },
                           child: Text(
-                              AppLocalizations.of(context)!.txtButtonCancel),
+                              l10n.txtButtonCancel),
                         ),
                         const HorizontalSpace(width: 15.0),
                         // Accept
@@ -425,8 +400,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
                                   _precaModel.calculateAverage();
                                   Navigator.of(context).pop();
                                 },
-                          child: Text(
-                              AppLocalizations.of(context)!.txtButtonAccept),
+                          child: Text(l10n.txtButtonAccept),
                         ),
                       ],
                     ),
@@ -444,39 +418,41 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
     );
   }
 
-  String calculateScore(String diagnose, String medicado) {
+  // Note: 'diagnose' parameter is already a localized string from searchBloodPressurePercentiles
+  // 'medicado' parameter is also a localized string (e.g., l10n.txtYes)
+  String calculateScore(String diagnose, String? medicado) {
+    final l10n = AppLocalizations.of(context)!; // Get l10n instance for this method
     int score = 0;
 
     if (_precaModel.ageYears! < 16) {
-      if (diagnose == "patientDiagnoseNorm".i18n()) {
+      if (diagnose == l10n.patientDiagnoseNorm) {
         score = 100;
-      } else if (diagnose == "patientDiagnoseHT".i18n()) {
+      } else if (diagnose == l10n.patientDiagnoseHT) {
         score = 66;
-      } else if (diagnose == "patientDiagnoseHT1".i18n()) {
+      } else if (diagnose == l10n.patientDiagnoseHT1) {
         score = 33;
-      } else if (diagnose == "patientDiagnoseHT2".i18n()) {
+      } else if (diagnose == l10n.patientDiagnoseHT2) {
         score = 0;
       } else {
         score = 0;
       }
     } else {
-      if (diagnose == "patientDiagnoseNorm".i18n()) {
+      if (diagnose == l10n.patientDiagnoseNorm) {
         score = 100;
-      } else if (diagnose == "patientDiagnoseHT".i18n()) {
+      } else if (diagnose == l10n.patientDiagnoseHT) {
         score = 75;
-      } else if (diagnose == "patientDiagnoseHT1".i18n()) {
+      } else if (diagnose == l10n.patientDiagnoseHT1) {
         score = 50;
-      } else if (diagnose == "patientDiagnoseHT2".i18n()) {
+      } else if (diagnose == l10n.patientDiagnoseHT2) {
         score = 25;
       } else {
         score = 0;
       }
     }
 
-    if (medicado == "txtYes".i18n() && score >= 20) score -= 20;
+    if (medicado == l10n.txtYes && score >= 20) score -= 20;
 
     _precaModel.bloodPressureValue = score;
-
-    return "txtScore".i18n() + score.toString();
+    return l10n.txtScore + score.toString();
   }
 }

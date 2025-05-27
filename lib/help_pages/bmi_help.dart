@@ -21,7 +21,8 @@ class BmiHelp extends StatelessWidget {
    ;
 */
 
-  final data = "El índice de masa corporal (IMC) es el criterio más usado para medir la masa corporal en"
+  final data =
+      "El índice de masa corporal (IMC) es el criterio más usado para medir la masa corporal en"
       "relación a la altura y el indicador práctico y universalmente aplicable, barato y no invasivo"
       "para identificar el sobrepeso y la obesidad.\n"
       "#  \n"
@@ -70,7 +71,6 @@ However, tables and graphics are not a convenient way to determine percentile va
 
   @override
   Widget build(BuildContext context) {
-
     final locale = Localizations.localeOf(context);
 
     final localizedValues = <String, Map<String, String>>{
@@ -97,18 +97,7 @@ However, tables and graphics are not a convenient way to determine percentile va
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(18.0),
-            child: HtmlWidget(
-        localizedValues[locale.languageCode]!['title']!
-        /*
-            Html(
-                data: "txtBmiHelp".i18n(),
-                onLinkTap: (url, context, map) async {
-                  if (await canLaunchUrl(Uri.parse(url!))) {
-                    await launchUrl(Uri.parse(url!));
-                  } else {
-                    throw 'Could not launch $url';
-                  }
-                }*/),
+            child: HtmlWidget(localizedValues[locale.languageCode]!['title']!),
           ),
         ),
       ),
