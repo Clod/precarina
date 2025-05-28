@@ -293,13 +293,30 @@ void main() {
       final allTextWidgets = find.byType(Text);
       debugPrint('All Text widgets on screen: ${tester.widgetList(allTextWidgets).map((widget) => (widget as Text).data).toList()}');
 
-  debugPrint('Dumping widget tree before finding ElevatedButtons on DietScreen:');
-  debugDumpApp(); // <<< ADD THIS LINE
+  // debugPrint('Dumping widget tree before finding ElevatedButtons on DietScreen:');
+  // debugDumpApp(); // <<< ADD THIS LINE
 
-  // Try to find the Row containing the buttons first
+  // Ensure the DietScreen's ListView is present
+  final listViewFinder = find.byKey(const Key('diet_screen_list_view'));
+  expect(listViewFinder, findsOneWidget, reason: "The main ListView on DietScreen (key 'diet_screen_list_view') should be present.");
+
+  // Scroll until the Row with the buttons is visible
+  // This is crucial if the button row is off-screen initially.
+  await tester.scrollUntilVisible(
+    find.byKey(const Key('diet_screen_button_row')),
+    150.0, // The amount to scroll by in each attempt (adjust as needed)
+    scrollable: find.descendant(
+        of: listViewFinder, // This finds the ListView widget
+        matching: find.byType(Scrollable) // This finds the Scrollable widget *inside* the ListView
+    ),
+    maxScrolls: 10, // Optional: prevent infinite scrolling in case of issues
+  );
+  await tester.pumpAndSettle(); // Allow UI to settle after scrolling
+
+  // Now, try to find the Row containing the buttons
   final buttonRowFinder = find.byKey(const Key('diet_screen_button_row'));
-  expect(buttonRowFinder, findsOneWidget, reason: "The Row containing buttons on DietScreen was not found. This indicates a problem rendering that part of the screen.");
-  debugPrint('Found the Row containing buttons on DietScreen.');
+  expect(buttonRowFinder, findsOneWidget, reason: "The Row containing buttons on DietScreen (key 'diet_screen_button_row') was not found. This indicates it's not rendered or not scrolled into view.");
+  debugPrint('Found the Row containing buttons on DietScreen after scrolling.');
 
   // Now try to find buttons within that specific row
   // final elevatedButtonsInRowFinder = find.descendant(of: buttonRowFinder, matching: find.byType(ElevatedButton));
@@ -402,17 +419,31 @@ void main() {
       debugPrint('Diet Screen: Found $dietItemCount DietItemWidgets.');
 
       for (int i = 0; i < dietItemCount; i++) {
-        final dietItemWidget = dietItemWidgetsFinder.at(i);
-        await tester.ensureVisible(dietItemWidget); // Scroll to the item
+        final dietItemWidgetFinder = dietItemWidgetsFinder.at(i);
+        await tester.ensureVisible(dietItemWidgetFinder); // Scroll to the item
         await tester.pumpAndSettle();
 
-        // Tap the first radio option within this DietItemWidget
-        final radioOptionFinder = find.descendant(
-          of: dietItemWidget,
-          matching: find.byType(RadioListTile<int?>), // Assumes RadioListTile<int?> is used
-        ).first;
+        // Get the DietItem widget instance to access its properties (like the options text)
+        final DietItem dietItemInstance = tester.widget(dietItemWidgetFinder);
 
-        await tester.tap(radioOptionFinder);
+        // We'll tap the first option. Ensure 'opciones' is not empty.
+        // This should be guaranteed by how DietScreen provides data, but a check is good.
+        expect(dietItemInstance.opciones, isNotEmpty, reason: "DietItemWidget $i has no options (opciones list is empty).");
+        final String firstOptionText = dietItemInstance.opciones[0];
+
+        // Find the Text widget for the first option within this DietItemWidget.
+        // The Text widget is a child of Padding, which is a child of CupertinoSegmentedControl.
+        final optionToTapFinder = find.descendant(
+          of: dietItemWidgetFinder, // Search within the current DietItem
+          matching: find.text(firstOptionText),
+        );
+
+        // Assert that the specific option text is found.
+        expect(optionToTapFinder, findsOneWidget,
+          reason: 'Expected to find the text for the first option ("$firstOptionText") in DietItemWidget $i. Check DietItemWidget implementation and if it displays options correctly.',
+        );
+
+        await tester.tap(optionToTapFinder);
         await tester.pumpAndSettle();
         debugPrint('Diet Screen: Selected first option for item $i.');
       }

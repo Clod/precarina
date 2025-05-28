@@ -27,8 +27,6 @@ class _DietScreenState extends State<DietScreen> {
   int? _indexSex = 0;
   int? _indexAgeRange = 0;
 
-  final List<DietItem> _dietItemsList = [];
-
   // Accept button will not be anabled until an option is picked for EACH item.
   bool _enableAcceptButton = false;
 
@@ -54,40 +52,37 @@ class _DietScreenState extends State<DietScreen> {
     });
     debugPrint("index: $index, selection: $selection");
 
-    // If all Items are not null, it means that every option has an answer
-    // so I can enable the Accept button.
-    _enableAcceptButton = true;
-    for (int i = 0; i < Items.values.length; i++) {
-      if (_foodIndex[i][0] == null) {
-        _enableAcceptButton = false;
-      }
-    }
+    // Enable the Accept button only if all items have a selection.
+    setState(() {
+      _enableAcceptButton = _foodIndex.every((item) => item[0] != null);
+    });
+  }
+
+  int _getActualScoreValue(int selectedOptionValue) {
+    // Esta porquería es porque muestro el item que vale 2 a la izquierda
+    // y el que vale 0 a la derecha.
+    if (selectedOptionValue == 0) return 2;
+    if (selectedOptionValue == 2) return 0;
+    return selectedOptionValue; // Assuming 1 maps to 1 (or other direct mapping)
   }
 
   int? _calculateScore(List<List<int?>> selections) {
     int score = 0;
 
     // Recorro la lista. Si están todos los datos devuelvo el score y, si no, Ingresar datos
-    //
     for (int i = 0; i < Items.values.length; i++) {
       if (selections[i][0] != null) {
-        // Esta porquería es porque muestro el item que vale 2 a la izquierda
-        // y el que vale 0 a la derecha.
-        int valorASumar = selections[i][0]!;
-        if (valorASumar == 0) {
-          valorASumar = 2;
-        } else if (valorASumar == 2) {
-          valorASumar = 0;
-        }
-        score += valorASumar;
+        score += _getActualScoreValue(selections[i][0]!);
       } else {
+        // This case should ideally not be reached if _enableAcceptButton logic is correct,
+        // as _calculateScore is called when the button is enabled.
         return null;
       }
     }
     score = (score * 3.3333333).round();
 
-    debugPrint("Habilito el botón de aceptar");
-    _enableAcceptButton = true;
+    // _enableAcceptButton should already be true if this method is called.
+    // No need to set it again here.
 
     debugPrint("Valor de dieta calculado: $score");
 
@@ -96,32 +91,10 @@ class _DietScreenState extends State<DietScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // debugPrint("Data: ${_precaModel.toString()}");
-    // debugPrint(_foodIndex.toString());
     List<String> localizedTitulos = getTitulos(context);
     List<List<List<List<String>>>> localizedOpciones = getOpciones(context);
 
-    // The list of presented options depends on both the sex and the age of the patient.
-    // Each DietItem() consist of a title y three options presented below it.
-    List<DietItem> dietItems() {
-      for (var i = 0; i < Items.values.length; i++) {
-        _dietItemsList.add(
-          DietItem(
-            callback: foodCallback, // called each time the user makes a choice
-            index: _foodIndex[i], // indicates
-            // title: titulo[i],
-            // opciones: opciones[_indexSex!][_indexAgeRange!][i],
-            title: localizedTitulos[i],
-            opciones: localizedOpciones[_indexSex!][_indexAgeRange!][i],
-          ),
-        );
-      }
-      return _dietItemsList;
-    }
-
     _precaModel = Provider.of<PrecarinaModel>(context, listen: false);
-
-    _dietItemsList.clear();
 
     // Select choices according to sex...
     if (_precaModel!.patientSex != null) {
@@ -161,9 +134,20 @@ class _DietScreenState extends State<DietScreen> {
               child: Container(
                 color: Colors.yellow[50],
                 child: ListView(
+                  key: const Key('diet_screen_list_view'), // Add a key for better testability
                   controller: _scrollController,
                   children: [
-                    ...dietItems(),
+                    // Generate DietItem widgets directly
+                    ...List.generate(Items.values.length, (i) {
+                      return DietItem(
+                        callback: foodCallback, // called each time the user makes a choice
+                        index: _foodIndex[i],    // indicates the selection for this item
+                        title: localizedTitulos[i],
+                        opciones: localizedOpciones[_indexSex!][_indexAgeRange!][i],
+                      );
+                    }),
+                    // ..._dietItemsList, // Old way
+
                     const VerticalSpace(height: 15.0),
                     Row(
                   key: const Key('diet_screen_button_row'), // ADD THIS KEY
