@@ -30,31 +30,29 @@ class _DietScreenState extends State<DietScreen> {
   // Accept button will not be anabled until an option is picked for EACH item.
   bool _enableAcceptButton = false;
 
-  // _foodIndex keeps the choice (0, 1 or 2) for each item of the list of options
-  // This dirty trick is used to be able to pass ints by reference to the callback
-  // Items is the list of kinds of foods
-  final List<List<int?>> _foodIndex =
-      List.generate(Items.values.length, (_) => [null]);
+  // _foodSelections keeps the choice (0, 1, or 2) for each diet item.
+  // Initialize with nulls, indicating no selection yet.
+  late List<int?> _foodSelections;
 
   final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
+    _foodSelections = List.generate(Items.values.length, (_) => null);
     _enableAcceptButton = false;
   }
 
-  // Called each time the user makes a choice
-  void foodCallback(List<int?> index, int? selection) {
-    debugPrint("Index: $index, Selection: $selection");
+  // Called each time the user makes a choice for a specific diet item.
+  // itemIndex is the index of the DietItem in the list.
+  // selection is the value chosen in the CupertinoSegmentedControl (0, 1, or 2).
+  void foodCallback(int itemIndex, int? selection) {
+    debugPrint("Item Index: $itemIndex, Selection: $selection");
     setState(() {
-      index[0] = selection;
-    });
-    debugPrint("index: $index, selection: $selection");
-
-    // Enable the Accept button only if all items have a selection.
-    setState(() {
-      _enableAcceptButton = _foodIndex.every((item) => item[0] != null);
+      _foodSelections[itemIndex] = selection;
+      // Enable the Accept button only if all items have a selection.
+      _enableAcceptButton =
+          _foodSelections.every((selectedItem) => selectedItem != null);
     });
   }
 
@@ -66,13 +64,13 @@ class _DietScreenState extends State<DietScreen> {
     return selectedOptionValue; // Assuming 1 maps to 1 (or other direct mapping)
   }
 
-  int? _calculateScore(List<List<int?>> selections) {
+  int? _calculateScore(List<int?> selections) {
     int score = 0;
 
     // Recorro la lista. Si están todos los datos devuelvo el score y, si no, Ingresar datos
     for (int i = 0; i < Items.values.length; i++) {
-      if (selections[i][0] != null) {
-        score += _getActualScoreValue(selections[i][0]!);
+      if (selections[i] != null) {
+        score += _getActualScoreValue(selections[i]!);
       } else {
         // This case should ideally not be reached if _enableAcceptButton logic is correct,
         // as _calculateScore is called when the button is enabled.
@@ -139,11 +137,14 @@ class _DietScreenState extends State<DietScreen> {
                   children: [
                     // Generate DietItem widgets directly
                     ...List.generate(Items.values.length, (i) {
+                      // CRITICAL: Add a unique key to each DietItem for testability.
                       return DietItem(
-                        callback: foodCallback, // called each time the user makes a choice
-                        index: _foodIndex[i],    // indicates the selection for this item
+                        key: ValueKey('diet_item_$i'), // Key for integration testing
+                        itemIndex: i, // Pass the actual index of the item
+                        groupValue: _foodSelections[i], // The current selection for this item
                         title: localizedTitulos[i],
                         opciones: localizedOpciones[_indexSex!][_indexAgeRange!][i],
+                        onChanged: foodCallback, // Callback function
                       );
                     }),
                     // ..._dietItemsList, // Old way
@@ -167,7 +168,7 @@ class _DietScreenState extends State<DietScreen> {
                               ? null
                               : () {
                                   _precaModel!.dietValue =
-                                      _calculateScore(_foodIndex);
+                                      _calculateScore(_foodSelections);
                                   debugPrint(
                                       "Diet Value en Screen: ${_precaModel!.dietValue}");
                                   _precaModel!.calculateAverage();

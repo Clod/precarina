@@ -451,23 +451,39 @@ void main() {
       debugPrint('Diet Screen: Starting loop to process all $totalExpectedDietItems DietItemWidgets by scrolling if necessary.');
 
       for (int i = 0; i < totalExpectedDietItems; i++) {
-        // Finder for the i-th DietItem widget.
-        // .at(i) gets the i-th widget matched by dietItemWidgetsFinder (find.byType(DietItem)).
-        final Finder currentItemFinder = dietItemWidgetsFinder.at(i);
+        // Finder for the specific logical i-th DietItem widget using its unique key.
+        final Finder currentItemFinder = find.byKey(ValueKey('diet_item_$i'));
 
         debugPrint('Diet Screen: Ensuring item $i (0-indexed) is visible...');
-        await tester.ensureVisible(currentItemFinder); // Scroll to the item
+        // Use scrollUntilVisible for potentially long scrolls, or ensureVisible if items are relatively close.
+        // ensureVisible is fine if the item is expected to be found directly or after minimal scrolling.
+        // scrollUntilVisible is more robust if the item could be far off-screen.
+        await tester.scrollUntilVisible(
+          currentItemFinder,
+          100.0, // Amount to scroll by in each attempt
+          scrollable: find.descendant(
+              of: find.byKey(const Key('diet_screen_list_view')), // Ensure this is your ListView's key
+              matching: find.byType(Scrollable)),
+          maxScrolls: totalExpectedDietItems * 2, // Generous limit
+        );
         await tester.pumpAndSettle(); // Allow UI to settle after scrolling and potential widget building
 
-        // Get the DietItem widget instance to access its properties (like the options text)
-        // Now that it's visible, get the widget instance.
         final DietItem dietItemInstance = tester.widget(currentItemFinder);
         debugPrint('Diet Screen: Item $i (0-indexed) is now visible and being processed.');
 
         // We'll tap the first option. Ensure 'opciones' is not empty.
         // This should be guaranteed by how DietScreen provides data, but a check is good.
         expect(dietItemInstance.opciones, isNotEmpty, reason: "DietItemWidget at index $i (0-indexed) has no options (opciones list is empty).");
-        final String firstOptionText = dietItemInstance.opciones[0];
+        // final String firstOptionText = dietItemInstance.opciones[0];
+        int randomIndex = 0; // Default to 0 if no options are available
+        if (dietItemInstance.opciones.isNotEmpty) {
+          // Randomly select an index from the available options
+          randomIndex = (i % dietItemInstance.opciones.length); // Use modulo to cycle through options
+        } else {
+          debugPrint('Diet Screen: No options available for DietItemWidget at index $i. Skipping selection.');
+          continue; // Skip this item if no options are available
+        }
+        final String firstOptionText = dietItemInstance.opciones[randomIndex];
 
         // Find the Text widget for the first option within this DietItemWidget.
         // The Text widget is a child of Padding, which is a child of CupertinoSegmentedControl.
@@ -483,7 +499,7 @@ void main() {
 
         debugPrint('Diet Screen: Tapping option "$firstOptionText" for item $i.');
         await tester.tap(optionToTapFinder);
-        await tester.pumpAndSettle(); // Settle after tap
+        await tester.pumpAndSettle(const Duration(milliseconds: 1500)); // Settle after tap and add 0.5s delay
         debugPrint('Diet Screen: Selected first option for item $i.');
       }
 
