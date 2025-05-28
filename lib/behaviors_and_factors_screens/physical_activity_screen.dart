@@ -25,8 +25,6 @@ class PhysicalActivityScreen extends StatefulWidget {
 class _PhysicalActivityScreenState extends State<PhysicalActivityScreen> {
   var precaModel = PrecarinaModel();
 
-  late BuildContext bc;
-
   int? _selectedOption;
 
   bool enableAcceptButton = true;
@@ -44,8 +42,6 @@ class _PhysicalActivityScreenState extends State<PhysicalActivityScreen> {
   Widget build(BuildContext context) {
 
     // List<String> optionsTexts = AppLocalizations.of(context)!.txtPhysicalActivityDialogOptions.split("|");
-
-    bc = context;
 
     double height = MediaQuery.of(context).size.height;
 

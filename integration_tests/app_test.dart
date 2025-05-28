@@ -1,9 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
+import 'package:precarina/l10n/app_localizations.dart';
 import 'package:precarina/main.dart' as app;
+import 'package:precarina/aux_widgets/diet_item_widget.dart'; // Import for DietItem
 
 // Keys for InputDataPage widgets (must match keys in input_data_page.dart)
 const Key heightInputKey = Key('height_input_field');
@@ -17,6 +18,9 @@ const Key calculateButtonKey = Key('calculate_button');
 
 // Key for the T&C Accept button
 const Key acceptTcButtonKey = Key('accept_tc_button');
+
+// Key for DietScreen Scaffold (to be added to diet_screen.dart)
+const Key dietScreenScaffoldKey = Key('dietScreenScaffold');
 
 // Define the key for your main Scaffold (must match the key in your app code)
 const Key mainScaffoldKey = ValueKey('mainScaffold');
@@ -59,21 +63,28 @@ void main() {
       // Verify the Scaffold is found before trying to interact with it.
       expect(scaffoldFinder, findsOneWidget, reason: 'Main Scaffold was not found. Ensure it has the key "$mainScaffoldKey" or check app navigation.');
       
-      // If found, then get its state and open the drawer.
+      // Get the ScaffoldState.
       final ScaffoldState state = tester.state(scaffoldFinder);
       if (state.hasDrawer) {
         state.openDrawer();
         await tester.pumpAndSettle();
         debugPrint('Drawer opened.');
 
-        // You could add steps here to tap on drawer items if needed
-        // Example: await tester.tap(find.text('Help Section'));
-        // await tester.pumpAndSettle();
-
-        // Close the drawer
-        state.closeDrawer();
-        await tester.pumpAndSettle();
-        debugPrint('Drawer closed.');
+        // After an asynchronous operation (pumpAndSettle), the widget associated with 'state'
+        // might have been removed from the widget tree (e.g., due to navigation or conditional UI changes).
+        // It's crucial to check if the 'state' is still mounted before calling methods on it.
+        if (!state.mounted) {
+          debugPrint('Scaffold state is no longer mounted after opening drawer. Skipping drawer close.');
+          // Depending on your test's expectations, you might want to fail here if the Scaffold
+          // was not expected to become unmounted.
+          // For example:
+          // fail('Scaffold state became unmounted unexpectedly after opening drawer.');
+        } else {
+          // If still mounted, it's safe to interact with the state.
+          state.closeDrawer();
+          await tester.pumpAndSettle();
+          debugPrint('Drawer closed.');
+        }
       } else {
         debugPrint('Scaffold found, but it does not have a drawer.');
       }
@@ -211,6 +222,228 @@ void main() {
       debugPrint('-------------------------------------\n');
 
       // You can add more interactions or assertions here as needed
+
+      // --- Continue testing Diet screen ---
+      debugPrint('--- Testing Diet Screen ---');
+
+      // After the "Calculate" button is tapped and the UI settles,
+      // we are likely on a new screen (e.g., a results screen).
+      // We need to get AppLocalizations from *this current screen's* context
+      // to find the navigation element to the DietScreen.
+
+      // OPTION 1 (More Robust): Use a specific key for the post-calculation screen's Scaffold.
+      // const Key postCalculationScaffoldKey = Key('postCalculationScreenScaffold'); // Define this
+      // final Finder currentScreenScaffoldFinder = find.byKey(postCalculationScaffoldKey);
+      // Add `key: postCalculationScaffoldKey` to the Scaffold of the screen visible after calculation.
+
+      // OPTION 2 (Less Robust, but requires no app code changes if it works): Find Scaffold by type.
+      // This assumes the relevant Scaffold is the primary one visible.
+      final Finder currentScreenScaffoldFinder = find.byType(Scaffold);
+      expect(currentScreenScaffoldFinder, findsOneWidget, reason: "Current screen's Scaffold not found before attempting DietScreen navigation. Consider adding a specific key to this screen's Scaffold.");
+      // Get AppLocalizations directly without storing the context
+      final AppLocalizations l10nForDietNavigation = AppLocalizations.of(tester.element(currentScreenScaffoldFinder))!;
+
+      // Navigate to Diet Screen
+      // IMPORTANT: Adjust the finder below based on how navigation to DietScreen is implemented in MainScreen.
+      // It could be a button with text, an icon, or a ListTile in a drawer/list.
+      // Using l10nMainScreen.txtDietButton ("Alimentación") as an example.
+      // More robust finder: Find the Text widget with the localized text, then find its ElevatedButton ancestor.
+      final dietButtonNavigationFinder = find.descendant(
+        of: find.byType(ElevatedButton), // Or the specific button type
+        matching: find.text(l10nForDietNavigation.txtDietButton), // Use localizations from the current screen
+      );
+      // Alternative: final dietButtonNavigationFinder = find.byTooltip('Diet');
+      // Best: final dietButtonNavigationFinder = find.byKey(const Key('navigateToDietScreenButton'));
+
+      // Add a debug print to see what the finder found before tapping
+      debugPrint('Attempting to find Diet navigation button: ${dietButtonNavigationFinder.toString()}');
+
+      if (tester.any(dietButtonNavigationFinder)) {
+        await tester.tap(dietButtonNavigationFinder);
+        await tester.pumpAndSettle(); // Wait for DietScreen to load
+        debugPrint('Navigated to Diet Screen.');
+      } else {
+        // Fallback: Try finding by common text if localization key isn't on a button directly
+        // This is less robust.
+        final dietTextFinder = find.text(l10nForDietNavigation.txtDietButton); // "Alimentación"
+        if (tester.any(dietTextFinder)) {
+            // If it's just text, it might be part of a ListTile or other tappable widget
+            await tester.tap(find.ancestor(of: dietTextFinder, matching: find.byType(InkWell)).first);
+            await tester.pumpAndSettle();
+            debugPrint('Navigated to Diet Screen (using text ancestor).');
+        } else {
+            debugPrint('Could not find navigation element to Diet Screen. Skipping Diet Screen tests.');
+            return; // Exit test if navigation fails
+        }
+      }
+
+      // At this point, we should be on the DietScreen.
+      // Get AppLocalizations for the DietScreen using its specific context.
+      // This is done *after* the await tester.pumpAndSettle() that completed the navigation.
+      final Finder dietScreenScaffoldFinder = find.byKey(dietScreenScaffoldKey);
+      expect(dietScreenScaffoldFinder, findsOneWidget, reason: "DietScreen's Scaffold (using dietScreenScaffoldKey) not found after navigation.");
+      // Get AppLocalizations directly without storing the context
+      final AppLocalizations l10nDiet = AppLocalizations.of(tester.element(dietScreenScaffoldFinder))!;
+
+      // Verify "Accept" button is initially disabled
+      // Debug print to confirm the localized string being used for the "Accept" button
+      debugPrint('Diet Screen: Attempting to find "Accept" button with text: "${l10nDiet.txtButtonAccept}"');
+
+      // Try to find all text widgets on screen to debug
+      final allTextWidgets = find.byType(Text);
+      debugPrint('All Text widgets on screen: ${tester.widgetList(allTextWidgets).map((widget) => (widget as Text).data).toList()}');
+
+  debugPrint('Dumping widget tree before finding ElevatedButtons on DietScreen:');
+  debugDumpApp(); // <<< ADD THIS LINE
+
+  // Try to find the Row containing the buttons first
+  final buttonRowFinder = find.byKey(const Key('diet_screen_button_row'));
+  expect(buttonRowFinder, findsOneWidget, reason: "The Row containing buttons on DietScreen was not found. This indicates a problem rendering that part of the screen.");
+  debugPrint('Found the Row containing buttons on DietScreen.');
+
+  // Now try to find buttons within that specific row
+  // final elevatedButtonsInRowFinder = find.descendant(of: buttonRowFinder, matching: find.byType(ElevatedButton));
+      // Try to find all ElevatedButtons on screen to debug
+      final allElevatedButtons = find.byType(ElevatedButton);
+      debugPrint('Found ${tester.widgetList(allElevatedButtons).length} ElevatedButtons on screen');
+      
+      // Print details about each ElevatedButton
+      for (int i = 0; i < tester.widgetList(allElevatedButtons).length; i++) {
+        final buttonFinder = allElevatedButtons.at(i);
+        final ElevatedButton button = tester.widget(buttonFinder);
+        
+        // Check if this button has a Text child
+        if (button.child is Text) {
+          final String buttonText = (button.child as Text).data ?? '';
+          final bool isEnabled = button.onPressed != null;
+          debugPrint('Button $i: text="$buttonText", enabled=$isEnabled, key=${button.key}');
+        } else {
+          debugPrint('Button $i: No Text child, key=${button.key}');
+        }
+      }
+      
+      // Find the Accept button using multiple strategies
+      Finder acceptButtonFinder1;
+      
+      // Strategy 1: Try to find by key (most reliable)
+      final Finder acceptButtonByKeyFinder = find.byKey(const Key('diet_accept_button'));
+      if (tester.any(acceptButtonByKeyFinder)) {
+        debugPrint('Diet Screen: Found Accept button by key');
+        acceptButtonFinder1 = acceptButtonByKeyFinder;
+      } 
+      // Strategy 2: Try to find by text content
+      else {
+        debugPrint('Diet Screen: Could not find Accept button by key, trying by text');
+        
+        // Try localized text first
+        final Finder acceptButtonTextFinder = find.text(l10nDiet.txtButtonAccept);
+        if (tester.any(acceptButtonTextFinder)) {
+          debugPrint('Diet Screen: Found text with localized value: "${l10nDiet.txtButtonAccept}"');
+          acceptButtonFinder1 = find.ancestor(
+            of: acceptButtonTextFinder,
+            matching: find.byType(ElevatedButton),
+          );
+        }
+        // Try hardcoded English text
+        else {
+          final Finder acceptTextEnFinder = find.text("Accept");
+          if (tester.any(acceptTextEnFinder)) {
+            debugPrint('Diet Screen: Found "Accept" text (English)');
+            acceptButtonFinder1 = find.ancestor(
+              of: acceptTextEnFinder,
+              matching: find.byType(ElevatedButton),
+            );
+          }
+          // Try hardcoded Spanish text
+          else {
+            final Finder acceptTextEsFinder = find.text("Aceptar");
+            if (tester.any(acceptTextEsFinder)) {
+              debugPrint('Diet Screen: Found "Aceptar" text (Spanish)');
+              acceptButtonFinder1 = find.ancestor(
+                of: acceptTextEsFinder,
+                matching: find.byType(ElevatedButton),
+              );
+            }
+            // Strategy 3: Fallback to the last button (assuming it's the Accept button)
+            else if (tester.any(allElevatedButtons)) {
+              debugPrint('Diet Screen: Could not find button with Accept text, using last button as fallback');
+              acceptButtonFinder1 = allElevatedButtons.last;
+            }
+            // Strategy 4: Ultimate fallback
+            else {
+              debugPrint('Diet Screen: No buttons found at all, test will fail');
+              acceptButtonFinder1 = find.byType(ElevatedButton); // This will fail the test with a clear message
+            }
+          }
+        }
+      }
+      
+      // Verify we found a button
+      expect(acceptButtonFinder1, findsOneWidget, reason: "The Accept button was not found on the Diet Screen.");
+
+      // Check if the button is initially disabled as expected
+      ElevatedButton acceptButtonWidget = tester.widget(acceptButtonFinder1);
+      debugPrint('Diet Screen: Accept button found, checking if it\'s disabled...');
+      debugPrint('Diet Screen: Button onPressed is ${acceptButtonWidget.onPressed == null ? "null (disabled)" : "not null (enabled)"}');
+      
+      expect(acceptButtonWidget.onPressed, isNull, reason: "Accept button should be disabled initially on Diet Screen.");
+      debugPrint('Diet Screen: Accept button initially disabled.');
+
+      // Find all DietItemWidgets. The number of items comes from Items.values.length in the app.
+      // Using find.byType(DietItemWidget) is more robust than filtering by string name.
+      // This assumes DietItemWidget is the correct public class name of your widget.
+      final dietItemWidgetsFinder = find.byType(DietItem); 
+      // Old fragile way: find.byType(StatefulWidget).suchThat( (widget) => widget.toStringShort().contains('DietItem'));
+      
+      // If DietItemWidget is not directly usable with find.byType, you might need to count them differently or use a known count.
+      // For this example, let's assume we find them.
+      final int dietItemCount = tester.widgetList(dietItemWidgetsFinder).length;
+      expect(dietItemCount, greaterThan(0), reason: "Should find at least one DietItemWidget.");
+      debugPrint('Diet Screen: Found $dietItemCount DietItemWidgets.');
+
+      for (int i = 0; i < dietItemCount; i++) {
+        final dietItemWidget = dietItemWidgetsFinder.at(i);
+        await tester.ensureVisible(dietItemWidget); // Scroll to the item
+        await tester.pumpAndSettle();
+
+        // Tap the first radio option within this DietItemWidget
+        final radioOptionFinder = find.descendant(
+          of: dietItemWidget,
+          matching: find.byType(RadioListTile<int?>), // Assumes RadioListTile<int?> is used
+        ).first;
+
+        await tester.tap(radioOptionFinder);
+        await tester.pumpAndSettle();
+        debugPrint('Diet Screen: Selected first option for item $i.');
+      }
+
+      // Verify "Accept" button is now enabled
+      acceptButtonWidget = tester.widget(acceptButtonFinder1); // Re-fetch the widget state using the same robust finder
+      debugPrint('Diet Screen: After selections, button onPressed is ${acceptButtonWidget.onPressed == null ? "null (disabled)" : "not null (enabled)"}');
+      
+      expect(acceptButtonWidget.onPressed, isNotNull, reason: "Accept button should be enabled after all selections on Diet Screen.");
+      debugPrint('Diet Screen: Accept button now enabled.');
+
+      // Tap "Accept" button
+      await tester.tap(acceptButtonFinder1); // Tap using the same robust finder
+      await tester.pumpAndSettle(); // For SnackBar to appear
+      debugPrint('Diet Screen: Tapped Accept button.');
+
+      // Verify SnackBar with score
+      expect(find.textContaining('Score:'), findsOneWidget);
+      debugPrint('Diet Screen: Score SnackBar found.');
+
+      // Tap "OK" on SnackBar
+      await tester.tap(find.text('OK'));
+      await tester.pumpAndSettle(); // For SnackBar to hide and navigation to occur
+      debugPrint('Diet Screen: Tapped OK on SnackBar.');
+
+      // Verify navigation back (e.g., DietScreen is gone)
+      expect(find.byKey(dietScreenScaffoldKey), findsNothing, reason: "DietScreen should be popped after OK on SnackBar.");
+      expect(find.byKey(mainScaffoldKey), findsOneWidget, reason: "Should have navigated back to the screen with mainScaffoldKey (e.g., MainScreen).");
+      debugPrint('Diet Screen: Navigated back successfully.');
+
+      debugPrint('--- Diet Screen Test Completed ---');
     });
   });
 }

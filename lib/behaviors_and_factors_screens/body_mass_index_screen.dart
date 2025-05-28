@@ -130,7 +130,9 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
     }
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _precaModel = Provider.of<PrecarinaModel>(context, listen: false);
+      if (mounted) {
+        _precaModel = Provider.of<PrecarinaModel>(context, listen: false);
+      }
     });
   }
 

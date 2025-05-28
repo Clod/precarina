@@ -11,6 +11,9 @@ import '../aux_widgets/vertical_space.dart';
 import '../help_pages/help_drawer.dart';
 import '../model/datos_alimentacion.dart';
 
+// Key for DietScreen Scaffold, used in integration tests
+const Key dietScreenScaffoldKey = Key('dietScreenScaffold');
+
 class DietScreen extends StatefulWidget {
   const DietScreen({super.key});
 
@@ -137,6 +140,7 @@ class _DietScreenState extends State<DietScreen> {
     }
 
     return Scaffold(
+      key: dietScreenScaffoldKey, // Added key for testing
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.txtDietButton),
         leading: IconButton(
@@ -162,6 +166,7 @@ class _DietScreenState extends State<DietScreen> {
                     ...dietItems(),
                     const VerticalSpace(height: 15.0),
                     Row(
+                  key: const Key('diet_screen_button_row'), // ADD THIS KEY
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // Cancel button
@@ -173,6 +178,7 @@ class _DietScreenState extends State<DietScreen> {
                         const HorizontalSpace(width: 15.0),
                         // Accept button
                         ElevatedButton(
+                          key: const Key('diet_accept_button'),
                           onPressed: !_enableAcceptButton
                               ? null
                               : () {

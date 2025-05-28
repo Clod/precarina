@@ -50,7 +50,7 @@ class _BloodPressureScreenState extends State<BloodPressureScreen> {
     // This callback will get called AFTER the Widget is built
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return; // Add mounted check
-      showWarning(context);
+      showWarning(context, isMounted: () => mounted);
       if (!mounted) return; // Guard context use with mounted check
       _precaModel = Provider.of<PrecarinaModel>(context, listen: false);
     });

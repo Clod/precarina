@@ -20,8 +20,6 @@ class SmokeExposureScreen extends StatefulWidget {
 class _SmokeExposureScreenState extends State<SmokeExposureScreen> {
   var precaModel = PrecarinaModel();
 
-  late BuildContext bc;
-
   int? _selectedOption;
 
   bool enableAcceptButton = false;
@@ -37,7 +35,6 @@ class _SmokeExposureScreenState extends State<SmokeExposureScreen> {
     final smokeExposureValues = [100, 80, 50, 30, 25, 5, 0];
     List<String> optionsTexts = AppLocalizations.of(context)!.txtSmokeExposureDialogOptions.split("|");
 
-    bc = context;
     // final Orientation orientation = MediaQuery.of(context).orientation;
     // final Size dialogSize = (orientation == Orientation.portrait) ? Size(400, 600) : Size(600, 400);
 

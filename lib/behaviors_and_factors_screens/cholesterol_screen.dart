@@ -17,8 +17,6 @@ class CholesterolScreen extends StatefulWidget {
 class _CholesterolScreenState extends State<CholesterolScreen> {
   var precaModel = PrecarinaModel();
 
-  late BuildContext bc;
-
   int? _selectedOption;
 
   bool enableAcceptButton = false;
@@ -40,8 +38,6 @@ class _CholesterolScreenState extends State<CholesterolScreen> {
 
     debugPrint('...............${optionsTexts.length}................');
     debugPrint(optionsTexts.toString());
-
-    bc = context;
 
     return Scaffold(
       // resizeToAvoidBottomInset: false,

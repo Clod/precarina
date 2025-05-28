@@ -52,8 +52,6 @@ class SleepScreen extends StatefulWidget {
 class _SleepScreenState extends State<SleepScreen> {
   var precaModel = PrecarinaModel();
 
-  late BuildContext bc;
-
   // int? _selectedOption;
 
   bool enableAcceptButton = false;
@@ -66,8 +64,6 @@ class _SleepScreenState extends State<SleepScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bc = context;
-
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       appBar: AppBar(
