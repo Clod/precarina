@@ -411,40 +411,79 @@ void main() {
       // This assumes DietItemWidget is the correct public class name of your widget.
       final dietItemWidgetsFinder = find.byType(DietItem); 
       // Old fragile way: find.byType(StatefulWidget).suchThat( (widget) => widget.toStringShort().contains('DietItem'));
-      
-      // If DietItemWidget is not directly usable with find.byType, you might need to count them differently or use a known count.
-      // For this example, let's assume we find them.
-      final int dietItemCount = tester.widgetList(dietItemWidgetsFinder).length;
-      expect(dietItemCount, greaterThan(0), reason: "Should find at least one DietItemWidget.");
-      debugPrint('Diet Screen: Found $dietItemCount DietItemWidgets.');
 
-      for (int i = 0; i < dietItemCount; i++) {
-        final dietItemWidgetFinder = dietItemWidgetsFinder.at(i);
-        await tester.ensureVisible(dietItemWidgetFinder); // Scroll to the item
-        await tester.pumpAndSettle();
+      const int totalExpectedDietItems = 15; // Requirement: process all 15 items
+
+      // Sanity check: ensure at least one DietItemWidget is initially found/rendered.
+      // tester.widgetList(finder) returns a list of widgets currently matching the finder.
+      final int initiallyFoundDietItems = tester.widgetList(dietItemWidgetsFinder).length;
+      expect(initiallyFoundDietItems, greaterThan(0), reason: "DietScreen should display at least one DietItemWidget initially.");
+      debugPrint('Diet Screen: Initially found $initiallyFoundDietItems DietItemWidgets on screen.');
+
+      // --- Scroll ListView to the absolute top ---
+      // This ensures that when we start iterating from item 0, we are truly at the beginning of the list.
+      if (totalExpectedDietItems > 0) {
+        debugPrint('Diet Screen: Attempting to scroll ListView to absolute top...');
+        final listViewFinder = find.byKey(const Key('diet_screen_list_view')); // Key for the ListView
+        // Ensure the ListView itself is found (already asserted earlier in the test)
+        // final listViewFinder = find.byKey(const Key('diet_screen_list_view'));
+        // expect(listViewFinder, findsOneWidget, reason: "The main ListView on DietScreen (key 'diet_screen_list_view') should be present.");
+
+        final scrollableFinder = find.descendant(
+          of: listViewFinder,
+          matching: find.byType(Scrollable),
+        );
+        expect(scrollableFinder, findsOneWidget, reason: "Scrollable descendant of DietScreen ListView not found. Ensure ListView (key 'diet_screen_list_view') contains a Scrollable.");
+
+        final ScrollableState scrollableState = tester.state(scrollableFinder);
+        if (scrollableState.position.pixels != scrollableState.position.minScrollExtent) {
+          await tester.runAsync(() async { // Use runAsync for direct position manipulation
+            scrollableState.position.jumpTo(scrollableState.position.minScrollExtent);
+          });
+          await tester.pumpAndSettle(); // Allow UI to settle after the jump
+          debugPrint('Diet Screen: ListView scrolled to top using jumpTo.');
+        } else {
+          debugPrint('Diet Screen: ListView already at the top.');
+        }
+      }
+      // --- End of scroll to top ---
+
+      debugPrint('Diet Screen: Starting loop to process all $totalExpectedDietItems DietItemWidgets by scrolling if necessary.');
+
+      for (int i = 0; i < totalExpectedDietItems; i++) {
+        // Finder for the i-th DietItem widget.
+        // .at(i) gets the i-th widget matched by dietItemWidgetsFinder (find.byType(DietItem)).
+        final Finder currentItemFinder = dietItemWidgetsFinder.at(i);
+
+        debugPrint('Diet Screen: Ensuring item $i (0-indexed) is visible...');
+        await tester.ensureVisible(currentItemFinder); // Scroll to the item
+        await tester.pumpAndSettle(); // Allow UI to settle after scrolling and potential widget building
 
         // Get the DietItem widget instance to access its properties (like the options text)
-        final DietItem dietItemInstance = tester.widget(dietItemWidgetFinder);
+        // Now that it's visible, get the widget instance.
+        final DietItem dietItemInstance = tester.widget(currentItemFinder);
+        debugPrint('Diet Screen: Item $i (0-indexed) is now visible and being processed.');
 
         // We'll tap the first option. Ensure 'opciones' is not empty.
         // This should be guaranteed by how DietScreen provides data, but a check is good.
-        expect(dietItemInstance.opciones, isNotEmpty, reason: "DietItemWidget $i has no options (opciones list is empty).");
+        expect(dietItemInstance.opciones, isNotEmpty, reason: "DietItemWidget at index $i (0-indexed) has no options (opciones list is empty).");
         final String firstOptionText = dietItemInstance.opciones[0];
 
         // Find the Text widget for the first option within this DietItemWidget.
         // The Text widget is a child of Padding, which is a child of CupertinoSegmentedControl.
         final optionToTapFinder = find.descendant(
-          of: dietItemWidgetFinder, // Search within the current DietItem
+          of: currentItemFinder, // Search within the current DietItem
           matching: find.text(firstOptionText),
         );
 
         // Assert that the specific option text is found.
         expect(optionToTapFinder, findsOneWidget,
           reason: 'Expected to find the text for the first option ("$firstOptionText") in DietItemWidget $i. Check DietItemWidget implementation and if it displays options correctly.',
-        );
+        ); // Reason updated to use $i for clarity. Original was: 'Expected to find the text for the first option ("$firstOptionText") in DietItemWidget at index $i (0-indexed).'
 
+        debugPrint('Diet Screen: Tapping option "$firstOptionText" for item $i.');
         await tester.tap(optionToTapFinder);
-        await tester.pumpAndSettle();
+        await tester.pumpAndSettle(); // Settle after tap
         debugPrint('Diet Screen: Selected first option for item $i.');
       }
 
