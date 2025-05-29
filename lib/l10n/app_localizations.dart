@@ -63,7 +63,7 @@ import 'app_localizations_es.dart';
 /// property.
 abstract class AppLocalizations {
   AppLocalizations(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -86,16 +86,16 @@ abstract class AppLocalizations {
   /// of delegates is preferred or required.
   static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
       <LocalizationsDelegate<dynamic>>[
-        delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ];
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
-    Locale('es'),
+    Locale('es')
   ];
 
   /// No description provided for @txtPrecarina.
@@ -595,28 +595,28 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'MT 1 sm u dy or MT 1/2 pl dy or MT 3 med us per wk'**
   String
-  get txtMoreThanOneSmallUnitDailyOrMoreThanHalfPlateDailyOrMoreThanThreeMediumUnitsPerWeek;
+      get txtMoreThanOneSmallUnitDailyOrMoreThanHalfPlateDailyOrMoreThanThreeMediumUnitsPerWeek;
 
   /// No description provided for @txtThreeMediumUnitsPerWeekOrOneThirdRawPlateDailyOrOneFourthCookedPlateDaily.
   ///
   /// In en, this message translates to:
   /// **'3 med us per wk or 1/3 raw pl dy or 1/4 cooked pl dy'**
   String
-  get txtThreeMediumUnitsPerWeekOrOneThirdRawPlateDailyOrOneFourthCookedPlateDaily;
+      get txtThreeMediumUnitsPerWeekOrOneThirdRawPlateDailyOrOneFourthCookedPlateDaily;
 
   /// No description provided for @txtOneMediumUnitPerWeekOrOneFourthRawPlateDailyOrOneFourthCookedPlateFourTimesPerWeek.
   ///
   /// In en, this message translates to:
   /// **'1 med u per wk or 1/4 raw pl dy or 1/4 cooked pl 4 times/wk'**
   String
-  get txtOneMediumUnitPerWeekOrOneFourthRawPlateDailyOrOneFourthCookedPlateFourTimesPerWeek;
+      get txtOneMediumUnitPerWeekOrOneFourthRawPlateDailyOrOneFourthCookedPlateFourTimesPerWeek;
 
   /// No description provided for @txtLessThanOneMediumUnitPerWeekOrLessThanOneFourthRawPlateDailyOrLessThanOneFourthCookedPlateFourTimesPerWeek.
   ///
   /// In en, this message translates to:
   /// **'LT 1 med u per wk or LT 1/4 raw pl dy or LT 1/4 cooked pl 4 times/wk'**
   String
-  get txtLessThanOneMediumUnitPerWeekOrLessThanOneFourthRawPlateDailyOrLessThanOneFourthCookedPlateFourTimesPerWeek;
+      get txtLessThanOneMediumUnitPerWeekOrLessThanOneFourthRawPlateDailyOrLessThanOneFourthCookedPlateFourTimesPerWeek;
 
   /// No description provided for @txtOneMediumUnitDailyOrTwoSmallUnitsDaily.
   ///
@@ -653,7 +653,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'MT 2 slices of sand bread or MT 2 sm mignons or MT 6 water crackers'**
   String
-  get txtMoreThanTwoSlicesOfSandBreadOrMoreThanTwoSmallMignonsOrMoreThanSixWaterCrackers;
+      get txtMoreThanTwoSlicesOfSandBreadOrMoreThanTwoSmallMignonsOrMoreThanSixWaterCrackers;
 
   /// No description provided for @txtQuarterPlateDailyOrOneServingOfDoughDaily.
   ///
@@ -708,7 +708,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'1 serv the sz of a sm matchbox or sz of 1/2 SUBE card or 2 tbsp'**
   String
-  get txtOneServingTheSizeOfSmallMatchboxOrSizeOfHalfSUBECardOrTwoTableSpoons;
+      get txtOneServingTheSizeOfSmallMatchboxOrSizeOfHalfSUBECardOrTwoTableSpoons;
 
   /// No description provided for @txtHalfServingTheSizeOfSmallMatchboxOrOneDieOrOneTableSpoon.
   ///
@@ -721,7 +721,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'LT 1/2 serv the sz of a sm matchbox or LT 1 die or LT 1 tbsp'**
   String
-  get txtLessThanHalfServingTheSizeOfSmallMatchboxOrLessThanOneDieOrLessThanOneTableSpoon;
+      get txtLessThanHalfServingTheSizeOfSmallMatchboxOrLessThanOneDieOrLessThanOneTableSpoon;
 
   /// No description provided for @txtHalfMediumSteakPerDayOrOneAndHalfEggsDailyOrOneMediumMincedMeat.
   ///
@@ -734,14 +734,14 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'1 med steak dy or up to 2 egg us dy or 1 serv the sz of a slice of veal + 1 egg dy'**
   String
-  get txtOneMediumSteakDailyOrUpToTwoEggUnitsDailyOrOneServingTheSizeOfSliceOfVealPlusOneEggDaily;
+      get txtOneMediumSteakDailyOrUpToTwoEggUnitsDailyOrOneServingTheSizeOfSliceOfVealPlusOneEggDaily;
 
   /// No description provided for @txtMoreThanOneMediumSteakDailyOrMoreThanTwoEggUnitsDailyOrMoreThanOneServingTheSizeOfSliceOfVealPlusOneEggDaily.
   ///
   /// In en, this message translates to:
   /// **'MT 1 med steak dy or MT 2 egg us dy or MT 1 serv the sz of a slice of veal + 1 egg dy'**
   String
-  get txtMoreThanOneMediumSteakDailyOrMoreThanTwoEggUnitsDailyOrMoreThanOneServingTheSizeOfSliceOfVealPlusOneEggDaily;
+      get txtMoreThanOneMediumSteakDailyOrMoreThanTwoEggUnitsDailyOrMoreThanOneServingTheSizeOfSliceOfVealPlusOneEggDaily;
 
   /// No description provided for @txtOneMediumServingPerWeekOrOneCanPerWeek.
   ///
@@ -766,7 +766,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'4 walnut halves or 8 almonds or 1 tbsp of seeds or peanuts dy'**
   String
-  get txtFourWalnutHalvesOrEightAlmondsOrOneTableSpoonOfSeedsOrPeanutsDaily;
+      get txtFourWalnutHalvesOrEightAlmondsOrOneTableSpoonOfSeedsOrPeanutsDaily;
 
   /// No description provided for @txtTwoWalnutHalvesOrFourAlmondsOrOneTeaspoonOfSeedsOrPeanutsDaily.
   ///
@@ -779,7 +779,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'LT 2 walnut halves or LT 4 almonds or LT 1 teaspoon of seeds or peanuts dy'**
   String
-  get txtLessThanTwoWalnutHalvesOrLessThanFourAlmondsOrLessThanOneTeaspoonOfSeedsOrPeanutsDaily;
+      get txtLessThanTwoWalnutHalvesOrLessThanFourAlmondsOrLessThanOneTeaspoonOfSeedsOrPeanutsDaily;
 
   /// No description provided for @txtTwoTableSpoonsDessertTypeDaily.
   ///
@@ -864,7 +864,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'4 med us per wk or 1/2 raw pl dy or 1/4 cooked pl dy'**
   String
-  get txtFourMediumUnitsPerWeekOrHalfRawPlateDailyOrQuarterCookedPlateDaily;
+      get txtFourMediumUnitsPerWeekOrHalfRawPlateDailyOrQuarterCookedPlateDaily;
 
   /// No description provided for @txtTwoMediumUnitsPerWeekOrQuarterPlateDaily.
   ///
@@ -913,7 +913,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'MT 3 slices of bread per day or MT 3 sm mignons or MT 9 water biscuits'**
   String
-  get txtMoreThanThreeSlicesOfBreadPerDayOrMoreThanThreeSmallMignonsOrMoreThanNineWaterBiscuits;
+      get txtMoreThanThreeSlicesOfBreadPerDayOrMoreThanThreeSmallMignonsOrMoreThanNineWaterBiscuits;
 
   /// No description provided for @txtQuarterPlateOfWholeWheatPastaPerDayOrOnePortionOfDough.
   ///
@@ -962,7 +962,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'1 port the sz of a sm matchbox or half the sz of a SUBE card or 2 tbsp dy'**
   String
-  get txtOnePortionTheSizeOfSmallMatchboxOrHalfTheSizeOfSUBECardOrTwoTableSpoonsDaily;
+      get txtOnePortionTheSizeOfSmallMatchboxOrHalfTheSizeOfSUBECardOrTwoTableSpoonsDaily;
 
   /// No description provided for @txtOnePortionTheSizeOfDiceOrOneTableSpoonDaily.
   ///
@@ -975,28 +975,28 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'LT 1 port the sz of a sm matchbox or LT 1 die or LT 1 tbsp'**
   String
-  get txtLessThanOnePortionTheSizeOfSmallMatchboxOrLessThanOneDieOrLessThanOneTableSpoon;
+      get txtLessThanOnePortionTheSizeOfSmallMatchboxOrLessThanOneDieOrLessThanOneTableSpoon;
 
   /// No description provided for @txtOneSmallPortionWithoutWasteDailyOrUpToTwoEggUnitsDailyOrOnePortionTheSizeOfSliceOfVealPlusOneEggDaily.
   ///
   /// In en, this message translates to:
   /// **'1 sm port without waste dy or up to 2 egg us dy or 1 port the sz of a slice of veal + 1 egg dy'**
   String
-  get txtOneSmallPortionWithoutWasteDailyOrUpToTwoEggUnitsDailyOrOnePortionTheSizeOfSliceOfVealPlusOneEggDaily;
+      get txtOneSmallPortionWithoutWasteDailyOrUpToTwoEggUnitsDailyOrOnePortionTheSizeOfSliceOfVealPlusOneEggDaily;
 
   /// No description provided for @txtTwoSmallPortionsWithoutWasteDailyOrUpToFourEggUnitsDailyOrOneSmallPortionPlusTwoEggUnits.
   ///
   /// In en, this message translates to:
   /// **'2 sm ports without waste dy or up to 4 egg us dy or 1 sm port + 2 egg us'**
   String
-  get txtTwoSmallPortionsWithoutWasteDailyOrUpToFourEggUnitsDailyOrOneSmallPortionPlusTwoEggUnits;
+      get txtTwoSmallPortionsWithoutWasteDailyOrUpToFourEggUnitsDailyOrOneSmallPortionPlusTwoEggUnits;
 
   /// No description provided for @txtMoreThanTwoSmallPortionsWithoutWasteDailyOrMoreThanFourEggUnitsDailyOrMoreThanOneSmallPortionPlusTwoEggUnits.
   ///
   /// In en, this message translates to:
   /// **'MT 2 sm ports without waste dy or MT 4 egg us dy or MT 1 sm port + 2 egg us'**
   String
-  get txtMoreThanTwoSmallPortionsWithoutWasteDailyOrMoreThanFourEggUnitsDailyOrMoreThanOneSmallPortionPlusTwoEggUnits;
+      get txtMoreThanTwoSmallPortionsWithoutWasteDailyOrMoreThanFourEggUnitsDailyOrMoreThanOneSmallPortionPlusTwoEggUnits;
 
   /// No description provided for @txtTwoMediumPortionsOrTwoCansPerWeek.
   ///
@@ -1021,21 +1021,21 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'8 walnut halves or 15 almonds or 2 dessert tbsp of seeds or peanuts per day'**
   String
-  get txtEightWalnutHalvesOrFifteenAlmondsOrTwoDessertTableSpoonsOfSeedsOrPeanutsPerDay;
+      get txtEightWalnutHalvesOrFifteenAlmondsOrTwoDessertTableSpoonsOfSeedsOrPeanutsPerDay;
 
   /// No description provided for @txtFourWalnutHalvesOrEightAlmondsOrOneTableSpoonDailyOfSeedsOrPeanuts.
   ///
   /// In en, this message translates to:
   /// **'4 walnut halves or 8 almonds or 1 tbsp dy of seeds or peanuts'**
   String
-  get txtFourWalnutHalvesOrEightAlmondsOrOneTableSpoonDailyOfSeedsOrPeanuts;
+      get txtFourWalnutHalvesOrEightAlmondsOrOneTableSpoonDailyOfSeedsOrPeanuts;
 
   /// No description provided for @txtLessThanFourWalnutHalvesOrLessThanEightAlmondsOrLessThanOneTableSpoonDailyOfSeedsOrPeanuts.
   ///
   /// In en, this message translates to:
   /// **'LT 4 walnut halves or LT 8 almonds or LT 1 tbsp dy of seeds or peanuts'**
   String
-  get txtLessThanFourWalnutHalvesOrLessThanEightAlmondsOrLessThanOneTableSpoonDailyOfSeedsOrPeanuts;
+      get txtLessThanFourWalnutHalvesOrLessThanEightAlmondsOrLessThanOneTableSpoonDailyOfSeedsOrPeanuts;
 
   /// No description provided for @txtTwoTableSpoonsDaily.
   ///
@@ -1132,21 +1132,21 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'5 med us per wk or 1/2 raw dish dy or 1/4 cooked dish dy'**
   String
-  get txtFiveMediumUnitsPerWeekOrHalfRawDishDailyOrQuarterCookedDishDaily;
+      get txtFiveMediumUnitsPerWeekOrHalfRawDishDailyOrQuarterCookedDishDaily;
 
   /// No description provided for @txtTwoAndHalfMediumUnitsPerWeekOrOneThirdRawDishDailyOrQuarterCookedDish.
   ///
   /// In en, this message translates to:
   /// **'2 and 1/2 med us per wk or 1/3 raw dish dy or 1/4 cooked dish'**
   String
-  get txtTwoAndHalfMediumUnitsPerWeekOrOneThirdRawDishDailyOrQuarterCookedDish;
+      get txtTwoAndHalfMediumUnitsPerWeekOrOneThirdRawDishDailyOrQuarterCookedDish;
 
   /// No description provided for @txtLessThanTwoAndHalfMediumUnitsPerWeekOrLessThanOneThirdRawDishDailyOrLessThanQuarterCookedDish.
   ///
   /// In en, this message translates to:
   /// **'LT 2 and 1/2 med us per wk or 1/3 raw dish dy or 1/4 cooked dish'**
   String
-  get txtLessThanTwoAndHalfMediumUnitsPerWeekOrLessThanOneThirdRawDishDailyOrLessThanQuarterCookedDish;
+      get txtLessThanTwoAndHalfMediumUnitsPerWeekOrLessThanOneThirdRawDishDailyOrLessThanQuarterCookedDish;
 
   /// No description provided for @txtHalfDishOfPastaPerDayOrTwoServingsOfDoughPerDay.
   ///
@@ -1183,7 +1183,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'MT 3/4 dish per day or MT 3 servs of dough per day'**
   String
-  get txtMoreThanThreeQuartersDishPerDayOrMoreThanThreeServingsOfDoughPerDay;
+      get txtMoreThanThreeQuartersDishPerDayOrMoreThanThreeServingsOfDoughPerDay;
 
   /// No description provided for @txtTwoBreakfastCupSizeDaily.
   ///
@@ -1208,35 +1208,35 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'1 port, the sz of a sm matchbox or 1/2 SUBE card or 2 tbsp dy'**
   String
-  get txtOnePortionTheSizeOfSmallMatchboxOrHalfSUBECardOrTwoTableSpoonsDaily;
+      get txtOnePortionTheSizeOfSmallMatchboxOrHalfSUBECardOrTwoTableSpoonsDaily;
 
   /// No description provided for @txtOneSmallPortionWithoutWasteDailyOrUpToTwoEggUnitsOrHalfSmallPortionPlusOneEgg.
   ///
   /// In en, this message translates to:
   /// **'1 sm port without waste dy or up to 2 egg us or 1/2 sm port + 1 egg'**
   String
-  get txtOneSmallPortionWithoutWasteDailyOrUpToTwoEggUnitsOrHalfSmallPortionPlusOneEgg;
+      get txtOneSmallPortionWithoutWasteDailyOrUpToTwoEggUnitsOrHalfSmallPortionPlusOneEgg;
 
   /// No description provided for @txtTenWalnutHalvesOrTwentyAlmondsOrTwoDessertTableSpoonsOfSeedsOrPeanutsPerDay.
   ///
   /// In en, this message translates to:
   /// **'10 walnut halves or 20 almonds or 2 tbsp per day of seeds or peanuts'**
   String
-  get txtTenWalnutHalvesOrTwentyAlmondsOrTwoDessertTableSpoonsOfSeedsOrPeanutsPerDay;
+      get txtTenWalnutHalvesOrTwentyAlmondsOrTwoDessertTableSpoonsOfSeedsOrPeanutsPerDay;
 
   /// No description provided for @txtFiveWalnutHalvesOrTenAlmondsOrOneTableSpoonDailyOfSeedsOrPeanuts.
   ///
   /// In en, this message translates to:
   /// **'5 walnut halves or 10 almonds or 1 tbsp dy of seeds or peanuts'**
   String
-  get txtFiveWalnutHalvesOrTenAlmondsOrOneTableSpoonDailyOfSeedsOrPeanuts;
+      get txtFiveWalnutHalvesOrTenAlmondsOrOneTableSpoonDailyOfSeedsOrPeanuts;
 
   /// No description provided for @txtLessThanFiveWalnutHalvesOrLessThanTenAlmondsOrLessThanOneTableSpoonDailyOfSeedsOrPeanuts.
   ///
   /// In en, this message translates to:
   /// **'LT 5 walnut halves or 10 almonds or 1 tbsp dy of seeds or peanuts'**
   String
-  get txtLessThanFiveWalnutHalvesOrLessThanTenAlmondsOrLessThanOneTableSpoonDailyOfSeedsOrPeanuts;
+      get txtLessThanFiveWalnutHalvesOrLessThanTenAlmondsOrLessThanOneTableSpoonDailyOfSeedsOrPeanuts;
 
   /// No description provided for @txtTwoTableSpoonsPerDay.
   ///
@@ -1273,7 +1273,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'LT 1 and 1/2 pls per wk or LT 1 sm u every other day'**
   String
-  get txtLessThanOneAndHalfPlatesPerWeekOrLessThanOneSmallUnitEveryOtherDay;
+      get txtLessThanOneAndHalfPlatesPerWeekOrLessThanOneSmallUnitEveryOtherDay;
 
   /// No description provided for @txtHalfSmallUnitPerDayOrQuarterPlatePerDayOrThreeSmallUnitsPerWeek.
   ///
@@ -1292,7 +1292,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'MT 1 sm u per day or MT 1/2 pl per day or MT 3 med us per wk'**
   String
-  get txtMoreThanOneSmallUnitPerDayOrMoreThanHalfPlatePerDayOrMoreThanThreeMediumUnitsPerWeek;
+      get txtMoreThanOneSmallUnitPerDayOrMoreThanHalfPlatePerDayOrMoreThanThreeMediumUnitsPerWeek;
 
   /// No description provided for @txtThreeMediumUnitsPerWeekOrOneThirdRawPlateOrQuarterCookedPlate.
   ///
@@ -1305,14 +1305,14 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'1 med u per wk or 1/4 raw pl per day or 1/4 pl 4 times/wk'**
   String
-  get txtOneMediumUnitPerWeekOrQuarterRawPlatePerDayOrQuarterPlateFourTimesPerWeek;
+      get txtOneMediumUnitPerWeekOrQuarterRawPlatePerDayOrQuarterPlateFourTimesPerWeek;
 
   /// No description provided for @txtLessThanOneMediumUnitPerWeekOrQuarterRawPlatePerDayOrQuarterPlateFourTimesPerWeek.
   ///
   /// In en, this message translates to:
   /// **'LT 1 med u per wk or 1/4 raw pl per day or 1/4 pl 4 times/wk'**
   String
-  get txtLessThanOneMediumUnitPerWeekOrQuarterRawPlatePerDayOrQuarterPlateFourTimesPerWeek;
+      get txtLessThanOneMediumUnitPerWeekOrQuarterRawPlatePerDayOrQuarterPlateFourTimesPerWeek;
 
   /// No description provided for @txtTwoMediumUnitsPerDay.
   ///
@@ -1397,21 +1397,21 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'1 sm port without waste 5 times/wk or 1/2 sm port + 1 egg dy'**
   String
-  get txtOneSmallPortionWithoutWasteFiveTimesPerWeekOrHalfSmallPortionPlusOneEggDaily;
+      get txtOneSmallPortionWithoutWasteFiveTimesPerWeekOrHalfSmallPortionPlusOneEggDaily;
 
   /// No description provided for @txtOneMediumPortionWithoutWasteDailyOrOneSmallPortionPlusOneEggDaily.
   ///
   /// In en, this message translates to:
   /// **'1 med port without waste dy or 1 sm port + 1 egg dy'**
   String
-  get txtOneMediumPortionWithoutWasteDailyOrOneSmallPortionPlusOneEggDaily;
+      get txtOneMediumPortionWithoutWasteDailyOrOneSmallPortionPlusOneEggDaily;
 
   /// No description provided for @txtMoreThanOneMediumPortionWithoutWasteDailyOrMoreThanOneSmallPortionPlusOneEggDaily.
   ///
   /// In en, this message translates to:
   /// **'MT 1 med port without waste dy or MT 1 sm port + 1 egg dy'**
   String
-  get txtMoreThanOneMediumPortionWithoutWasteDailyOrMoreThanOneSmallPortionPlusOneEggDaily;
+      get txtMoreThanOneMediumPortionWithoutWasteDailyOrMoreThanOneSmallPortionPlusOneEggDaily;
 
   /// No description provided for @txtTwoSmallPortionsPerWeekOrOneAndHalfCansPerWeek.
   ///
@@ -1442,14 +1442,14 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'3 walnut halves or 5 almonds or 1/2 tbsp dy of seeds or peanuts'**
   String
-  get txtThreeWalnutHalvesOrFiveAlmondsOrHalfTableSpoonDailyOfSeedsOrPeanuts;
+      get txtThreeWalnutHalvesOrFiveAlmondsOrHalfTableSpoonDailyOfSeedsOrPeanuts;
 
   /// No description provided for @txtLessThanThreeWalnutHalvesOrLessThanFiveAlmondsOrLessThanHalfTableSpoonDailyOfSeedsOrPeanuts.
   ///
   /// In en, this message translates to:
   /// **'LT 3 walnut halves or 5 almonds or 1/2 tbsp dy of seeds or peanuts'**
   String
-  get txtLessThanThreeWalnutHalvesOrLessThanFiveAlmondsOrLessThanHalfTableSpoonDailyOfSeedsOrPeanuts;
+      get txtLessThanThreeWalnutHalvesOrLessThanFiveAlmondsOrLessThanHalfTableSpoonDailyOfSeedsOrPeanuts;
 
   /// No description provided for @txtTwoDessertSpoonsPerDay.
   ///
@@ -1480,7 +1480,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'5 and 1/2 pls per wk or 1 med u per day or 3/4 pl per day'**
   String
-  get txtFiveAndHalfPlatesPerWeekOrOneMediumUnitPerDayOrThreeQuartersPlatePerDay;
+      get txtFiveAndHalfPlatesPerWeekOrOneMediumUnitPerDayOrThreeQuartersPlatePerDay;
 
   /// No description provided for @txtThreePlatesPerWeekOrOneSmallUnitPerDayOrOneThirdPlatePerDay.
   ///
@@ -1493,77 +1493,77 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'LT 3 pls per wk or LT 1 dy u or LT 1/3 pl per day'**
   String
-  get txtLessThanThreePlatesPerWeekOrLessThanOneDailyUnitOrLessThanOneThirdPlatePerDay;
+      get txtLessThanThreePlatesPerWeekOrLessThanOneDailyUnitOrLessThanOneThirdPlatePerDay;
 
   /// No description provided for @txtOneAndHalfPlatesPerWeekOrHalfPlateThreeTimesPerWeekOrOneMedallionPerDay.
   ///
   /// In en, this message translates to:
   /// **'1 and 1/2 pls per wk or 1/2 pl 3 times per wk or 1 medallion per day'**
   String
-  get txtOneAndHalfPlatesPerWeekOrHalfPlateThreeTimesPerWeekOrOneMedallionPerDay;
+      get txtOneAndHalfPlatesPerWeekOrHalfPlateThreeTimesPerWeekOrOneMedallionPerDay;
 
   /// No description provided for @txtOnePlatePerWeekOrHalfPlatePerWeekOrOneMedallionThreeTimesPerWeek.
   ///
   /// In en, this message translates to:
   /// **'1 pl per wk or 1/2 pl per wk or 1 medallion 3 times per wk'**
   String
-  get txtOnePlatePerWeekOrHalfPlatePerWeekOrOneMedallionThreeTimesPerWeek;
+      get txtOnePlatePerWeekOrHalfPlatePerWeekOrOneMedallionThreeTimesPerWeek;
 
   /// No description provided for @txtLessThanOnePlatePerWeekOrLessThanHalfPlatePerWeekOrLessThanOneMedallionThreeTimesPerWeek.
   ///
   /// In en, this message translates to:
   /// **'LT 1 pl per wk or LT 1/2 pl per wk or LT 1 medallion 3 times per wk'**
   String
-  get txtLessThanOnePlatePerWeekOrLessThanHalfPlatePerWeekOrLessThanOneMedallionThreeTimesPerWeek;
+      get txtLessThanOnePlatePerWeekOrLessThanHalfPlatePerWeekOrLessThanOneMedallionThreeTimesPerWeek;
 
   /// No description provided for @txtOneSmallUnitPerDayOrThreeMediumUnitsPerWeekOrOneThirdPlatePerDay.
   ///
   /// In en, this message translates to:
   /// **'1 sm u per day or 3 med us per wk or 1/3 pl per day'**
   String
-  get txtOneSmallUnitPerDayOrThreeMediumUnitsPerWeekOrOneThirdPlatePerDay;
+      get txtOneSmallUnitPerDayOrThreeMediumUnitsPerWeekOrOneThirdPlatePerDay;
 
   /// No description provided for @txtOneMediumUnitPerDayOrThreeLargeUnitsPerWeekOrThreeQuartersPlatePerDay.
   ///
   /// In en, this message translates to:
   /// **'1 med u per day or 3 large us per wk or 3/4 pl per day'**
   String
-  get txtOneMediumUnitPerDayOrThreeLargeUnitsPerWeekOrThreeQuartersPlatePerDay;
+      get txtOneMediumUnitPerDayOrThreeLargeUnitsPerWeekOrThreeQuartersPlatePerDay;
 
   /// No description provided for @txtMoreThanOneMediumUnitPerDayOrMoreThanThreeLargeUnitsPerWeekOrMoreThanThreeQuartersPlatePerDay.
   ///
   /// In en, this message translates to:
   /// **'MT 1 med u per day or MT 3 large us per wk or MT 3/4 pl per day'**
   String
-  get txtMoreThanOneMediumUnitPerDayOrMoreThanThreeLargeUnitsPerWeekOrMoreThanThreeQuartersPlatePerDay;
+      get txtMoreThanOneMediumUnitPerDayOrMoreThanThreeLargeUnitsPerWeekOrMoreThanThreeQuartersPlatePerDay;
 
   /// No description provided for @txtFiveMediumUnitsPerWeekOrHalfRawPlateDailyOrQuarterCookedPlateDaily.
   ///
   /// In en, this message translates to:
   /// **'5 med us per wk or 1/2 raw pl dy or 1/4 cooked pl dy'**
   String
-  get txtFiveMediumUnitsPerWeekOrHalfRawPlateDailyOrQuarterCookedPlateDaily;
+      get txtFiveMediumUnitsPerWeekOrHalfRawPlateDailyOrQuarterCookedPlateDaily;
 
   /// No description provided for @txtTwoAndHalfMediumUnitsPerWeekOrOneThirdRawPlateDailyOrQuarterCookedPlate.
   ///
   /// In en, this message translates to:
   /// **'2 1/2 med us per wk or 1/3 raw pl dy or 1/4 cooked pl'**
   String
-  get txtTwoAndHalfMediumUnitsPerWeekOrOneThirdRawPlateDailyOrQuarterCookedPlate;
+      get txtTwoAndHalfMediumUnitsPerWeekOrOneThirdRawPlateDailyOrQuarterCookedPlate;
 
   /// No description provided for @txtLessThanTwoAndHalfMediumUnitsPerWeekOrLessThanOneThirdRawPlateDailyOrLessThanQuarterCookedPlate.
   ///
   /// In en, this message translates to:
   /// **'LT 2 1/2 med us per wk or LT 1/3 raw pl dy or LT 1/4 cooked pl'**
   String
-  get txtLessThanTwoAndHalfMediumUnitsPerWeekOrLessThanOneThirdRawPlateDailyOrLessThanQuarterCookedPlate;
+      get txtLessThanTwoAndHalfMediumUnitsPerWeekOrLessThanOneThirdRawPlateDailyOrLessThanQuarterCookedPlate;
 
   /// No description provided for @txtOneAndHalfLargeUnitPerDayOrTwoMediumUnitsPerDayOrThreeSmallUnits.
   ///
   /// In en, this message translates to:
   /// **'1 1/2 large u per day or 2 med us per day or 3 sm us'**
   String
-  get txtOneAndHalfLargeUnitPerDayOrTwoMediumUnitsPerDayOrThreeSmallUnits;
+      get txtOneAndHalfLargeUnitPerDayOrTwoMediumUnitsPerDayOrThreeSmallUnits;
 
   /// No description provided for @txtOneMediumUnitPerDayOrTwoSmallUnits.
   ///
@@ -1594,7 +1594,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'MT 3 mold type slices per day or MT 3 sm mignons per day'**
   String
-  get txtMoreThanThreeMoldTypeSlicesPerDayOrMoreThanThreeSmallMignonsPerDay;
+      get txtMoreThanThreeMoldTypeSlicesPerDayOrMoreThanThreeSmallMignonsPerDay;
 
   /// No description provided for @txtQuarterPlateOfWholeWheatPastaPerDayOrOneServingOfDough.
   ///
@@ -1643,49 +1643,49 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'1 sm port without waste dy or up to 2 egg us dy or 1 slice sz port of peceto + 1 egg dy'**
   String
-  get txtOneSmallPortionWithoutWasteDailyOrUpToTwoEggUnitsDailyOrOneSliceSizePortionOfPecetoPlusOneEggDaily;
+      get txtOneSmallPortionWithoutWasteDailyOrUpToTwoEggUnitsDailyOrOneSliceSizePortionOfPecetoPlusOneEggDaily;
 
   /// No description provided for @txtTwoSmallPortionsWithoutWasteDailyOrUpToFourEggUnitsDailyOrOneSmallPortionPlusTwoEggUnitsDaily.
   ///
   /// In en, this message translates to:
   /// **'2 sm ports without waste dy or up to 4 egg us dy or 1 sm port + 2 egg us dy'**
   String
-  get txtTwoSmallPortionsWithoutWasteDailyOrUpToFourEggUnitsDailyOrOneSmallPortionPlusTwoEggUnitsDaily;
+      get txtTwoSmallPortionsWithoutWasteDailyOrUpToFourEggUnitsDailyOrOneSmallPortionPlusTwoEggUnitsDaily;
 
   /// No description provided for @txtMoreThanTwoSmallPortionsWithoutWasteDailyOrMoreThanFourEggUnitsDailyOrMoreThanOneSmallPortionPlusTwoEggUnitsDaily.
   ///
   /// In en, this message translates to:
   /// **'MT 2 sm ports without waste dy or MT 4 egg us dy or MT 1 sm port + 2 egg us dy'**
   String
-  get txtMoreThanTwoSmallPortionsWithoutWasteDailyOrMoreThanFourEggUnitsDailyOrMoreThanOneSmallPortionPlusTwoEggUnitsDaily;
+      get txtMoreThanTwoSmallPortionsWithoutWasteDailyOrMoreThanFourEggUnitsDailyOrMoreThanOneSmallPortionPlusTwoEggUnitsDaily;
 
   /// No description provided for @txtTenWalnutHalvesOrTwentyAlmondsOrTwoTableSpoonsDailyOfSeedsOrPeanuts.
   ///
   /// In en, this message translates to:
   /// **'10 walnut halves or 20 almonds or 2 tbsp dy of seeds or peanuts'**
   String
-  get txtTenWalnutHalvesOrTwentyAlmondsOrTwoTableSpoonsDailyOfSeedsOrPeanuts;
+      get txtTenWalnutHalvesOrTwentyAlmondsOrTwoTableSpoonsDailyOfSeedsOrPeanuts;
 
   /// No description provided for @txtHalfPlateCookedDailyOrThreeQuartersPlateRawDailyOrSixMediumUnitsPerWeek.
   ///
   /// In en, this message translates to:
   /// **'1/2 pl cooked dy or 3/4 pl raw dy or 6 med us per wk'**
   String
-  get txtHalfPlateCookedDailyOrThreeQuartersPlateRawDailyOrSixMediumUnitsPerWeek;
+      get txtHalfPlateCookedDailyOrThreeQuartersPlateRawDailyOrSixMediumUnitsPerWeek;
 
   /// No description provided for @txtQuarterPlateCookedDailyOrHalfPlateRawDailyOrThreeMediumUnitsPerWeek.
   ///
   /// In en, this message translates to:
   /// **'1/4 pl cooked dy or 1/2 pl raw dy or 3 med us per wk'**
   String
-  get txtQuarterPlateCookedDailyOrHalfPlateRawDailyOrThreeMediumUnitsPerWeek;
+      get txtQuarterPlateCookedDailyOrHalfPlateRawDailyOrThreeMediumUnitsPerWeek;
 
   /// No description provided for @txtLessThanQuarterPlateCookedDailyOrLessThanHalfPlateRawDailyOrLessThanThreeMediumUnitsPerWeek.
   ///
   /// In en, this message translates to:
   /// **'LT 1/4 pl cooked dy or LT 1/2 pl raw dy or LT 3 med us per wk'**
   String
-  get txtLessThanQuarterPlateCookedDailyOrLessThanHalfPlateRawDailyOrLessThanThreeMediumUnitsPerWeek;
+      get txtLessThanQuarterPlateCookedDailyOrLessThanHalfPlateRawDailyOrLessThanThreeMediumUnitsPerWeek;
 
   /// No description provided for @txtTwoPlatesPerWeekOrOnePlatePlusTwoMedallionsPerWeek.
   ///
@@ -1698,14 +1698,14 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'LT 1 pl per wk or LT 1/2 pl + 1 medallion per wk'**
   String
-  get txtLessThanOnePlatePerWeekOrLessThanHalfPlatePlusOneMedallionPerWeek;
+      get txtLessThanOnePlatePerWeekOrLessThanHalfPlatePlusOneMedallionPerWeek;
 
   /// No description provided for @txtUpToSixSmallUnitsPerWeekOrThreeLargeUnitsPerWeekOrHalfPlateDaily.
   ///
   /// In en, this message translates to:
   /// **'up to 6 sm us/wk or 3 large us/wk or 1/2 pl dy'**
   String
-  get txtUpToSixSmallUnitsPerWeekOrThreeLargeUnitsPerWeekOrHalfPlateDaily;
+      get txtUpToSixSmallUnitsPerWeekOrThreeLargeUnitsPerWeekOrHalfPlateDaily;
 
   /// No description provided for @txtUpToNineUnitsPerWeekOrFiveLargeUnitsPerWeekOrOnePlateDaily.
   ///
@@ -1718,14 +1718,14 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'MT 9 us/wk or MT 5 large us/wk or MT 1 pl dy'**
   String
-  get txtMoreThanNineUnitsPerWeekOrMoreThanFiveLargeUnitsPerWeekOrMoreThanOnePlateDaily;
+      get txtMoreThanNineUnitsPerWeekOrMoreThanFiveLargeUnitsPerWeekOrMoreThanOnePlateDaily;
 
   /// No description provided for @txtOneMediumUnitDailyOrThreeQuartersPlateRawDailyOrHalfPlateCookedDaily.
   ///
   /// In en, this message translates to:
   /// **'1 med u dy or 3/4 pl raw dy or 1/2 pl cooked dy'**
   String
-  get txtOneMediumUnitDailyOrThreeQuartersPlateRawDailyOrHalfPlateCookedDaily;
+      get txtOneMediumUnitDailyOrThreeQuartersPlateRawDailyOrHalfPlateCookedDaily;
 
   /// No description provided for @txtOneSmallUnitDailyOrHalfPlateRawDailyOrQuarterPlateCookedDaily.
   ///
@@ -1738,7 +1738,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'LT 1 sm u dy or 1/2 pl raw dy or 1/4 pl cooked dy'**
   String
-  get txtLessThanOneSmallUnitDailyOrLessThanHalfPlateRawDailyOrLessThanQuarterPlateCookedDaily;
+      get txtLessThanOneSmallUnitDailyOrLessThanHalfPlateRawDailyOrLessThanQuarterPlateCookedDaily;
 
   /// No description provided for @txtTwoLargeUnitsPerDayOrFourSmallUnitsPerDay.
   ///
@@ -1775,14 +1775,14 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'MT 6 slices per day or MT 4 sm medallions or MT 2 sm flutes'**
   String
-  get txtMoreThanSixSlicesPerDayOrMoreThanFourSmallMedallionsOrMoreThanTwoSmallFlutes;
+      get txtMoreThanSixSlicesPerDayOrMoreThanFourSmallMedallionsOrMoreThanTwoSmallFlutes;
 
   /// No description provided for @txtHalfPlateOfWholeWheatPastaPerDayOrOneAndHalfPortionOfDoughPerDay.
   ///
   /// In en, this message translates to:
   /// **'1/2 pl of whole wheat pasta per day or 1 and 1/2 port of dough per day'**
   String
-  get txtHalfPlateOfWholeWheatPastaPerDayOrOneAndHalfPortionOfDoughPerDay;
+      get txtHalfPlateOfWholeWheatPastaPerDayOrOneAndHalfPortionOfDoughPerDay;
 
   /// No description provided for @txtOnePlatePerDayOrThreePortionsOfDoughPerDay.
   ///
@@ -1831,28 +1831,28 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'1 med port without waste dy or up to 3 eggs dy or 1 sm port + 2 eggs dy'**
   String
-  get txtOneMediumPortionWithoutWasteDailyOrUpToThreeEggsDailyOrOneSmallPortionPlusTwoEggsDaily;
+      get txtOneMediumPortionWithoutWasteDailyOrUpToThreeEggsDailyOrOneSmallPortionPlusTwoEggsDaily;
 
   /// No description provided for @txtTwoSmallPortionsWithoutWasteDailyOrUpToFourEggsOrOneMediumPortionPlusTwoEggs.
   ///
   /// In en, this message translates to:
   /// **'2 sm ports without waste dy or up to 4 eggs or 1 med port + 2 eggs'**
   String
-  get txtTwoSmallPortionsWithoutWasteDailyOrUpToFourEggsOrOneMediumPortionPlusTwoEggs;
+      get txtTwoSmallPortionsWithoutWasteDailyOrUpToFourEggsOrOneMediumPortionPlusTwoEggs;
 
   /// No description provided for @txtMoreThanTwoSmallPortionsWithoutWasteDailyOrUpToFourEggsDailyOrMoreThanOneMediumPortionPlusTwoEggs.
   ///
   /// In en, this message translates to:
   /// **'MT 2 sm ports without waste dy or up to 4 eggs dy or 1 med port + 2 eggs'**
   String
-  get txtMoreThanTwoSmallPortionsWithoutWasteDailyOrUpToFourEggsDailyOrMoreThanOneMediumPortionPlusTwoEggs;
+      get txtMoreThanTwoSmallPortionsWithoutWasteDailyOrUpToFourEggsDailyOrMoreThanOneMediumPortionPlusTwoEggs;
 
   /// No description provided for @txtTwoLargePortionsPerWeekOrTwoCansPerWeekOrOneThirdPlateOfCannedFishPerWeek.
   ///
   /// In en, this message translates to:
   /// **'2 large port per wk or 2 cans/wk or 1/3 pl of canned fish per wk'**
   String
-  get txtTwoLargePortionsPerWeekOrTwoCansPerWeekOrOneThirdPlateOfCannedFishPerWeek;
+      get txtTwoLargePortionsPerWeekOrTwoCansPerWeekOrOneThirdPlateOfCannedFishPerWeek;
 
   /// No description provided for @txtOneMediumPortionPerWeekOrOneCanPerWeekOrQuarterPlatePerWeek.
   ///
@@ -1865,28 +1865,28 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'LT 1 med portion per wk or 1 can/wk or 1/4 pl per wk'**
   String
-  get txtLessThanOneMediumPortionPerWeekOrLessThanOneCanPerWeekOrLessThanQuarterPlatePerWeek;
+      get txtLessThanOneMediumPortionPerWeekOrLessThanOneCanPerWeekOrLessThanQuarterPlatePerWeek;
 
   /// No description provided for @txtTenWalnutHalvesPerDayOrTwentyAlmondsPerDayOrTwoTableSpoonsPerDayOfSeedsOrPeanuts.
   ///
   /// In en, this message translates to:
   /// **'10 walnut halves per day or 20 almonds per day or 2 tbsp per day of seeds or peanuts'**
   String
-  get txtTenWalnutHalvesPerDayOrTwentyAlmondsPerDayOrTwoTableSpoonsPerDayOfSeedsOrPeanuts;
+      get txtTenWalnutHalvesPerDayOrTwentyAlmondsPerDayOrTwoTableSpoonsPerDayOfSeedsOrPeanuts;
 
   /// No description provided for @txtFiveWalnutHalvesPerDayOrTenAlmondsPerDayOrOneTableSpoonPerDayOfSeedsOrPeanuts.
   ///
   /// In en, this message translates to:
   /// **'5 walnut halves per day or 10 almonds per day or 1 tbsp per day of seeds or peanuts'**
   String
-  get txtFiveWalnutHalvesPerDayOrTenAlmondsPerDayOrOneTableSpoonPerDayOfSeedsOrPeanuts;
+      get txtFiveWalnutHalvesPerDayOrTenAlmondsPerDayOrOneTableSpoonPerDayOfSeedsOrPeanuts;
 
   /// No description provided for @txtLessThanFiveWalnutHalvesPerDayOrLessThanTenAlmondsPerDayOrLessThanOneTableSpoonPerDayOfSeedsOrPeanuts.
   ///
   /// In en, this message translates to:
   /// **'LT 5 walnut halves per day or 10 almonds per day or 1 tbsp per day of seeds or peanuts'**
   String
-  get txtLessThanFiveWalnutHalvesPerDayOrLessThanTenAlmondsPerDayOrLessThanOneTableSpoonPerDayOfSeedsOrPeanuts;
+      get txtLessThanFiveWalnutHalvesPerDayOrLessThanTenAlmondsPerDayOrLessThanOneTableSpoonPerDayOfSeedsOrPeanuts;
 
   /// No description provided for @txtThreeTableSpoonsPerDay.
   ///
@@ -2588,9 +2588,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   }
 
   throw FlutterError(
-    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-    'an issue with the localizations generation tool. Please file an issue '
-    'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.',
-  );
+      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+      'an issue with the localizations generation tool. Please file an issue '
+      'on GitHub with a reproducible sample app and the gen-l10n configuration '
+      'that was used.');
 }

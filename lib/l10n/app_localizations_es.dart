@@ -297,23 +297,21 @@ class AppLocalizationsEs extends AppLocalizations {
       '1 unid pqña por día o 1/2 pl por día o 3 unids med por sem';
 
   @override
-  String
-  get txtMoreThanOneSmallUnitDailyOrMoreThanHalfPlateDailyOrMoreThanThreeMediumUnitsPerWeek =>
+  String get txtMoreThanOneSmallUnitDailyOrMoreThanHalfPlateDailyOrMoreThanThreeMediumUnitsPerWeek =>
       'MÁS DE 1 unid pqña por día o MÁS DE 1/2 pl por día o MÁS DE 3 unids med por sem';
 
   @override
   String
-  get txtThreeMediumUnitsPerWeekOrOneThirdRawPlateDailyOrOneFourthCookedPlateDaily =>
-      '3 unids med por sem o 1/3 pl crudo por día o 1/4 pl cocido por día';
+      get txtThreeMediumUnitsPerWeekOrOneThirdRawPlateDailyOrOneFourthCookedPlateDaily =>
+          '3 unids med por sem o 1/3 pl crudo por día o 1/4 pl cocido por día';
 
   @override
   String
-  get txtOneMediumUnitPerWeekOrOneFourthRawPlateDailyOrOneFourthCookedPlateFourTimesPerWeek =>
-      '1 unid med por sem o 1/4 pl crudo por día o 1/4 pl cocido 4 veces/sem';
+      get txtOneMediumUnitPerWeekOrOneFourthRawPlateDailyOrOneFourthCookedPlateFourTimesPerWeek =>
+          '1 unid med por sem o 1/4 pl crudo por día o 1/4 pl cocido 4 veces/sem';
 
   @override
-  String
-  get txtLessThanOneMediumUnitPerWeekOrLessThanOneFourthRawPlateDailyOrLessThanOneFourthCookedPlateFourTimesPerWeek =>
+  String get txtLessThanOneMediumUnitPerWeekOrLessThanOneFourthRawPlateDailyOrLessThanOneFourthCookedPlateFourTimesPerWeek =>
       'MENOS DE 1 unid med por sem o MENOS DE 1/4 pl crudo por día o MENOS DE 1/4 pl cocido 4 veces/sem';
 
   @override
@@ -335,8 +333,7 @@ class AppLocalizationsEs extends AppLocalizations {
       '2 rebanadas de pan de sándwich o 2 mignons pqños o 6 galletas de agua';
 
   @override
-  String
-  get txtMoreThanTwoSlicesOfSandBreadOrMoreThanTwoSmallMignonsOrMoreThanSixWaterCrackers =>
+  String get txtMoreThanTwoSlicesOfSandBreadOrMoreThanTwoSmallMignonsOrMoreThanSixWaterCrackers =>
       'MÁS DE 2 rebanadas de pan de sándwich o MÁS DE 2 mignons pqños o MÁS DE 6 galletas de agua';
 
   @override
@@ -372,8 +369,7 @@ class AppLocalizationsEs extends AppLocalizations {
       'MENOS DE 1/2 taza tipo desayuno por día o MENOS DE 1 taza tipo té por día';
 
   @override
-  String
-  get txtOneServingTheSizeOfSmallMatchboxOrSizeOfHalfSUBECardOrTwoTableSpoons =>
+  String get txtOneServingTheSizeOfSmallMatchboxOrSizeOfHalfSUBECardOrTwoTableSpoons =>
       '1 porción del tamaño de una caja de fósforos pqña o el tamaño de 1/2 tarjeta SUBE o 2 cdas soperas';
 
   @override
@@ -381,23 +377,20 @@ class AppLocalizationsEs extends AppLocalizations {
       '1/2 porción del tamaño de una caja de fósforos pqña o 1 dado o 1 cda sopera';
 
   @override
-  String
-  get txtLessThanHalfServingTheSizeOfSmallMatchboxOrLessThanOneDieOrLessThanOneTableSpoon =>
+  String get txtLessThanHalfServingTheSizeOfSmallMatchboxOrLessThanOneDieOrLessThanOneTableSpoon =>
       'MENOS DE 1/2 porción del tamaño de una caja de fósforos pqña o MENOS DE 1 dado o MENOS DE 1 cda sopera';
 
   @override
   String
-  get txtHalfMediumSteakPerDayOrOneAndHalfEggsDailyOrOneMediumMincedMeat =>
-      '1/2 bife med por día o 1 y 1/2 huevos por día o 1 carne picada med';
+      get txtHalfMediumSteakPerDayOrOneAndHalfEggsDailyOrOneMediumMincedMeat =>
+          '1/2 bife med por día o 1 y 1/2 huevos por día o 1 carne picada med';
 
   @override
-  String
-  get txtOneMediumSteakDailyOrUpToTwoEggUnitsDailyOrOneServingTheSizeOfSliceOfVealPlusOneEggDaily =>
+  String get txtOneMediumSteakDailyOrUpToTwoEggUnitsDailyOrOneServingTheSizeOfSliceOfVealPlusOneEggDaily =>
       '1 bife med por día o hasta 2 unids de huevo por día o 1 porción del tamaño de una rodaja de ternera + 1 huevo por día';
 
   @override
-  String
-  get txtMoreThanOneMediumSteakDailyOrMoreThanTwoEggUnitsDailyOrMoreThanOneServingTheSizeOfSliceOfVealPlusOneEggDaily =>
+  String get txtMoreThanOneMediumSteakDailyOrMoreThanTwoEggUnitsDailyOrMoreThanOneServingTheSizeOfSliceOfVealPlusOneEggDaily =>
       'MÁS DE 1 bife med por día o MÁS DE 2 unids de huevo por día o MÁS DE 1 porción del tamaño de una rodaja de ternera + 1 huevo por día';
 
   @override
@@ -413,18 +406,15 @@ class AppLocalizationsEs extends AppLocalizations {
       'MENOS DE 1 porción pqña por sem o MENOS DE 1/2 lata por sem';
 
   @override
-  String
-  get txtFourWalnutHalvesOrEightAlmondsOrOneTableSpoonOfSeedsOrPeanutsDaily =>
+  String get txtFourWalnutHalvesOrEightAlmondsOrOneTableSpoonOfSeedsOrPeanutsDaily =>
       '4 mitades de nuez o 8 almendras o 1 cda sopera de semillas o cacahuetes por día';
 
   @override
-  String
-  get txtTwoWalnutHalvesOrFourAlmondsOrOneTeaspoonOfSeedsOrPeanutsDaily =>
+  String get txtTwoWalnutHalvesOrFourAlmondsOrOneTeaspoonOfSeedsOrPeanutsDaily =>
       '2 mitades de nuez o 4 almendras o 1 cdta de semillas o cacahuetes por día';
 
   @override
-  String
-  get txtLessThanTwoWalnutHalvesOrLessThanFourAlmondsOrLessThanOneTeaspoonOfSeedsOrPeanutsDaily =>
+  String get txtLessThanTwoWalnutHalvesOrLessThanFourAlmondsOrLessThanOneTeaspoonOfSeedsOrPeanutsDaily =>
       'MENOS DE 2 mitades de nuez o MENOS DE 4 almendras o MENOS DE 1 cdta de semillas o cacahuetes por día';
 
   @override
@@ -477,8 +467,8 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String
-  get txtFourMediumUnitsPerWeekOrHalfRawPlateDailyOrQuarterCookedPlateDaily =>
-      '4 unids med por sem o 1/2 pl crudo por día o 1/4 pl cocido por día';
+      get txtFourMediumUnitsPerWeekOrHalfRawPlateDailyOrQuarterCookedPlateDaily =>
+          '4 unids med por sem o 1/2 pl crudo por día o 1/4 pl cocido por día';
 
   @override
   String get txtTwoMediumUnitsPerWeekOrQuarterPlateDaily =>
@@ -504,12 +494,11 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String
-  get txtThreeSlicesOfBreadPerDayOrThreeSmallMignonsOrNineWaterBiscuits =>
-      '3 rebanadas de pan por día o 3 mignons pqños o 9 galletas de agua';
+      get txtThreeSlicesOfBreadPerDayOrThreeSmallMignonsOrNineWaterBiscuits =>
+          '3 rebanadas de pan por día o 3 mignons pqños o 9 galletas de agua';
 
   @override
-  String
-  get txtMoreThanThreeSlicesOfBreadPerDayOrMoreThanThreeSmallMignonsOrMoreThanNineWaterBiscuits =>
+  String get txtMoreThanThreeSlicesOfBreadPerDayOrMoreThanThreeSmallMignonsOrMoreThanNineWaterBiscuits =>
       'MÁS DE 3 rebanadas de pan por día o MÁS DE 3 mignons pqños o MÁS DE 9 galletas de agua';
 
   @override
@@ -538,8 +527,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get txtLessThanOneTeacupDaily => 'MENOS DE 1 taza de té por día';
 
   @override
-  String
-  get txtOnePortionTheSizeOfSmallMatchboxOrHalfTheSizeOfSUBECardOrTwoTableSpoonsDaily =>
+  String get txtOnePortionTheSizeOfSmallMatchboxOrHalfTheSizeOfSUBECardOrTwoTableSpoonsDaily =>
       '1 porción del tamaño de una caja de fósforos pqña o la mitad del tamaño de una tarjeta SUBE o 2 cdas soperas por día';
 
   @override
@@ -547,23 +535,19 @@ class AppLocalizationsEs extends AppLocalizations {
       '1 porción, del tamaño de un dado o 1 cda sopera por día';
 
   @override
-  String
-  get txtLessThanOnePortionTheSizeOfSmallMatchboxOrLessThanOneDieOrLessThanOneTableSpoon =>
+  String get txtLessThanOnePortionTheSizeOfSmallMatchboxOrLessThanOneDieOrLessThanOneTableSpoon =>
       'MENOS DE 1 porción del tamaño de una caja de fósforos pqña o MENOS DE 1 dado o MENOS DE 1 cda sopera';
 
   @override
-  String
-  get txtOneSmallPortionWithoutWasteDailyOrUpToTwoEggUnitsDailyOrOnePortionTheSizeOfSliceOfVealPlusOneEggDaily =>
+  String get txtOneSmallPortionWithoutWasteDailyOrUpToTwoEggUnitsDailyOrOnePortionTheSizeOfSliceOfVealPlusOneEggDaily =>
       '1 porción pqña sin desperdicio por día o hasta 2 unids de huevo por día o 1 porción del tamaño de una rodaja de ternera + 1 huevo por día';
 
   @override
-  String
-  get txtTwoSmallPortionsWithoutWasteDailyOrUpToFourEggUnitsDailyOrOneSmallPortionPlusTwoEggUnits =>
+  String get txtTwoSmallPortionsWithoutWasteDailyOrUpToFourEggUnitsDailyOrOneSmallPortionPlusTwoEggUnits =>
       '2 porciones pqñas sin desperdicio por día o hasta 4 unids de huevo por día o 1 porción pqña + 2 unids de huevo';
 
   @override
-  String
-  get txtMoreThanTwoSmallPortionsWithoutWasteDailyOrMoreThanFourEggUnitsDailyOrMoreThanOneSmallPortionPlusTwoEggUnits =>
+  String get txtMoreThanTwoSmallPortionsWithoutWasteDailyOrMoreThanFourEggUnitsDailyOrMoreThanOneSmallPortionPlusTwoEggUnits =>
       'MÁS DE 2 porciones pqñas sin desperdicio por día o MÁS DE 4 unids de huevo por día o MÁS DE 1 porción pqña + 2 unids de huevo';
 
   @override
@@ -579,18 +563,15 @@ class AppLocalizationsEs extends AppLocalizations {
       'MENOS DE 1 porción med o 1 lata por sem';
 
   @override
-  String
-  get txtEightWalnutHalvesOrFifteenAlmondsOrTwoDessertTableSpoonsOfSeedsOrPeanutsPerDay =>
+  String get txtEightWalnutHalvesOrFifteenAlmondsOrTwoDessertTableSpoonsOfSeedsOrPeanutsPerDay =>
       '8 mitades de nuez o 15 almendras o 2 cdas de postre de semillas o cacahuetes por día';
 
   @override
-  String
-  get txtFourWalnutHalvesOrEightAlmondsOrOneTableSpoonDailyOfSeedsOrPeanuts =>
+  String get txtFourWalnutHalvesOrEightAlmondsOrOneTableSpoonDailyOfSeedsOrPeanuts =>
       '4 mitades de nuez o 8 almendras o 1 cda sopera por día de semillas o cacahuetes';
 
   @override
-  String
-  get txtLessThanFourWalnutHalvesOrLessThanEightAlmondsOrLessThanOneTableSpoonDailyOfSeedsOrPeanuts =>
+  String get txtLessThanFourWalnutHalvesOrLessThanEightAlmondsOrLessThanOneTableSpoonDailyOfSeedsOrPeanuts =>
       'MENOS DE 4 mitades de nuez o MENOS DE 8 almendras o MENOS DE 1 cda sopera por día de semillas o cacahuetes';
 
   @override
@@ -645,18 +626,15 @@ class AppLocalizationsEs extends AppLocalizations {
       'MÁS DE 3/4 plato por día o unid pqña todos los días';
 
   @override
-  String
-  get txtFiveMediumUnitsPerWeekOrHalfRawDishDailyOrQuarterCookedDishDaily =>
+  String get txtFiveMediumUnitsPerWeekOrHalfRawDishDailyOrQuarterCookedDishDaily =>
       '5 unids med por sem o 1/2 plato crudo por día o 1/4 plato cocido por día';
 
   @override
-  String
-  get txtTwoAndHalfMediumUnitsPerWeekOrOneThirdRawDishDailyOrQuarterCookedDish =>
+  String get txtTwoAndHalfMediumUnitsPerWeekOrOneThirdRawDishDailyOrQuarterCookedDish =>
       '2 y 1/2 unids med por sem o 1/3 plato crudo por día o 1/4 plato cocido';
 
   @override
-  String
-  get txtLessThanTwoAndHalfMediumUnitsPerWeekOrLessThanOneThirdRawDishDailyOrLessThanQuarterCookedDish =>
+  String get txtLessThanTwoAndHalfMediumUnitsPerWeekOrLessThanOneThirdRawDishDailyOrLessThanQuarterCookedDish =>
       'MENOS DE 2 y 1/2 unids med por sem o 1/3 plato crudo por día o 1/4 plato cocido';
 
   @override
@@ -681,8 +659,8 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String
-  get txtMoreThanThreeQuartersDishPerDayOrMoreThanThreeServingsOfDoughPerDay =>
-      'MÁS DE 3/4 plato por día o MÁS DE 3 porciones de masa por día';
+      get txtMoreThanThreeQuartersDishPerDayOrMoreThanThreeServingsOfDoughPerDay =>
+          'MÁS DE 3/4 plato por día o MÁS DE 3 porciones de masa por día';
 
   @override
   String get txtTwoBreakfastCupSizeDaily => '2 tazas tamaño desayuno por día';
@@ -695,28 +673,23 @@ class AppLocalizationsEs extends AppLocalizations {
       'MENOS DE 1 taza tamaño desayuno por día';
 
   @override
-  String
-  get txtOnePortionTheSizeOfSmallMatchboxOrHalfSUBECardOrTwoTableSpoonsDaily =>
+  String get txtOnePortionTheSizeOfSmallMatchboxOrHalfSUBECardOrTwoTableSpoonsDaily =>
       '1 porción, del tamaño de una caja de fósforos pqña o 1/2 tarjeta SUBE o 2 cdas soperas por día';
 
   @override
-  String
-  get txtOneSmallPortionWithoutWasteDailyOrUpToTwoEggUnitsOrHalfSmallPortionPlusOneEgg =>
+  String get txtOneSmallPortionWithoutWasteDailyOrUpToTwoEggUnitsOrHalfSmallPortionPlusOneEgg =>
       '1 porción pqña sin desperdicio por día o hasta 2 unids de huevo o 1/2 porción pqña + 1 huevo';
 
   @override
-  String
-  get txtTenWalnutHalvesOrTwentyAlmondsOrTwoDessertTableSpoonsOfSeedsOrPeanutsPerDay =>
+  String get txtTenWalnutHalvesOrTwentyAlmondsOrTwoDessertTableSpoonsOfSeedsOrPeanutsPerDay =>
       '10 mitades de nuez o 20 almendras o 2 cdas de postre por día de semillas o cacahuetes';
 
   @override
-  String
-  get txtFiveWalnutHalvesOrTenAlmondsOrOneTableSpoonDailyOfSeedsOrPeanuts =>
+  String get txtFiveWalnutHalvesOrTenAlmondsOrOneTableSpoonDailyOfSeedsOrPeanuts =>
       '5 mitades de nuez o 10 almendras o 1 cda sopera por día de semillas o cacahuetes';
 
   @override
-  String
-  get txtLessThanFiveWalnutHalvesOrLessThanTenAlmondsOrLessThanOneTableSpoonDailyOfSeedsOrPeanuts =>
+  String get txtLessThanFiveWalnutHalvesOrLessThanTenAlmondsOrLessThanOneTableSpoonDailyOfSeedsOrPeanuts =>
       'MENOS DE 5 mitades de nuez o MENOS DE 10 almendras o MENOS DE 1 cda sopera por día de semillas o cacahuetes';
 
   @override
@@ -738,21 +711,20 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String
-  get txtLessThanOneAndHalfPlatesPerWeekOrLessThanOneSmallUnitEveryOtherDay =>
-      'MENOS DE 1 y 1/2 pls por sem o MENOS DE 1 unid pqña día por medio';
+      get txtLessThanOneAndHalfPlatesPerWeekOrLessThanOneSmallUnitEveryOtherDay =>
+          'MENOS DE 1 y 1/2 pls por sem o MENOS DE 1 unid pqña día por medio';
 
   @override
   String
-  get txtHalfSmallUnitPerDayOrQuarterPlatePerDayOrThreeSmallUnitsPerWeek =>
-      '1/2 unid pqña por día o 1/4 pl por día o 3 unids pqñas por sem';
+      get txtHalfSmallUnitPerDayOrQuarterPlatePerDayOrThreeSmallUnitsPerWeek =>
+          '1/2 unid pqña por día o 1/4 pl por día o 3 unids pqñas por sem';
 
   @override
   String get txtOneSmallUnitPerDayOrHalfPlatePerDayOrThreeMediumUnitsPerWeek =>
       '1 unid pqña por día o 1/2 pl por día o 3 unids med por sem';
 
   @override
-  String
-  get txtMoreThanOneSmallUnitPerDayOrMoreThanHalfPlatePerDayOrMoreThanThreeMediumUnitsPerWeek =>
+  String get txtMoreThanOneSmallUnitPerDayOrMoreThanHalfPlatePerDayOrMoreThanThreeMediumUnitsPerWeek =>
       'MÁS DE 1 unid pqña por día o MÁS DE 1/2 pl por día o MÁS DE 3 unids med por sem';
 
   @override
@@ -761,12 +733,11 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String
-  get txtOneMediumUnitPerWeekOrQuarterRawPlatePerDayOrQuarterPlateFourTimesPerWeek =>
-      '1 unid med por sem o 1/4 pl crudo por día o 1/4 pl 4 veces/sem';
+      get txtOneMediumUnitPerWeekOrQuarterRawPlatePerDayOrQuarterPlateFourTimesPerWeek =>
+          '1 unid med por sem o 1/4 pl crudo por día o 1/4 pl 4 veces/sem';
 
   @override
-  String
-  get txtLessThanOneMediumUnitPerWeekOrQuarterRawPlatePerDayOrQuarterPlateFourTimesPerWeek =>
+  String get txtLessThanOneMediumUnitPerWeekOrQuarterRawPlatePerDayOrQuarterPlateFourTimesPerWeek =>
       'MENOS DE 1 unid med por sem o 1/4 pl crudo por día o 1/4 pl 4 veces/sem';
 
   @override
@@ -809,8 +780,7 @@ class AppLocalizationsEs extends AppLocalizations {
       'MENOS DE 1/2 taza para desayuno o MENOS DE 1 taza de té';
 
   @override
-  String
-  get txtOnePortionTheSizeOfSmallMatchboxOrHalfSUBECardOrTwoTableSpoons =>
+  String get txtOnePortionTheSizeOfSmallMatchboxOrHalfSUBECardOrTwoTableSpoons =>
       '1 porción del tamaño de una caja de fósforos pqña o 1/2 tarjeta SUBE o 2 cdas soperas';
 
   @override
@@ -821,18 +791,15 @@ class AppLocalizationsEs extends AppLocalizations {
       'MENOS DE 1 porción del tamaño de un dado';
 
   @override
-  String
-  get txtOneSmallPortionWithoutWasteFiveTimesPerWeekOrHalfSmallPortionPlusOneEggDaily =>
+  String get txtOneSmallPortionWithoutWasteFiveTimesPerWeekOrHalfSmallPortionPlusOneEggDaily =>
       '1 porción pqña sin desperdicio 5 veces/sem o 1/2 porción pqña + 1 huevo por día';
 
   @override
-  String
-  get txtOneMediumPortionWithoutWasteDailyOrOneSmallPortionPlusOneEggDaily =>
+  String get txtOneMediumPortionWithoutWasteDailyOrOneSmallPortionPlusOneEggDaily =>
       '1 porción med sin desperdicio por día o 1 porción pqña + 1 huevo por día';
 
   @override
-  String
-  get txtMoreThanOneMediumPortionWithoutWasteDailyOrMoreThanOneSmallPortionPlusOneEggDaily =>
+  String get txtMoreThanOneMediumPortionWithoutWasteDailyOrMoreThanOneSmallPortionPlusOneEggDaily =>
       'MÁS DE 1 porción med sin desperdicio por día o MÁS DE 1 porción pqña + 1 huevo por día';
 
   @override
@@ -848,18 +815,15 @@ class AppLocalizationsEs extends AppLocalizations {
       'MENOS DE 1 porción pqña por sem o 1 lata/sem';
 
   @override
-  String
-  get txtSixWalnutHalvesOrTenAlmondsOrOneTableSpoonDailyOfSeedsOrPeanuts =>
+  String get txtSixWalnutHalvesOrTenAlmondsOrOneTableSpoonDailyOfSeedsOrPeanuts =>
       '6 mitades de nuez o 10 almendras o 1 cda sopera por día de semillas o cacahuetes';
 
   @override
-  String
-  get txtThreeWalnutHalvesOrFiveAlmondsOrHalfTableSpoonDailyOfSeedsOrPeanuts =>
+  String get txtThreeWalnutHalvesOrFiveAlmondsOrHalfTableSpoonDailyOfSeedsOrPeanuts =>
       '3 mitades de nuez o 5 almendras o 1/2 cda sopera por día de semillas o cacahuetes';
 
   @override
-  String
-  get txtLessThanThreeWalnutHalvesOrLessThanFiveAlmondsOrLessThanHalfTableSpoonDailyOfSeedsOrPeanuts =>
+  String get txtLessThanThreeWalnutHalvesOrLessThanFiveAlmondsOrLessThanHalfTableSpoonDailyOfSeedsOrPeanuts =>
       'MENOS DE 3 mitades de nuez o MENOS DE 5 almendras o MENOS DE 1/2 cda sopera por día de semillas o cacahuetes';
 
   @override
@@ -877,67 +841,63 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String
-  get txtFiveAndHalfPlatesPerWeekOrOneMediumUnitPerDayOrThreeQuartersPlatePerDay =>
-      '5 y 1/2 pls por sem o 1 unid med por día o 3/4 pl por día';
+      get txtFiveAndHalfPlatesPerWeekOrOneMediumUnitPerDayOrThreeQuartersPlatePerDay =>
+          '5 y 1/2 pls por sem o 1 unid med por día o 3/4 pl por día';
 
   @override
   String get txtThreePlatesPerWeekOrOneSmallUnitPerDayOrOneThirdPlatePerDay =>
       '3 pls por sem o 1 unid pqña por día o 1/3 pl por día';
 
   @override
-  String
-  get txtLessThanThreePlatesPerWeekOrLessThanOneDailyUnitOrLessThanOneThirdPlatePerDay =>
+  String get txtLessThanThreePlatesPerWeekOrLessThanOneDailyUnitOrLessThanOneThirdPlatePerDay =>
       'MENOS DE 3 pls por sem o MENOS DE 1 unid diaria o MENOS DE 1/3 pl por día';
 
   @override
   String
-  get txtOneAndHalfPlatesPerWeekOrHalfPlateThreeTimesPerWeekOrOneMedallionPerDay =>
-      '1 y 1/2 pls por sem o 1/2 pl 3 veces por sem o 1 medallón por día';
+      get txtOneAndHalfPlatesPerWeekOrHalfPlateThreeTimesPerWeekOrOneMedallionPerDay =>
+          '1 y 1/2 pls por sem o 1/2 pl 3 veces por sem o 1 medallón por día';
 
   @override
   String
-  get txtOnePlatePerWeekOrHalfPlatePerWeekOrOneMedallionThreeTimesPerWeek =>
-      '1 pl por sem o 1/2 pl por sem o 1 medallón 3 veces por sem';
+      get txtOnePlatePerWeekOrHalfPlatePerWeekOrOneMedallionThreeTimesPerWeek =>
+          '1 pl por sem o 1/2 pl por sem o 1 medallón 3 veces por sem';
 
   @override
-  String
-  get txtLessThanOnePlatePerWeekOrLessThanHalfPlatePerWeekOrLessThanOneMedallionThreeTimesPerWeek =>
+  String get txtLessThanOnePlatePerWeekOrLessThanHalfPlatePerWeekOrLessThanOneMedallionThreeTimesPerWeek =>
       'MENOS DE 1 pl por sem o MENOS DE 1/2 pl por sem o MENOS DE 1 medallón 3 veces por sem';
 
   @override
   String
-  get txtOneSmallUnitPerDayOrThreeMediumUnitsPerWeekOrOneThirdPlatePerDay =>
-      '1 unid pqña por día o 3 unids med por sem o 1/3 pl por día';
+      get txtOneSmallUnitPerDayOrThreeMediumUnitsPerWeekOrOneThirdPlatePerDay =>
+          '1 unid pqña por día o 3 unids med por sem o 1/3 pl por día';
 
   @override
   String
-  get txtOneMediumUnitPerDayOrThreeLargeUnitsPerWeekOrThreeQuartersPlatePerDay =>
-      '1 unid med por día o 3 unids grandes por sem o 3/4 pl por día';
+      get txtOneMediumUnitPerDayOrThreeLargeUnitsPerWeekOrThreeQuartersPlatePerDay =>
+          '1 unid med por día o 3 unids grandes por sem o 3/4 pl por día';
 
   @override
-  String
-  get txtMoreThanOneMediumUnitPerDayOrMoreThanThreeLargeUnitsPerWeekOrMoreThanThreeQuartersPlatePerDay =>
+  String get txtMoreThanOneMediumUnitPerDayOrMoreThanThreeLargeUnitsPerWeekOrMoreThanThreeQuartersPlatePerDay =>
       'MÁS DE 1 unid med por día o MÁS DE 3 unids grandes por sem o MÁS DE 3/4 pl por día';
 
   @override
   String
-  get txtFiveMediumUnitsPerWeekOrHalfRawPlateDailyOrQuarterCookedPlateDaily =>
-      '5 unids med por sem o 1/2 pl crudo por día o 1/4 pl cocido por día';
+      get txtFiveMediumUnitsPerWeekOrHalfRawPlateDailyOrQuarterCookedPlateDaily =>
+          '5 unids med por sem o 1/2 pl crudo por día o 1/4 pl cocido por día';
 
   @override
   String
-  get txtTwoAndHalfMediumUnitsPerWeekOrOneThirdRawPlateDailyOrQuarterCookedPlate =>
-      '2 1/2 unids med por sem o 1/3 pl crudo por día o 1/4 pl cocido';
+      get txtTwoAndHalfMediumUnitsPerWeekOrOneThirdRawPlateDailyOrQuarterCookedPlate =>
+          '2 1/2 unids med por sem o 1/3 pl crudo por día o 1/4 pl cocido';
 
   @override
-  String
-  get txtLessThanTwoAndHalfMediumUnitsPerWeekOrLessThanOneThirdRawPlateDailyOrLessThanQuarterCookedPlate =>
+  String get txtLessThanTwoAndHalfMediumUnitsPerWeekOrLessThanOneThirdRawPlateDailyOrLessThanQuarterCookedPlate =>
       'MENOS DE 2 1/2 unids med por sem o MENOS DE 1/3 pl crudo por día o MENOS DE 1/4 pl cocido';
 
   @override
   String
-  get txtOneAndHalfLargeUnitPerDayOrTwoMediumUnitsPerDayOrThreeSmallUnits =>
-      '1 1/2 unid grande por día o 2 unids med por día o 3 unids pqñas';
+      get txtOneAndHalfLargeUnitPerDayOrTwoMediumUnitsPerDayOrThreeSmallUnits =>
+          '1 1/2 unid grande por día o 2 unids med por día o 3 unids pqñas';
 
   @override
   String get txtOneMediumUnitPerDayOrTwoSmallUnits =>
@@ -956,8 +916,7 @@ class AppLocalizationsEs extends AppLocalizations {
       '3 rebanadas tipo molde por día o 3 mignons pqños por día';
 
   @override
-  String
-  get txtMoreThanThreeMoldTypeSlicesPerDayOrMoreThanThreeSmallMignonsPerDay =>
+  String get txtMoreThanThreeMoldTypeSlicesPerDayOrMoreThanThreeSmallMignonsPerDay =>
       'MÁS DE 3 rebanadas tipo molde por día o MÁS DE 3 mignons pqños por día';
 
   @override
@@ -974,8 +933,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get txtLessThanOneBreakfastTypeCup => 'MENOS DE 1 taza tipo desayuno';
 
   @override
-  String
-  get txtOneSmallMatchboxSizePortionOrHalfSUBECardOrTwoTableSpoonsDaily =>
+  String get txtOneSmallMatchboxSizePortionOrHalfSUBECardOrTwoTableSpoonsDaily =>
       '1 porción tamaño caja de fósforos pqña o 1/2 tarjeta SUBE o 2 cdas soperas por día';
 
   @override
@@ -987,38 +945,33 @@ class AppLocalizationsEs extends AppLocalizations {
       'MENOS DE 1 porción tamaño dado o MENOS DE 1 cda sopera por día';
 
   @override
-  String
-  get txtOneSmallPortionWithoutWasteDailyOrUpToTwoEggUnitsDailyOrOneSliceSizePortionOfPecetoPlusOneEggDaily =>
+  String get txtOneSmallPortionWithoutWasteDailyOrUpToTwoEggUnitsDailyOrOneSliceSizePortionOfPecetoPlusOneEggDaily =>
       '1 porción pqña sin desperdicio por día o hasta 2 unids de huevo por día o 1 porción tamaño rodaja de peceto + 1 huevo por día';
 
   @override
-  String
-  get txtTwoSmallPortionsWithoutWasteDailyOrUpToFourEggUnitsDailyOrOneSmallPortionPlusTwoEggUnitsDaily =>
+  String get txtTwoSmallPortionsWithoutWasteDailyOrUpToFourEggUnitsDailyOrOneSmallPortionPlusTwoEggUnitsDaily =>
       '2 porciones pqñas sin desperdicio por día o hasta 4 unids de huevo por día o 1 porción pqña + 2 unids de huevo por día';
 
   @override
-  String
-  get txtMoreThanTwoSmallPortionsWithoutWasteDailyOrMoreThanFourEggUnitsDailyOrMoreThanOneSmallPortionPlusTwoEggUnitsDaily =>
+  String get txtMoreThanTwoSmallPortionsWithoutWasteDailyOrMoreThanFourEggUnitsDailyOrMoreThanOneSmallPortionPlusTwoEggUnitsDaily =>
       'MÁS DE 2 porciones pqñas sin desperdicio por día o MÁS DE 4 unids de huevo por día o MÁS DE 1 porción pqña + 2 unids de huevo por día';
 
   @override
-  String
-  get txtTenWalnutHalvesOrTwentyAlmondsOrTwoTableSpoonsDailyOfSeedsOrPeanuts =>
+  String get txtTenWalnutHalvesOrTwentyAlmondsOrTwoTableSpoonsDailyOfSeedsOrPeanuts =>
       '10 mitades de nuez o 20 almendras o 2 cdas soperas por día de semillas o cacahuetes';
 
   @override
   String
-  get txtHalfPlateCookedDailyOrThreeQuartersPlateRawDailyOrSixMediumUnitsPerWeek =>
-      '1/2 pl cocido por día o 3/4 pl crudo por día o 6 unids med por sem';
+      get txtHalfPlateCookedDailyOrThreeQuartersPlateRawDailyOrSixMediumUnitsPerWeek =>
+          '1/2 pl cocido por día o 3/4 pl crudo por día o 6 unids med por sem';
 
   @override
   String
-  get txtQuarterPlateCookedDailyOrHalfPlateRawDailyOrThreeMediumUnitsPerWeek =>
-      '1/4 pl cocido por día o 1/2 pl crudo por día o 3 unids med por sem';
+      get txtQuarterPlateCookedDailyOrHalfPlateRawDailyOrThreeMediumUnitsPerWeek =>
+          '1/4 pl cocido por día o 1/2 pl crudo por día o 3 unids med por sem';
 
   @override
-  String
-  get txtLessThanQuarterPlateCookedDailyOrLessThanHalfPlateRawDailyOrLessThanThreeMediumUnitsPerWeek =>
+  String get txtLessThanQuarterPlateCookedDailyOrLessThanHalfPlateRawDailyOrLessThanThreeMediumUnitsPerWeek =>
       'MENOS DE 1/4 pl cocido por día o MENOS DE 1/2 pl crudo por día o MENOS DE 3 unids med por sem';
 
   @override
@@ -1027,13 +980,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String
-  get txtLessThanOnePlatePerWeekOrLessThanHalfPlatePlusOneMedallionPerWeek =>
-      'MENOS DE 1 pl por sem o MENOS DE 1/2 pl + 1 medallón por sem';
+      get txtLessThanOnePlatePerWeekOrLessThanHalfPlatePlusOneMedallionPerWeek =>
+          'MENOS DE 1 pl por sem o MENOS DE 1/2 pl + 1 medallón por sem';
 
   @override
   String
-  get txtUpToSixSmallUnitsPerWeekOrThreeLargeUnitsPerWeekOrHalfPlateDaily =>
-      'hasta 6 unids pqñas/sem o 3 unids grandes/sem o 1/2 pl por día';
+      get txtUpToSixSmallUnitsPerWeekOrThreeLargeUnitsPerWeekOrHalfPlateDaily =>
+          'hasta 6 unids pqñas/sem o 3 unids grandes/sem o 1/2 pl por día';
 
   @override
   String get txtUpToNineUnitsPerWeekOrFiveLargeUnitsPerWeekOrOnePlateDaily =>
@@ -1041,21 +994,20 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String
-  get txtMoreThanNineUnitsPerWeekOrMoreThanFiveLargeUnitsPerWeekOrMoreThanOnePlateDaily =>
-      'MÁS DE 9 unids/sem o MÁS DE 5 unids grandes/sem o MÁS DE 1 pl por día';
+      get txtMoreThanNineUnitsPerWeekOrMoreThanFiveLargeUnitsPerWeekOrMoreThanOnePlateDaily =>
+          'MÁS DE 9 unids/sem o MÁS DE 5 unids grandes/sem o MÁS DE 1 pl por día';
 
   @override
   String
-  get txtOneMediumUnitDailyOrThreeQuartersPlateRawDailyOrHalfPlateCookedDaily =>
-      '1 unid med por día o 3/4 pl crudo por día o 1/2 pl cocido por día';
+      get txtOneMediumUnitDailyOrThreeQuartersPlateRawDailyOrHalfPlateCookedDaily =>
+          '1 unid med por día o 3/4 pl crudo por día o 1/2 pl cocido por día';
 
   @override
   String get txtOneSmallUnitDailyOrHalfPlateRawDailyOrQuarterPlateCookedDaily =>
       '1 unid pqña por día o 1/2 pl crudo por día o 1/4 pl cocido por día';
 
   @override
-  String
-  get txtLessThanOneSmallUnitDailyOrLessThanHalfPlateRawDailyOrLessThanQuarterPlateCookedDaily =>
+  String get txtLessThanOneSmallUnitDailyOrLessThanHalfPlateRawDailyOrLessThanQuarterPlateCookedDaily =>
       'MENOS DE 1 unid pqña por día o 1/2 pl crudo por día o 1/4 pl cocido por día';
 
   @override
@@ -1079,14 +1031,13 @@ class AppLocalizationsEs extends AppLocalizations {
       '6 rebanadas por día o 4 medallones pqños o 2 flautas pqñas';
 
   @override
-  String
-  get txtMoreThanSixSlicesPerDayOrMoreThanFourSmallMedallionsOrMoreThanTwoSmallFlutes =>
+  String get txtMoreThanSixSlicesPerDayOrMoreThanFourSmallMedallionsOrMoreThanTwoSmallFlutes =>
       'MÁS DE 6 rebanadas por día o MÁS DE 4 medallones pqños o MÁS DE 2 flautas pqñas';
 
   @override
   String
-  get txtHalfPlateOfWholeWheatPastaPerDayOrOneAndHalfPortionOfDoughPerDay =>
-      '1/2 pl de pasta integral por día o 1 y 1/2 porción de masa por día';
+      get txtHalfPlateOfWholeWheatPastaPerDayOrOneAndHalfPortionOfDoughPerDay =>
+          '1/2 pl de pasta integral por día o 1 y 1/2 porción de masa por día';
 
   @override
   String get txtOnePlatePerDayOrThreePortionsOfDoughPerDay =>
@@ -1114,23 +1065,19 @@ class AppLocalizationsEs extends AppLocalizations {
       'MENOS DE 1 porción del tamaño de un dado o MENOS DE 1 cda sopera';
 
   @override
-  String
-  get txtOneMediumPortionWithoutWasteDailyOrUpToThreeEggsDailyOrOneSmallPortionPlusTwoEggsDaily =>
+  String get txtOneMediumPortionWithoutWasteDailyOrUpToThreeEggsDailyOrOneSmallPortionPlusTwoEggsDaily =>
       '1 porción med sin desperdicio por día o hasta 3 huevos por día o 1 porción pqña + 2 huevos por día';
 
   @override
-  String
-  get txtTwoSmallPortionsWithoutWasteDailyOrUpToFourEggsOrOneMediumPortionPlusTwoEggs =>
+  String get txtTwoSmallPortionsWithoutWasteDailyOrUpToFourEggsOrOneMediumPortionPlusTwoEggs =>
       '2 porciones pqñas sin desperdicio por día o hasta 4 huevos o 1 porción med + 2 huevos';
 
   @override
-  String
-  get txtMoreThanTwoSmallPortionsWithoutWasteDailyOrUpToFourEggsDailyOrMoreThanOneMediumPortionPlusTwoEggs =>
+  String get txtMoreThanTwoSmallPortionsWithoutWasteDailyOrUpToFourEggsDailyOrMoreThanOneMediumPortionPlusTwoEggs =>
       'MÁS DE 2 porciones pqñas sin desperdicio por día o hasta 4 huevos por día o 1 porción med + 2 huevos';
 
   @override
-  String
-  get txtTwoLargePortionsPerWeekOrTwoCansPerWeekOrOneThirdPlateOfCannedFishPerWeek =>
+  String get txtTwoLargePortionsPerWeekOrTwoCansPerWeekOrOneThirdPlateOfCannedFishPerWeek =>
       '2 porciones grandes por sem o 2 latas/sem o 1/3 pl de pescado enlatado por sem';
 
   @override
@@ -1139,22 +1086,19 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String
-  get txtLessThanOneMediumPortionPerWeekOrLessThanOneCanPerWeekOrLessThanQuarterPlatePerWeek =>
-      'MENOS DE 1 porción med por sem o 1 lata/sem o 1/4 pl por sem';
+      get txtLessThanOneMediumPortionPerWeekOrLessThanOneCanPerWeekOrLessThanQuarterPlatePerWeek =>
+          'MENOS DE 1 porción med por sem o 1 lata/sem o 1/4 pl por sem';
 
   @override
-  String
-  get txtTenWalnutHalvesPerDayOrTwentyAlmondsPerDayOrTwoTableSpoonsPerDayOfSeedsOrPeanuts =>
+  String get txtTenWalnutHalvesPerDayOrTwentyAlmondsPerDayOrTwoTableSpoonsPerDayOfSeedsOrPeanuts =>
       '10 mitades de nuez por día o 20 almendras por día o 2 cdas soperas por día de semillas o cacahuetes';
 
   @override
-  String
-  get txtFiveWalnutHalvesPerDayOrTenAlmondsPerDayOrOneTableSpoonPerDayOfSeedsOrPeanuts =>
+  String get txtFiveWalnutHalvesPerDayOrTenAlmondsPerDayOrOneTableSpoonPerDayOfSeedsOrPeanuts =>
       '5 mitades de nuez por día o 10 almendras por día o 1 cda sopera por día de semillas o cacahuetes';
 
   @override
-  String
-  get txtLessThanFiveWalnutHalvesPerDayOrLessThanTenAlmondsPerDayOrLessThanOneTableSpoonPerDayOfSeedsOrPeanuts =>
+  String get txtLessThanFiveWalnutHalvesPerDayOrLessThanTenAlmondsPerDayOrLessThanOneTableSpoonPerDayOfSeedsOrPeanuts =>
       'MENOS DE 5 mitades de nuez por día o MENOS DE 10 almendras por día o MENOS DE 1 cda sopera por día de semillas o cacahuetes';
 
   @override
