@@ -81,7 +81,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class MyHomePageState extends State<MyHomePage> {
-  late BuildContext bc;
+  // Removed late BuildContext bc to avoid using BuildContext across async gaps
   bool tcAccepted = false;
 
   @override
@@ -91,16 +91,21 @@ class MyHomePageState extends State<MyHomePage> {
 
     if (flagShowTandC != false) {
       // Register a callback to execute after the widget is built
-      WidgetsBinding.instance.addPostFrameCallback(
-          (_) => showTandC(bc, () => prefs!.setBool('showTandC', false)));
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        // Add mounted check to ensure the widget is still in the tree
+        if (mounted) {
+          showTandC(context, () => prefs!.setBool('showTandC', false));
+        }
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    bc = context;
-
+    // Removed bc = context assignment
+    const Key mainScaffoldKey = ValueKey('mainScaffold');
     return Scaffold(
+      key: mainScaffoldKey,
       appBar: AppBar(
         title: const Text(
           'PRECARINA',

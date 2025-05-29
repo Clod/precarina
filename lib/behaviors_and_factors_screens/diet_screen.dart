@@ -11,6 +11,9 @@ import '../aux_widgets/vertical_space.dart';
 import '../help_pages/help_drawer.dart';
 import '../model/datos_alimentacion.dart';
 
+// Key for DietScreen Scaffold, used in integration tests
+const Key dietScreenScaffoldKey = Key('dietScreenScaffold');
+
 class DietScreen extends StatefulWidget {
   const DietScreen({super.key});
 
@@ -24,82 +27,60 @@ class _DietScreenState extends State<DietScreen> {
   int? _indexSex = 0;
   int? _indexAgeRange = 0;
 
-  final List<DietItem> _dietItemsList = [];
-
   // Accept button will not be anabled until an option is picked for EACH item.
   bool _enableAcceptButton = false;
 
-  // _foodIndex keeps the choice (0, 1 or 2) for each item of the list of options
-  // This dirty trick is used to be able to pass ints by reference to the callback
-  // Items is the list of kinds of foods
-  final List<List<int?>> _foodIndex = List.generate(Items.values.length, (_) => [null]);
+  // _foodSelections keeps the choice (0, 1, or 2) for each diet item.
+  // Initialize with nulls, indicating no selection yet.
+  late List<int?> _foodSelections;
 
   final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
+    _foodSelections = List.generate(Items.values.length, (_) => null);
     _enableAcceptButton = false;
   }
 
-  // Called each time the user makes a choice
-  void foodCallback(List<int?> index, int? selection) {
-    debugPrint("Index: $index, Selection: $selection");
+  // Called each time the user makes a choice for a specific diet item.
+  // itemIndex is the index of the DietItem in the list.
+  // selection is the value chosen in the CupertinoSegmentedControl (0, 1, or 2).
+  void foodCallback(int itemIndex, int? selection) {
+    debugPrint("Item Index: $itemIndex, Selection: $selection");
     setState(() {
-      index[0] = selection;
+      _foodSelections[itemIndex] = selection;
+      // Enable the Accept button only if all items have a selection.
+      _enableAcceptButton =
+          _foodSelections.every((selectedItem) => selectedItem != null);
     });
-    debugPrint("index: $index, selection: $selection");
-
-    // If all Items are not null, it means that every option has an answer
-    // so I can enable the Accept button.
-    _enableAcceptButton = true;
-    for (int i = 0; i < Items.values.length; i++) {
-      if (_foodIndex[i][0] == null) {
-        _enableAcceptButton = false;
-      }
-    }
   }
 
-  // The list of presented options depends on both the sex and the age of the patient.
-  // Each DietItem() consist of a title y three options presented below it.
-  List<DietItem> _dietItems() {
-    for (var i = 0; i < Items.values.length; i++) {
-      _dietItemsList.add(
-        DietItem(
-          callback: foodCallback,   // called each time the user makes a choice
-          index: _foodIndex[i],     // indicates
-          title: titulo[i],
-          opciones: opciones[_indexSex!][_indexAgeRange!][i],
-        ),
-      );
-    }
-    return _dietItemsList;
+  int _getActualScoreValue(int selectedOptionValue) {
+    // Esta porquería es porque muestro el item que vale 2 a la izquierda
+    // y el que vale 0 a la derecha.
+    if (selectedOptionValue == 0) return 2;
+    if (selectedOptionValue == 2) return 0;
+    return selectedOptionValue; // Assuming 1 maps to 1 (or other direct mapping)
   }
 
-  int? _calculateScore(List<List<int?>> selections) {
+  int? _calculateScore(List<int?> selections) {
     int score = 0;
 
     // Recorro la lista. Si están todos los datos devuelvo el score y, si no, Ingresar datos
-    //
     for (int i = 0; i < Items.values.length; i++) {
-      if (selections[i][0] != null) {
-        // Esta porquería es porque muestro el item que vale 2 a la izquierda
-        // y el que vale 0 a la derecha.
-        int valorASumar = selections[i][0]!;
-        if (valorASumar == 0) {
-          valorASumar = 2;
-        } else if (valorASumar == 2) {
-          valorASumar = 0;
-        }
-        score += valorASumar;
+      if (selections[i] != null) {
+        score += _getActualScoreValue(selections[i]!);
       } else {
+        // This case should ideally not be reached if _enableAcceptButton logic is correct,
+        // as _calculateScore is called when the button is enabled.
         return null;
       }
     }
     score = (score * 3.3333333).round();
 
-    debugPrint("Habilito el botón de aceptar");
-    _enableAcceptButton = true;
+    // _enableAcceptButton should already be true if this method is called.
+    // No need to set it again here.
 
     debugPrint("Valor de dieta calculado: $score");
 
@@ -108,16 +89,16 @@ class _DietScreenState extends State<DietScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // debugPrint("Data: ${_precaModel.toString()}");
-    // debugPrint(_foodIndex.toString());
+    List<String> localizedTitulos = getTitulos(context);
+    List<List<List<List<String>>>> localizedOpciones = getOpciones(context);
 
     _precaModel = Provider.of<PrecarinaModel>(context, listen: false);
 
-    _dietItemsList.clear();
-
     // Select choices according to sex...
     if (_precaModel!.patientSex != null) {
-      _precaModel!.patientSex == PatientSex.male ? _indexSex = 0 : _indexSex = 1;
+      _precaModel!.patientSex == PatientSex.male
+          ? _indexSex = 0
+          : _indexSex = 1;
     }
 
     // ...and age range
@@ -130,6 +111,7 @@ class _DietScreenState extends State<DietScreen> {
     }
 
     return Scaffold(
+      key: dietScreenScaffoldKey, // Added key for testing
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.txtDietButton),
         leading: IconButton(
@@ -150,35 +132,56 @@ class _DietScreenState extends State<DietScreen> {
               child: Container(
                 color: Colors.yellow[50],
                 child: ListView(
+                  key: const Key('diet_screen_list_view'), // Add a key for better testability
                   controller: _scrollController,
                   children: [
-                    ..._dietItems(),
+                    // Generate DietItem widgets directly
+                    ...List.generate(Items.values.length, (i) {
+                      // CRITICAL: Add a unique key to each DietItem for testability.
+                      return DietItem(
+                        key: ValueKey('diet_item_$i'), // Key for integration testing
+                        itemIndex: i, // Pass the actual index of the item
+                        groupValue: _foodSelections[i], // The current selection for this item
+                        title: localizedTitulos[i],
+                        opciones: localizedOpciones[_indexSex!][_indexAgeRange!][i],
+                        onChanged: foodCallback, // Callback function
+                      );
+                    }),
+                    // ..._dietItemsList, // Old way
+
                     const VerticalSpace(height: 15.0),
                     Row(
+                  key: const Key('diet_screen_button_row'), // ADD THIS KEY
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // Cancel button
                         ElevatedButton(
-                          child: Text(AppLocalizations.of(context)!.txtButtonCancel),
+                          child: Text(
+                              AppLocalizations.of(context)!.txtButtonCancel),
                           onPressed: () => Navigator.maybePop(context),
                         ),
                         const HorizontalSpace(width: 15.0),
                         // Accept button
                         ElevatedButton(
+                          key: const Key('diet_accept_button'),
                           onPressed: !_enableAcceptButton
                               ? null
                               : () {
-                                  _precaModel!.dietValue = _calculateScore(_foodIndex);
-                                  debugPrint("Diet Value en Screen: ${_precaModel!.dietValue}");
+                                  _precaModel!.dietValue =
+                                      _calculateScore(_foodSelections);
+                                  debugPrint(
+                                      "Diet Value en Screen: ${_precaModel!.dietValue}");
                                   _precaModel!.calculateAverage();
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
-                                      content: Text("Score: ${_precaModel!.dietValue}"),
+                                      content: Text(
+                                          "Score: ${_precaModel!.dietValue}"),
                                       duration: const Duration(days: 1),
                                       action: SnackBarAction(
                                         label: 'OK',
                                         onPressed: () {
-                                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                                          ScaffoldMessenger.of(context)
+                                              .hideCurrentSnackBar();
                                           Navigator.of(context).pop();
                                           // setState(() {
                                           //   diagnose = results[0];
@@ -189,7 +192,8 @@ class _DietScreenState extends State<DietScreen> {
                                     ),
                                   );
                                 },
-                          child: Text(AppLocalizations.of(context)!.txtButtonAccept),
+                          child: Text(
+                              AppLocalizations.of(context)!.txtButtonAccept),
                         ),
                       ],
                     ),

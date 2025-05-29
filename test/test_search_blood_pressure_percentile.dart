@@ -1,9 +1,10 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:precarina/aux_functions/search_blood_pressure_percentile_db.dart';
 import 'package:precarina/model/precarina_model.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:localization/localization.dart';
 
-import 'package:flutter/widgets.dart';
 
 
 String resultPasUnder_50 = "El percentilo de PAS determinado es menor a percentilo 50\n";
@@ -25,15 +26,35 @@ String patientDiagnoseHT1 = "Paciente con hipertensión estadio 1";
 String patientDiagnoseHT = "Paciente prehipertenso";
 String patientDiagnoseNorm = "Paciente normotenso";
 
-void main() async {
+void main() {
+  // Ensure Flutter binding is initialized for tests
+  TestWidgetsFlutterBinding.ensureInitialized();
 
   group('Math operations', () {
-    test('searchBloodPressurePercentiles test', () async {
+    testWidgets('searchBloodPressurePercentiles test 1.1', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          localizationsDelegates: [
+            LocalJsonLocalization.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en', 'US'), // Using a default locale
+          ],
+          home: const SizedBox(), // Minimal home widget
+        ),
+      );
+
+      final BuildContext context = tester.element(find.byType(SizedBox));
+
       // Test case 1
       debugPrint("***************************************************************");
       debugPrint("Test 1.1");
       expect(
-        searchBloodPressurePercentiles(
+        await searchBloodPressurePercentiles(
+          context: context,
           sex: PatientSex.male,
           height: 125.0,
           age: 9,
@@ -51,7 +72,8 @@ void main() async {
       debugPrint("***************************************************************");
       debugPrint("Test 1.2");
       expect(
-        searchBloodPressurePercentiles(
+        await searchBloodPressurePercentiles(
+          context: context,
           sex: PatientSex.male,
           height: 125.0,
           age: 9,
@@ -69,7 +91,8 @@ void main() async {
       debugPrint("***************************************************************");
       debugPrint("Test 1.3");
       expect(
-        searchBloodPressurePercentiles(
+        await searchBloodPressurePercentiles(
+          context: context,
           sex: PatientSex.male,
           height: 125.0,
           age: 9,
@@ -87,7 +110,8 @@ void main() async {
       debugPrint("***************************************************************");
       debugPrint("Test 1.4");
       expect(
-        searchBloodPressurePercentiles(
+        await searchBloodPressurePercentiles(
+          context: context,
           sex: PatientSex.male,
           height: 125.0,
           age: 9,
@@ -104,12 +128,29 @@ void main() async {
   });
 
   group('Math operations', () {
-    test('searchBloodPressurePercentiles test', () {
+    testWidgets('searchBloodPressurePercentiles test 2.1', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          localizationsDelegates: [
+            LocalJsonLocalization.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en', 'US'),
+          ],
+          home: const SizedBox(),
+        ),
+      );
+      final BuildContext context = tester.element(find.byType(SizedBox));
+
       // Test case 2.1
       debugPrint("***************************************************************");
       debugPrint("Test 2.1");
       expect(
-        searchBloodPressurePercentiles(
+        await searchBloodPressurePercentiles(
+          context: context,
           sex: PatientSex.male,
           height: 103.0,
           age: 3,
@@ -127,7 +168,8 @@ void main() async {
       debugPrint("***************************************************************");
       debugPrint("Test 2.2");
       expect(
-        searchBloodPressurePercentiles(
+        await searchBloodPressurePercentiles(
+          context: context,
           sex: PatientSex.male,
           height: 162.0,
           age: 14,
@@ -145,7 +187,8 @@ void main() async {
       debugPrint("***************************************************************");
       debugPrint("Test 2.3");
       expect(
-        searchBloodPressurePercentiles(
+        await searchBloodPressurePercentiles(
+          context: context,
           sex: PatientSex.female,
           height: 142.0,
           age: 8,
@@ -163,7 +206,8 @@ void main() async {
       debugPrint("***************************************************************");
       debugPrint("Test 2.4");
       expect(
-        searchBloodPressurePercentiles(
+        await searchBloodPressurePercentiles(
+          context: context,
           sex: PatientSex.female,
           height: 90.0,
           age: 6,
@@ -180,12 +224,29 @@ void main() async {
   });
 
   group('Tests ', () {
-    test('searchBloodPressurePercentiles test', () {
+    testWidgets('searchBloodPressurePercentiles test 3.1', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          localizationsDelegates: [
+            LocalJsonLocalization.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en', 'US'),
+          ],
+          home: const SizedBox(),
+        ),
+      );
+      final BuildContext context = tester.element(find.byType(SizedBox));
+
       // Test case 3.1
       debugPrint("***************************************************************");
       debugPrint("Test 3.1");
       expect(
-        searchBloodPressurePercentiles(
+        await searchBloodPressurePercentiles(
+          context: context,
           sex: PatientSex.male,
           height: 170.0,
           age: 13,
@@ -202,12 +263,29 @@ void main() async {
   });
 
   group('Test 16 & 16+ yars old ', () {
-    test('searchBloodPressurePercentiles test', () {
+    testWidgets('searchBloodPressurePercentiles test 4.1', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          localizationsDelegates: [
+            LocalJsonLocalization.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en', 'US'),
+          ],
+          home: const SizedBox(),
+        ),
+      );
+      final BuildContext context = tester.element(find.byType(SizedBox));
+
       // Test case 4.1
       debugPrint("***************************************************************");
       debugPrint("Test 4.1");
       expect(
-        searchBloodPressurePercentiles(
+        await searchBloodPressurePercentiles(
+          context: context,
           sex: PatientSex.female,
           height: 150.0,
           age: 16,
@@ -221,12 +299,29 @@ void main() async {
       );
     });
 
-    test('searchBloodPressurePercentiles test', () {
+    testWidgets('searchBloodPressurePercentiles test 4.2', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          localizationsDelegates: [
+            LocalJsonLocalization.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en', 'US'),
+          ],
+          home: const SizedBox(),
+        ),
+      );
+      final BuildContext context = tester.element(find.byType(SizedBox));
+
       // Test case 4.2
       debugPrint("***************************************************************");
       debugPrint("Test 4.2");
       expect(
-        searchBloodPressurePercentiles(
+        await searchBloodPressurePercentiles(
+          context: context,
           sex: PatientSex.male,
           height: 180.0,
           age: 16,
@@ -240,12 +335,29 @@ void main() async {
       );
     });
 
-    test('searchBloodPressurePercentiles test', () {
+    testWidgets('searchBloodPressurePercentiles test 4.3', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          localizationsDelegates: [
+            LocalJsonLocalization.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en', 'US'),
+          ],
+          home: const SizedBox(),
+        ),
+      );
+      final BuildContext context = tester.element(find.byType(SizedBox));
+
       // Test case 4.3
       debugPrint("***************************************************************");
       debugPrint("Test 4.3");
       expect(
-        searchBloodPressurePercentiles(
+        await searchBloodPressurePercentiles(
+          context: context,
           sex: PatientSex.female,
           height: 150.0,
           age: 16,
@@ -259,12 +371,29 @@ void main() async {
       );
     });
 
-    test('searchBloodPressurePercentiles test', () {
+    testWidgets('searchBloodPressurePercentiles test 4.4', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          localizationsDelegates: [
+            LocalJsonLocalization.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en', 'US'),
+          ],
+          home: const SizedBox(),
+        ),
+      );
+      final BuildContext context = tester.element(find.byType(SizedBox));
+
       // Test case 4.4
       debugPrint("***************************************************************");
       debugPrint("Test 4.4");
       expect(
-        searchBloodPressurePercentiles(
+        await searchBloodPressurePercentiles(
+          context: context,
           sex: PatientSex.female,
           height: 160.0,
           age: 17,
@@ -278,12 +407,29 @@ void main() async {
       );
     });
 
-    test('searchBloodPressurePercentiles test', () {
+    testWidgets('searchBloodPressurePercentiles test 4.5', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          localizationsDelegates: [
+            LocalJsonLocalization.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en', 'US'),
+          ],
+          home: const SizedBox(),
+        ),
+      );
+      final BuildContext context = tester.element(find.byType(SizedBox));
+
       // Test case 4.5
       debugPrint("***************************************************************");
       debugPrint("Test 4.5");
       expect(
-        searchBloodPressurePercentiles(
+        await searchBloodPressurePercentiles(
+          context: context,
           sex: PatientSex.male,
           height: 160.0,
           age: 16,

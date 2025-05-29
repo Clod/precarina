@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
-import 'package:localization/localization.dart';
+//import 'package:localization/localization.dart';
 import 'package:precarina/aux_widgets/physical_activity_survey.dart';
 import 'package:precarina/model/precarina_model.dart';
 import 'package:provider/provider.dart';
@@ -25,8 +25,6 @@ class PhysicalActivityScreen extends StatefulWidget {
 class _PhysicalActivityScreenState extends State<PhysicalActivityScreen> {
   var precaModel = PrecarinaModel();
 
-  late BuildContext bc;
-
   int? _selectedOption;
 
   bool enableAcceptButton = true;
@@ -44,8 +42,6 @@ class _PhysicalActivityScreenState extends State<PhysicalActivityScreen> {
   Widget build(BuildContext context) {
 
     // List<String> optionsTexts = AppLocalizations.of(context)!.txtPhysicalActivityDialogOptions.split("|");
-
-    bc = context;
 
     double height = MediaQuery.of(context).size.height;
 
@@ -88,7 +84,7 @@ class _PhysicalActivityScreenState extends State<PhysicalActivityScreen> {
                             // The background of the SnackBar can be red or black depending on the value of
                             // boolean
                             String snackBarText = 'Score: ${precaModel.physicalActivityValue}';
-                            if (isRedBackground) {snackBarText += "physicalActivitySedentaryWarning".i18n();}
+                            if (isRedBackground) {snackBarText += AppLocalizations.of(context)!.physicalActivitySedentaryWarning;}
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(snackBarText),

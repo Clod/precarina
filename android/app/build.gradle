@@ -34,7 +34,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace "ar.net.grasso.precarina"
-    compileSdkVersion 34
+    compileSdkVersion 35
     ndkVersion "27.0.12077973"
 
     compileOptions {
@@ -76,6 +76,9 @@ android {
         release {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.release
+                    minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
@@ -84,3 +87,13 @@ flutter {
     source '../..'
 }
 
+dependencies {
+    implementation "org.tensorflow:tensorflow-lite-gpu:2.14.0" // Use the latest version matching your tflite_flutter package
+    implementation "org.tensorflow:tensorflow-lite-gpu-api:2.14.0"
+}
+// This is needed to avoid a conflict with the tflite_flutter package
+configurations.all {
+    resolutionStrategy {
+        force 'org.tensorflow:tensorflow-lite:2.14.0'
+    }
+}

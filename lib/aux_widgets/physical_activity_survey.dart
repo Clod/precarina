@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:localization/localization.dart';
 import 'package:precarina/aux_widgets/vertical_space.dart';
+import 'package:precarina/l10n/app_localizations.dart';
 import 'package:precarina/model/precarina_model.dart';
 import 'package:provider/provider.dart';
 
@@ -44,6 +44,7 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: FormBuilder(
@@ -52,61 +53,61 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "physicalActivityQ1".i18n(),
+              l10n.physicalActivityQ1,
               style: const TextStyle(fontSize: 18),
             ),
             Text(
-              "physicalActivityQ1Note".i18n(),
+              l10n.physicalActivityQ1Note,
               style: const TextStyle(fontSize: 12),
             ),
             const VerticalSpace(height: 8),
             Column(
               children: [
                 RadioListTile(
-                  title: Text("physicalActivityQ1Opt1".i18n()),
-                  value: 0,
+                  title: Text(l10n.physicalActivityQ1Opt1),
+                  value: 0, // Assuming this value corresponds to the localized string
                   groupValue: _daysWithPhysicalActivity,
                   onChanged: physicalActiveDaysChoice,
                 ),
                 RadioListTile(
-                  title: Text("physicalActivityQ1Opt2".i18n()),
-                  value: 1,
+                  title: Text(l10n.physicalActivityQ1Opt2),
+                  value: 1, // Assuming this value corresponds to the localized string
                   groupValue: _daysWithPhysicalActivity,
                   onChanged: physicalActiveDaysChoice,
                 ),
                 RadioListTile(
-                  title: Text("physicalActivityQ1Opt3".i18n()),
-                  value: 2,
+                  title: Text(l10n.physicalActivityQ1Opt3),
+                  value: 2, // Assuming this value corresponds to the localized string
                   groupValue: _daysWithPhysicalActivity,
                   onChanged: physicalActiveDaysChoice,
                 ),
                 RadioListTile(
-                  title: Text("physicalActivityQ1Opt4".i18n()),
-                  value: 3,
+                  title: Text(l10n.physicalActivityQ1Opt4),
+                  value: 3, // Assuming this value corresponds to the localized string
                   groupValue: _daysWithPhysicalActivity,
                   onChanged: physicalActiveDaysChoice,
                 ),
                 RadioListTile(
-                  title: Text("physicalActivityQ1Opt5".i18n()),
-                  value: 4,
+                  title: Text(l10n.physicalActivityQ1Opt5),
+                  value: 4, // Assuming this value corresponds to the localized string
                   groupValue: _daysWithPhysicalActivity,
                   onChanged: physicalActiveDaysChoice,
                 ),
                 RadioListTile(
-                  title: Text("physicalActivityQ1Opt6".i18n()),
-                  value: 5,
+                  title: Text(l10n.physicalActivityQ1Opt6),
+                  value: 5, // Assuming this value corresponds to the localized string
                   groupValue: _daysWithPhysicalActivity,
                   onChanged: physicalActiveDaysChoice,
                 ),
                 RadioListTile(
-                  title: Text("physicalActivityQ1Opt7".i18n()),
-                  value: 6,
+                  title: Text(l10n.physicalActivityQ1Opt7),
+                  value: 6, // Assuming this value corresponds to the localized string
                   groupValue: _daysWithPhysicalActivity,
                   onChanged: physicalActiveDaysChoice,
                 ),
                 RadioListTile(
-                  title: Text("physicalActivityQ1Opt8".i18n()),
-                  value: 7,
+                  title: Text(l10n.physicalActivityQ1Opt8),
+                  value: 7, // Assuming this value corresponds to the localized string
                   groupValue: _daysWithPhysicalActivity,
                   onChanged: physicalActiveDaysChoice,
                 ),
@@ -114,7 +115,7 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
             ),
             const VerticalSpace(height: 16),
             Text(
-              "physicalActivityQ2".i18n(),
+              l10n.physicalActivityQ2,
               style: TextStyle(
                 fontSize: 18,
                 color: (disableQ2 ? Colors.black38 : Colors.black87),
@@ -133,7 +134,7 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
                       borderRadius: BorderRadius.circular(15.0),
                     ),
                     child: FormBuilderTextField(
-                      validator: (val) => !disableQ2 && val!.isEmpty ? "txtRequired".i18n() : null,
+                      validator: (val) => !disableQ2 && val!.isEmpty ? l10n.txtRequired : null,
                       key: _weeklyMinsOfActivityKey,
                       name: "WeeklyMinsOfActivity",
                       keyboardType: TextInputType.number,
@@ -180,27 +181,27 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
             ),
             const VerticalSpace(height: 16),
             Text(
-              "physicalActivityQ3".i18n(),
+              l10n.physicalActivityQ3,
               style: const TextStyle(fontSize: 18),
             ),
             const VerticalSpace(height: 8),
             Column(
               children: [
                 RadioListTile(
-                  title: Text("physicalActivityQ3Opt1".i18n()),
-                  value: 0,
+                  title: Text(l10n.physicalActivityQ3Opt1),
+                  value: 0, // Assuming this value corresponds to the localized string
                   groupValue: _transpToSchoolTypeValue,
                   onChanged: onPickTransport,
                 ),
                 RadioListTile(
-                  title: Text("physicalActivityQ3Opt2".i18n()),
-                  value: 1,
+                  title: Text(l10n.physicalActivityQ3Opt2),
+                  value: 1, // Assuming this value corresponds to the localized string
                   groupValue: _transpToSchoolTypeValue,
                   onChanged: onPickTransport,
                 ),
                 RadioListTile(
-                  title: Text("physicalActivityQ3Opt3".i18n()),
-                  value: 2,
+                  title: Text(l10n.physicalActivityQ3Opt3),
+                  value: 2, // Assuming this value corresponds to the localized string
                   groupValue: _transpToSchoolTypeValue,
                   onChanged: onPickTransport,
                 ),
@@ -208,7 +209,7 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
             ),
             const VerticalSpace(height: 16),
             Text(
-              "physicalActivityQ4".i18n(),
+              l10n.physicalActivityQ4,
               style: TextStyle(
                 fontSize: 18.0,
                 color: (disableQ4 ? Colors.black38 : Colors.black87),
@@ -227,7 +228,7 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
                       borderRadius: BorderRadius.circular(15.0),
                     ),
                     child: FormBuilderTextField(
-                      validator: (val) => !disableQ4 && val!.isEmpty ? "txtRequired".i18n() : null,
+                      validator: (val) => !disableQ4 && val!.isEmpty ? l10n.txtRequired : null,
                       key: _blocksToSchoolKey,
                       name: "BlocksToSchool",
                       keyboardType: TextInputType.number,
@@ -260,7 +261,7 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
                     ),
                   ),
                   Text(
-                    "physicalActivityBlocks".i18n(),
+                    l10n.physicalActivityBlocks,
                     style: TextStyle(
                       fontSize: 18,
                       color: (disableQ4 ? Colors.black38 : Colors.black87),
@@ -271,55 +272,55 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
             ),
             const VerticalSpace(height: 16),
             Text(
-              "physicalActivityQ5".i18n(),
+              l10n.physicalActivityQ5,
               style: const TextStyle(fontSize: 18),
             ),
             const VerticalSpace(height: 8),
             RadioListTile(
-              title: Text("physicalActivityQ5Opt0".i18n()),
-              value: 0,
+              title: Text(l10n.physicalActivityQ5Opt0),
+              value: 0, // Assuming this value corresponds to the localized string
               groupValue: _classesPerWeekValue,
               onChanged: daysOfPaClasses,
             ),
             RadioListTile(
-              title: Text("physicalActivityQ5Opt1".i18n()),
-              value: 1,
+              title: Text(l10n.physicalActivityQ5Opt1),
+              value: 1, // Assuming this value corresponds to the localized string
               groupValue: _classesPerWeekValue,
               onChanged: daysOfPaClasses,
             ),
             RadioListTile(
-              title: Text("physicalActivityQ5Opt2".i18n()),
-              value: 2,
+              title: Text(l10n.physicalActivityQ5Opt2),
+              value: 2, // Assuming this value corresponds to the localized string
               groupValue: _classesPerWeekValue,
               onChanged: daysOfPaClasses,
             ),
             RadioListTile(
-              title: Text("physicalActivityQ5Opt3".i18n()),
-              value: 3,
+              title: Text(l10n.physicalActivityQ5Opt3),
+              value: 3, // Assuming this value corresponds to the localized string
               groupValue: _classesPerWeekValue,
               onChanged: daysOfPaClasses,
             ),
             RadioListTile(
-              title: Text("physicalActivityQ5Opt4".i18n()),
-              value: 4,
+              title: Text(l10n.physicalActivityQ5Opt4),
+              value: 4, // Assuming this value corresponds to the localized string
               groupValue: _classesPerWeekValue,
               onChanged: daysOfPaClasses,
             ),
             RadioListTile(
-              title: Text("physicalActivityQ5Opt5".i18n()),
-              value: 5,
+              title: Text(l10n.physicalActivityQ5Opt5),
+              value: 5, // Assuming this value corresponds to the localized string
               groupValue: _classesPerWeekValue,
               onChanged: daysOfPaClasses,
             ),
             RadioListTile(
-              title: Text("physicalActivityQ5Opt6".i18n()),
-              value: 6,
+              title: Text(l10n.physicalActivityQ5Opt6),
+              value: 6, // Assuming this value corresponds to the localized string
               groupValue: _classesPerWeekValue,
               onChanged: daysOfPaClasses,
             ),
             const VerticalSpace(height: 16),
             Text(
-              "physicalActivityQ6".i18n(),
+              l10n.physicalActivityQ6,
               style: const TextStyle(fontSize: 18),
             ),
             const VerticalSpace(height: 8),
@@ -333,7 +334,6 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: FormBuilderTextField(
-                    //validator: (val) => val!.isEmpty ? "txtRequired".i18n() : null,
                     key: _dailyMinsOfScreenKey,
                     name: "DailyMinsOfScreen",
                     keyboardType: TextInputType.number,
@@ -365,7 +365,7 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
                     },
                   ),
                 ),
-                Text("physicalActivityMinutes".i18n()),
+                Text(l10n.physicalActivityMinutes),
               ],
             ),
           ],

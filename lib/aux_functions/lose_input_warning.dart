@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../l10n/app_localizations.dart';
+import 'package:precarina/l10n/app_localizations.dart';
 
 Future<bool> showInputLostWarning(BuildContext context) async {
   final shouldPop = await showDialog<bool>(

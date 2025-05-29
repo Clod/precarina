@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
-import 'package:localization/localization.dart';
 import 'package:precarina/aux_widgets/vertical_space.dart';
 import 'package:precarina/behaviors_and_factors_screens/pages_header.dart';
 import 'package:precarina/model/precarina_model.dart';
@@ -64,6 +63,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
 
   // Estimate percentile using ML model
   _estimatePercentile(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     // Hide the keyboard
     FocusScope.of(context).unfocus();
     // var input = [[7.011268, 12.637012, 0.0, 1.0]];
@@ -74,7 +74,8 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
       [0.00]
     ];
 
-    double? totalWeight = _precaModel.weightKilos! + _precaModel.weightGrams! / 1000.0;
+    double? totalWeight =
+        _precaModel.weightKilos! + _precaModel.weightGrams! / 1000.0;
 
     double imc = totalWeight / pow((_precaModel.height! / 100.0), 2);
 
@@ -115,7 +116,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
     });
 
     // Now let's go fo the diagnose
-    _diagnose = _determineDiagnose(_percentilValue);
+    _diagnose = _determineDiagnose(_percentilValue, l10n);
   }
 
   @override
@@ -129,7 +130,9 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
     }
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _precaModel = Provider.of<PrecarinaModel>(context, listen: false);
+      if (mounted) {
+        _precaModel = Provider.of<PrecarinaModel>(context, listen: false);
+      }
     });
   }
 
@@ -137,6 +140,8 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
   Widget build(BuildContext context) {
     debugPrint("Building Widget");
 
+    final l10n = AppLocalizations.of(context)!;
+    
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -167,43 +172,53 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                   children: [
                     const VerticalSpace(height: 15.0),
                     Text(
-                      "txtBMI".i18n(),
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                      l10n.txtBMI,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 25.0),
                     ),
                     const VerticalSpace(height: 5.0),
                     Text(
                       _imc,
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 30.0),
                     ),
                     const VerticalSpace(height: 10.0),
                     Text(
-                      "txtPercentile".i18n(),
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                      l10n.txtPercentile,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 25.0),
                     ),
                     const VerticalSpace(height: 5.0),
                     Text(
                       _percentil,
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 30.0),
                     ),
                     const VerticalSpace(height: 10.0),
                     Text(
-                      "txtDiagnose".i18n(),
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                      l10n.txtDiagnose,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 25.0),
                     ),
                     const VerticalSpace(height: 5.0),
                     Text(
                       _diagnose,
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 30.0),
                     ),
                     const VerticalSpace(height: 15.0),
                     Text(
-                      "txtScore".i18n(),
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                      l10n.txtScore,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 25.0),
                     ),
                     const VerticalSpace(height: 5.0),
                     Text(
-                      _precaModel.bmiValue != null ? _precaModel.bmiValue!.toString() : "txtPressCalc".i18n(),
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+                      _precaModel.bmiValue != null
+                          ? _precaModel.bmiValue!.toString()
+                          : l10n.txtPressCalc,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 30.0),
                     ),
                     const VerticalSpace(height: 15.0),
                     ElevatedButton(
@@ -220,12 +235,13 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                           // ≥ 140% of percentile 97 => 0
                         } else {
                           _precaModel.bmiValue = getScoreOver97();
-                          debugPrint("Score over 97: ${_precaModel.bmiValue.toString()}");
+                          debugPrint(
+                              "Score over 97: ${_precaModel.bmiValue.toString()}");
                           // _precaModel.notifyListeners();
                         }
                         _precaModel.calculateAverage();
                       },
-                      child: Text("txtCalculate".i18n()),
+                      child: Text(l10n.txtCalculate),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -235,7 +251,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                             _precaModel.bmiValue = null;
                             Navigator.of(context).pop();
                           },
-                          child: Text("txtCancel".i18n()),
+                          child: Text(l10n.txtCancel),
                         ),
                         const SizedBox(width: 10.0),
                         // Accept button
@@ -243,7 +259,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: Text("txtAccept".i18n()),
+                          child: Text(l10n.txtAccept),
                         ),
                       ],
                     )
@@ -257,13 +273,13 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
     );
   }
 
-  showSnackbar(BuildContext context) {
+  showSnackbar(BuildContext context, AppLocalizations l10n) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text("txtTradNotLaded".i18n()),
+        content: Text(l10n.txtTradNotLaded),
         duration: const Duration(days: 1),
         action: SnackBarAction(
-          label: "txtDone".i18n(),
+          label: l10n.txtDone,
           onPressed: () {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
           },
@@ -272,7 +288,7 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
     );
   }
 
-  String _determineDiagnose(int percentile) {
+  String _determineDiagnose(int percentile, AppLocalizations l10n) {
     /*
     overweight (>85th percentile and <95th percentile) and obesity (>95th percentile) and severe obesity (>99th percentile) .
     Therefore, for the PRECARINA application, we trained a Machine Learning model with data from the World Health Organization (
@@ -280,13 +296,13 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
      */
 
     if (percentile > 99) {
-      return "txtSevereObesity".i18n();
+      return l10n.txtSevereObesity;
     } else if (percentile > 95) {
-      return "txtObesity".i18n();
+      return l10n.txtObesity;
     } else if (percentile > 85) {
-      return "txtOverWeight".i18n();
+      return l10n.txtOverWeight;
     } else {
-      return "txtNormalWeight".i18n();
+      return l10n.txtNormalWeight;
     }
   }
 
@@ -297,7 +313,10 @@ class _BodyMassIndexScreenState extends State<BodyMassIndexScreen> {
     // No let's get the BMI for 97% at said age
     // According to the regression, fot 97%: bmi = -0.008237121887635776 age^3 +  0.28450418735930744 age^2 -2.1290147029215354 age + 23.20470735832494   (R^2 = 0.9996795012472375)
 
-    double bmi97 = -0.008237121887635776 * pow(age, 3) + 0.28450418735930744 * pow(age, 2) - 2.1290147029215354 * age + 23.20470735832494;
+    double bmi97 = -0.008237121887635776 * pow(age, 3) +
+        0.28450418735930744 * pow(age, 2) -
+        2.1290147029215354 * age +
+        23.20470735832494;
 
     // percentile 97 to < 120% of percentile 97 => 30
     // 120% of percentil 97 to < 140% of percentile 97 => 15

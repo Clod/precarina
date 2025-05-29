@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 import '../aux_widgets/vertical_space.dart';
+import '../l10n/app_localizations.dart';
 import '../model/precarina_model.dart';
 
 const dataTypeStyle = TextStyle(fontWeight: FontWeight.bold);
@@ -13,6 +13,7 @@ class PagesHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final precaModel = Provider.of<PrecarinaModel>(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Row(
       mainAxisSize: MainAxisSize.max,
@@ -37,9 +38,9 @@ class PagesHeader extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("txtSex".i18n(), style: dataTypeStyle),
+                      Text(l10n.txtSex, style: dataTypeStyle),
                       Text(
-                        precaModel.patientSex == PatientSex.female ? "sexFemale".i18n() : "sexMale".i18n(),
+                        precaModel.patientSex == PatientSex.female ? l10n.sexFemale : l10n.sexMale,
                         style: unitsStyle,
                       ),
                     ],
@@ -47,16 +48,16 @@ class PagesHeader extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                       Text("txtAge".i18n(), style: dataTypeStyle),
+                       Text(l10n.txtAge, style: dataTypeStyle),
                       Text("${precaModel.ageYears}"),
                       Text(
-                        precaModel.ageYears == 0 || precaModel.ageYears == 1 ? "suffixAno".i18n() : "suffixAnos".i18n(),
+                        precaModel.ageYears == 0 || precaModel.ageYears == 1 ? l10n.suffixAno : l10n.suffixAnos,
                         style: unitsStyle,
                       ),
                       const Text(" "),
                       Text("${precaModel.ageMonths}"),
                       Text(
-                        (precaModel.ageMonths == 1 ? "suffixMes".i18n() : "suffixMeses".i18n()),
+                        (precaModel.ageMonths == 1 ? l10n.suffixMes : l10n.suffixMeses),
                         style: unitsStyle,
                       ),
                     ],
@@ -64,7 +65,7 @@ class PagesHeader extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                       Text("txtWeight".i18n(), style: dataTypeStyle),
+                       Text(l10n.txtWeight, style: dataTypeStyle),
                       Text("${precaModel.weightKilos}"),
                       const Text(" Kg ", style: unitsStyle),
                       Text("${precaModel.weightGrams}"),
@@ -74,7 +75,7 @@ class PagesHeader extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("txtHeight".i18n(), style: dataTypeStyle),
+                      Text(l10n.txtHeight, style: dataTypeStyle),
                       Text("${precaModel.height}"),
                       const Text(
                         " cm",

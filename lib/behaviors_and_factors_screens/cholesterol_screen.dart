@@ -17,8 +17,6 @@ class CholesterolScreen extends StatefulWidget {
 class _CholesterolScreenState extends State<CholesterolScreen> {
   var precaModel = PrecarinaModel();
 
-  late BuildContext bc;
-
   int? _selectedOption;
 
   bool enableAcceptButton = false;
@@ -35,7 +33,11 @@ class _CholesterolScreenState extends State<CholesterolScreen> {
     final cholesterolValues = [100, 50, 0];
     List<String> optionsTexts = AppLocalizations.of(context)!.txtCholesterolDialogOptions.split("|");
 
-    bc = context;
+    // List<String> optionsTexts =
+    //     "< 170 mg/dl|170:199 mg/dl|≥ 200 mg/dl".split("|");
+
+    debugPrint('...............${optionsTexts.length}................');
+    debugPrint(optionsTexts.toString());
 
     return Scaffold(
       // resizeToAvoidBottomInset: false,
@@ -87,7 +89,8 @@ class _CholesterolScreenState extends State<CholesterolScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton(
-                          child: Text(AppLocalizations.of(context)!.txtButtonCancel),
+                          child: Text(
+                              AppLocalizations.of(context)!.txtButtonCancel),
                           onPressed: () => Navigator.maybePop(context),
                         ),
                         const HorizontalSpace(width: 10.0),
@@ -95,12 +98,14 @@ class _CholesterolScreenState extends State<CholesterolScreen> {
                           onPressed: enableAcceptButton
                               ? () {
                                   precaModel.cholesterolValue = _selectedOption;
-                                  debugPrint("Cholesterol Value en Screen: ${precaModel.cholesterolValue}");
+                                  debugPrint(
+                                      "Cholesterol Value en Screen: ${precaModel.cholesterolValue}");
                                   precaModel.calculateAverage();
                                   Navigator.of(context).pop();
                                 }
                               : null,
-                          child: Text(AppLocalizations.of(context)!.txtButtonAccept),
+                          child: Text(
+                              AppLocalizations.of(context)!.txtButtonAccept),
                         ),
                       ],
                     ),

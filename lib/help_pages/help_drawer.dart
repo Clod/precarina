@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:localization/localization.dart';
 import 'package:precarina/help_pages/blood_pressure_help.dart';
 import 'package:precarina/help_pages/physical_activity_help.dart';
 import 'package:precarina/help_pages/smoke_exposure_help.dart';
@@ -20,6 +19,7 @@ class HelpDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Drawer(
       // Add a ListView to the drawer. This ensures the user can scroll
       // through the options in the drawer if there isn't enough vertical
@@ -34,7 +34,7 @@ class HelpDrawer extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                AppLocalizations.of(context)!.txtGlossary,
+                l10n.txtGlossary,
                 style:
                     const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
@@ -42,14 +42,14 @@ class HelpDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.restaurant),
-            title: Text(AppLocalizations.of(context)!.txtDietButton),
+            title: Text(l10n.txtDietButton),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => DietHelp(
-                      title: AppLocalizations.of(context)!.txtDietButton,
-                      content: AppLocalizations.of(context)!.txtDietHelp),
+                      title: l10n.txtDietButton,
+                      content: l10n.txtDietHelp),
                 ),
               );
             },
@@ -57,47 +57,42 @@ class HelpDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.balance),
             // leading: const Icon(Icons.scale),
-            title: Text(AppLocalizations.of(context)!.txtBodyMassIndexButton),
+            title: Text(l10n.txtBodyMassIndexButton),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => BmiHelp(
-                      title:
-                          AppLocalizations.of(context)!.txtBodyMassIndexButton,
-                      content:
-                          AppLocalizations.of(context)!.txtBodyMassIndextHelp),
+                      title: l10n.txtBodyMassIndexButton,
+                      content: l10n.txtBodyMassIndextHelp),
                 ),
               );
             },
           ),
           ListTile(
             leading: const Icon(Icons.smoking_rooms),
-            title: Text(AppLocalizations.of(context)!.txtSmokeExposureButton),
+            title: Text(l10n.txtSmokeExposureButton),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => SmokeExposureHelp(
-                      title:
-                          AppLocalizations.of(context)!.txtSmokeExposureButton,
-                      content:
-                          AppLocalizations.of(context)!.txtSmokeExposureHelp),
+                      title: l10n.txtSmokeExposureButton,
+                      content: l10n.txtSmokeExposureHelp),
                 ),
               );
             },
           ),
           ListTile(
             leading: const Icon(Icons.fastfood),
-            title: Text(AppLocalizations.of(context)!.txtCholesterolButton),
+            title: Text(l10n.txtCholesterolButton),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => CholesterolHelp(
-                      title: AppLocalizations.of(context)!.txtCholesterolButton,
-                      content:
-                          AppLocalizations.of(context)!.txtCholesterolHelp),
+                      title: l10n.txtCholesterolButton,
+                      content: l10n.txtCholesterolHelp),
                 ),
               );
             },
@@ -105,30 +100,28 @@ class HelpDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.sports_tennis),
             title:
-                Text(AppLocalizations.of(context)!.txtPhysicalActivityButton),
+                Text(l10n.txtPhysicalActivityButton),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => PhysicalActivityHelp(
-                      title: AppLocalizations.of(context)!
-                          .txtPhysicalActivityButton,
-                      content: AppLocalizations.of(context)!
-                          .txtPhysicalActivityHelp),
+                      title: l10n.txtPhysicalActivityButton,
+                      content: l10n.txtPhysicalActivityHelp),
                 ),
               );
             },
           ),
           ListTile(
             leading: const Icon(Icons.bedtime),
-            title: Text(AppLocalizations.of(context)!.txtSleepButton),
+            title: Text(l10n.txtSleepButton),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => SleepHelp(
-                    title: AppLocalizations.of(context)!.txtSleepButton,
-                    content: AppLocalizations.of(context)!.txtSleepButton,
+                    title: l10n.txtSleepButton,
+                    content: l10n.txtSleepButton, // Assuming this should also be a specific help string like l10n.txtSleepHelp
                   ),
                 ),
               );
@@ -136,28 +129,28 @@ class HelpDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.cookie),
-            title: Text(AppLocalizations.of(context)!.txtDiabetesButton),
+            title: Text(l10n.txtDiabetesButton),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => DiabetesHelp(
-                      title: AppLocalizations.of(context)!.txtDiabetesButton,
-                      content: AppLocalizations.of(context)!.txtDiabetesHelp),
+                      title: l10n.txtDiabetesButton,
+                      content: l10n.txtDiabetesHelp),
                 ),
               );
             },
           ),
           ListTile(
             leading: const Icon(Icons.favorite),
-            title: Text(AppLocalizations.of(context)!.txtBloodPressureButton),
+            title: Text(l10n.txtBloodPressureButton),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => BloodPressureHelp(
-                    title: AppLocalizations.of(context)!.txtBloodPressureButton,
-                    content: AppLocalizations.of(context)!.txtBloodPressureHelp,
+                    title: l10n.txtBloodPressureButton,
+                    content: l10n.txtBloodPressureHelp,
                   ),
                 ),
               );
@@ -170,9 +163,9 @@ class HelpDrawer extends StatelessWidget {
             applicationIcon: const Icon(
               Icons.local_play,
             ),
-            applicationName: 'PRECARINA',
+            applicationName: l10n.txtPrecarina, // Assuming 'PRECARINA' is also a localized string
             applicationVersion: '2.3.0 Build 26',
-            applicationLegalese: "txtApplicationLegalese".i18n(),
+            applicationLegalese: l10n.txtApplicationLegalese,
             aboutBoxChildren: [
               const SizedBox(
                 height: 5.0,
@@ -183,7 +176,7 @@ class HelpDrawer extends StatelessWidget {
                       'https://grasso.net.ar/precarina/precarina-data-security/'));
                 },
                 child: Text(
-                  "txtPrivacyPolicy".i18n(),
+                  l10n.txtPrivacyPolicy,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     decoration: TextDecoration.underline,
@@ -200,11 +193,11 @@ class HelpDrawer extends StatelessWidget {
                 height: 300.0,
                 width: 150.0,
                 child: SingleChildScrollView(
-                  child: Html(data: "txtAbout".i18n()),
+                  child: Html(data: l10n.txtAbout),
                 ),
               )
             ],
-            child: Text("txtAboutApp".i18n(),
+            child: Text(l10n.txtAboutApp,
                 style: const TextStyle(fontWeight: FontWeight.bold)),
           ),
         ],

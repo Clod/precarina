@@ -18,8 +18,6 @@ class DiabetesScreen extends StatefulWidget {
 class _DiabetesScreenState extends State<DiabetesScreen> {
   var precaModel = PrecarinaModel();
 
-  late BuildContext bc;
-
   int? _selectedOption;
 
   bool enableAcceptButton = false;
@@ -34,8 +32,6 @@ class _DiabetesScreenState extends State<DiabetesScreen> {
   Widget build(BuildContext context) {
     final diabetesValues = [100, 60, 40, 30, 20, 10, 0];
     List<String> optionsTexts = AppLocalizations.of(context)!.txtDiabetesDialogOptions.split("|");
-
-    bc = context;
 
     return Scaffold(
       // resizeToAvoidBottomInset: false,
