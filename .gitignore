@@ -49,3 +49,7 @@ app.*.map.json
 .fvm/flutter_sdk
 
  lib/gen/assets.gen.dart
+
+lib/l10n/app_localizations_en.dart
+lib/l10n/app_localizations_es.dart
+lib/l10n/app_localizations.dart
