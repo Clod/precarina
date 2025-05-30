@@ -1,6 +1,9 @@
 Para construir los íconos:
 % dart  run flutter_launcher_icons
 
+Verificar en Xcode que:
+
+Runner -> Build Setings -> Strip Style == Non-Global Symbols
 
 
 
