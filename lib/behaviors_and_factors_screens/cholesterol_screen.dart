@@ -15,23 +15,24 @@ class CholesterolScreen extends StatefulWidget {
 }
 
 class _CholesterolScreenState extends State<CholesterolScreen> {
-  var precaModel = PrecarinaModel();
+  late PrecarinaModel _precaModel;
 
   int? _selectedOption;
 
-  bool enableAcceptButton = false;
+  bool _enableAcceptButton = false;
 
   @override
   void initState() {
     super.initState();
-    precaModel = Provider.of<PrecarinaModel>(context, listen: false);
+    _precaModel = Provider.of<PrecarinaModel>(context, listen: false);
   }
 
   @override
   Widget build(BuildContext context) {
     // Score values
     final cholesterolValues = [100, 50, 0];
-    List<String> optionsTexts = AppLocalizations.of(context)!.txtCholesterolDialogOptions.split("|");
+    List<String> optionsTexts =
+        AppLocalizations.of(context)!.txtCholesterolDialogOptions.split("|");
 
     // List<String> optionsTexts =
     //     "< 170 mg/dl|170:199 mg/dl|≥ 200 mg/dl".split("|");
@@ -63,28 +64,20 @@ class _CholesterolScreenState extends State<CholesterolScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    ...(() {
-                      List<SizedBox> sbList = [];
-                      for (int i = 0; i < optionsTexts.length; i++) {
-                        sbList.add(
-                          SizedBox(
-                            width: 300.0,
-                            child: RadioListTile(
-                              title: Text(optionsTexts[i]),
-                              value: cholesterolValues[i],
-                              groupValue: _selectedOption,
-                              onChanged: (value) {
-                                setState(() {
-                                  enableAcceptButton = true;
-                                  _selectedOption = value;
-                                });
-                              },
-                            ),
-                          ),
-                        );
-                      }
-                      return sbList;
-                    })(),
+                    _buildRadioGroup(
+                      groupValue: _selectedOption,
+                      onChanged: (newValue) {
+                        // Only update state if the value actually changes
+                        if (_selectedOption != newValue) {
+                          setState(() {
+                            _enableAcceptButton = true;
+                            _selectedOption = newValue;
+                          });
+                        }
+                      },
+                      optionsTexts: optionsTexts,
+                      optionsValues: cholesterolValues,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -95,12 +88,13 @@ class _CholesterolScreenState extends State<CholesterolScreen> {
                         ),
                         const HorizontalSpace(width: 10.0),
                         ElevatedButton(
-                          onPressed: enableAcceptButton
+                          onPressed: _enableAcceptButton
                               ? () {
-                                  precaModel.cholesterolValue = _selectedOption;
+                                  _precaModel.cholesterolValue =
+                                      _selectedOption;
                                   debugPrint(
-                                      "Cholesterol Value en Screen: ${precaModel.cholesterolValue}");
-                                  precaModel.calculateAverage();
+                                      "Cholesterol Value en Screen: ${_precaModel.cholesterolValue}");
+                                  _precaModel.calculateAverage();
                                   Navigator.of(context).pop();
                                 }
                               : null,
@@ -115,6 +109,62 @@ class _CholesterolScreenState extends State<CholesterolScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  /// Builds a radio group using `ToggleButtons` for single selection.
+  ///
+  /// The `groupValue` determines which option's value is currently selected.
+  /// The `onChanged` callback is triggered when a new option is selected,
+  /// providing the *value* of the newly selected option.
+  /// The `optionsTexts` list provides the text labels for each button.
+  /// The `optionsValues` list provides the corresponding integer values for each button.
+  Widget _buildRadioGroup({
+    required int? groupValue,
+    required ValueChanged<int?> onChanged,
+    required List<String> optionsTexts,
+    required List<int> optionsValues,
+  }) {
+    assert(optionsTexts.length == optionsValues.length,
+        'optionsTexts and optionsValues must have the same length');
+
+    // Determine which button is selected based on its value matching groupValue
+    List<bool> isSelected = List.generate(optionsValues.length, (index) {
+      return optionsValues[index] == groupValue;
+    });
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: ToggleButtons(
+        direction: Axis.vertical, // Arrange buttons vertically
+        isSelected: isSelected,
+        onPressed: (int index) {
+          // Pass the value of the selected option to the onChanged callback
+          onChanged(optionsValues[index]);
+        },
+        borderRadius: BorderRadius.circular(8.0),
+        selectedBorderColor: Theme.of(context).colorScheme.primary,
+        selectedColor: Theme.of(context).colorScheme.onPrimary,
+        fillColor: Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).colorScheme.onSurface,
+        borderColor: Colors.grey,
+        borderWidth: 1.5,
+        constraints: BoxConstraints(
+          minHeight: 48.0, // Minimum height for each button
+          minWidth: MediaQuery.of(context).size.width -
+              32, // Fill available width (minus padding)
+        ),
+        children: optionsTexts
+            .map((text) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Text(
+                    text,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 16.0),
+                  ),
+                ))
+            .toList(),
       ),
     );
   }
