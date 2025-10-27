@@ -78,3 +78,70 @@ Tomar el peor caso.
 
 
 ----------------------------------
+
+
+
+**[Flutter Refactor Instructions – Improving Consistency, DRY, and Robustness]**
+
+
+**1. Replace Verbose Radio Button Groups with a Reusable Widget**
+- Identify any sets of repeated `RadioListTile` widgets that represent a single-choice selection.
+- Replace these blocks with a reusable method or widget function (like the `_buildRadioGroup` shown previously), using `ToggleButtons` for better customization and reduced code duplication.
+- Pass the list of option labels, current selected index, and the onChanged handler as parameters to this method or widget.
+
+**2. Extract Numeric Input Fields into a Modular Builder**
+- Find all places where input fields (numeric entry, e.g., for minutes, blocks, etc.) are defined, especially where similar styling and logic is used repeatedly.
+- Refactor these into a single method (e.g., `_buildNumericInput`), passing in necessary configuration like key, controller, validator, etc.
+- Replace direct widget tree blocks with calls to this new method.
+
+**3. Improve Null Safety and Defensive Programming**
+- Use nullable-aware operators (`??`, `int?`, `double?`, etc.) everywhere user or model input may be null.
+- Explicitly check for null in value-change handlers to prevent runtime exceptions.
+- Do not use null assertion (`!`) unless absolutely certain a value cannot be null at runtime.
+
+**4. Strengthen State and Controller Management**
+- Ensure all `TextEditingController` instances are disposed in the `dispose()` method of `State` classes.
+- Remove any unused controller declarations.
+- Add `@override void dispose()` if missing.
+
+**5. Reduce Redundant Updates**
+- Update state only when values actually change. In all selection/onChanged callbacks, check if the new value differs from the current before calling `setState`.
+
+**6. Generalize Event Handler Parameters**
+- Explicitly type callback parameters (e.g., `int? value`) and add necessary null guards before using them.
+
+**7. Centralize Styling and Logic**
+- Move all shared container decoration, border, and input style configurations into the reusable widgets/methods.
+- Ensure changes to options, layout, or theming can be applied in one place with minimal changes needed elsewhere.
+
+**8. Test Functionality**
+- After every refactor, run the app and verify all forms still work as expected, especially user interactions and validation.
+
+***
+
+**Example Output Before and After Refactor:**
+
+_Before (Radio Selection):_
+```dart
+RadioListTile(
+  title: Text("Option 1"),
+  value: 0,
+  groupValue: selected,
+  onChanged: (value) => setState(() => selected = value),
+)
+// ... (repeated multiple times)
+```
+
+_After:_
+```dart
+_buildRadioGroup(
+  groupValue: selected,
+  onChanged: (value) => setState(() => selected = value),
+  options: ["Option 1", "Option 2", "Option 3"]
+)
+```
+
+***
+
+
+When in doubt, refactor inline logic into parameterized methods—aim for DRY, maintainable, robust Flutter code.

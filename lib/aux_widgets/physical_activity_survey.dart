@@ -22,10 +22,12 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
   int _blocksToSchoolValue = 0;
   int _classesPerWeekValue = 1;
   int _dailyMinsOfScreenValue = 0;
-  TextEditingController p6Controller = TextEditingController();
-  final TextEditingController _blocksToSchoolController = TextEditingController();
-  final TextEditingController _weeklyMinsOfActController = TextEditingController();
-  final TextEditingController _dailyMinsOfScreenController = TextEditingController();
+
+  final _blocksToSchoolController = TextEditingController();
+  final TextEditingController _weeklyMinsOfActController =
+      TextEditingController();
+  final TextEditingController _dailyMinsOfScreenController =
+      TextEditingController();
 
   final _weeklyMinsOfActivityKey = GlobalKey<FormFieldState<String>>();
   final _blocksToSchoolKey = GlobalKey<FormFieldState<String>>();
@@ -40,6 +42,14 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
   void initState() {
     super.initState();
     precaModel = Provider.of<PrecarinaModel>(context, listen: false);
+  }
+
+  @override
+  void dispose() {
+    _blocksToSchoolController.dispose();
+    _weeklyMinsOfActController.dispose();
+    _dailyMinsOfScreenController.dispose();
+    super.dispose();
   }
 
   @override
@@ -61,56 +71,18 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
               style: const TextStyle(fontSize: 12),
             ),
             const VerticalSpace(height: 8),
-            Column(
-              children: [
-                RadioListTile(
-                  title: Text(l10n.physicalActivityQ1Opt1),
-                  value: 0, // Assuming this value corresponds to the localized string
-                  groupValue: _daysWithPhysicalActivity,
-                  onChanged: physicalActiveDaysChoice,
-                ),
-                RadioListTile(
-                  title: Text(l10n.physicalActivityQ1Opt2),
-                  value: 1, // Assuming this value corresponds to the localized string
-                  groupValue: _daysWithPhysicalActivity,
-                  onChanged: physicalActiveDaysChoice,
-                ),
-                RadioListTile(
-                  title: Text(l10n.physicalActivityQ1Opt3),
-                  value: 2, // Assuming this value corresponds to the localized string
-                  groupValue: _daysWithPhysicalActivity,
-                  onChanged: physicalActiveDaysChoice,
-                ),
-                RadioListTile(
-                  title: Text(l10n.physicalActivityQ1Opt4),
-                  value: 3, // Assuming this value corresponds to the localized string
-                  groupValue: _daysWithPhysicalActivity,
-                  onChanged: physicalActiveDaysChoice,
-                ),
-                RadioListTile(
-                  title: Text(l10n.physicalActivityQ1Opt5),
-                  value: 4, // Assuming this value corresponds to the localized string
-                  groupValue: _daysWithPhysicalActivity,
-                  onChanged: physicalActiveDaysChoice,
-                ),
-                RadioListTile(
-                  title: Text(l10n.physicalActivityQ1Opt6),
-                  value: 5, // Assuming this value corresponds to the localized string
-                  groupValue: _daysWithPhysicalActivity,
-                  onChanged: physicalActiveDaysChoice,
-                ),
-                RadioListTile(
-                  title: Text(l10n.physicalActivityQ1Opt7),
-                  value: 6, // Assuming this value corresponds to the localized string
-                  groupValue: _daysWithPhysicalActivity,
-                  onChanged: physicalActiveDaysChoice,
-                ),
-                RadioListTile(
-                  title: Text(l10n.physicalActivityQ1Opt8),
-                  value: 7, // Assuming this value corresponds to the localized string
-                  groupValue: _daysWithPhysicalActivity,
-                  onChanged: physicalActiveDaysChoice,
-                ),
+            _buildRadioGroup(
+              groupValue: _daysWithPhysicalActivity,
+              onChanged: physicalActiveDaysChoice,
+              options: [
+                l10n.physicalActivityQ1Opt1,
+                l10n.physicalActivityQ1Opt2,
+                l10n.physicalActivityQ1Opt3,
+                l10n.physicalActivityQ1Opt4,
+                l10n.physicalActivityQ1Opt5,
+                l10n.physicalActivityQ1Opt6,
+                l10n.physicalActivityQ1Opt7,
+                l10n.physicalActivityQ1Opt8,
               ],
             ),
             const VerticalSpace(height: 16),
@@ -127,47 +99,18 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
+                  _buildNumericInput(
+                    fieldKey: _weeklyMinsOfActivityKey,
+                    name: "WeeklyMinsOfActivity",
+                    controller: _weeklyMinsOfActController,
+                    maxLength: 3,
                     width: 55.0,
-                    decoration: BoxDecoration(
-                      color: Colors.yellow[100],
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: FormBuilderTextField(
-                      validator: (val) => !disableQ2 && val!.isEmpty ? l10n.txtRequired : null,
-                      key: _weeklyMinsOfActivityKey,
-                      name: "WeeklyMinsOfActivity",
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      textAlign: TextAlign.center,
-                      maxLength: 3,
-                      controller: _weeklyMinsOfActController,
-                      decoration: const InputDecoration(
-                        counterText: '', // Hide the counter text
-                        border: InputBorder.none,
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15.0),
-                          ),
-                          borderSide: BorderSide(color: Colors.blue),
-                        ),
-                        contentPadding: EdgeInsets.symmetric(
-                          vertical: 5,
-                          horizontal: 10,
-                        ),
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          if (value != null && value != "") {
-                            debugPrint("el puto value: $value");
-                            _weeklyMinsOfActValue = int.tryParse(value)!;
-                          }
-                        });
-                      },
-                      onTap: () {
-                        _weeklyMinsOfActivityKey.currentState?.reset();
-                      },
-                    ),
+                    validator: (val) =>
+                        !disableQ2 && (val == null || val.isEmpty)
+                            ? l10n.txtRequired
+                            : null,
+                    onChanged: (value) => setState(() =>
+                        _weeklyMinsOfActValue = int.tryParse(value ?? '') ?? 0),
                   ),
                   Text(
                     " mins.",
@@ -185,26 +128,13 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
               style: const TextStyle(fontSize: 18),
             ),
             const VerticalSpace(height: 8),
-            Column(
-              children: [
-                RadioListTile(
-                  title: Text(l10n.physicalActivityQ3Opt1),
-                  value: 0, // Assuming this value corresponds to the localized string
-                  groupValue: _transpToSchoolTypeValue,
-                  onChanged: onPickTransport,
-                ),
-                RadioListTile(
-                  title: Text(l10n.physicalActivityQ3Opt2),
-                  value: 1, // Assuming this value corresponds to the localized string
-                  groupValue: _transpToSchoolTypeValue,
-                  onChanged: onPickTransport,
-                ),
-                RadioListTile(
-                  title: Text(l10n.physicalActivityQ3Opt3),
-                  value: 2, // Assuming this value corresponds to the localized string
-                  groupValue: _transpToSchoolTypeValue,
-                  onChanged: onPickTransport,
-                ),
+            _buildRadioGroup(
+              groupValue: _transpToSchoolTypeValue,
+              onChanged: onPickTransport,
+              options: [
+                l10n.physicalActivityQ3Opt1,
+                l10n.physicalActivityQ3Opt2,
+                l10n.physicalActivityQ3Opt3,
               ],
             ),
             const VerticalSpace(height: 16),
@@ -221,44 +151,18 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
+                  _buildNumericInput(
+                    fieldKey: _blocksToSchoolKey,
+                    name: "BlocksToSchool",
+                    controller: _blocksToSchoolController,
+                    maxLength: 2,
                     width: 45.0,
-                    decoration: BoxDecoration(
-                      color: Colors.yellow[100],
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: FormBuilderTextField(
-                      validator: (val) => !disableQ4 && val!.isEmpty ? l10n.txtRequired : null,
-                      key: _blocksToSchoolKey,
-                      name: "BlocksToSchool",
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      textAlign: TextAlign.center,
-                      maxLength: 2,
-                      controller: _blocksToSchoolController,
-                      decoration: const InputDecoration(
-                        counterText: '', // Hide the counter text
-                        border: InputBorder.none,
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15.0),
-                          ),
-                          borderSide: BorderSide(color: Colors.blue),
-                        ),
-                        contentPadding: EdgeInsets.symmetric(
-                          vertical: 5,
-                          horizontal: 10,
-                        ),
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          if (value != null && value != "") _blocksToSchoolValue = int.tryParse(value)!;
-                        });
-                      },
-                      onTap: () {
-                        _blocksToSchoolKey.currentState?.reset();
-                      },
-                    ),
+                    validator: (val) =>
+                        !disableQ4 && (val == null || val.isEmpty)
+                            ? l10n.txtRequired
+                            : null,
+                    onChanged: (value) => setState(() =>
+                        _blocksToSchoolValue = int.tryParse(value ?? '') ?? 0),
                   ),
                   Text(
                     l10n.physicalActivityBlocks,
@@ -276,47 +180,18 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
               style: const TextStyle(fontSize: 18),
             ),
             const VerticalSpace(height: 8),
-            RadioListTile(
-              title: Text(l10n.physicalActivityQ5Opt0),
-              value: 0, // Assuming this value corresponds to the localized string
+            _buildRadioGroup(
               groupValue: _classesPerWeekValue,
               onChanged: daysOfPaClasses,
-            ),
-            RadioListTile(
-              title: Text(l10n.physicalActivityQ5Opt1),
-              value: 1, // Assuming this value corresponds to the localized string
-              groupValue: _classesPerWeekValue,
-              onChanged: daysOfPaClasses,
-            ),
-            RadioListTile(
-              title: Text(l10n.physicalActivityQ5Opt2),
-              value: 2, // Assuming this value corresponds to the localized string
-              groupValue: _classesPerWeekValue,
-              onChanged: daysOfPaClasses,
-            ),
-            RadioListTile(
-              title: Text(l10n.physicalActivityQ5Opt3),
-              value: 3, // Assuming this value corresponds to the localized string
-              groupValue: _classesPerWeekValue,
-              onChanged: daysOfPaClasses,
-            ),
-            RadioListTile(
-              title: Text(l10n.physicalActivityQ5Opt4),
-              value: 4, // Assuming this value corresponds to the localized string
-              groupValue: _classesPerWeekValue,
-              onChanged: daysOfPaClasses,
-            ),
-            RadioListTile(
-              title: Text(l10n.physicalActivityQ5Opt5),
-              value: 5, // Assuming this value corresponds to the localized string
-              groupValue: _classesPerWeekValue,
-              onChanged: daysOfPaClasses,
-            ),
-            RadioListTile(
-              title: Text(l10n.physicalActivityQ5Opt6),
-              value: 6, // Assuming this value corresponds to the localized string
-              groupValue: _classesPerWeekValue,
-              onChanged: daysOfPaClasses,
+              options: [
+                l10n.physicalActivityQ5Opt0,
+                l10n.physicalActivityQ5Opt1,
+                l10n.physicalActivityQ5Opt2,
+                l10n.physicalActivityQ5Opt3,
+                l10n.physicalActivityQ5Opt4,
+                l10n.physicalActivityQ5Opt5,
+                l10n.physicalActivityQ5Opt6,
+              ],
             ),
             const VerticalSpace(height: 16),
             Text(
@@ -327,43 +202,14 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
+                _buildNumericInput(
+                  fieldKey: _dailyMinsOfScreenKey,
+                  name: "DailyMinsOfScreen",
+                  controller: _dailyMinsOfScreenController,
+                  maxLength: 3,
                   width: 55.0,
-                  decoration: BoxDecoration(
-                    color: Colors.yellow[100],
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  child: FormBuilderTextField(
-                    key: _dailyMinsOfScreenKey,
-                    name: "DailyMinsOfScreen",
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    textAlign: TextAlign.center,
-                    maxLength: 3,
-                    controller: _dailyMinsOfScreenController,
-                    decoration: const InputDecoration(
-                      counterText: '', // Hide the counter text
-                      border: InputBorder.none,
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(15.0),
-                        ),
-                        borderSide: BorderSide(color: Colors.blue),
-                      ),
-                      contentPadding: EdgeInsets.symmetric(
-                        vertical: 5,
-                        horizontal: 10,
-                      ),
-                    ),
-                    onChanged: (value) {
-                      setState(() {
-                        (value != null && value != "") ? _dailyMinsOfScreenValue = (int.tryParse(value) ?? 0) : _dailyMinsOfScreenValue = 0;
-                      });
-                    },
-                    onTap: () {
-                      _dailyMinsOfScreenKey.currentState?.reset();
-                    },
-                  ),
+                  onChanged: (value) => setState(() =>
+                      _dailyMinsOfScreenValue = int.tryParse(value ?? '') ?? 0),
                 ),
                 Text(l10n.physicalActivityMinutes),
               ],
@@ -374,36 +220,42 @@ class PhysicalActivitySurveyState extends State<PhysicalActivitySurvey> {
     );
   }
 
-  void daysOfPaClasses(value) {
-    setState(() {
-      _classesPerWeekValue = value;
-    });
+  void daysOfPaClasses(int? value) {
+    if (value != null && value != _classesPerWeekValue) {
+      setState(() {
+        _classesPerWeekValue = value;
+      });
+    }
   }
 
-  void onPickTransport(value) {
-    setState(() {
-      _transpToSchoolTypeValue = value;
-      if (_transpToSchoolTypeValue == 2) {
-        disableQ4 = true;
-        FocusScope.of(context).unfocus();
-        _blocksToSchoolController.clear();
-      } else {
-        disableQ4 = false;
-      }
-    });
+  void onPickTransport(int? value) {
+    if (value != null && value != _transpToSchoolTypeValue) {
+      setState(() {
+        _transpToSchoolTypeValue = value;
+        if (_transpToSchoolTypeValue == 2) {
+          disableQ4 = true;
+          FocusScope.of(context).unfocus();
+          _blocksToSchoolController.clear();
+        } else {
+          disableQ4 = false;
+        }
+      });
+    }
   }
 
-  void physicalActiveDaysChoice(value) {
+  void physicalActiveDaysChoice(int? value) {
     FocusScope.of(context).unfocus();
-    setState(() {
-      _daysWithPhysicalActivity = value;
-      if (_daysWithPhysicalActivity == 0) {
-        disableQ2 = true;
-        _weeklyMinsOfActController.clear();
-      } else {
-        disableQ2 = false;
-      }
-    });
+    if (value != null && value != _daysWithPhysicalActivity) {
+      setState(() {
+        _daysWithPhysicalActivity = value;
+        if (_daysWithPhysicalActivity == 0) {
+          disableQ2 = true;
+          _weeklyMinsOfActController.clear();
+        } else {
+          disableQ2 = false;
+        }
+      });
+    }
   }
 
   /*
@@ -457,7 +309,7 @@ TATE (minutos/día) = (10 x((P4/14,5) x 60)) / 7
         tate = (10 * ((_blocksToSchoolValue / 43.2) * 60) / 7).truncate();
         break;
       case 1:
-        double factor = precaModel.ageYears! > 14 ? 14.5 : 13.0;
+        double factor = (precaModel.ageYears ?? 0) > 14 ? 14.5 : 13.0;
         tate = (10 * ((_blocksToSchoolValue / factor) * 60) / 7).truncate();
         break;
       default:
@@ -468,7 +320,8 @@ TATE (minutos/día) = (10 x((P4/14,5) x 60)) / 7
 
     // Tiempo clases educación física en minutos diarios
     // Duración de la clase según nivel educativo = primario (45 minutos) o secundario (60 minutos)
-    int tef = (weeklyClases * (precaModel.ageYears! > 13 ? 60 : 45) / 7).truncate();
+    int tef = (weeklyClases * ((precaModel.ageYears ?? 0) > 13 ? 60 : 45) / 7)
+        .truncate();
     debugPrint("TEF: $tef");
 
     // Promedio diario total en minutos
@@ -478,9 +331,85 @@ TATE (minutos/día) = (10 x((P4/14,5) x 60)) / 7
 
     precaModel.physicalActivityValue = (100 * totalMinutes / 45.0).truncate();
 
-    if (precaModel.physicalActivityValue! > 100) precaModel.physicalActivityValue = 100;
+    if ((precaModel.physicalActivityValue ?? 0) > 100) {
+      precaModel.physicalActivityValue = 100;
+    }
 
     // Si pasa más de 120 minutos en la compu el snackbar es rojo
     return _dailyMinsOfScreenValue >= 120 ? true : false;
+  }
+
+  /// Builds a radio group using `ToggleButtons` for single selection.
+  ///
+  /// The `groupValue` determines which option is currently selected.
+  /// The `onChanged` callback is triggered when a new option is selected,
+  /// providing the index of the newly selected option.
+  /// The `options` list provides the text labels for each radio button.
+
+  Widget _buildRadioGroup({
+    required int groupValue,
+    required ValueChanged<int?> onChanged,
+    required List<String> options,
+  }) {
+    return ToggleButtons(
+      direction: Axis.vertical,
+      isSelected: List.generate(options.length, (index) => index == groupValue),
+      onPressed: (int index) {
+        onChanged(index);
+      },
+      borderRadius: const BorderRadius.all(Radius.circular(8)),
+      constraints: BoxConstraints(
+        minHeight: 40.0,
+        minWidth: MediaQuery.of(context).size.width -
+            32, // Adjust width to fill space
+      ),
+      children: options
+          .map((option) => Text(option, textAlign: TextAlign.center))
+          .toList(),
+    );
+  }
+
+  Widget _buildNumericInput({
+    required GlobalKey<FormFieldState<String>> fieldKey,
+    required String name,
+    required TextEditingController controller,
+    required int maxLength,
+    required double width,
+    required ValueChanged<String?> onChanged,
+    String? Function(String?)? validator,
+  }) {
+    return Container(
+      width: width,
+      decoration: BoxDecoration(
+        color: Colors.yellow[100],
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child: FormBuilderTextField(
+        key: fieldKey,
+        name: name,
+        controller: controller,
+        validator: validator,
+        onChanged: onChanged,
+        onTap: () => fieldKey.currentState?.reset(),
+        keyboardType: TextInputType.number,
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+        textAlign: TextAlign.center,
+        maxLength: maxLength,
+        decoration: const InputDecoration(
+          counterText: '', // Hide the counter text
+          border: InputBorder.none,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(15.0),
+            ),
+            borderSide: BorderSide(color: Colors.blue),
+          ),
+          contentPadding: EdgeInsets.symmetric(
+            vertical: 5,
+            horizontal: 10,
+          ),
+        ),
+      ),
+    );
   }
 }
