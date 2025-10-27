@@ -71,8 +71,6 @@ class _InputDataPageState extends State<InputDataPage> {
   final TextEditingController _textContAltura = TextEditingController();
   final TextEditingController _textContKilos = TextEditingController();
   final TextEditingController _textContGramos = TextEditingController();
-  final TextEditingController _textContAnios = TextEditingController();
-  final TextEditingController _textContMeses = TextEditingController();
 
   var heightMaskFormatter = MaskTextInputFormatter(
       mask: '###,#',
@@ -109,6 +107,16 @@ class _InputDataPageState extends State<InputDataPage> {
     _currentDate = DateTime(_dateTime.year, _dateTime.month, _dateTime.day);
   }
 
+  @override
+  void dispose() {
+    _textContAltura.dispose();
+    _textContKilos.dispose();
+    _textContGramos.dispose();
+    _heightFocusNode.dispose();
+    // _textContAnios and _textContMeses were removed as they were unused.
+    super.dispose();
+  }
+
   calcularEdad(DateTime nacimiento) {
     // Duration parse = nacimiento.difference(DateTime.now()).abs();
     return "";
@@ -126,9 +134,6 @@ class _InputDataPageState extends State<InputDataPage> {
         LocalDateTime a = LocalDateTime.now();
         LocalDateTime b = LocalDateTime.dateTime(pickedDate);
         Period diff = a.periodSince(b);
-        // debugPrint("years: ${diff.years}; months: ${diff.months}; days: ${diff.days}; hours: ${diff.hours}; minutes: ${diff.minutes}; seconds: ${diff.seconds}");
-        _textContAnios.text = diff.years.toString();
-        _textContMeses.text = diff.months.toString();
         _formKey.currentState?.fields['Age Years']
             ?.setValue(diff.years); //value(diff.years);
         _formKey.currentState?.fields['Age Months']?.setValue(diff.months);
@@ -226,53 +231,7 @@ class _InputDataPageState extends State<InputDataPage> {
               style:
                   const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.yellow[100],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 150.0,
-                    child: RadioListTile(
-                      key: genderFemaleRadioKey,
-                      title: Text(
-                        l10n.sexFemale,
-                        style: const TextStyle(fontSize: 14.0),
-                      ),
-                      value: PatientSex.female,
-                      groupValue: _selectedOption,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedOption = value;
-                          _showSexError = false;
-                        });
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    width: 150.0,
-                    child: RadioListTile(
-                      key: genderMaleRadioKey,
-                      title: Text(
-                        l10n.sexMale,
-                        style: const TextStyle(fontSize: 14.0),
-                      ),
-                      value: PatientSex.male,
-                      groupValue: _selectedOption,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedOption = value;
-                          _showSexError = false;
-                        });
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            _buildSexToggleButtons(l10n),
             if (_showSexError)
               Text(
                 l10n.txtRequired,
@@ -294,68 +253,21 @@ class _InputDataPageState extends State<InputDataPage> {
             const SizedBox(
               height: 5.0,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  width: 10.0,
-                ),
-                Stack(
-                  children: [
-                    Container(
-                      width: 100.0,
-                      height: 48.0,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.yellow[100],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 100.0,
-                      child: KeyedSubtree(
-                        key: heightInputKey, // Key for testing find.byKey()
-                        child: FormBuilderTextField(
-                          validator: (val) =>
-                              val!.isEmpty ? l10n.txtRequired : null,
-                          name: "HeightKey", // Name used by FormBuilder
-                          key:
-                              _heightKey, // GlobalKey for FormFieldState access (e.g., for reset)
-                          keyboardType: TextInputType.number,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                            heightMaskFormatter
-                          ],
-                          textAlign: TextAlign.center,
-                          controller: _textContAltura,
-                          focusNode: _heightFocusNode,
-                          decoration: InputDecoration(
-                            hintText: l10n.hintHeight,
-                            border: InputBorder.none,
-                            focusedBorder: const OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15.0)),
-                                borderSide: BorderSide(color: Colors.blue)),
-                            contentPadding: const EdgeInsets.symmetric(
-                              vertical: 5,
-                              horizontal: 10,
-                            ),
-                          ),
-                          onTap: () {
-                            _heightKey.currentState?.reset();
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const Text(
-                  "  cm",
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+            _buildNumericInputField(
+              testKey: heightInputKey,
+              formFieldKey: _heightKey,
+              name: "HeightKey",
+              controller: _textContAltura,
+              hintText: l10n.hintHeight,
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                heightMaskFormatter
               ],
+              validator: (val) =>
+                  val == null || val.isEmpty ? l10n.txtRequired : null,
+              focusNode: _heightFocusNode,
+              onTap: () => _heightKey.currentState?.reset(),
+              suffixText: "cm",
             ),
             const SizedBox(
               height: 10.0,
@@ -371,113 +283,35 @@ class _InputDataPageState extends State<InputDataPage> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Stack(
-                  children: [
-                    Container(
-                      width: 100.0,
-                      height: 48.0,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.yellow[100],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 100.0,
-                      child: FormBuilderTextField(
-                        key: weightKilosInputKey, // Using the test key directly or wrap in KeyedSubtree
-                        // validator: (val) =>
-                        //     val!.isEmpty ? l10n.txtRequired : null,
-                        // Using FormBuilder's key for state, not for finding in tests.
-                        // key: _weightKilosKey,
-                        name: "WeightKilos", // Name used by FormBuilder
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                          kilosWeightMaskFormatter
-                        ],
-                        textAlign: TextAlign.center,
-                        controller: _textContKilos,
-                        decoration: InputDecoration(
-                          hintText: l10n.hintWeightKilos,
-                          border: InputBorder.none,
-                          focusedBorder: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15.0),
-                              ),
-                              borderSide: BorderSide(color: Colors.blue)),
-                          contentPadding: const EdgeInsets.symmetric(
-                            vertical: 5,
-                            horizontal: 10,
-                          ),
-                        ),
-                        onTap: () {
-                          // _weightKilosKey.currentState?.reset(); // This key is for FormFieldState
-                        },
-                      ),
-                    ),
+              children: <Widget>[
+                _buildNumericInputField(
+                  testKey: weightKilosInputKey,
+                  name: "WeightKilos",
+                  controller: _textContKilos,
+                  hintText: l10n.hintWeightKilos,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    kilosWeightMaskFormatter
                   ],
-                ),
-                const Text(
-                  " Kg", // Adjusted spacing for consistency
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  validator: (val) =>
+                      val == null || val.isEmpty ? l10n.txtRequired : null,
+                  suffixText: "Kg",
                 ),
                 const SizedBox(
                   width: 10.0,
                 ),
-                Stack(children: [
-                  Container(
-                    width: 100.0,
-                    height: 48.0,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.yellow[100],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 100.0,
-                    child: FormBuilderTextField(
-                      key: weightGramsInputKey, // Using the test key directly or wrap in KeyedSubtree
-                      // validator: (val) =>
-                      //     val!.isEmpty ? l10n.txtRequired : null,
-                      // key: _weightGramsKey, // FormFieldState key
-                      name: "WeightGrams", // Name used by FormBuilder
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                        gramsWeightMaskFormatter
-                      ],
-                      textAlign: TextAlign.center,
-                      controller: _textContGramos,
-                      decoration: InputDecoration(
-                        hintText: l10n.hintWeightGramos,
-                        border: InputBorder.none,
-                        focusedBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15.0),
-                          ),
-                          borderSide: BorderSide(color: Colors.blue),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                          vertical: 5,
-                          horizontal: 10,
-                        ),
-                      ),
-                      onTap: () {
-                        // _weightGramsKey.currentState?.reset(); // FormFieldState key
-                      },
-                    ),
-                  ),
-                ]),
-                const Text(
-                  " g", // Adjusted spacing for consistency
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+                _buildNumericInputField(
+                  testKey: weightGramsInputKey,
+                  name: "WeightGrams",
+                  controller: _textContGramos,
+                  hintText: l10n.hintWeightGramos,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    gramsWeightMaskFormatter
+                  ],
+                  validator: (val) =>
+                      val == null || val.isEmpty ? l10n.txtRequired : null,
+                  suffixText: "g",
                 ),
               ],
             ),
@@ -634,16 +468,26 @@ class _InputDataPageState extends State<InputDataPage> {
 
                     if (_formKey.currentState?.validate() == true) {
                       // If decimals were ommitted complete with 0
-                      if (RegExp(r',\s*$').hasMatch(_textContAltura.text)) {
-                        _textContAltura.text += '0';
+                      if (_textContAltura.text.endsWith(',')) {
+                        _textContAltura.text = '${_textContAltura.text}0';
                       }
                       // Let's change the comma to a period
-                      _textContAltura.text.replaceAll(",", ".");
-                      debugPrint("Altura: ${_textContAltura.text}");
-                      precaModel.height = double.parse(
-                          _textContAltura.text.replaceAll(",", "."));
-                      precaModel.weightKilos = int.parse(_textContKilos.text);
-                      precaModel.weightGrams = int.parse(_textContGramos.text);
+                      final String heightText =
+                          _textContAltura.text.replaceAll(",", ".");
+                      precaModel.height = double.tryParse(heightText);
+                      precaModel.weightKilos =
+                          int.tryParse(_textContKilos.text);
+                      precaModel.weightGrams =
+                          int.tryParse(_textContGramos.text);
+
+                      // Defensive check, although validators should prevent this.
+                      if (precaModel.height == null ||
+                          precaModel.weightKilos == null ||
+                          precaModel.weightGrams == null) {
+                        // Optionally show an error to the user
+                        return;
+                      }
+
                       precaModel.ageYears =
                           _formKey.currentState?.fields['Age Years']?.value;
                       precaModel.ageMonths =
@@ -683,14 +527,119 @@ class _InputDataPageState extends State<InputDataPage> {
     );
   }
 
+  Widget _buildSexToggleButtons(AppLocalizations l10n) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: ToggleButtons(
+        isSelected: [
+          _selectedOption == PatientSex.female,
+          _selectedOption == PatientSex.male,
+        ],
+        onPressed: (int index) {
+          final selectedSex = PatientSex.values[index];
+          if (_selectedOption != selectedSex) {
+            setState(() {
+              _selectedOption = selectedSex;
+              _showSexError = false;
+            });
+          }
+        },
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
+        selectedBorderColor: Colors.blue,
+        selectedColor: Colors.white,
+        fillColor: Colors.blue,
+        color: Colors.blue,
+        constraints: BoxConstraints(
+          minHeight: 40.0,
+          minWidth: (MediaQuery.of(context).size.width - 48) / 2,
+        ),
+        children: [
+          // Use a KeyedSubtree if you need to find the specific Text widget in tests
+          KeyedSubtree(key: genderFemaleRadioKey, child: Text(l10n.sexFemale)),
+          KeyedSubtree(key: genderMaleRadioKey, child: Text(l10n.sexMale)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNumericInputField({
+    Key? testKey,
+    GlobalKey<FormFieldState<String>>? formFieldKey,
+    required String name,
+    required TextEditingController controller,
+    required String hintText,
+    List<TextInputFormatter>? inputFormatters,
+    String? Function(String?)? validator,
+    FocusNode? focusNode,
+    VoidCallback? onTap,
+    required String suffixText,
+  }) {
+    final field = FormBuilderTextField(
+      // Use the formFieldKey for state access, or the testKey if it's a ValueKey for the widget itself
+      key: formFieldKey ?? testKey,
+      name: name,
+      keyboardType: TextInputType.number,
+      inputFormatters: inputFormatters,
+      textAlign: TextAlign.center,
+      controller: controller,
+      focusNode: focusNode,
+      decoration: InputDecoration(
+        hintText: hintText,
+        border: InputBorder.none,
+        focusedBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15.0)),
+          borderSide: BorderSide(color: Colors.blue),
+        ),
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 5,
+          horizontal: 10,
+        ),
+      ),
+      validator: validator,
+      onTap: onTap,
+    );
+
+    // Wrap in KeyedSubtree only if a separate testKey is provided for finding the wrapper
+    final Widget inputWidget = (testKey != null && formFieldKey != null)
+        ? KeyedSubtree(key: testKey, child: field)
+        : field;
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Stack(
+          children: [
+            Container(
+              width: 100.0,
+              height: 48.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.yellow[100],
+              ),
+            ),
+            SizedBox(
+              width: 100.0,
+              child: inputWidget,
+            ),
+          ],
+        ),
+        Text(
+          " $suffixText",
+          style: const TextStyle(
+            fontSize: 15.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+
   _resetearValores(BuildContext context) {
     setState(() {
       _formKey.currentState?.reset();
       _textContAltura.text = '';
       _textContKilos.text = '';
       _textContGramos.text = '';
-      // _textContAnios.text = '';
-      // _textContMeses.text = '';
       _formKey.currentState?.fields['Age Years']?.setValue(null);
       _formKey.currentState?.fields['Age Months']?.setValue(null);
       _dateTime = DateTime.now();
