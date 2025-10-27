@@ -253,21 +253,23 @@ class _InputDataPageState extends State<InputDataPage> {
             const SizedBox(
               height: 5.0,
             ),
-            _buildNumericInputField(
-              testKey: heightInputKey,
-              formFieldKey: _heightKey,
-              name: "HeightKey",
-              controller: _textContAltura,
-              hintText: l10n.hintHeight,
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                heightMaskFormatter
-              ],
-              validator: (val) =>
-                  val == null || val.isEmpty ? l10n.txtRequired : null,
-              focusNode: _heightFocusNode,
-              onTap: () => _heightKey.currentState?.reset(),
-              suffixText: "cm",
+            Center(
+              child: _buildNumericInputField(
+                testKey: heightInputKey,
+                formFieldKey: _heightKey,
+                name: "HeightKey",
+                controller: _textContAltura,
+                hintText: l10n.hintHeight,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                  heightMaskFormatter
+                ],
+                validator: (val) =>
+                    val == null || val.isEmpty ? l10n.txtRequired : null,
+                focusNode: _heightFocusNode,
+                onTap: () => _heightKey.currentState?.reset(),
+                suffixText: "cm",
+              ),
             ),
             const SizedBox(
               height: 10.0,
@@ -528,6 +530,10 @@ class _InputDataPageState extends State<InputDataPage> {
   }
 
   Widget _buildSexToggleButtons(AppLocalizations l10n) {
+    // Define the order of sexes to match the button layout.
+    // This makes the logic independent of the enum's definition order.
+    final sexOptions = [PatientSex.female, PatientSex.male];
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: ToggleButtons(
@@ -538,8 +544,12 @@ class _InputDataPageState extends State<InputDataPage> {
         onPressed: (int index) {
           final selectedSex = PatientSex.values[index];
           if (_selectedOption != selectedSex) {
+          // Use the local `sexOptions` list to get the correct value.
+          final newlySelectedSex = sexOptions[index];
+          if (_selectedOption != newlySelectedSex) {
             setState(() {
               _selectedOption = selectedSex;
+              _selectedOption = newlySelectedSex;
               _showSexError = false;
             });
           }
