@@ -30,9 +30,6 @@ class _DiabetesScreenState extends State<DiabetesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final diabetesValues = [100, 60, 40, 30, 20, 10, 0];
-    List<String> optionsTexts = AppLocalizations.of(context)!.txtDiabetesDialogOptions.split("|");
-
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -56,34 +53,28 @@ class _DiabetesScreenState extends State<DiabetesScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const VerticalSpace(height: 10.0),
-                    ...(() {
-                      List<Widget> sbList = [];
-                      for (int i = 0; i < optionsTexts.length; i++) {
-                        sbList.add(SizedBox(
-                          width: 300.0,
-                          child: RadioListTile(
-                            title: Text(optionsTexts[i]),
-                            value: diabetesValues[i],
-                            groupValue: _selectedOption,
-                            onChanged: (value) {
-                              setState(() {
-                                enableAcceptButton = true;
-                                _selectedOption = value;
-                              });
-                            },
-                          ),
-                        ));
-                        sbList.add(const VerticalSpace(height: 5.0));
-                      }
-                      return sbList;
-                    })(),
+                    _buildRadioGroup(
+                      groupValue: _selectedOption,
+                      onChanged: (int? value) {
+                        if (value != null && value != _selectedOption) {
+                          setState(() {
+                            enableAcceptButton = true;
+                            _selectedOption = value;
+                          });
+                        }
+                      },
+                      optionsTexts: AppLocalizations.of(context)!
+                          .txtDiabetesDialogOptions
+                          .split("|"),
+                      optionsValues: const [100, 60, 40, 30, 20, 10, 0],
+                    ),
                     const VerticalSpace(height: 15.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton(
-                          child: Text(AppLocalizations.of(context)!.txtButtonCancel),
+                          child: Text(
+                              AppLocalizations.of(context)!.txtButtonCancel),
                           onPressed: () => Navigator.maybePop(context),
                         ),
                         const HorizontalSpace(width: 10.0),
@@ -91,12 +82,14 @@ class _DiabetesScreenState extends State<DiabetesScreen> {
                           onPressed: enableAcceptButton
                               ? () {
                                   precaModel.diabetesValue = _selectedOption;
-                                  debugPrint("Diabetes Value en Screen: ${precaModel.diabetesValue}");
+                                  debugPrint(
+                                      "Diabetes Value en Screen: ${precaModel.diabetesValue}");
                                   precaModel.calculateAverage();
                                   Navigator.of(context).pop();
                                 }
                               : null,
-                          child: Text(AppLocalizations.of(context)!.txtButtonAccept),
+                          child: Text(
+                              AppLocalizations.of(context)!.txtButtonAccept),
                         ),
                       ],
                     ),
@@ -106,6 +99,52 @@ class _DiabetesScreenState extends State<DiabetesScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildRadioGroup({
+    required int? groupValue,
+    required ValueChanged<int?> onChanged,
+    required List<String> optionsTexts,
+    required List<int> optionsValues,
+  }) {
+    assert(optionsTexts.length == optionsValues.length,
+        'optionsTexts and optionsValues must have the same length');
+
+    List<bool> isSelected = List.generate(optionsValues.length, (index) {
+      return optionsValues[index] == groupValue;
+    });
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: ToggleButtons(
+        direction: Axis.vertical,
+        isSelected: isSelected,
+        onPressed: (int index) {
+          onChanged(optionsValues[index]);
+        },
+        borderRadius: BorderRadius.circular(8.0),
+        selectedBorderColor: Theme.of(context).colorScheme.primary,
+        selectedColor: Theme.of(context).colorScheme.onPrimary,
+        fillColor: Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).colorScheme.onSurface,
+        borderColor: Colors.grey,
+        borderWidth: 1.5,
+        constraints: BoxConstraints(
+          minHeight: 48.0,
+          minWidth: MediaQuery.of(context).size.width - 32,
+        ),
+        children: optionsTexts
+            .map((text) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Text(
+                    text,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 16.0),
+                  ),
+                ))
+            .toList(),
       ),
     );
   }
