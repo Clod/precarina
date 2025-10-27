@@ -542,13 +542,10 @@ class _InputDataPageState extends State<InputDataPage> {
           _selectedOption == PatientSex.male,
         ],
         onPressed: (int index) {
-          final selectedSex = PatientSex.values[index];
-          if (_selectedOption != selectedSex) {
           // Use the local `sexOptions` list to get the correct value.
           final newlySelectedSex = sexOptions[index];
           if (_selectedOption != newlySelectedSex) {
             setState(() {
-              _selectedOption = selectedSex;
               _selectedOption = newlySelectedSex;
               _showSexError = false;
             });
