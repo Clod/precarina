@@ -35,7 +35,7 @@ if (keystorePropertiesFile.exists()) {
 android {
     namespace "ar.net.grasso.precarina"
     compileSdkVersion 36
-    ndkVersion "27.0.12077973"
+    ndkVersion "29.0.14206865" // Replace with the actual version you installed
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
