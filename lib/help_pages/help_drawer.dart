@@ -164,7 +164,7 @@ class HelpDrawer extends StatelessWidget {
               Icons.local_play,
             ),
             applicationName: l10n.txtPrecarina, // Assuming 'PRECARINA' is also a localized string
-            applicationVersion: '2.4.0 Build 27',
+            applicationVersion: '2.5.0 Build 28',
             applicationLegalese: l10n.txtApplicationLegalese,
             aboutBoxChildren: [
               const SizedBox(

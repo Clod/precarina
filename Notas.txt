@@ -1,3 +1,26 @@
+Para hacer los builds para los stores:
+
+https://docs.google.com/document/d/1vF4wRXFvQNbXeBKm4ZsbYA4ApUR5CeHgpKqp_dlCpI0/edit?usp=sharing
+
+
+Cambiar la versión en 
+
+- help_drawer.dart
+- pubspec.yaml
+
+% flutter build ipa
+
+Ojo que puede tirar errores por no estar logueado o por tener pendienta la aceptación de algo.
+
+Y para Google se puede hacer desde línea de comando con:
+
+% flutter build aab
+
+
+
+
+
+
 Para construir los íconos:
 % dart  run flutter_launcher_icons
 
